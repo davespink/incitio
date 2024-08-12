@@ -51,29 +51,86 @@
 
 
   <div style="width:100%">
-    <div class="container" style="width:100%">
+    <div class="container" style="width:100%;">
       <div class="row">
         <div class="col" style="background-color:  whitesmoke;">
           <button style="border-style: none;background-color: transparent;">
             <h1> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio</h1>
           </button>
         </div>
-        <div class="col-8 mx-aoto" style="background-color: mintcream;padding: 10px;;">
+        <div class="col-8 mx-aoto" style="background-color: mintcream;padding: 10px;display:inline-block;">
 
           <button id="none" class="btn btn-light"
             style="background-color:whitesmoke;position: relative;width: 80%;height: 15%; border-radius: 16px;    box-shadow: 5px 5px 5px gray;">
-            <span class="btn-label" style="position:relative; left:-40px"><i class="bi-search" style="font-size:25px" ></i></span>
+            <span class="btn-label" style="position:relative; left:-40px"><i class="bi-search"
+                style="font-size:25px"></i></span>
             <input class="xxx" aria-label="Search inCitio" autocomplete="off" placeholder="Search inCitio" value=""
               name="" type="text" style="padding: 0px; border:0cap; 
             height: auto; width: 80%;  background-color: white;
              position: relative; z-index: 6; left: 0px;" spellcheck="false" aria-haspopup="true" aria-live="off"
-              aria-owns="gs_sbt50"> 
+              aria-owns="gs_sbt50">
           </button>
+
+
+          <div style="margin-top: 20px; display:block">
+            
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+              style="background-color:  whitesmoke;color:darkgray">
+              Dropdown button
+            </button>
+
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+              style="background-color:  whitesmoke;color:darkgray">
+              Dropdown button
+            </button>
+
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" data-bs-target="#myModal">New Room</a></li>
+
+              <li onclick="idmodal.click();"><a class="dropdown-item" href="#">New Container</a></li>
+              <li><a class="dropdown-item" href="#">New Item</a></li>
+            </ul>
+          </div>
+
+          <!-- Button to Open the Modal -->
+          <button type="button" id="idmodal" class="btn btn-primary" style="display: none;" data-bs-toggle="modal"
+            data-bs-target="#myModal">
+            Open modal
+          </button>
+
+
+          <!-- The Modal -->
+          <div class="modal" id="myModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Modal Heading</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                  Modal body..
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
 
         </div>
         <div class="col-2" style="background-color: floralwhite;">
           3 of 3
-          <p>dddd</p>
+          <p>cccc</p>
           <p>cccc</p>
           <p>cccc</p>
           <p>cccc</p>
