@@ -42,14 +42,26 @@
 
 <script>
 
+  function doNewButton() {
 
+    let item = prompt("Enter item name", "unknown item");
+
+    if (item == null || item == "")
+      return;
+
+    const newButton = document.createElement('button');
+    newButton.textContent = item;
+    let e = document.getElementById("allbuttons");
+
+    e.appendChild(newButton);
+
+
+  }
 
 </script>
 
 
 <body style="width:100%">
-
-
 
   <div style="width:100%">
     <div class="container" style="width:100%;">
@@ -58,7 +70,8 @@
           <button style="border-style: none;background-color: transparent;">
             <h1> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio</h1>
           </button>
-          <button class="btn" style="border-style: none;background-color:aquamarine;margin-top: 20px;border-radius: 16px; ">
+          <button class="btn" onclick="doNewButton();"
+            style="border-style: none;background-color:aquamarine;margin-top: 20px;border-radius: 16px; ">
             <h1> Hello</h1>
           </button>
 
@@ -79,7 +92,7 @@
           </button>
 
 
-          <div style="margin-top: 100px; display:block">
+          <div id="allbuttons" style="margin-top: 100px; display:block">
 
             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
               style="background-color:  whitesmoke;color:darkgray">
