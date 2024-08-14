@@ -44,16 +44,22 @@
 
   function doNewButton() {
 
-    let item = prompt("Enter item name", "unknown item");
+    let itemName = prompt("Enter item name", "unknown item");
 
-    if (item == null || item == "")
+    if (itemName == null || itemName == "")
       return;
 
     const newButton = document.createElement('button');
-    newButton.textContent = item;
+
     let e = document.getElementById("allbuttons");
 
     e.appendChild(newButton);
+
+
+    newButton.outerHTML = `<button type="button"
+    class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"  style="margin:10px">` + itemName + `</button>`;
+
+
 
 
   }
@@ -88,16 +94,13 @@
             <input aria-label="Search inCitio" autocomplete="off" placeholder="Search inCitio" value="" name=""
               type="text" style="padding: 0px; border:0cap; float:right;
             width: 90%;  background-color: rgb(71, 12, 12);
-      z-index: 6; left: 0px;" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50">
+             z-index: 6; left: 0px;" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50">
           </button>
 
 
           <div id="allbuttons" style="margin-top: 100px; display:block">
 
-            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-              style="background-color:  whitesmoke;color:darkgray">
-              Dropdown button1
-            </button>
+
 
             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
               style="background-color:  whitesmoke;color:darkgray">
