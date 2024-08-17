@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--   My project for household management  -->
+<!--   My project for household management  
+   
+TODO: Work on modal box or form
+
+-->
 
 <head>
   <meta charset="UTF-8">
@@ -44,10 +48,6 @@
 
   function doNewButton() {
 
-    let itemName = prompt("Enter item name", "unknown item");
-
-    if (itemName == null || itemName == "")
-      return;
 
     const newButton = document.createElement('button');
 
@@ -55,14 +55,34 @@
 
     e.appendChild(newButton);
 
+    let stampx = new Date().getTime();
+    let stamp = stampx.toString();
+    stamp = stamp.slice(9);
 
-    newButton.outerHTML = `<button type="button"
-    class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"  style="margin:10px">` + itemName + `</button>`;
-
-
+    newButton.outerHTML = `<button type="button" id="` + stamp + `" `
+      + ` class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"  style="margin:10px">` + stamp + `</button>`;
 
 
   }
+
+
+
+  function modalSubmit() {
+
+      alert("submit");
+
+      let itemName = document.getElementById("itemName");
+
+      alert(itemName.value);
+
+      event = event || window.event;
+      var source = event.target || event.srcElement;
+
+      alert(source.innerText);
+
+   }
+
+  function hid(el) { el.style.display = 'none'; }
 
 </script>
 
@@ -72,17 +92,25 @@
   <div style="width:100%">
     <div class="container" style="width:100%;">
       <div class="row">
-        <div class="col" style="background-color:  whitesmoke;">
+        <div class="col" style="background-color:  rgb(160, 83, 128);justify-content: center;align-items: center">
           <button style="border-style: none;background-color: transparent;">
             <h1> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio</h1>
           </button>
           <button class="btn" onclick="doNewButton();"
-            style="border-style: none;background-color:aquamarine;margin-top: 20px;border-radius: 16px; ">
-            <h1> Hello</h1>
+            style="border-style: none;background-color:aquamarine;margin-left:20px; margin-top: 20px;border-radius: 16px; ">
+            <h1>Hello</h1>
+
+
+
           </button>
 
+          <p>
+
+
+          </p>
 
         </div>
+
 
 
         <div class="col-8 mx-auto" style="background-color: rgb(41, 92, 67);padding: 10px ;">
@@ -102,14 +130,11 @@
 
 
 
-            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-              style="background-color:  whitesmoke;color:darkgray">
-              Dropdown button2
-            </button>
+
 
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" data-bs-target="#myModal">New Room</a></li>
-
+              <li><a class="dropdown-item" data-bs-target="#myModal"   href="#"  data-bs-toggle="modal">New Room</a></li>
+<!--  idmodal'click not needed-->
               <li onclick="idmodal.click();"><a class="dropdown-item" href="#">New Container</a></li>
               <li><a class="dropdown-item" href="#">New Item</a></li>
             </ul>
@@ -117,8 +142,8 @@
 
 
 
-          <!-- Button to Open the Modal -->
-          <button type="button" id="idmodal" class="btn btn-primary" style="display: none;" data-bs-toggle="modal"
+          <!-- Hidden Button to Open the Modal -->
+          <button type="button" id="idmodal" class="btn btn-primary" style="display:initial" data-bs-toggle="modal"
             data-bs-target="#myModal">
             Open modal
           </button>
@@ -137,7 +162,22 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                  Modal body..
+                  <form>
+                    <div class="mb-3">
+                      <label for="itemName" class="form-label">Item Name</label>
+                      <input type="text" class="form-control" id="itemName" aria-describedby="emaillHelp">
+                      <div id="emailHelp" class="form-text">Input name of item</div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-3 form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="modalSubmit()">Submit</button>
+                  </form>
                 </div>
 
                 <!-- Modal footer -->
@@ -149,19 +189,27 @@
             </div>
           </div>
 
-
-
-
         </div>
         <div class="col-2" style="background-color: floralwhite;">
           3 of 3
-          <p>cccc</p>
-          <p>cccc</p>
-          <p>cccc</p>
-          <p>cccc</p>
-          <p>cccc</p>
-          <p>cccc</p>
-          <p>cccc</p>
+
+          <p>
+
+
+          <div class="picture" id="picture_box" style="background-color: transparent; position: absolute; 
+           display: initial; width:150px;height:150px;border: 1px solid black;  margin: 0px; " contenteditable="true">
+            <button id="paste_btn" onclick="
+            hid(this);
+            let p = this.parentElement;
+         ;
+         p.parentElement.style='font-size:20px'
+            p.innerHTML = 'Now copy an image to the clipboard, THEN right click here to paste it'            
+  
+
+            " style="padding:10px;margin:10px ;height:100px;
+            ">left click here to start paste
+            </button>
+          </div>
 
         </div>
       </div>
@@ -170,8 +218,38 @@
 
   <script>
 
+    function doBefore() {
+      // alert("before");
+
+      let p = document.getElementById("picture_box");
+      p.innerHTML = "";
+    }
+
+    function doAfter() {
+
+      let p = document.getElementById("picture_box");
+      let c = p.firstElementChild;
+      let d = c.firstElementChild;
 
 
+      d.style.height = "150px";
+      d.style.width = "150px";
+      //  c.style.position="relative";
+      // c.style.left = "20px";
+      //  console.log(c.style.left);
+    }
+
+
+    document.addEventListener('paste',
+      (ev) => {
+        doBefore();
+      }, true);
+
+    document.addEventListener('paste',
+      (ev) => {
+        setTimeout(doAfter, 0);
+
+      }, false);  
   </script>
 
 </body>
