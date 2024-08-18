@@ -69,18 +69,18 @@ TODO: Work on modal box or form
 
   function modalSubmit() {
 
-      alert("submit");
+    alert("submit");
 
-      let itemName = document.getElementById("itemName");
+    let itemName = document.getElementById("itemName");
 
-      alert(itemName.value);
+    alert(itemName.value);
 
-      event = event || window.event;
-      var source = event.target || event.srcElement;
+    event = event || window.event;
+    var source = event.target || event.srcElement;
 
-      alert(source.innerText);
+    alert(source.innerText);
 
-   }
+  }
 
   function hid(el) { el.style.display = 'none'; }
 
@@ -96,14 +96,18 @@ TODO: Work on modal box or form
           <button style="border-style: none;background-color: transparent;">
             <h1> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio</h1>
           </button>
-          <button class="btn" onclick="doNewButton();"
-            style="border-style: none;background-color:aquamarine;margin-left:20px; margin-top: 20px;border-radius: 16px; ">
-            <h1>Hello</h1>
 
-
-
-          </button>
-
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                       id="dropdownMenuButton"
+              style="border-style: none;background-color:aquamarine;margin-left:20px; margin-top: 20px;border-radius: 16px; ">
+              <h1>+New</h1>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" data-bs-target="#myModal" href="#" data-bs-toggle="modal">Container</a></li>
+              <li><a class="dropdown-item" href="#">New Item</a></li>
+            </ul>
+          </div>
           <p>
 
 
@@ -132,9 +136,9 @@ TODO: Work on modal box or form
 
 
 
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" data-bs-target="#myModal"   href="#"  data-bs-toggle="modal">New Room</a></li>
-<!--  idmodal'click not needed-->
+            <ul class="dropdown-menu">Modal
+              <li><a class="dropdown-item" data-bs-target="#myModal" href="#" data-bs-toggle="myModal">New Room</a></li>
+              <!--  idmodal'click not needed-->
               <li onclick="idmodal.click();"><a class="dropdown-item" href="#">New Container</a></li>
               <li><a class="dropdown-item" href="#">New Item</a></li>
             </ul>
@@ -176,7 +180,8 @@ TODO: Work on modal box or form
                       <input type="checkbox" class="form-check-input" id="exampleCheck1">
                       <label class="form-check-label" for="exampleCheck1">Check me out</label>
                     </div>
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="modalSubmit() ">Submit</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+                      onclick="modalSubmit() ">Submit</button>
                   </form>
                 </div>
 

@@ -8,7 +8,7 @@ Demo Bootstrap5 forms
 
 <head>
   <meta charset="UTF-8">
-  <title>Incitio v 0.1</title>
+  <title>Demo bootsrap5 dropdown menu</title>
 
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
@@ -44,213 +44,35 @@ Demo Bootstrap5 forms
 </style>
 
 
-<script>
-
-  function doNewButton() {
-
-
-    const newButton = document.createElement('button');
-
-    let e = document.getElementById("allbuttons");
-
-    e.appendChild(newButton);
-
-    let stampx = new Date().getTime();
-    let stamp = stampx.toString();
-    stamp = stamp.slice(9);
-
-    newButton.outerHTML = `<button type="button" id="` + stamp + `" `
-      + ` class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"  style="margin:10px">` + stamp + `</button>`;
-
-
-  }
-
-
-
-  function modalSubmit() {
-
-      alert("submit");
-
-      let itemName = document.getElementById("itemName");
-
-      alert(itemName.value);
-
-      event = event || window.event;
-      var source = event.target || event.srcElement;
-
-      alert(source.innerText);
-
-   }
-
-  function hid(el) { el.style.display = 'none'; }
-
-</script>
-
 
 <body style="width:100%">
 
-  <div style="width:100%">
-    <div class="container" style="width:100%;">
-      <div class="row">
-        <div class="col" style="background-color:  rgb(160, 83, 128);justify-content: center;align-items: center">
-          <button style="border-style: none;background-color: transparent;">
-            <h1> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio</h1>
-          </button>
-          <button class="btn" onclick="doNewButton();"
-            style="border-style: none;background-color:aquamarine;margin-left:20px; margin-top: 20px;border-radius: 16px; ">
-            <h1>Hello</h1>
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+      id="dropdownMenuButton"
+      style="border-style: none;color:black;background-color:aquamarine;margin-left:20px; margin-top: 20px;border-radius: 16px; ">
+      <h1>Hello</h1>
+    </button>
 
-
-
-          </button>
-
-          <p>
-
-
-          </p>
-
-        </div>
-
-
-
-        <div class="col-8 mx-auto" style="background-color: rgb(41, 92, 67);padding: 10px ;">
-
-          <button id="none" class="btn btn-light mx-auto" style="float:right; background-color:rgb(23, 84, 124);position: relative;
-              width: 90%;height: 15%; border-radius: 16px; box-shadow: 5px 5px 5px gray;">
-            <span class="btn-label" style="position:absolute;top:0px; left:10px; margin-bottom: 20px;">
-              <i class="bi-search" style="font-size:30px"></i></span>
-            <input aria-label="Search inCitio" autocomplete="off" placeholder="Search inCitio" value="" name=""
-              type="text" style="padding: 0px; border:0cap; float:right;
-            width: 90%;  background-color: rgb(71, 12, 12);
-             z-index: 6; left: 0px;" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50">
-          </button>
-
-
-          <div id="allbuttons" style="margin-top: 100px; display:block">
-
-
-
-
-
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" data-bs-target="#myModal"   href="#"  data-bs-toggle="modal">New Room</a></li>
-<!--  idmodal'click not needed-->
-              <li onclick="idmodal.click();"><a class="dropdown-item" href="#">New Container</a></li>
-              <li><a class="dropdown-item" href="#">New Item</a></li>
-            </ul>
-          </div>
-
-
-
-          <!-- Hidden Button to Open the Modal -->
-          <button type="button" id="idmodal" class="btn btn-primary" style="display:initial" data-bs-toggle="modal"
-            data-bs-target="#myModal">
-            Open modal
-          </button>
-
-
-          <!-- The Modal -->
-          <div class="modal" id="myModal">
-            <div class="modal-dialog">
-              <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                  <h4 class="modal-title">Modal Heading</h4>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                  <form>
-                    <div class="mb-3">
-                      <label for="itemName" class="form-label">Item Name</label>
-                      <input type="text" class="form-control" id="itemName" aria-describedby="emaillHelp">
-                      <div id="emailHelp" class="form-text">Input name of item</div>
-                    </div>
-                    <div class="mb-3">
-                      <label for="exampleInputPassword1" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1">
-                    </div>
-                    <div class="mb-3 form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="modalSubmit() ">Submit</button>
-                  </form>
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div class="col-2" style="background-color: floralwhite;">
-          3 of 3
-
-          <p>
-
-
-          <div class="picture" id="picture_box" style="background-color: transparent; position: absolute; 
-           display: initial; width:150px;height:150px;border: 1px solid black;  margin: 0px; " contenteditable="true">
-            <button id="paste_btn" onclick="
-            hid(this);
-            let p = this.parentElement;
-         ;
-         p.parentElement.style='font-size:20px'
-            p.innerHTML = 'Now copy an image to the clipboard, THEN right click here to paste it'            
-  
-
-            " style="padding:10px;margin:10px ;height:100px;
-            ">left click here to start paste
-            </button>
-          </div>
-
-        </div>
-      </div>
-    </div>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">New Room</a></li>
+      <li><a class="dropdown-item" href="#">New Container</a></li>
+      <li><a class="dropdown-item" href="#">New Item</a></li>
+    </ul>
   </div>
 
-  <script>
 
-    function doBefore() {
-      // alert("before");
-
-      let p = document.getElementById("picture_box");
-      p.innerHTML = "";
-    }
-
-    function doAfter() {
-
-      let p = document.getElementById("picture_box");
-      let c = p.firstElementChild;
-      let d = c.firstElementChild;
-
-
-      d.style.height = "150px";
-      d.style.width = "150px";
-      //  c.style.position="relative";
-      // c.style.left = "20px";
-      //  console.log(c.style.left);
-    }
-
-
-    document.addEventListener('paste',
-      (ev) => {
-        doBefore();
-      }, true);
-
-    document.addEventListener('paste',
-      (ev) => {
-        setTimeout(doAfter, 0);
-
-      }, false);  
-  </script>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+      aria-expanded="false">
+      Dropdown button
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li><a class="dropdown-item" href="#">Another action</a></li>
+      <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+  </div>
 
 </body>
 
