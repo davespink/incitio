@@ -47,8 +47,6 @@ TODO: Work on modal box or form
 <script>
 
   function doNewButton() {
-
-
     const newButton = document.createElement('button');
 
     let e = document.getElementById("allbuttons");
@@ -61,7 +59,6 @@ TODO: Work on modal box or form
 
     newButton.outerHTML = `<button type="button" id="` + stamp + `" `
       + ` class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"  style="margin:10px">` + stamp + `</button>`;
-
 
   }
 
@@ -104,8 +101,8 @@ TODO: Work on modal box or form
               <h1>+New</h1>
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" data-bs-target="#myModal" href="#" data-bs-toggle="modal">Container</a></li>
-              <li><a class="dropdown-item" href="#">New Item</a></li>
+              <li><a class="dropdown-item" data-bs-target="#myModal" href="#" data-bs-toggle="modal">New Container</a></li>
+              <li><a class="dropdown-item" data-bs-target="#myModal" href="#" data-bs-toggle="modal">New Item</a></li>
             </ul>
           </div>
           <p>
