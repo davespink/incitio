@@ -28,7 +28,6 @@ TODO: Work on modal box or form
 
   h2 {
     font-size: 40px;
-
   }
 
   p {
@@ -46,22 +45,25 @@ TODO: Work on modal box or form
 
 <script>
 
+  let x = 0;
+
   function doNewButton(buttonText) {
-
-
     let newButton = document.createElement('button');
-
     let e = document.getElementById("allbuttons");
-
     e.appendChild(newButton);
 
     let stampx = new Date().getTime();
     let stamp = stampx.toString();
     stamp = stamp.slice(9);
 
-    newButton.outerHTML = `<button type="button" id="` + stamp + `" `
-      + ` class="btn btn-primary"  style="margin:5px">` + buttonText + "-" + stamp + `</button>`;
 
+
+    newButton.outerHTML =
+      `<button id="` + stamp + `" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false"  onclick="x=` + stamp + `"
+              style="border-style: none;background-color:rgb(118, 143, 72);margin-left:20px; margin-top: 20px;border-radius: 16px; ">`
+      + buttonText + "-" + stamp +
+      `</button>`;
 
   }
 
@@ -70,19 +72,31 @@ TODO: Work on modal box or form
   function modalSubmit() {
 
     // alert("submit");
-
     let itemName = document.getElementById("itemName");
-
     // alert(itemName.value);
-
-
     let el = document.getElementById("modal_close");
     el.click();
 
     doNewButton(itemName.value);
   }
+  function doRemove() { let ebg = document.getElementById(x); ebg.remove(); }
 
 
+  function doDelete() {
+
+    if (confirm('Are you sure you want to delete')) {
+
+      setTimeout((() => {  document.getElementById(x).remove(); }), 100);
+
+
+      console.log('Thing was deleted');
+    } else {
+      // Do nothing!
+      console.log('Thing was not deleted');
+    }
+
+   
+  }
 
 </script>
 
@@ -103,6 +117,7 @@ TODO: Work on modal box or form
               style="border-style: none;background-color:aquamarine;margin-left:20px; margin-top: 20px;border-radius: 16px; ">
               <h1>+New</h1>
             </button>
+
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" data-bs-target="#myModal" href="#" data-bs-toggle="modal">New Container</a>
               </li>
@@ -118,38 +133,29 @@ TODO: Work on modal box or form
 
 
 
-        <div class="col-8 mx-auto" style="background-color: rgb(41, 92, 67);padding: 10px ;">
+        <div class="col-6 mx-auto" style="background-color: rgb(41, 92, 67);padding: 10px ;">
 
-          <button id="none" class="btn btn-light mx-auto" style="float:right; background-color:rgb(23, 84, 124);position: relative;
+          <button id="none" class="btn btn-light mx-auto" style="float:right; background-color:blanchedalmond;position: relative;
               width: 90%;height: 15%; border-radius: 16px; box-shadow: 5px 5px 5px gray;">
             <span class="btn-label" style="position:absolute;top:0px; left:10px; margin-bottom: 20px;">
               <i class="bi-search" style="font-size:30px"></i></span>
             <input aria-label="Search inCitio" autocomplete="off" placeholder="Search inCitio" value="" name=""
               type="text" style="padding: 0px; border:0cap; float:right;
-            width: 90%;  background-color: rgb(71, 12, 12);
+            width: 90%;  background-color: rgb(219, 192, 192);
              z-index: 6; left: 0px;" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50">
           </button>
 
 
-          <div id="allbuttons" style="margin-top: 100px; display:block">
+          <div id="allbuttons" class="dropdown" style="margin-top: 100px; display:block ; background-color :blueviolet">
 
-
-
-
-
-            <ul class="dropdown-menu">Modal
-
-              <!--  idmodal'click not needed-->
-              <li onclick="idmodal.click();"><a class="dropdown-item" href="#">New Container</a></li>
-              <li><a class="dropdown-item" href="#">New Item</a></li>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" onclick="doDelete( )">Delete</a>
+              </li>
+              <li><a class="dropdown-item">Select</a></li>
             </ul>
 
 
           </div>
-
-
-
-
 
 
           <!-- The Modal -->
@@ -188,7 +194,7 @@ TODO: Work on modal box or form
 
         </div>
         <div class="col-2" style="background-color: floralwhite;">
-        
+
 
           <p>
 
@@ -224,7 +230,7 @@ TODO: Work on modal box or form
 
     function doAfter() {
 
-     // alert("doAfter");
+      // alert("doAfter");
 
       let p = document.getElementById("picture_box");
       let c = p.firstElementChild;
