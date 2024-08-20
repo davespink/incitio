@@ -44,8 +44,10 @@ TODO: Work on modal box or form
 
 
 <script>
+  // globals
+  let gButtonId = 0;
+  let gHeaderThingType = "";
 
-  let x = 0;
 
   function doNewButton(buttonText) {
     let newButton = document.createElement('button');
@@ -56,12 +58,24 @@ TODO: Work on modal box or form
     let stamp = stampx.toString();
     stamp = stamp.slice(9);
 
+    let bgColor = "";
+
+    if (gThingType == "c") {
+      bgColor = "blue";
+
+    } else {
+      bgColor = "green";
+    }
 
 
     newButton.outerHTML =
       `<button id="` + stamp + `" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false"  onclick="x=` + stamp + `"
-              style="border-style: none;background-color:rgb(118, 143, 72);margin-left:20px; margin-top: 20px;border-radius: 16px; ">`
+              aria-expanded="false" href="#" onclick="gButtonId=` + stamp + `"
+              style="border-style:none;
+
+              background-color:` + bgColor + `;
+              
+              margin-left:20px; margin-top: 20px;border-radius: 16px; ">`
       + buttonText + "-" + stamp +
       `</button>`;
 
@@ -79,14 +93,14 @@ TODO: Work on modal box or form
 
     doNewButton(itemName.value);
   }
-  function doRemove() { let ebg = document.getElementById(x); ebg.remove(); }
+  function doRemove() { let ebg = document.getElementById(gButtonId); ebg.remove(); }
 
 
   function doDelete() {
 
     if (confirm('Are you sure you want to delete')) {
 
-      setTimeout((() => {  document.getElementById(x).remove(); }), 100);
+      setTimeout((() => { document.getElementById(gButtonId).remove(); }), 100);
 
 
       console.log('Thing was deleted');
@@ -95,18 +109,26 @@ TODO: Work on modal box or form
       console.log('Thing was not deleted');
     }
 
-   
+
   }
+
+  function doSelect() {
+
+    alert("Select");
+
+  }
+
+ 
 
 </script>
 
 
 <body style="width:100%">
 
-  <div style="width:100%">
+  <div style="width:100%;background-color: black">
     <div class="container" style="width:100%;">
       <div class="row">
-        <div class="col" style="background-color:  rgb(160, 83, 128);justify-content: center;align-items: center">
+        <div class="col-2" style="background-color:  rgb(160, 83, 128);justify-content: center;align-items: center">
           <button style="border-style: none;background-color: transparent;">
             <h1> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio</h1>
           </button>
@@ -119,9 +141,21 @@ TODO: Work on modal box or form
             </button>
 
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" data-bs-target="#myModal" href="#" data-bs-toggle="modal">New Container</a>
+
+              <li><a class="dropdown-item" data-bs-target="#myModal" href="#" data-bs-toggle="modal" onClick="
+           
+                gThingType='c';
+                document.getElementById('headerThingType').innerText='Container';
+                document.getElementById('itemThingType').innerHTML='Container Name';
+            
+                 ">New Container</a>
               </li>
-              <li><a class="dropdown-item" data-bs-target="#myModal" href="#" data-bs-toggle="modal">New Item</a></li>
+              <li><a class="dropdown-item" data-bs-target="#myModal" href="#" data-bs-toggle="modal" onClick="
+                   
+                 gThingType='i';
+                document.getElementById('headerThingType').innerText='Item';
+                document.getElementById('itemThingType').innerHTML='Item Name';
+                 "> New Item</a></li>
             </ul>
           </div>
           <p>
@@ -147,11 +181,14 @@ TODO: Work on modal box or form
 
 
           <div id="allbuttons" class="dropdown" style="margin-top: 100px; display:block ; background-color :blueviolet">
+            <p>
+            <h4>Home>Toolshed</h4>
+            </p>
 
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" onclick="doDelete( )">Delete</a>
+              <li><a class="dropdown-item" href="#" onclick="doDelete( )">Delete</a>
               </li>
-              <li><a class="dropdown-item">Select</a></li>
+              <li><a class="dropdown-item" href="#" onclick="doSelect( )">Select</a></li>
             </ul>
 
 
@@ -161,12 +198,12 @@ TODO: Work on modal box or form
           <!-- The Modal -->
           <div class="modal" id="myModal">
             <div class="modal-dialog">
-              <div class="modal-content">
+              <div class="modal-content" style="width:80%">
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                  <h4 class="modal-title">
-                    <script>document.write("new thing");</script>
+                  <h4 id="headerThingType" class="modal-title">
+
                   </h4>
                   <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
@@ -175,12 +212,12 @@ TODO: Work on modal box or form
                 <div class="modal-body">
                   <form>
                     <div class="mb-3">
-                      <label for="itemName" class="form-label">Item Name</label>
+                      <label for="itemName" class="form-label" id="itemThingType">Item Name</label>
                       <input type="text" class="form-control" id="itemName" value="untitled" type="text">
-                      <div id="emailHelp" class="form-text">Input name of item</div>
+
                     </div>
 
-                    <button type="button" onClick="modalSubmit()" class="btn btn-primary">Submit
+                    <button type="submit" onClick="modalSubmit()" data-bs-submit="submit" class="btn btn-primary">Submit
                     </button>
                     <button id="modal_close" type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
 
@@ -193,14 +230,14 @@ TODO: Work on modal box or form
           </div>
 
         </div>
-        <div class="col-2" style="background-color: floralwhite;">
+
+
+        <div class="col-4" style="background-color: rgb(131, 107, 61);">
 
 
           <p>
-
-
-          <div class="picture" id="picture_box" style="background-color: transparent; position: absolute; 
-           display: initial; width:150px;height:150px;border: 1px solid black;  margin: 0px; " contenteditable="true">
+          <div class="picture" id="picture_box" style="background-color: white; position: absolute;margin:auto; 
+           display: initial; width:150px;height:150px;border: 1px solid black;  " contenteditable="true">
             <button id="paste_btn" onclick="
             hid(this);
             let p = this.parentElement;
