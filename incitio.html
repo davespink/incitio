@@ -49,25 +49,34 @@ TODO: Work on modal box or form
   let gHeaderThingType = "";
 
 
+
+
   function doNewButton(buttonText) {
-    let newButton = document.createElement('button');
-    let e = document.getElementById("allbuttons");
-    e.appendChild(newButton);
+    let newItemButton = document.createElement('button');
+    let elItems = document.getElementById("allbuttons");
+    elItems.appendChild(newItemButton);
+
+
+    let newBranchButton = document.createElement('button');
+    let elBranch = document.getElementById("allbuttons");
+    elBranch.appendChild(newBranchButton);
+
+
 
     let stampx = new Date().getTime();
     let stamp = stampx.toString();
     stamp = stamp.slice(9);
- 
-  if (gThingType == "c") {
+
+    if (gThingType == "c") {
       bgColor = "blue";
 
     } else {
       bgColor = "green";
     }
- 
 
-    newButton.outerHTML =
-      `<button id="` + stamp + `" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+
+    newItemButton.outerHTML =
+      `<button id="item_` + stamp + `" class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
               aria-expanded="false" href="#" onclick="gButtonId=` + stamp + `"
               style="border-style:none;
 
@@ -76,6 +85,20 @@ TODO: Work on modal box or form
               margin-left:20px; margin-top: 20px;border-radius: 16px; ">`
       + buttonText + "-" + stamp +
       `</button>`;
+
+      bgColor="brown";
+      newBranchButton.outerHTML =
+      `<button id="branch_` + stamp + `" class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
+              aria-expanded="false" href="#" onclick="gButtonId=` + stamp + `"
+              style="border-style:none;
+
+              background-color:` + bgColor + `;
+              
+              margin-left:20px; margin-top: 20px;border-radius: 16px; ">`
+      + buttonText + "-" + stamp +
+      `</button>`;
+
+
 
   }
 
@@ -89,12 +112,12 @@ TODO: Work on modal box or form
     let el = document.getElementById("modal_close");
     el.click();
 
-    setTimeout(doNewButton(itemName.value),3000);
+    setTimeout(doNewButton(itemName.value), 3000);
   }
   function doRemove() {
-    
+
     let ebg = document.getElementById(gButtonId); ebg.remove();
-  
+
   }
 
 
@@ -102,7 +125,7 @@ TODO: Work on modal box or form
 
     if (confirm('Are you sure you want to delete')) {
 
-      setTimeout((() => { document.getElementById(gButtonId).remove(); }), 100);
+      setTimeout((() => { document.getElementById(gButtonId).remove(); }), 1000);
 
 
       console.log('Thing was deleted');
@@ -116,11 +139,13 @@ TODO: Work on modal box or form
 
   function doSelect() {
 
-    alert("Select");
+    alert(gButtonId);
+
+  //  document.getElementById("branch").innerHTML += ">" + gButtonId;
 
   }
 
- 
+
 
 </script>
 
@@ -131,13 +156,13 @@ TODO: Work on modal box or form
     <div class="container" style="width:100%;">
       <div class="row">
         <div class="col-2" style="background-color:  rgb(160, 83, 128);justify-content: center;align-items: center">
-          <button  onClick="doNewButton()" style="border-style: none;background-color: transparent;">
+          <button onClick="doNewButton()" style="border-style: none;background-color: transparent;">
             <h1> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio</h1>
           </button>
 
           <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false" id="dropdownMenuButton" 
+              aria-expanded="false" id="dropdownMenuButton"
               style="border-style: none;background-color:aquamarine;margin-left:20px; margin-top: 20px;border-radius: 16px; ">
               <h1>+New</h1>
             </button>
@@ -181,10 +206,23 @@ TODO: Work on modal box or form
              z-index: 6; left: 0px;" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50">
           </button>
 
- 
+          <div id="branch" class="dropdown" style="margin-top: 100px; display:block ; background-color :blueviolet">
+            <button id="home" class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
+              aria-expanded="false" "   style=" border-style:none; background-color:rgb(128, 98, 0); margin-left:20px;
+              margin-top: 20px;border-radius: 16px; ">Home</button>
+
+              <ul class=" dropdown-menu">
+              <li><a class="dropdown-item" href="#" onclick="doDelete( )">Delete Branch</a>
+              </li>
+              <li><a class="dropdown-item" href="#" onclick="doSelect( )">Select Branch</a></li>
+              </ul>
+
+
+          </div>
+
           <div id="allbuttons" class="dropdown" style="margin-top: 100px; display:block ; background-color :blueviolet">
-             
- 
+
+
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#" onclick="doDelete( )">Delete</a>
               </li>
@@ -217,7 +255,7 @@ TODO: Work on modal box or form
 
                     </div>
 
-                    <button type="button" onClick="modalSubmit()"   class="btn btn-primary">Submit
+                    <button type="button" onClick="modalSubmit()" class="btn btn-primary">Submit
                     </button>
                     <button id="modal_close" type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
 
