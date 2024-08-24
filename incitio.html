@@ -104,14 +104,14 @@ Look at local storge
       `</button>`;
 
 
-// only last button is dropdown-toggle
+    // only last button is dropdown-toggle
 
-  //    el=getElementById("branch_" + stamp);
- 
-//      el.setAttribute("data-bs-toggle","dropdown");
- 
+    //    el=getElementById("branch_" + stamp);
 
-      // next the chevron
+    //      el.setAttribute("data-bs-toggle","dropdown");
+
+
+    // next the chevron
     //  el.classList.add("dropdowm-toggle");
 
   }
@@ -170,7 +170,7 @@ Look at local storge
     <div class="container" style="width:100%;">
       <div class="row">
         <div class="col-2" style="background-color:  rgb(160, 83, 128);justify-content: center;align-items: center">
-          <button onClick="doNewButton()" style="border-style: none;background-color: transparent;">
+          <button style="border-style: none;background-color: transparent;">
             <h1> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio</h1>
           </button>
 
@@ -284,25 +284,15 @@ Look at local storge
         </div>
 
 
-        <div class="col-4" style="background-color: rgb(131, 107, 61);display:flex ;justify-content: center;">
+        <div class="col-4" style="background-color: rgb(131, 107, 61); display:flex;justify-content: center; ">
+          <div style="display:inline-block">
+ 
 
-
-          <p>
-          <div class="picture" id="picture_box" style="display:flex ;justify-content: center;  
-           background-color: white; position: absolute;margin-top: 20px;  padding:30px;
+            <div id="picture_box" style="background-color: white;margin-top: 20px;   
              width:200px;height:200px;border: 1px solid black;  " contenteditable="true">
-
-            <button id="paste_btn" style="height:auto;padding:20px;"
-            
-            onclick="hid(this);
-            let p = this.parentElement;  
-        
-            p.innerText = 'Now copy an image to the clipboard, THEN right click here to paste it'"     
-     >
-            
-            left click here to start paste
-            
-          </button>
+ 
+            </div>
+            <p></p> <button style="margin-left: 50%;margin-right: 50%;">reset</button>
           </div>
 
         </div>
@@ -313,10 +303,10 @@ Look at local storge
   <script>
 
     function doBefore() {
-  //    alert("before");
+      //    alert("before");
 
       let p = document.getElementById("picture_box");
-      p.style.padding="0px";
+      p.style.padding = "0px";
       p.innerHTML = "";
     }
 
@@ -327,16 +317,12 @@ Look at local storge
       let p = document.getElementById("picture_box");
       let c = p.firstElementChild;
       let d = c.firstElementChild;
+      if (c.tagName.toString() != "IMG") { alert("error"); return false; }
+
+      //   d.style.height = "250px";
+     c.style.width = "200px";
 
 
-   //   d.style.height = "250px";
-      d.style.width = "250px";
-
-
-    
-      //  c.style.position="relative";
-      // c.style.left = "20px";
-      //  console.log(c.style.left);
     }
     function hid(el) {
       el.display = "none";
@@ -354,7 +340,20 @@ Look at local storge
       }, false);
 
 
+    const pictureBoxReset = `<div class="picture" id="picture_box" style="display:flex ;justify-content: center;  
+           background-color: white; position: absolute;margin-top: 20px;  padding:30px;
+             width:200px;height:200px;border: 1px solid black;  " contenteditable="true">
 
+            <button id="paste_btn" style="height:auto;padding:20px;"
+            
+            onclick="hid(this);
+            let p = this.parentElement;  
+            p.innerText = 'Now copy an image to the clipboard, THEN right click here to paste it'">
+            
+            left click here to start paste
+            
+          </button>
+          </div>`;
 
   </script>
 
