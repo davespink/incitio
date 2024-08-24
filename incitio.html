@@ -2,7 +2,9 @@
 <html lang="en">
 <!--   My project for household management  
    
-TODO: Work on modal box or form
+TODO: Look at JSON object
+Start from empty data
+Look at local storge
 
 -->
 
@@ -57,9 +59,6 @@ TODO: Work on modal box or form
     elItems.appendChild(newItemButton);
 
 
-    let newBranchButton = document.createElement('button');
-    let elBranch = document.getElementById("allbuttons");
-    elBranch.appendChild(newBranchButton);
 
 
 
@@ -86,10 +85,16 @@ TODO: Work on modal box or form
       + buttonText + "-" + stamp +
       `</button>`;
 
-      bgColor="brown";
-      newBranchButton.outerHTML =
-      `<button id="branch_` + stamp + `" class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
-              aria-expanded="false" href="#" onclick="gButtonId=` + stamp + `"
+
+    let newBranchButton = document.createElement('button');
+    let elBranch = document.getElementById("branch");
+    elBranch.appendChild(newBranchButton);
+
+
+    bgColor = "brown";
+    newBranchButton.outerHTML =
+      `<button id="branch_` + stamp + `" class="btn btn-primary" type="button" data-bs-toggle="drpopdown"
+              aria-expanded="false" href="#" onclick=("gButtonId=` + stamp + `) "
               style="border-style:none;
 
               background-color:` + bgColor + `;
@@ -99,6 +104,15 @@ TODO: Work on modal box or form
       `</button>`;
 
 
+// only last button is dropdown-toggle
+
+  //    el=getElementById("branch_" + stamp);
+ 
+//      el.setAttribute("data-bs-toggle","dropdown");
+ 
+
+      // next the chevron
+    //  el.classList.add("dropdowm-toggle");
 
   }
 
@@ -141,7 +155,7 @@ TODO: Work on modal box or form
 
     alert(gButtonId);
 
-  //  document.getElementById("branch").innerHTML += ">" + gButtonId;
+    //  document.getElementById("branch").innerHTML += ">" + gButtonId;
 
   }
 
@@ -270,23 +284,25 @@ TODO: Work on modal box or form
         </div>
 
 
-        <div class="col-4" style="background-color: rgb(131, 107, 61);">
+        <div class="col-4" style="background-color: rgb(131, 107, 61);display:flex ;justify-content: center;">
 
 
           <p>
-          <div class="picture" id="picture_box" style="background-color: white; position: absolute;margin:auto; 
-           display: initial; width:150px;height:150px;border: 1px solid black;  " contenteditable="true">
-            <button id="paste_btn" onclick="
-            hid(this);
-            let p = this.parentElement;
-         ;
-         p.parentElement.style='font-size:20px'
-            p.innerHTML = 'Now copy an image to the clipboard, THEN right click here to paste it'            
-  
+          <div class="picture" id="picture_box" style="display:flex ;justify-content: center;  
+           background-color: white; position: absolute;margin-top: 20px;  padding:30px;
+             width:200px;height:200px;border: 1px solid black;  " contenteditable="true">
 
-            " style="padding:10px;margin:10px ;height:100px;
-            ">left click here to start paste
-            </button>
+            <button id="paste_btn" style="height:auto;padding:20px;"
+            
+            onclick="hid(this);
+            let p = this.parentElement;  
+        
+            p.innerText = 'Now copy an image to the clipboard, THEN right click here to paste it'"     
+     >
+            
+            left click here to start paste
+            
+          </button>
           </div>
 
         </div>
@@ -297,9 +313,10 @@ TODO: Work on modal box or form
   <script>
 
     function doBefore() {
-      alert("before");
+  //    alert("before");
 
       let p = document.getElementById("picture_box");
+      p.style.padding="0px";
       p.innerHTML = "";
     }
 
@@ -312,8 +329,11 @@ TODO: Work on modal box or form
       let d = c.firstElementChild;
 
 
-      d.style.height = "150px";
-      d.style.width = "150px";
+   //   d.style.height = "250px";
+      d.style.width = "250px";
+
+
+    
       //  c.style.position="relative";
       // c.style.left = "20px";
       //  console.log(c.style.left);
