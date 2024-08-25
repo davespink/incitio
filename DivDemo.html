@@ -7,7 +7,7 @@ Demo Divs
 
 <head>
     <meta charset="UTF-8">
-    <title>Demo bootsrap5 dropdown menu</title>
+    <title>Demo Div tag</title>
 
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
@@ -34,7 +34,61 @@ Demo Divs
             padding: 0px;
             margin: 0px;
         }
+
+        
+         
     </style>
+    <script>
+
+        function createButton(inType, inDescription) {
+
+            //   alert(inType);
+
+            let newButton = document.createElement('button');
+            let elItemsDiv = document.getElementById("divItems");
+            elItemsDiv.appendChild(newButton);
+
+
+            let stampx = new Date().getTime();
+            let stamp = stampx.toString();
+            stamp = stamp.slice(9);
+            /*
+                        if (gThingType == "c") {
+                            bgColor = "blue";
+            
+                        } else {
+                            bgColor = "green";
+                        }
+            
+            */
+
+            bgColor = "cornflowerblue";
+
+
+            inDescription = prompt('Enter description');
+
+            /*
+                        newButton.outerHTML =
+                            `<button id="item_` + stamp + `" class="btn btn-primary"   
+                           href="#" onclick="gButtonId=` + stamp + `"
+                          style="border-style:none;
+            
+                          background-color:` + bgColor + `;
+                          
+                          margin-left:20px; margin-top: 20px;border-radius: 16px; ">`
+                            + inDescription + "-" + stamp +
+                          `</button>`; */
+
+            newButton.outerHTML =
+                `<button id="item_` + stamp + `" class="btn btn-primary" style="margin:5px">`
+                + inDescription + "-" + stamp +
+                `</button>`;
+
+
+        }
+
+
+    </script>
 </head>
 
 <body>
@@ -49,9 +103,9 @@ Demo Divs
             </button>
 
             <div style="margin:auto">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false" id="dropdownMenuButton"
-                    style="border-style: none;  margin-top: 20px;border-radius: 16px; ">
+                <button class="btn btn-primary  " type="button"
+                    onclick="createButton('item','Stove');createButton('item','Microwave');createButton('item','AirFrier')"
+                    id="dropdownMenuButton" style="border-style: none;  margin-top: 20px;border-radius: 16px; ">
                     <h1>+New</h1>
                 </button>
             </div>
@@ -94,10 +148,20 @@ Demo Divs
 
             <div class="myDiv" style="background-color:white;margin:auto">
                 <h2 style="text-align: left;margin:10px;">Home > Kitchen </h2>
-                <h3 style="text-align: left;margin:10px;">Containers</h3>
+                <h2 style="text-align: left;margin:10px;">Containers</h2>
                 <h4 style="text-align: left;margin:10px;margin:20px">Fridge Freezer CocaCola Fridge Cabinet Shelf 1</h2>
+
                     <h2 style="text-align: left;margin:10px;">Items</h2>
-                    <h4 style="text-align: left;margin:10px;margin:20px">Stove Microwave Airfrier</h2>
+
+
+                    <div id="divItems" style="text-align: left;margin-left: 10px;margin-bottom: 10px;" text-align:
+                        center;>
+                        <button class="btn btn-primary">Stove</button>
+                        <button class="btn btn-primary">Microwave</button>
+                        <button class="btn btn-primary">Airfrier</button>
+
+                    </div>
+
             </div>
 
 
@@ -128,12 +192,28 @@ Demo Divs
             </div>
 
 
-            <div class="myDiv" style="background-color:white;margin:auto">
-                <h2 style="text-align: left;margin:10px;">Home > Kitchen </h2>
-                <h3 style="text-align: left;margin:10px;">Containers</h3>
-                <h4 style="text-align: left;margin:10px;margin:20px">Fridge Freezer CocaCola Fridge Cabinet Shelf 1</h2>
-                    <h2 style="text-align: left;margin:10px;">Items</h2>
-                    <h4 style="text-align: left;margin:10px;margin:20px">Stove Microwave Airfrier</h2>
+            <div style="background-color:white;margin:auto; padding:2px; ">
+                <div style="text-align:left;background-color: cornsilk;margin-left: 10px;">
+                    <form >
+                        <div class="form-group">
+                          <label for="email">Email address:</label>
+                          <input type="email" class="form-control" id="email"> 
+                           <label><input type="checkbox"> Remember me</label>
+                        </div>
+                        <div class="form-group">
+                          <label for="pwd">Password:</label>
+                          <input type="password" class="form-control" id="pwd">
+                        </div>
+                        <div class="checkbox">
+                          <label><input type="checkbox"> Remember me</label>        
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Example textarea</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                          </div>
+                      </form>
+                    <br>
+                </div>
             </div>
 
 
