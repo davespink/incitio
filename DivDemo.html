@@ -34,15 +34,23 @@ Demo Divs
             padding: 0px;
             margin: 0px;
         }
-
-        
-         
     </style>
     <script>
+        function buttonSelected(buttonId) {
+
+           // alert(buttonId)
+            let el = document.getElementById("inName");
+            el.value = buttonId;
+
+        
+        
+        }
+
+
+
 
         function createButton(inType, inDescription) {
 
-            //   alert(inType);
 
             let newButton = document.createElement('button');
             let elItemsDiv = document.getElementById("divItems");
@@ -51,41 +59,36 @@ Demo Divs
 
             let stampx = new Date().getTime();
             let stamp = stampx.toString();
+
+            // TODO remove next line
             stamp = stamp.slice(9);
-            /*
-                        if (gThingType == "c") {
-                            bgColor = "blue";
-            
-                        } else {
-                            bgColor = "green";
-                        }
-            
-            */
 
-            bgColor = "cornflowerblue";
+            if (inType == "c") {
+                buttonColor = `btn btn-primary`;
 
+
+            } else {
+                buttonColor = `btn btn-success`;
+            }
 
             inDescription = prompt('Enter description');
 
-            /*
-                        newButton.outerHTML =
-                            `<button id="item_` + stamp + `" class="btn btn-primary"   
-                           href="#" onclick="gButtonId=` + stamp + `"
-                          style="border-style:none;
-            
-                          background-color:` + bgColor + `;
-                          
-                          margin-left:20px; margin-top: 20px;border-radius: 16px; ">`
-                            + inDescription + "-" + stamp +
-                          `</button>`; */
+            buttonId = "item_" + stamp;
 
             newButton.outerHTML =
-                `<button id="item_` + stamp + `" class="btn btn-primary" style="margin:5px">`
-                + inDescription + "-" + stamp +
-                `</button>`;
+                `<button id="` + buttonId + `" onClick=buttonSelected("` + buttonId + `"); class="` + buttonColor + ` style="margin:5px">`
+                + inDescription + `</button>`;
+
+            //   newButton.onclick = buttonSelected(buttonId);
 
 
+
+            //     newButton.onclick = alert("eeexxx");
         }
+
+
+
+
 
 
     </script>
@@ -103,11 +106,24 @@ Demo Divs
             </button>
 
             <div style="margin:auto">
-                <button class="btn btn-primary  " type="button"
-                    onclick="createButton('item','Stove');createButton('item','Microwave');createButton('item','AirFrier')"
+                <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
                     id="dropdownMenuButton" style="border-style: none;  margin-top: 20px;border-radius: 16px; ">
                     <h1>+New</h1>
                 </button>
+
+
+
+
+                <ul class="dropdown-menu">
+
+                    <li><a class="dropdown-item" href="#" onClick="createButton('c','x');">New Container</a>
+                    </li>
+                    <li><a class="dropdown-item" href="#" onClick="createButton('i','x');">New Item</a>
+                    </li>
+                </ul>
+
+
+
             </div>
 
 
@@ -143,24 +159,35 @@ Demo Divs
 
             </div>
 
-
-
-
             <div class="myDiv" style="background-color:white;margin:auto">
-                <h2 style="text-align: left;margin:10px;">Home > Kitchen </h2>
-                <h2 style="text-align: left;margin:10px;">Containers</h2>
-                <h4 style="text-align: left;margin:10px;margin:20px">Fridge Freezer CocaCola Fridge Cabinet Shelf 1</h2>
-
-                    <h2 style="text-align: left;margin:10px;">Items</h2>
 
 
-                    <div id="divItems" style="text-align: left;margin-left: 10px;margin-bottom: 10px;" text-align:
-                        center;>
-                        <button class="btn btn-primary">Stove</button>
-                        <button class="btn btn-primary">Microwave</button>
-                        <button class="btn btn-primary">Airfrier</button>
 
-                    </div>
+                <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 10px;" text-align: center;>
+
+
+                    <button class="btn btn-primary" style="padding:0px;margin:0px ">
+                        <h2>Home</h2>
+                    </button>
+                    <button class="btn btn-primary">
+                        <h2>></h2>
+                    </button>
+                    <button class="btn">
+                        <h2>Kitchen</h2>
+                    </button>
+
+                </div>
+
+
+                <h2 style="text-align: left;margin:10px;">Items</h2>
+
+
+                <div id="divItems" style="text-align: left;margin-left: 10px;margin-bottom: 10px;" text-align: center;>
+                    <button class="btn btn-primary">Stove</button>
+                    <button class="btn btn-primary">Microwave</button>
+                    <button class="btn btn-primary">Airfrier</button>
+
+                </div>
 
             </div>
 
@@ -194,25 +221,33 @@ Demo Divs
 
             <div style="background-color:white;margin:auto; padding:2px; ">
                 <div style="text-align:left;background-color: cornsilk;margin-left: 10px;">
-                    <form >
+                    <form>
+
                         <div class="form-group">
-                          <label for="email">Email address:</label>
-                          <input type="email" class="form-control" id="email"> 
-                           <label><input type="checkbox"> Remember me</label>
+                            <label for="inName">Name:</label>
+                            <input type="text" class="form-control" id="inName">
+                            <!--    <label><input type="checkbox"> Remember me</label> -->
                         </div>
+
+
                         <div class="form-group">
-                          <label for="pwd">Password:</label>
-                          <input type="password" class="form-control" id="pwd">
+                            <label for="inDescription">Description</label>
+                            <textarea class="form-control" id="inDescription" rows="5"></textarea>
                         </div>
+
                         <div class="checkbox">
-                          <label><input type="checkbox"> Remember me</label>        
+                            <label><input type="checkbox">Check</label>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Example textarea</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                          </div>
-                      </form>
-                    <br>
+
+                        <div style="background-color: blueviolet;text-align:center">
+
+                            <button type="button" class="btn btn-default btn-primary">Update</button>
+                        </div>
+
+
+
+
+
                 </div>
             </div>
 
