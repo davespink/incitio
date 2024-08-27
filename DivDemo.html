@@ -38,18 +38,22 @@ Demo Divs!
     <script>
         function buttonSelected(buttonId) {
 
-           // alert(buttonId)
-            let el = document.getElementById("inName");
-            el.value = buttonId;
+            let thisButton = document.getElementById(buttonId);
 
-        
-        
+            let el = document.getElementById("inName");
+            el.value = thisButton.innerText;
+
+            el = document.getElementById("inItemId");
+            el.value = buttonId;
         }
 
+        function updateButtonName() {
 
-
-
-        function createButton(inType, inDescription) {
+            let thisButton = document.getElementById(inItemId.value);
+            let newName = document.getElementById("inName");
+            thisButton.innerText = newName.value;
+        }
+        function createButton(inType) {
 
 
             let newButton = document.createElement('button');
@@ -71,24 +75,67 @@ Demo Divs!
                 buttonColor = `btn btn-success`;
             }
 
-            inDescription = prompt('Enter description');
+            inName = prompt('Enter item name');
 
             buttonId = "item_" + stamp;
 
             newButton.outerHTML =
                 `<button id="` + buttonId + `" onClick=buttonSelected("` + buttonId + `"); class="` + buttonColor + ` style="margin:5px">`
-                + inDescription + `</button>`;
+                + inName + `</button>`;
 
-            //   newButton.onclick = buttonSelected(buttonId);
+            // append info to gItem;
 
+            newObject = Object.create(gCurrentRoot);
+            newObject.id = buttonId;
+            newObject.name = inName;
+            mewObject.parentId = gCurrentRoot.id;
+            newObject.description = "";
+            gCurrentRoot.children.push(newObject);
 
+            // createChain(inName);
 
-            //     newButton.onclick = alert("eeexxx");
         }
 
 
 
 
+        let newButton = document.createElement('button');
+        let elItemsDiv = document.getElementById("divItems");
+        elItemsDiv.appendChild(newButton);
+
+
+        let stampx = new Date().getTime();
+        let stamp = stampx.toString();
+
+        // TODO remove next line
+        stamp = stamp.slice(9);
+
+        if (inType == "c") {
+            buttonColor = `btn btn-primary`;
+
+
+        } else {
+            buttonColor = `btn btn-success`;
+        }
+
+        inName = prompt('Enter item name');
+
+        buttonId = "item_" + stamp;
+
+        newButton.outerHTML =
+            `<button id="` + buttonId + `" onClick=buttonSelected("` + buttonId + `"); class="` + buttonColor + ` style="margin:5px">`
+            + inName + `</button>`;
+
+        // append info to gItem;
+
+        newObject = Object.create(gCurrentRoot);
+        newObject.id = buttonId;
+        newObject.name = inName;
+        newObject.parentId = gCurrentRoot.id;
+        newObject.description = "";
+        gCurrentRoot.children.push(newObject);
+
+     
 
 
     </script>
@@ -169,12 +216,7 @@ Demo Divs!
                     <button class="btn btn-primary" style="padding:0px;margin:0px ">
                         <h2>Home</h2>
                     </button>
-                    <button class="btn btn-primary">
-                        <h2>></h2>
-                    </button>
-                    <button class="btn">
-                        <h2>Kitchen</h2>
-                    </button>
+                   
 
                 </div>
 
@@ -182,10 +224,8 @@ Demo Divs!
                 <h2 style="text-align: left;margin:10px;">Items</h2>
 
 
-                <div id="divItems" style="text-align: left;margin-left: 10px;margin-bottom: 10px;" text-align: center;>
-                    <button class="btn btn-primary">Stove</button>
-                    <button class="btn btn-primary">Microwave</button>
-                    <button class="btn btn-primary">Airfrier</button>
+                <div id="divItems" style="text-align: left;margin-left: 10px;margin-bottom: 10px; ">
+
 
                 </div>
 
@@ -235,13 +275,14 @@ Demo Divs!
                             <textarea class="form-control" id="inDescription" rows="5"></textarea>
                         </div>
 
-                        <div class="checkbox">
-                            <label><input type="checkbox">Check</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="inItemId">
                         </div>
 
                         <div style="background-color: blueviolet;text-align:center">
 
-                            <button type="button" class="btn btn-default btn-primary">Update</button>
+                            <button type="button" class="btn btn-default btn-primary"
+                                onclick="updateButtonName();">Update</button>
                         </div>
 
 
@@ -268,6 +309,34 @@ Demo Divs!
 
 
     </div>
+
+
+
+    <script>
+
+        // Item
+        const itemHome = {
+            id: "0",
+            parentId: "0",
+            name: "home",
+            description: "the root",
+            children: []
+        };
+
+        let gCurrentRoot = itemHome;
+
+
+
+        /*
+                newObject = Object.create(item);
+                newObject.id = "1";
+                newObject.name = "sue";
+                item.children.push(newObject);
+        */
+
+    </script>
+
+
 </body>
 
 

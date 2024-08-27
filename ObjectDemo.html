@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>JavaScript Objects</h1>
+    <h2>Creating an Object</h2>
+
+    <p id="demo"></p>
+
+    <script>
+        // Create an Object:
+        
+
+        const item = {
+            id: "0",
+            name: "home",
+            description: "the root",
+            children: []
+        };
+
+
+        newObject = Object.create(item);
+        newObject.id = "1";
+        newObject.name="sue";
+        item.children.push(newObject);
+      
+
+        x = Object.create(item);
+        x.id = "2";
+        x.name="sam";
+        item.children.push(x);
+
+        q = item.children[1] ;
+alert(q.name);
+alert(q.id);
+alert(q.description)
+    </script>
+
+</body>
+
+</html>
