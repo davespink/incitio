@@ -52,8 +52,15 @@ Demo Divs!
             let thisButton = document.getElementById(inItemId.value);
             let newName = document.getElementById("inName");
             thisButton.innerText = newName.value;
+
+            // change also in object array
+
         }
+
         function createButton(inType) {
+
+            inName = prompt('Enter item name', 'unNamed');
+            if (inName == null) return;
 
 
             let newButton = document.createElement('button');
@@ -65,7 +72,9 @@ Demo Divs!
             let stamp = stampx.toString();
 
             // TODO remove next line
-            stamp = stamp.slice(9);
+            //     stamp = stamp.slice(9);
+
+            buttonId = "item_" + stamp;
 
             if (inType == "c") {
                 buttonColor = `btn btn-primary`;
@@ -75,67 +84,84 @@ Demo Divs!
                 buttonColor = `btn btn-success`;
             }
 
-            inName = prompt('Enter item name');
 
-            buttonId = "item_" + stamp;
 
-            newButton.outerHTML =
-                `<button id="` + buttonId + `" onClick=buttonSelected("` + buttonId + `"); class="` + buttonColor + ` style="margin:5px">`
+            let theHTML =
+                `<button id="` + buttonId
+                + `" onClick=buttonSelected("`
+                + buttonId + `");  ondblclick=setCurrentRoot("`
+                + stamp + `");    class="`
+                + buttonColor
+                + `" style="margin:5px">`
                 + inName + `</button>`;
 
             // append info to gItem;
+            newButton.outerHTML = theHTML
 
-            newObject = Object.create(gCurrentRoot);
-            newObject.id = buttonId;
-            newObject.name = inName;
-            mewObject.parentId = gCurrentRoot.id;
-            newObject.description = "";
-            gCurrentRoot.children.push(newObject);
+            newItem = Object.create(itemHome);
+            newItem.id = stamp;
+            newItem.parentId = gCurrentParentId;
+            newItem.name = inName;
+            newItem.description = "";
 
-            // createChain(inName);
+            gItemArray.push(newItem);
 
+
+
+
+
+        }
+
+        function setCurrentRoot(rootId) {
+
+            // add to chain at top
+             alert(rootId);
+
+            let newButton = document.createElement('button');
+            let elItemsDiv = document.getElementById("divChain");
+            elItemsDiv.appendChild(newButton);
+
+
+            //  inName = rootId;
+
+            // get name from root it
+
+            for (i = 0; i < gItemArray.length; i++) {
+                //     alert(gItemArray[i].id);
+                if (gItemArray[i].id == rootId) {
+                    //   alert(gItemArray[i].name);
+
+                    inName = gItemArray[i].name;
+                }
+            }
+
+            buttonId = "chain_" + rootId;
+
+            let theHTML =
+                `<button id="` + buttonId
+                + `" onClick=buttonSelected("`
+                + buttonId + `");  ondblclick=setCurrentRoot("`
+                + rootId + `");    class="btn btn-dark" style="margin:5px">`
+                + inName + `</button>`;
+
+            // append info to gItem;
+            newButton.outerHTML = theHTML;
+
+            // append info to gItem;
+            gCurrentParentId = rootId;
+
+            // remove from allButtons
+            buttonId = "item_" + rootId;
+            btn = document.getElementById(buttonId);
+
+          //  btn.style.display = "none";
+
+            btn.remove();
         }
 
 
 
 
-        let newButton = document.createElement('button');
-        let elItemsDiv = document.getElementById("divItems");
-        elItemsDiv.appendChild(newButton);
-
-
-        let stampx = new Date().getTime();
-        let stamp = stampx.toString();
-
-        // TODO remove next line
-        stamp = stamp.slice(9);
-
-        if (inType == "c") {
-            buttonColor = `btn btn-primary`;
-
-
-        } else {
-            buttonColor = `btn btn-success`;
-        }
-
-        inName = prompt('Enter item name');
-
-        buttonId = "item_" + stamp;
-
-        newButton.outerHTML =
-            `<button id="` + buttonId + `" onClick=buttonSelected("` + buttonId + `"); class="` + buttonColor + ` style="margin:5px">`
-            + inName + `</button>`;
-
-        // append info to gItem;
-
-        newObject = Object.create(gCurrentRoot);
-        newObject.id = buttonId;
-        newObject.name = inName;
-        newObject.parentId = gCurrentRoot.id;
-        newObject.description = "";
-        gCurrentRoot.children.push(newObject);
-
-     
 
 
     </script>
@@ -172,7 +198,19 @@ Demo Divs!
 
 
             </div>
+            <div class="myDiv" style="margin-top:20px">
 
+                <button onclick="{
+
+               alert(JSON.stringify(gItemArray));
+
+            }">To jason</button>
+
+
+                <button>Fromjason</button>
+
+
+            </div>
 
 
 
@@ -216,7 +254,7 @@ Demo Divs!
                     <button class="btn btn-primary" style="padding:0px;margin:0px ">
                         <h2>Home</h2>
                     </button>
-                   
+
 
                 </div>
 
@@ -320,19 +358,26 @@ Demo Divs!
             parentId: "0",
             name: "home",
             description: "the root",
-            children: []
         };
 
-        let gCurrentRoot = itemHome;
+        let gCurrentParentId = itemHome.id;
 
+        const gItemArray = [];
+
+        gItemArray.push(itemHome);
 
 
         /*
-                newObject = Object.create(item);
-                newObject.id = "1";
-                newObject.name = "sue";
-                item.children.push(newObject);
-        */
+        newItem = Object.create(itemHome);
+        newItem.id = 20;
+        newItem.parentId = 2;
+        newItem.name = "Kitchen";
+        newItem.description = "MyRoom";
+
+        gItemArray.push(newItem);*/
+
+        x = 1;
+
 
     </script>
 
