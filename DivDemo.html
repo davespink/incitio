@@ -57,12 +57,14 @@ Demo Divs!
 
         }
 
-        function createButton(inType) {
+        // Dreate a new item
+        function createItem(itemObject) {
 
-            inName = prompt('Enter item name', 'unNamed');
-            if (inName == null) return;
+            if (inName == "") {
+                inName = prompt('Enter item name', 'unNamed');
+                if (inName == null) return;
 
-
+            }
             let newButton = document.createElement('button');
             let elItemsDiv = document.getElementById("divItems");
             elItemsDiv.appendChild(newButton);
@@ -104,7 +106,11 @@ Demo Divs!
             newItem.name = inName;
             newItem.description = "";
 
-            gItemArray.push(newItem);
+            if (andPush)
+                gItemArray.push(newItem);
+
+
+
 
 
 
@@ -112,10 +118,57 @@ Demo Divs!
 
         }
 
+        function createButton(itemObject) {
+
+            let newButton = document.createElement('button');
+            let elItemsDiv = document.getElementById("divItems");
+            elItemsDiv.appendChild(newButton);
+
+
+
+            if (itemObject.type == "c") {
+                buttonColor = `btn btn-primary`;
+
+
+            } else {
+                buttonColor = `btn btn-success`;
+            }
+
+            buttonId = "item_" + itemObject.id;
+
+            let theHTML =
+                `<button id="` + buttonId
+                + `" onClick=buttonSelected("`
+                + buttonId + `");  ondblclick=setCurrentRoot("`
+                + itemObject.id + `");    class="`
+                + buttonColor
+                + `" style="margin:5px">`
+                + itemObject.name + `</button>`;
+
+            // append info to gItem;
+            newButton.outerHTML = theHTML
+
+
+            /*
+            newItem = Object.create(itemHome);
+            newItem.id = stamp;
+            newItem.parentId = gCurrentParentId;
+            newItem.name = inName;
+            newItem.description = "";
+
+            if (andPush)
+                gItemArray.push(newItem);
+
+
+*/
+
+
+        }
+
         function setCurrentRoot(rootId) {
 
             // add to chain at top
-             alert(rootId);
+      
 
             let newButton = document.createElement('button');
             let elItemsDiv = document.getElementById("divChain");
@@ -150,19 +203,44 @@ Demo Divs!
             // append info to gItem;
             gCurrentParentId = rootId;
 
-            // remove from allButtons
-            buttonId = "item_" + rootId;
-            btn = document.getElementById(buttonId);
 
-          //  btn.style.display = "none";
+            //clear divItems
+            let el = document.getElementById("divItems");
+            el.innerHTML = "";
 
-            btn.remove();
+            // Create buttons for each child of rootId
+
+            for (i = 0; i < gItemArray.length; i++) {
+            //    alert(gItemArray[i].parentId);
+         
+                if (gItemArray[i].parentId == rootId)
+                    createButton(gItemArray[i]);
+            }
+
         }
 
 
+        function fromJSON() {
 
 
+            // gItemArray  gItemArra
 
+            js = '[{"id":"0","type":"c","parentId":"","name":"home","description":"the root"},{"id":"1724876619107","type":"c","parentId":"0","name":"Kitchen","description":""},{"id":"1724876628283","type":"c","parentId":"0","name":"Study","description":""},{"id":"1724876635379","type":"c","parentId":"0","name":"Shed","type":"c","description":""},{"id":"1724876671440","type":"i","parentId":"1724876619107","name":"Knife","description":""},{"id":"1724876680143","type":"i","parentId":"1724876619107","name":"Fork","description":""},{"id":"1724876697405","type":"i","parentId":"1724876635379","name":"Spanner","description":""}]'
+
+            gItemArray = JSON.parse(js);
+
+            //     Find all children of Home and make buttons in allButons
+
+            for (i = 0; i < gItemArray.length; i++)
+                if (gItemArray[i].parentId == "0")
+                    createButton(gItemArray[i]);
+
+        }
+
+        function toJSON() {
+
+
+        }
 
     </script>
 </head>
@@ -189,9 +267,9 @@ Demo Divs!
 
                 <ul class="dropdown-menu">
 
-                    <li><a class="dropdown-item" href="#" onClick="createButton('c','x');">New Container</a>
+                    <li><a class="dropdown-item" href="#" onClick="createButton('c','');">New Container</a>
                     </li>
-                    <li><a class="dropdown-item" href="#" onClick="createButton('i','x');">New Item</a>
+                    <li><a class="dropdown-item" href="#" onClick="createButton('i','');">New Item</a>
                     </li>
                 </ul>
 
@@ -200,18 +278,14 @@ Demo Divs!
             </div>
             <div class="myDiv" style="margin-top:20px">
 
-                <button onclick="{
-
-               alert(JSON.stringify(gItemArray));
-
-            }">To jason</button>
+                <button onclick="toJSON()">To jason</button>
+                <button onclick="fromJSON()">From JSON</button>
 
 
-                <button>Fromjason</button>
+
 
 
             </div>
-
 
 
 
@@ -340,12 +414,6 @@ Demo Divs!
         </div>
 
 
-
-
-
-
-
-
     </div>
 
 
@@ -353,30 +421,23 @@ Demo Divs!
     <script>
 
         // Item
-        const itemHome = {
+
+        /*
+        const itemObject = {
             id: "0",
-            parentId: "0",
+            type:"?",
+            parentId: "",
             name: "home",
             description: "the root",
         };
 
-        let gCurrentParentId = itemHome.id;
+        let gCurrentParentId = itemObject.id;
 
-        const gItemArray = [];
+        let gItemArray = [];
 
         gItemArray.push(itemHome);
 
-
-        /*
-        newItem = Object.create(itemHome);
-        newItem.id = 20;
-        newItem.parentId = 2;
-        newItem.name = "Kitchen";
-        newItem.description = "MyRoom";
-
-        gItemArray.push(newItem);*/
-
-        x = 1;
+*/
 
 
     </script>

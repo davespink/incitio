@@ -1,39 +1,24 @@
 <!DOCTYPE html>
 <html>
 
-<body>
-    <h1>JavaScript Objects</h1>
-    <h2>Creating an Object</h2>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
 
-    <p id="demo"></p>
+<body>
 
     <script>
-        // Create an Object:
-        
+        let x = '{"name":"John", "age":30, "car":null}';
+        let s = JSON.stringify(x);
 
-        const item = {
-            id: "0",
-            name: "home",
-            description: "the root",
-            children: []
-        };
+        alert("hello");
 
 
-        newObject = Object.create(item);
-        newObject.id = "1";
-        newObject.name="sue";
-        item.children.push(newObject);
-      
-
-        x = Object.create(item);
-        x.id = "2";
-        x.name="sam";
-        item.children.push(x);
-
-        q = item.children[1] ;
-alert(q.name);
-alert(q.id);
-alert(q.description)
     </script>
 
 </body>
