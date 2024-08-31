@@ -47,74 +47,76 @@ Demo Divs!
             el.value = buttonId;
         }
 
-        function updateButtonName() {
+        function updateItemFromForm() {
 
-            let thisButton = document.getElementById(inItemId.value);
-            let newName = document.getElementById("inName");
-            thisButton.innerText = newName.value;
+            //      let thisButton = document.getElementById(inItemId.value);
+            //     let newName = document.getElementById("inName");
+            //     thisButton.innerText = newName.value;
 
-            // change also in object array
+            function getFormValue(id) {
+
+                let r = document.getElementById(id);
+                return r.value
+
+            }
+
+
+
+            let idValue = getFormValue('inItemId');
+            let nameValue = getFormValue('inName');
+            let descriptionValue = getFormValue('inDescription');
+
+
+            ar = idValue.split("_");
+
+            id = ar[1];
+
+            for (i = 0; i < gItemArray.length; i++) {
+                //     alert(gItemArray[i].id);
+                if (gItemArray[i].id == id) {
+                    //   alert(gItemArray[i].name);
+
+                    gItemArray[i].name = nameValue;
+
+                    gItemArray[i].description = descriptionValue;
+                    break;
+                }
+            }
 
         }
 
-        // Dreate a new item
-        function createItem(itemObject) {
 
-            if (inName == "") {
-                inName = prompt('Enter item name', 'unNamed');
-                if (inName == null) return;
+        function makeNewButton(type) {
 
-            }
-            let newButton = document.createElement('button');
-            let elItemsDiv = document.getElementById("divItems");
-            elItemsDiv.appendChild(newButton);
+            newItemObject = createItem(type);
+            if (newItemObject)
+                createButton(newItemObject);
 
+        }
+
+        // create a new item from user input
+        function createItem(type) {
+
+            newItem = Object.create(itemObject);
+
+
+
+            inName = prompt('Enter item name', 'unNamed');
+            if (inName == null) return false;
 
             let stampx = new Date().getTime();
             let stamp = stampx.toString();
 
-            // TODO remove next line
-            //     stamp = stamp.slice(9);
-
-            buttonId = "item_" + stamp;
-
-            if (inType == "c") {
-                buttonColor = `btn btn-primary`;
-
-
-            } else {
-                buttonColor = `btn btn-success`;
-            }
-
-
-
-            let theHTML =
-                `<button id="` + buttonId
-                + `" onClick=buttonSelected("`
-                + buttonId + `");  ondblclick=setCurrentRoot("`
-                + stamp + `");    class="`
-                + buttonColor
-                + `" style="margin:5px">`
-                + inName + `</button>`;
-
-            // append info to gItem;
-            newButton.outerHTML = theHTML
-
-            newItem = Object.create(itemHome);
             newItem.id = stamp;
+            newItem.type = type;
             newItem.parentId = gCurrentParentId;
+
+            gItemArray.push(newItem);
+
             newItem.name = inName;
-            newItem.description = "";
+            newItem.description - "";
 
-            if (andPush)
-                gItemArray.push(newItem);
-
-
-
-
-
-
-
+            return newItem;
 
         }
 
@@ -159,60 +161,93 @@ Demo Divs!
             if (andPush)
                 gItemArray.push(newItem);
 
-
 */
+        }
 
 
+        function resetChainDiv(rootId) {
+            let elChainDiv = gid("divChain");
+            elChainDiv.innerHTML = ` <button class="btn btn-primary"  ondblclick="resetChainDiv()" style="padding:0px;margin:0px ">
+                       <h2>Home</h2></button>`;
+            return elChainDiv;
         }
 
         function setCurrentRoot(rootId) {
 
-            // add to chain at top
-      
+            let elChainDiv = resetChainDiv();
 
-            let newButton = document.createElement('button');
-            let elItemsDiv = document.getElementById("divChain");
-            elItemsDiv.appendChild(newButton);
+     
+
+            function discoverChain(thisId) {
+
+              
 
 
-            //  inName = rootId;
-
-            // get name from root it
-
-            for (i = 0; i < gItemArray.length; i++) {
-                //     alert(gItemArray[i].id);
-                if (gItemArray[i].id == rootId) {
-                    //   alert(gItemArray[i].name);
-
-                    inName = gItemArray[i].name;
+                for (i = 0; i < gItemArray.length; i++) {
+                    //     alert(gItemArray[i].id);
+                    if (gItemArray[i].id == thisId) {
+                        let parentId = gItemArray.parentId;
+                    
+                        if (parentId == 0) {
+                            return gChainArray;
+                            break;
+                        }
+                        else {
+                            gChainArray.push(thisId);
+                            discoverChain(parentId);
+                        }
+                    }
                 }
             }
 
+
+             discoverChain(rootId);
+
+
+            // look at gChainArray!
+
+
+            //
+            //          Never break the chain
+            //
+
+
+
+            let newButton = document.createElement('button');
+            elChainDiv.appendChild(newButton);
+
+
+
             buttonId = "chain_" + rootId;
 
-            let theHTML =
-                `<button id="` + buttonId
-                + `" onClick=buttonSelected("`
-                + buttonId + `");  ondblclick=setCurrentRoot("`
-                + rootId + `");    class="btn btn-dark" style="margin:5px">`
-                + inName + `</button>`;
 
-            // append info to gItem;
-            newButton.outerHTML = theHTML;
+            for (i = 0; i < gItemArray.length; i++) {
 
-            // append info to gItem;
+                if (gItemArray[i].id == rootId) {
+                    let theHTML =
+                        `<button id="` + buttonId
+                        + `" onClick=buttonSelected("`
+                        + buttonId + `");  ondblclick=setCurrentRoot("`
+                        + rootId + `");    class="btn btn-dark" style="margin:5px">`
+                        + gItemArray[i].name + `</button>`;
+
+                    newButton.outerHTML = theHTML;
+                    break;
+                }
+            }
+
+
             gCurrentParentId = rootId;
-
 
             //clear divItems
             let el = document.getElementById("divItems");
             el.innerHTML = "";
 
-            // Create buttons for each child of rootId
+            // Create buttons in divItems for each child of rootId
 
             for (i = 0; i < gItemArray.length; i++) {
-            //    alert(gItemArray[i].parentId);
-         
+                //    alert(gItemArray[i].parentId);
+
                 if (gItemArray[i].parentId == rootId)
                     createButton(gItemArray[i]);
             }
@@ -220,25 +255,25 @@ Demo Divs!
         }
 
 
-        function fromJSON() {
 
+        function fromArray() {
 
-            // gItemArray  gItemArra
-
-            js = '[{"id":"0","type":"c","parentId":"","name":"home","description":"the root"},{"id":"1724876619107","type":"c","parentId":"0","name":"Kitchen","description":""},{"id":"1724876628283","type":"c","parentId":"0","name":"Study","description":""},{"id":"1724876635379","type":"c","parentId":"0","name":"Shed","type":"c","description":""},{"id":"1724876671440","type":"i","parentId":"1724876619107","name":"Knife","description":""},{"id":"1724876680143","type":"i","parentId":"1724876619107","name":"Fork","description":""},{"id":"1724876697405","type":"i","parentId":"1724876635379","name":"Spanner","description":""}]'
-
-            gItemArray = JSON.parse(js);
-
-            //     Find all children of Home and make buttons in allButons
+            //     Find all children of Home and make buttons in allButtons
+            gid("divItems").innerHTML = "";
 
             for (i = 0; i < gItemArray.length; i++)
                 if (gItemArray[i].parentId == "0")
                     createButton(gItemArray[i]);
+        }
 
+        function fromJSON() {
+
+            js = '[{"id":"0","type":"c","parentId":"","name":"home","description":"the root"},{"id":"1724876619107","type":"c","parentId":"0","name":"Kitchen","description":""},{"id":"1724876628283","type":"c","parentId":"0","name":"Study","description":""},{"id":"1724876635379","type":"c","parentId":"0","name":"Shed","type":"c","description":""},{"id":"1724876671440","type":"i","parentId":"1724876619107","name":"Knife","description":""},{"id":"1724876680143","type":"i","parentId":"1724876619107","name":"Fork","description":""},{"id":"1724876697405","type":"i","parentId":"1724876635379","name":"Spanner","description":""}]'
+            gItemArray = JSON.parse(js);
+            fromArray();
         }
 
         function toJSON() {
-
 
         }
 
@@ -262,33 +297,22 @@ Demo Divs!
                     <h1>+New</h1>
                 </button>
 
-
-
-
                 <ul class="dropdown-menu">
 
-                    <li><a class="dropdown-item" href="#" onClick="createButton('c','');">New Container</a>
+                    <li><a class="dropdown-item" href="#" onClick="makeNewButton('c');">New Container</a>
                     </li>
-                    <li><a class="dropdown-item" href="#" onClick="createButton('i','');">New Item</a>
+                    <li><a class="dropdown-item" href="#" onClick="makeNewButton('i');">New Item</a>
                     </li>
                 </ul>
-
-
 
             </div>
             <div class="myDiv" style="margin-top:20px">
 
                 <button onclick="toJSON()">To jason</button>
                 <button onclick="fromJSON()">From JSON</button>
-
-
-
-
+                <button onclick="fromArray()">From Array</button>
 
             </div>
-
-
-
         </div>
 
         <p>
@@ -297,11 +321,7 @@ Demo Divs!
 
         <!-- second column -->
         <div class="myDiv" style="width:70%;background-color:white">
-
             <div class="myDiv" style="background-color:rgb(68, 119, 94);margin:auto">
-
-
-
                 <button id="none" class="btn btn-light" style="margin:30px; background-color:blanchedalmond;position: relative;
                 width: 60%;height: 15%; border-radius: 16px; box-shadow: 5px 5px 5px gray;">
                     <span class="btn-label" style="position:absolute;top:0px; left:10px; margin-bottom: 20px;">
@@ -313,36 +333,23 @@ Demo Divs!
                z-index: 6; left: 0px;" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50">
 
                 </button>
-
-
-
             </div>
 
+            <!--    Chain   -->
             <div class="myDiv" style="background-color:white;margin:auto">
-
-
-
                 <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 10px;" text-align: center;>
-
-
                     <button class="btn btn-primary" style="padding:0px;margin:0px ">
                         <h2>Home</h2>
                     </button>
-
-
                 </div>
 
-
+                <!--    Items  -->
                 <h2 style="text-align: left;margin:10px;">Items</h2>
-
-
                 <div id="divItems" style="text-align: left;margin-left: 10px;margin-bottom: 10px; ">
-
 
                 </div>
 
             </div>
-
 
 
             <div class="myDiv" style="background-color:rgb(92, 68, 119);margin:auto">
@@ -352,35 +359,32 @@ Demo Divs!
 
         </div>
 
-
-
-
-
         <!-- third column -->
         <div class="myDiv" style="width:30%;background-color:white">
 
-            <div class="myDiv" style="background-color:rgb(30, 218, 127);margin:20px ">
 
+            <div class="myDiv" id="picture_box"
+                style="height:250px;width:250px;margin:auto;margin-top: 20px;margin-bottom: 20px;padding:5px"
+                contenteditable="true">
 
-                <div id="picture_box" style="background-color: white;   margin:auto; 
-                width:200px;height:200px;border: 1px solid black;  " contenteditable="true">
+                <button id="paste_btn" style="height:auto;padding:20px;" onclick="hid(this);
+                 let p = this.parentElement;  
+                 p.innerText = 'Now copy an image to the clipboard, THEN right click here to paste it'">
 
-                </div>
+                    left click here to start paste
 
-
+                </button>
             </div>
-
 
             <div style="background-color:white;margin:auto; padding:2px; ">
                 <div style="text-align:left;background-color: cornsilk;margin-left: 10px;">
                     <form>
-
+                        <!--    Form   -->
                         <div class="form-group">
                             <label for="inName">Name:</label>
                             <input type="text" class="form-control" id="inName">
                             <!--    <label><input type="checkbox"> Remember me</label> -->
                         </div>
-
 
                         <div class="form-group">
                             <label for="inDescription">Description</label>
@@ -394,26 +398,17 @@ Demo Divs!
                         <div style="background-color: blueviolet;text-align:center">
 
                             <button type="button" class="btn btn-default btn-primary"
-                                onclick="updateButtonName();">Update</button>
+                                onclick="updateItemFromForm();">Update</button>
                         </div>
-
-
-
-
 
                 </div>
             </div>
-
-
 
             <div class="myDiv" style="background-color:rgb(92, 68, 119);margin:auto">
                 <h2>This is a third div in a center element</h2>
                 <p>This is some text in a div element.</p>
             </div>
-
         </div>
-
-
     </div>
 
 
@@ -422,23 +417,65 @@ Demo Divs!
 
         // Item
 
-        /*
+
         const itemObject = {
             id: "0",
-            type:"?",
+            type: "?",
             parentId: "",
             name: "home",
             description: "the root",
+            image: ""
         };
 
-        let gCurrentParentId = itemObject.id;
+        let gCurrentParentId = 0;
+
 
         let gItemArray = [];
 
-        gItemArray.push(itemHome);
+       let gChainArray = [];
 
-*/
+        gItemArray.push(itemObject);
 
+
+        function doBefore() {
+            let p = document.getElementById("picture_box");
+
+            p.style.padding = "0px";
+            p.innerHTML = "";
+        }
+
+        function doAfter() {
+
+            let p = document.getElementById("picture_box");
+            let c = p.firstElementChild;
+            let d = c.firstElementChild;
+            //  if (c.tagName.toString() != "IMG") { alert("error"); return false; }
+
+            //   d.style.height = "200px";
+            d.style.height = "250px";
+
+            document.activeElement.blur();
+        }
+
+
+        function hid(el) {
+            el.display = "none";
+        }
+
+        function gid(name) {
+            return document.getElementById(name);
+        }
+
+        gid("picture_box").addEventListener('paste',
+            (ev) => {
+                doBefore();
+            }, true);
+
+        gid("picture_box").addEventListener('paste',
+            (ev) => {
+                setTimeout(doAfter, 0);
+
+            }, false);
 
     </script>
 
