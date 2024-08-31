@@ -23,10 +23,8 @@ Demo Divs
     <style>
         .myDiv {
             border: 5px outset red;
-
             text-align: center;
         }
-
 
         .body {
             width: 100%;
@@ -36,18 +34,30 @@ Demo Divs
         }
     </style>
     <script>
-        function buttonSelected(buttonId) {
 
-            let thisButton = document.getElementById(buttonId);
+        function getItemObjectById(id) {
+            for (i = 0; i < gItemArray.length; i++) {
+                //     
+                if (gItemArray[i].id == id) {
+                    return gItemArray[i];
+                }
 
-            let el = document.getElementById("inName");
-            el.value = thisButton.innerText;
-
-            el = document.getElementById("inItemId");
-            el.value = buttonId;
+            }
         }
 
-        function updateItemFromForm() {
+
+        function buttonSelected(buttonId) {
+            (gid("inName")).value = (gid(buttonId)).innerText;
+            (gid("inItemId")).value = buttonId;
+            // replace above
+            let a = buttonId.split("_");
+            let itemObject = getItemObjectById(a[1]);
+
+            (gid("inDescription")).value = itemObject.description;
+
+        }
+
+        function updateItemsFromForm() {
 
             //      let thisButton = document.getElementById(inItemId.value);
             //     let newName = document.getElementById("inName");
@@ -60,24 +70,19 @@ Demo Divs
 
             }
 
-
-
             let idValue = getFormValue('inItemId');
             let nameValue = getFormValue('inName');
             let descriptionValue = getFormValue('inDescription');
 
 
-            ar = idValue.split("_");
+            ar =  idValue.split("_");
 
             id = ar[1];
-
+//replace
             for (i = 0; i < gItemArray.length; i++) {
-                //     alert(gItemArray[i].id);
+                //     
                 if (gItemArray[i].id == id) {
-                    //   alert(gItemArray[i].name);
-
                     gItemArray[i].name = nameValue;
-
                     gItemArray[i].description = descriptionValue;
                     break;
                 }
@@ -138,6 +143,11 @@ Demo Divs
 
             buttonId = "item_" + itemObject.id;
 
+
+
+
+
+
             let theHTML =
                 `<button id="` + buttonId
                 + `" onClick=buttonSelected("`
@@ -151,17 +161,6 @@ Demo Divs
             newButton.outerHTML = theHTML
 
 
-            /*
-            newItem = Object.create(itemHome);
-            newItem.id = stamp;
-            newItem.parentId = gCurrentParentId;
-            newItem.name = inName;
-            newItem.description = "";
-
-            if (andPush)
-                gItemArray.push(newItem);
-
-*/
         }
 
 
@@ -176,18 +175,18 @@ Demo Divs
 
             let elChainDiv = resetChainDiv();
 
-     
+
 
             function discoverChain(thisId) {
 
-              
+
 
 
                 for (i = 0; i < gItemArray.length; i++) {
                     //     alert(gItemArray[i].id);
                     if (gItemArray[i].id == thisId) {
                         let parentId = gItemArray.parentId;
-                    
+
                         if (parentId == 0) {
                             return gChainArray;
                             break;
@@ -201,7 +200,7 @@ Demo Divs
             }
 
 
-             discoverChain(rootId);
+            discoverChain(rootId);
 
 
             // look at gChainArray!
@@ -262,8 +261,10 @@ Demo Divs
             gid("divItems").innerHTML = "";
 
             for (i = 0; i < gItemArray.length; i++)
+
                 if (gItemArray[i].parentId == "0")
                     createButton(gItemArray[i]);
+
         }
 
         function fromJSON() {
@@ -398,7 +399,7 @@ Demo Divs
                         <div style="background-color: blueviolet;text-align:center">
 
                             <button type="button" class="btn btn-default btn-primary"
-                                onclick="updateItemFromForm();">Update</button>
+                                onclick="updateItemsFromForm();">Update</button>
                         </div>
 
                 </div>
@@ -432,7 +433,7 @@ Demo Divs
 
         let gItemArray = [];
 
-       let gChainArray = [];
+        let gChainArray = [];
 
         gItemArray.push(itemObject);
 
