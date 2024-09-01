@@ -275,6 +275,7 @@ Demo Divs
         }
 
         function toJSON() {
+            const myJSON = JSON.stringify(gItemArray);
 
         }
 
@@ -452,8 +453,15 @@ Demo Divs
             let d = c.firstElementChild;
             //  if (c.tagName.toString() != "IMG") { alert("error"); return false; }
 
-            //   d.style.height = "200px";
-            d.style.height = "250px";
+
+
+              c.style.width = "240px";
+            c.style.height = "240px";
+
+
+            
+            d.style.width = "240px";
+            d.style.height = "240px";
 
             document.activeElement.blur();
         }
@@ -479,7 +487,15 @@ Demo Divs
             }, false);
 
     </script>
+<!--
 
+ jason =   '[{"id":"0","type":"c","parentId":"","name":"home","description":"the root"},{"id":"1724876619107","type":"c","parentId":"0","name":"Kitchen","description":""},{"id":"1724876628283","type":"c","parentId":"0","name":"Study","description":""},{"id":"1724876635379","type":"c","parentId":"0","name":"Shed","description":""},{"id":"1724876671440","type":"i","parentId":"1724876619107","name":"Knife","description":""},{"id":"1724876680143","type":"i","parentId":"1724876619107","name":"Fork","description":""},{"id":"1724876697405","type":"i","parentId":"1724876635379","name":"Spanner","description":""}]'
+
+
+json ='[{"id":"0","type":"c","parentId":"","name":"home","description":"the root"},{"id":"1724876619107","type":"c","parentId":"0","name":"Kitchen","description":""},{"id":"1724876628283","type":"c","parentId":"0","name":"Study","description":""},{"id":"1724876635379","type":"c","parentId":"0","name":"Shed","description":""},{"id":"1724876671440","type":"i","parentId":"1724876619107","name":"Knife","description":""},{"id":"1724876680143","type":"i","parentId":"1724876619107","name":"Fork","description":""},{"id":"1724876697405","type":"i","parentId":"1724876635379","name":"Spanner","description":""},{"id":"1725155019094","type":"i","parentId":"1724876619107","name":"Spoon"},{"id":"1725155029207","type":"i","parentId":"1724876619107","name":"Fridge"},{"id":"1725155040300","type":"i","parentId":"1724876619107","name":"Cupboard"},{"id":"1725155069892","type":"c","parentId":"1724876619107","name":"Drawer"},{"id":"1725155102196","type":"i","parentId":"1725155069892","name":"Chopper"},{"id":"1725155118228","type":"i","parentId":"1725155069892","name":"Mixer"}]'
+
+
+-->
 
 </body>
 
