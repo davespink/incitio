@@ -29,11 +29,18 @@ Incityo
       text-align: center;
     }
 
-    .body {
+    body {
       width: 100%;
       margin: 0px;
       padding: 0px;
       margin: 0px;
+    }
+
+    img {
+      width: 100%;
+      /* or any custom size */
+      height: 100%;
+      object-fit: contain;
     }
   </style>
   <script>
@@ -418,6 +425,10 @@ Incityo
       el.display = "none";
     }
 
+
+
+
+
     const itemObject = {
       id: "0",
       type: "?",
@@ -437,13 +448,16 @@ Incityo
     gItemArray.push(itemObject);
 
 
-    let gPictureBoxInnerHTML = `<button id="paste_btn" style="height:90%;width:90%;padding:20px;margin:auto" onclick="hid(this);
-                 let p = this.parentElement;  
-                 p.innerHTML= '<button>Now copy an image to the clipboard, THEN right click here to paste it</button>'">
-          left click here to start paste
-        </button>`;
+    function f(el) {
+      hid(el);
+      let p = el.parentElement;
+      p.innerHTML = '<button   style="height:100%;width:100%;object-fit:contain;padding:20px;margin:auto" >Now copy an image to the clipboard, THEN right click here to paste it</button>';
+    }
 
-    //     gid("picture_box").innerHTML = gPictureBoxInnerHTML;
+    let gPictureBoxInnerHTML = `<button id="paste_btn" style="height:100%;width:100%;object-fit:contain;padding:20px;margin:auto" 
+    onclick="f(this);"  >left click here to start paste</button>`;
+
+
 
 
     function doBefore() {
@@ -462,9 +476,9 @@ Incityo
       //    let theImage = pictureBox.firstElementChild;
       //  if (c.tagName.toString() != "IMG") { alert("error"); return false; }
 
-      pictureBox.style.width = "240px";
-      pictureBox.style.height = "240px";
-
+      //  pictureBox.style.width = "240px";
+      //    pictureBox.style.height = "240px";
+      //
       //    theImage.style.width = "240px";
       //   theImage.style.height = "240px";
 
