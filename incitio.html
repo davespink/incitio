@@ -42,6 +42,11 @@ Incityo
       height: 100%;
       object-fit: contain;
     }
+
+    .hasFocus {
+      border: 5px outset purple;
+      text-align: center;
+    }
   </style>
   <script>
 
@@ -68,17 +73,27 @@ Incityo
 
 
     function buttonSelected(buttonId) {
-      // (gid("inName")).value = (gid(buttonId)).innerText;
-      // (gid("inItemId")).value = buttonId;
-      // replace above
+
+      // remove focus from all buttons
+      let bs = document.getElementsByClassName("hasFocus");
+
+      for(i=0;i<bs.length;i++){
+        bs[i].classList.remove("hasFocus");
+      }
+      
+      let thisButton = gid(buttonId);
+
+      thisButton.classList.add("hasFocus");
+
+
       let a = buttonId.split("_");
       let itemObject = getItemObjectById(a[1]);
 
       (gid("inName")).value = itemObject.name;
       (gid("inItemId")).value = "item_" + itemObject.id;
       (gid("inDescription")).value = itemObject.description;
-
-      //(gid("picture_box")).outerHTML = itemObject.image
+      if (itemObject.image != "?")
+        (gid("picture_box")).innerHTML = itemObject.image
 
 
     }
@@ -112,8 +127,8 @@ Incityo
     }
 
     function resetPictureBox() {
-
-      gid("picture_box").innerHTML = gPictureBoxInnerHTML;
+      let x = gid("picture_box");
+      x.innerHTML = gPictureBoxInnerHTML;
     }
 
 
@@ -122,6 +137,8 @@ Incityo
       newItemObject = createItem(type);
       if (newItemObject)
         createButton(newItemObject);
+
+
 
     }
 
@@ -164,7 +181,7 @@ Incityo
         `<button id="` + buttonId
         + `" onClick=buttonSelected("`
         + buttonId + `");  ondblclick=setCurrentRoot("`
-        + itemObject.id + `");    class="`
+        + itemObject.id + `");    class="      `
         + buttonColor
         + `" style="margin:5px">`
         + itemObject.name + `</button>`;
@@ -172,8 +189,7 @@ Incityo
       // append info to gItem;
       newButton.outerHTML = theHTML;
 
-      let thisButton = gid(buttonId);
-      thisButton.click();
+
 
       resetPictureBox();
 
@@ -265,7 +281,10 @@ Incityo
     }
 
     function fromJSON() {
-      js = '[{\"id\":\"0\",\"type\":\"?\",\"parentId\":\"\",\"name\":\"home\",\"description\":\"the root\",\"image\":\"theImage\"},{\"id\":\"1725214183385\",\"type\":\"i\",\"parentId\":0,\"name\":\"Plate\",\"image\":\"<img src=\\\"data:image/jpeg;base64,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\\\" alt=\\\"PLATE definición y significado | Diccionario Inglés Collins\\\" style=\\\"width: 240px; height: 240px;\\\">\"}]';
+      //   js = '[{\"id\":\"0\",\"type\":\"?\",\"parentId\":\"\",\"name\":\"home\",\"description\":\"the root\",\"image\":\"theImage\"},{\"id\":\"1725214183385\",\"type\":\"i\",\"parentId\":0,\"name\":\"Plate\",\"image\":\"<img src=\\\"data:image/jpeg;base64,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\\\" alt=\\\"PLATE definición y significado | Diccionario Inglés Collins\\\" style=\\\"width: 240px; height: 240px;\\\">\"}]';
+
+
+      js = '[{"id":"0","type":"?","parentId":"?","name":"home","description":"the root","image":"theImage"},{"id":"1725307957660","type":"c","parentId":0,"name":"Small Tool Box","description":"Small Tool Box description","image":"<p><img src=\\"file:///C:/Users/daves/Downloads/Photos-001%20(1)/20240902_140603.jpg\\"></p>"},{"id":"1725307981412","type":"i","parentId":"1725307957660","name":"Magnifying Glass","description":"Magnifying Glass description","image":"?"},{"id":"1725308045531","type":"i","parentId":"1725307957660","name":"Single Hole Punch","description":"Single Hole Punch description","image":"?"},{"id":"1725308123085","type":"i","parentId":"1725307957660","name":"Clamp","description":"Clamp description","image":"?"},{"id":"1725308161629","type":"i","parentId":"1725307957660","name":"Hammer","description":"Hammer description","image":"?"},{"id":"1725308183333","type":"i","parentId":"1725307957660","name":"Clamp","description":"G clamp","image":"?"},{"id":"1725313688194","type":"i","parentId":0,"name":"Hammer","description":"Hammer description","image":"<p><img src=\\"file:///C:/Users/daves/Downloads/Photos-001%20(1)/20240902_141545.jpg\\"></p>"},{"id":"1725313766835","type":"i","parentId":0,"name":"Clamp","description":"Clamp description","image":"<p><img src=\\"file:///C:/Users/daves/Downloads/Photos-001%20(1)/20240902_141504.jpg\\"></p>"},{"id":"1725313857684","type":"i","parentId":0,"name":"One hole punch","description":"One hole punch description","image":"<p><img src=\\"file:///C:/Users/daves/Downloads/20240903_022154.jpg\\"></p>"}]';
 
       gItemArray = JSON.parse(js);
       fromArray();
@@ -454,7 +473,7 @@ Incityo
       p.innerHTML = '<button   style="height:100%;width:100%;object-fit:contain;padding:20px;margin:auto" >Now copy an image to the clipboard, THEN right click here to paste it</button>';
     }
 
-    let gPictureBoxInnerHTML = `<button id="paste_btn" style="height:100%;width:100%;object-fit:contain;padding:20px;margin:auto" 
+    let gPictureBoxInnerHTML = `<button id="paste_btn" style="height:90%;width:90%;object-fit:contain;padding:20px;margin:auto" 
     onclick="f(this);"  >left click here to start paste</button>`;
 
 
@@ -471,7 +490,7 @@ Incityo
 
       let p = document.getElementById("picture_box");
       let pictureBox = p.firstElementChild;
-      let theImage = pictureBox.getElementsByTagName('img');
+      //  let theImage = pictureBox.getElementsByTagName('img');
 
       //    let theImage = pictureBox.firstElementChild;
       //  if (c.tagName.toString() != "IMG") { alert("error"); return false; }
@@ -532,7 +551,7 @@ Incityo
 
 json ='[{"id":"0","type":"c","parentId":"","name":"home","description":"the root"},{"id":"1724876619107","type":"c","parentId":"0","name":"Kitchen","description":""},{"id":"1724876628283","type":"c","parentId":"0","name":"Study","description":""},{"id":"1724876635379","type":"c","parentId":"0","name":"Shed","description":""},{"id":"1724876671440","type":"i","parentId":"1724876619107","name":"Knife","description":""},{"id":"1724876680143","type":"i","parentId":"1724876619107","name":"Fork","description":""},{"id":"1724876697405","type":"i","parentId":"1724876635379","name":"Spanner","description":""},{"id":"1725155019094","type":"i","parentId":"1724876619107","name":"Spoon"},{"id":"1725155029207","type":"i","parentId":"1724876619107","name":"Fridge"},{"id":"1725155040300","type":"i","parentId":"1724876619107","name":"Cupboard"},{"id":"1725155069892","type":"c","parentId":"1724876619107","name":"Drawer"},{"id":"1725155102196","type":"i","parentId":"1725155069892","name":"Chopper"},{"id":"1725155118228","type":"i","parentId":"1725155069892","name":"Mixer"}]'
 
-
+json = '[{"id":"0","type":"?","parentId":"?","name":"home","description":"the root","image":"theImage"},{"id":"1725307957660","type":"c","parentId":0,"name":"Small Tool Box","description":"Small Tool Box description","image":"?"},{"id":"1725307981412","type":"i","parentId":"1725307957660","name":"Magnifying Glass","description":"Magnifying Glass description","image":"?"},{"id":"1725308045531","type":"i","parentId":"1725307957660","name":"Single Hole Punch","description":"Single Hole Punch description","image":"?"},{"id":"1725308123085","type":"i","parentId":"1725307957660","name":"Clamp","description":"Clamp description","image":"?"},{"id":"1725308161629","type":"i","parentId":"1725307957660","name":"Hammer","description":"Hammer description","image":"?"},{"id":"1725308183333","type":"i","parentId":"1725307957660","name":"Clamp","description":"G clamp","image":"?"}]'
 -->
 
 </body>
