@@ -6,6 +6,29 @@ Incityo
 
 1 Sep 24. First version that sort of works. Now a TODO list...
 
+Impliment.
+
+Debug Window
+Tidy up
+
+
+Search name/description.
+Change container.
+Delete container ask what happens to children.
+Grid search with photos.
+Photo of Home
+
+Import export.
+Backups.
+Website.
+
+Android version. Maybe javascript to start with.
+
+
+
+
+
+
 -->
 
 <head>
@@ -49,6 +72,13 @@ Incityo
     }
   </style>
   <script>
+    function doSearch() {
+
+      let searchInput = gid("search");
+
+
+      alert(searchInput.value);
+    }
 
     function getItemObjectById(id) {
       for (i = 0; i < gItemArray.length; i++) {
@@ -74,32 +104,49 @@ Incityo
 
     function buttonSelected(buttonId) {
 
-      // remove focus from all buttons
-
-      
       let bs = document.getElementsByClassName("hasFocus");
 
       for (i = 0; i < bs.length; i++) {
         bs[i].classList.remove("hasFocus");
       }
-      
 
       let thisButton = gid(buttonId);
 
       thisButton.classList.add("hasFocus");
- 
+
 
       let a = buttonId.split("_");
       let itemObject = getItemObjectById(a[1]);
 
       (gid("inName")).value = itemObject.name;
-      (gid("inItemId")).value = "item_" + itemObject.id;
+      (gid("inItemId")).value = itemObject.id;
+      (gid("inParentId")).value = itemObject.parentId;
       (gid("inDescription")).value = itemObject.description;
       if (itemObject.image != "?")
         (gid("picture_box")).innerHTML = itemObject.image; else resetPictureBox();
 
+      // Fill list of parents
 
+      let np = gid("newParent");
+
+
+      let theHTMLL = "";
+
+      for (i = 0; i < gItemArray.length; i++) {
+        //     
+        if (gItemArray[i].type == "c") {
+          theHTML += `<option value="` + gItemArray[i].id + `">` + gItemArray[i].name + `</option>`;
+
+
+
+        }
+      }
+
+
+      np.innerHTML = theHTML;
     }
+
+
 
     function getFormValue(id) {
       let r = document.getElementById(id);
@@ -134,9 +181,10 @@ Incityo
 
       for (i = 0; i < gItemArray.length; i++) {
         //     
-        if (gItemArray[i].id == id) {
+        if (gItemArray[i].id == idValue) {
           gItemArray[i].name = nameValue;
           gItemArray[i].description = descriptionValue;
+          gItemArray[i].parentId = getFormValue('newParent');
           break;
         }
       }
@@ -196,22 +244,7 @@ Incityo
 
       buttonId = "item_" + itemObject.id;
 
-
-      /*
-      let theHTML =
-        `<button id="` + buttonId
-        + `" onClick=buttonSelected("`
-        + buttonId + `");  ondblclick=setCurrentRoot("`
-        + itemObject.id + `");    class="      `
-        + buttonColor
-        + `" style="margin:5px">`
-        + itemObject.name + `</button>`;*/
-
-
-
       theHTML = `<button id="${buttonId}" onClick=buttonSelected("${buttonId}")  ondblclick=setCurrentRoot("${itemObject.id}")  class="${buttonColor}" style="margin:5px">${itemObject.name}</button>`;
-
-
 
       newButton.outerHTML = theHTML;
 
@@ -222,12 +255,15 @@ Incityo
 
     function resetChainDiv(rootId) {
       let elChainDiv = gid("divChain");
-      elChainDiv.innerHTML = ` <button class="btn btn-primary"  ondblclick="resetChainDiv()" style="padding:0px;margin:0px ">
+      elChainDiv.innerHTML = ` <button class="btn btn-primary"  onclick="fromArray()" style="padding:0px;margin:0px ">
                        <h2>Home</h2></button>`;
       return elChainDiv;
     }
 
     function setCurrentRoot(rootId) {
+
+      doDebug("root is " + rootId);
+
       let elChainDiv = resetChainDiv();
 
       function discoverChain(thisId) {
@@ -266,16 +302,18 @@ Incityo
       for (i = 0; i < gItemArray.length; i++) {
 
         if (gItemArray[i].id == rootId) {
-          let theHTML =
-            `<button id="` + buttonId
-            + `" onClick=buttonSelected("`
-            + buttonId + `");  ondblclick=setCurrentRoot("`
-            + rootId + `");    class="btn btn-dark" style="margin:5px">`
-            + gItemArray[i].name + `</button>`;
+          theHTML = `<button id="${buttonId}" onClick=buttonSelected("${buttonId}") 
+             ondblclick=setCurrentRoot("${rootId}")  class="btn btn-primary"
+                    style="margin:5px">${gItemArray[i].name}</button>`;
 
           newButton.outerHTML = theHTML;
           break;
         }
+
+
+
+
+
       }
 
       gCurrentParentId = rootId;
@@ -287,7 +325,6 @@ Incityo
       // Create buttons in divItems for each child of rootId
 
       for (i = 0; i < gItemArray.length; i++) {
-
         if (gItemArray[i].parentId == rootId)
           createButton(gItemArray[i]);
       }
@@ -302,6 +339,14 @@ Incityo
 
         if (gItemArray[i].parentId == "0")
           createButton(gItemArray[i]);
+
+      resetChainDiv(0);
+    }
+
+    function doDebug(message) {
+
+      if (message.length == 0) gid("debugWindow").innerHTML = ""; else
+        gid("debugWindow").innerHTML = gid("debugWindow").innerHTML + message + "</br>";
 
     }
 
@@ -322,6 +367,13 @@ Incityo
       const myJSON = JSON.stringify(gItemArray);
       // Store
       localStorage.setItem("jsonString", myJSON);
+
+      localStorage.setItem("jsonStringSep4", myJSON);
+
+
+      Object.keys(localStorage).forEach(function (key) {
+        console.log(localStorage.getItem(key));
+      });
 
       alert("to JSON");
     }
@@ -360,8 +412,17 @@ Incityo
         <button onclick="toJSON()">To jason</button>
         <button onclick="fromJSON()">From JSON</button>
         <button onclick="fromArray()">From Array</button>
+        <button onclick="doDebug(`test`)">Test</button>
+        <button onclick="doDebug(``)">Clear</button>
+      </div>
+
+      <div class="myDiv" id="debugWindow"
+        style="margin-top:20px;width:200px;height:200px;text-align: left; overflow-y:scroll;background-color: aqua blanchedalmond;">
+
+
 
       </div>
+
     </div>
 
     <p>
@@ -373,11 +434,12 @@ Incityo
       <div class="myDiv" style="background-color:rgb(68, 119, 94);margin:auto">
         <button id="none" class="btn btn-light" style="margin:30px; background-color:blanchedalmond;position: relative;
                 width: 60%;height: 15%; border-radius: 16px; box-shadow: 5px 5px 5px gray;">
-          <span class="btn-label" style="position:absolute;top:0px; left:10px; margin-bottom: 20px;">
+          <span class="btn-label" onclick="doSearch();"
+            style="position:absolute;top:0px; left:10px; margin-bottom: 20px;">
             <i class="bi-search" style="font-size:30px"></i></span>
 
           <input aria-label="Search inCitio" autocomplete="off" placeholder="Search inCitio" value="" name=""
-            type="text" style="padding: 0px; border:0cap; float:right;
+            type="text" id="search" style="padding: 0px; border:0cap; float:right;
               width: 90%;  background-color: rgb(219, 192, 192);
                z-index: 6; left: 0px;" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50">
 
@@ -387,7 +449,7 @@ Incityo
       <!--    Chain   -->
       <div class="myDiv" style="background-color:white;margin:auto">
         <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 10px;" text-align: center;>
-          <button class="btn btn-primary" style="padding:0px;margin:0px ">
+          <button class="btn btn-primary" onClick="setCurrentRoot(`0`);" style="padding:0px;margin:0px ">
             <h2>Home</h2>
           </button>
         </div>
@@ -442,8 +504,32 @@ Incityo
             </div>
 
             <div class="form-group">
+              <label for="inItemId">Item Id</label>
               <input type="text" class="form-control" id="inItemId">
             </div>
+            <div class="form-group">
+              <label for="inParentId">Parent Id</label>
+              <input type="text" class="form-control" id="inParentId">
+              <p></p>
+            </div>
+
+            <div class="form-group">
+              <label for="newParent">Change container:</label>
+              <select id="newParent" name="newParent">
+                <!--
+         
+                `<option value="1234">Small Toolbox</option>
+                <option value="saab">General Tools</option>
+                <option value="fiat">Fiat</option>
+                <option value="audi">Audi</option>`
+       -->
+
+
+              </select>
+            </div>
+
+            <p></p>
+            <p></p>
 
             <div style="background-color: blueviolet;text-align:center">
 
@@ -478,7 +564,7 @@ Incityo
 
     const itemObject = {
       id: "0",
-      type: "?",
+      type: "c",
       parentId: "?",
       name: "home",
       description: "the root",
@@ -493,6 +579,9 @@ Incityo
 
     gItemArray.push(itemObject);
 
+
+
+    // doDebug("hello");
 
     function f(el) {
       hid(el);
@@ -514,22 +603,27 @@ Incityo
     }
 
     function doAfter() {
-
-      let p = document.getElementById("picture_box");
-      let pictureBox = p.firstElementChild;
-  
-
-      let i = gid("inItemId").value;
-
-      a = i.split("_");
-
-      b = a[1];
-
-      thisIndex = getItemObjectIndexById(b);
-      gItemArray[thisIndex].image = pictureBox.outerHTML;
+      try {
+        let p = document.getElementById("picture_box");
+        let pictureBox = p.firstElementChild;
 
 
-      document.activeElement.blur();
+        thisId = (gid("inItemId")).value;
+
+
+
+        thisIndex = getItemObjectIndexById(thisId);
+        gItemArray[thisIndex].image = pictureBox.outerHTML; // save the outerHTML
+
+
+        document.activeElement.blur();
+      }
+      catch {
+
+        doDebug("must be some mistake");
+
+      }
+
 
 
     }
@@ -546,6 +640,8 @@ Incityo
 
       }, false);
 
+
+    let x = localStorage.getItem("jsonStringSep4");
 
 
 
