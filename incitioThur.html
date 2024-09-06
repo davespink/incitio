@@ -11,11 +11,6 @@ Impliment.
 Debug Window
 Tidy up
 
- 
-
-
-BUGS: When data changed the fromArray is not working
-
 
 Search name/description.
 Change container.
@@ -28,6 +23,9 @@ Backups.
 Website.
 
 Android version. Maybe javascript to start with.
+
+
+
 
 
 
@@ -45,6 +43,8 @@ Android version. Maybe javascript to start with.
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
 
   <style>
     .myDiv {
@@ -72,18 +72,26 @@ Android version. Maybe javascript to start with.
     }
   </style>
   <script>
+    function doSearch() {
+
+      let searchInput = gid("search");
 
 
-    // array operations
+      alert(searchInput.value);
+    }
+
     function getItemObjectById(id) {
       for (i = 0; i < gItemArray.length; i++) {
         //     
         if (gItemArray[i].id == id) {
+          console.debug(i);
           return gItemArray[i];
+          break;
         }
 
       }
     }
+
 
     function getItemObjectIndexById(id) {
       for (i = 0; i < gItemArray.length; i++) {
@@ -91,13 +99,10 @@ Android version. Maybe javascript to start with.
         if (gItemArray[i].id == id) {
           return i;
         }
+
       }
     }
 
-    function doSearch() {
-      let searchInput = gid("search");
-      alert(searchInput.value);
-    }
 
     function buttonSelected(buttonId) {
 
@@ -111,6 +116,7 @@ Android version. Maybe javascript to start with.
 
       thisButton.classList.add("hasFocus");
 
+
       let a = buttonId.split("_");
       let itemObject = getItemObjectById(a[1]);
 
@@ -121,27 +127,34 @@ Android version. Maybe javascript to start with.
       if (itemObject.image != "?")
         (gid("picture_box")).innerHTML = itemObject.image; else resetPictureBox();
 
-
-      // this should be a function 
       // Fill list of parents
 
       let np = gid("newParent");
-      let theHTML = "";
+
+
+      let theHTMLL = "";
 
       for (i = 0; i < gItemArray.length; i++) {
         //     
         if (gItemArray[i].type == "c") {
           theHTML += `<option value="` + gItemArray[i].id + `">` + gItemArray[i].name + `</option>`;
+
+
+
         }
       }
 
+
       np.innerHTML = theHTML;
     }
+
+
 
     function getFormValue(id) {
       let r = document.getElementById(id);
       return r.value
     }
+
 
     function deleteItem() {
 
@@ -150,11 +163,12 @@ Android version. Maybe javascript to start with.
       ar = idValue.split("_");
       id = ar[1];
 
-      thisIndex = getItemObjectIndexById(idValue);
+      thisIndex = getItemObjectIndexById(id);
 
       gItemArray.splice(thisIndex, 1);
 
-      setCurrentRoot(getCurrentParentId());
+      fromArray();
+
     }
 
     function updateItemsFromForm() {
@@ -177,8 +191,8 @@ Android version. Maybe javascript to start with.
         }
       }
 
-     // fromArray();
-      setCurrentRoot(getCurrentParentId());
+      fromArray();
+
     }
 
     function resetPictureBox() {
@@ -191,7 +205,9 @@ Android version. Maybe javascript to start with.
 
       newItemObject = createItem(type);
       if (newItemObject)
-        createItemButton(newItemObject);
+        createButton(newItemObject);
+
+
 
     }
 
@@ -208,7 +224,7 @@ Android version. Maybe javascript to start with.
 
       newItem.id = stamp;
       newItem.type = type;
-      newItem.parentId = getCurrentParentId();
+      newItem.parentId = gCurrentParentId;
       newItem.name = pName;
       newItem.description = pName + " description";
       newItem.image = "?";
@@ -217,12 +233,19 @@ Android version. Maybe javascript to start with.
       return newItem;
     }
 
-
-    function createChainButton(itemObject) {
+    function createButton(itemObject) {
       let newButton = document.createElement('button');
-      let el = document.getElementById("divChain");
-      el.appendChild(newButton);
 
+
+
+      /*
+      if (itemObject.id == "0") {
+        el = document.getElementById("divChain");
+      }
+      else el = document.getElementById("divItems");
+
+      el.appendChild(newButton);
+*/
       if (itemObject.type == "c") {
         buttonColor = `btn btn-primary`;
       } else {
@@ -235,97 +258,33 @@ Android version. Maybe javascript to start with.
 
       newButton.outerHTML = theHTML;
 
+      //    resetPictureBox();
       return newButton;
 
-      //    resetPictureBox();
-
-    }
-
-    function createItemButton(itemObject) {
-      let newButton = document.createElement('button');
-      let el = document.getElementById("divItems");
-      el.appendChild(newButton);
-
-      if (itemObject.type == "c") {
-        buttonColor = `btn btn-primary`;
-      } else {
-        buttonColor = `btn btn-success`;
-      }
-
-      buttonId = "item_" + itemObject.id;
-
-      theHTML = `<button id="${buttonId}" onClick=buttonSelected("${buttonId}")  ondblclick=setCurrentRoot("${itemObject.id}")  class="${buttonColor}" style="margin:5px">${itemObject.name}</button>`;
-
-      newButton.outerHTML = theHTML;
-
-      return newButton;
-
-      //    resetPictureBox();
-
-    }
-
-    function resetChainDiv(rootId) {
-
-      let elChainDiv = gid("divChain");
-      elChainDiv.innerHTML = ` <button class="btn btn-primary"  onclick="fromArray()" style="padding:0px;margin:0px ">
-                       <h2>Home</h2></button>`;
-      return elChainDiv;
     }
 
 
-
-    function discoverChain(thisId) {
-
-      for (i = 0; i < gItemArray.length; i++) {
-        //     alert(gItemArray[i].id);
-        if (gItemArray[i].id == thisId) {
-          let parentId = gItemArray[i].parentId;
-          gChainArray.push(thisId);
-          return parentId;
-        }
-      }
-    }
-
+    // function resetChainDiv(rootId) {
+    //   let elChainDiv = gid("divChain");
+    //   elChainDiv.innerHTML = ` <button class="btn btn-primary"  onclick="fromArray()" style="padding:0px;margin:0px ">
+    //                   <h2>Home</h2></button>`;
+    //   return elChainDiv;
+    //  }
 
     function setCurrentRoot(rootId) {
+
       doDebug("root is " + rootId);
-      setCurrentParentId(rootId);
+      //   resetChainDiv();
 
-      gChainArray = [];
-
-      let thisRoot = rootId;
-
-      while (thisRoot != "?")
-        thisRoot = discoverChain(thisRoot);
-
-      gChainArray = gChainArray.reverse();
-
-      gid("divChain").innerHTML = "";
-
-      for (i = 0; i < gChainArray.length; i++) {
-        thisId = gChainArray[i];
-        thisItemObject = getItemObjectById(thisId);
-        thisButton = createChainButton(thisItemObject);
-      }
-
-      gid("divItems").innerHTML = "";
-      for (i = 0; i < gItemArray.length; i++)
-
-        if (gItemArray[i].parentId == getCurrentParentId())
-          createItemButton(gItemArray[i]);
-
-    }
-
-    function resetItemDiv() {
-      gid("divItems").innerHTML = "";
-
+     // thisObject = getItemObjectById(rootId);
+     //  let createButton(thisObject);
+  
+       
 
     }
 
     function fromArray() {
       //     Find all children of Home and make buttons in allButtons
-
-      /*
       gid("divItems").innerHTML = "";
       gid("divChain").innerHTML = "";
       for (i = 0; i < gItemArray.length; i++)
@@ -333,7 +292,7 @@ Android version. Maybe javascript to start with.
         if (gItemArray[i].parentId == "0")
           createButton(gItemArray[i]);
 
-      resetChainDiv(0);*/
+      resetChainDiv(0);
     }
 
     function doDebug(message) {
@@ -351,9 +310,7 @@ Android version. Maybe javascript to start with.
       //     js = '[{"id":"0","type":"?","parentId":"?","name":"home","description":"the root","image":"theImage"},{"id":"1725307957660","type":"c","parentId":0,"name":"Small Tool Box","description":"Small Tool Box description","image":"<p><img src=\\"file:///C:/Users/daves/Downloads/Photos-001%20(1)/20240902_140603.jpg\\"></p>"},{"id":"1725307981412","type":"i","parentId":"1725307957660","name":"Magnifying Glass","description":"Magnifying Glass description","image":"?"},{"id":"1725308045531","type":"i","parentId":"1725307957660","name":"Single Hole Punch","description":"Single Hole Punch description","image":"?"},{"id":"1725308123085","type":"i","parentId":"1725307957660","name":"Clamp","description":"Clamp description","image":"?"},{"id":"1725308161629","type":"i","parentId":"1725307957660","name":"Hammer","description":"Hammer description","image":"?"},{"id":"1725308183333","type":"i","parentId":"1725307957660","name":"Clamp","description":"G clamp","image":"?"},{"id":"1725313688194","type":"i","parentId":0,"name":"Hammer","description":"Hammer description","image":"<p><img src=\\"file:///C:/Users/daves/Downloads/Photos-001%20(1)/20240902_141545.jpg\\"></p>"},{"id":"1725313766835","type":"i","parentId":0,"name":"Clamp","description":"Clamp description","image":"<p><img src=\\"file:///C:/Users/daves/Downloads/Photos-001%20(1)/20240902_141504.jpg\\"></p>"},{"id":"1725313857684","type":"i","parentId":0,"name":"One hole punch","description":"One hole punch description","image":"<p><img src=\\"file:///C:/Users/daves/Downloads/20240903_022154.jpg\\"></p>"}]';
 
       gItemArray = JSON.parse(js);
-      //    fromArray();
-
-      setCurrentRoot(0);
+      fromArray();
 
       alert("from JSON");
     }
@@ -407,7 +364,7 @@ Android version. Maybe javascript to start with.
         <button onclick="toJSON()">To jason</button>
         <button onclick="fromJSON()">From JSON</button>
         <button onclick="fromArray()">From Array</button>
-        <button onclick="setCurrentRoot(getCurrentParentId())">Test</button>
+        <button onclick="doDebug(`test`)">Test</button>
         <button onclick="doDebug(``)">Clear</button>
       </div>
 
@@ -422,6 +379,7 @@ Android version. Maybe javascript to start with.
 
     <p>
     <p></p>
+
 
     <!-- second column -->
     <div class="myDiv" style="width:70%;background-color:white">
@@ -443,9 +401,7 @@ Android version. Maybe javascript to start with.
       <!--    Chain   -->
       <div class="myDiv" style="background-color:white;margin:auto">
         <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 10px;" text-align: center;>
-          <button class="btn btn-primary" onClick="setCurrentRoot(`0`);" style="padding:0px;margin:0px ">
 
-          </button>
         </div>
 
         <!--    Items  -->
@@ -509,7 +465,14 @@ Android version. Maybe javascript to start with.
 
             <div class="form-group">
               <label for="newParent">Change container:</label>
-              <select id="newParent">
+              <select id="newParent" name="newParent">
+                <!--
+         
+                `<option value="1234">Small Toolbox</option>
+                <option value="saab">General Tools</option>
+                <option value="fiat">Fiat</option>
+                <option value="audi">Audi</option>`
+       -->
 
 
               </select>
@@ -534,12 +497,12 @@ Android version. Maybe javascript to start with.
     </div>
   </div>
 
-
+  //
+  // Initialize some things
+  //
 
   <script>
-
-    // TLA helpers
-
+    // Simple helper functions, I try to keep to 3 letters
     function gid(name) {
       return document.getElementById(name);
     }
@@ -548,39 +511,40 @@ Android version. Maybe javascript to start with.
       el.display = "none";
     }
 
-    const itemObject = {
-      id: "0",
-      type: "c",
-      parentId: "?",
-      name: "home",
-      description: "your humble abode",
-      image: "?"
-    };
 
     let gCurrentParentId = 0;
 
-    function getCurrentParentId() { return gCurrentParentId; }
-    function setCurrentParentId(id) { gCurrentParentId = id }
+    let gItemArray = []; // where all the data lives
 
+    let gChainArray = []; // the root and any active children, only used to calculate the back chain, not really data
 
-    let gItemArray = [];
-    let gChainArray = [];
+    // Let's create the root object so others will have a parent
+    const itemObject = {
+      id: "0",
+      type: "c",
+      parentId: "0",
+      name: "home",
+      description: "Your humble abode",
+      image: "?"
+    };
 
     gItemArray.push(itemObject);
 
-    setCurrentRoot(0);
 
-    ///pictureBox stuff
+    //setCurrentRoot(0);
+    createButton(gItemArray[0]);
+    buttonSelected("item_0");
 
+
+
+    // image stuff
     function f(el) {
       hid(el);
       let p = el.parentElement;
       p.innerHTML = '<button   style="height:50%;width:50%; padding:20px;margin:auto" >Now copy an image to the clipboard, THEN right click here to paste it</button>';
     }
-
-    let gPictureBoxInnerHTML = `<button id="paste_btn" style="height:90%;width:90%;object-fit:contain;padding:20px;margin:auto" 
-    onclick="f(this);"  >left click here to start paste</button>`;
-
+    //   let  = `<button id="paste_btn" style="height:90%;width:90%;object-fit:contain;padding:20px;margin:auto" 
+    //   onclick="f(this);"  >left click here to start paste</button>`;
 
     function doBefore() {
       let p = document.getElementById("picture_box");
@@ -593,11 +557,11 @@ Android version. Maybe javascript to start with.
       try {
         let p = document.getElementById("picture_box");
         let pictureBox = p.firstElementChild;
-
         thisId = (gid("inItemId")).value;
-
         thisIndex = getItemObjectIndexById(thisId);
         gItemArray[thisIndex].image = pictureBox.outerHTML; // save the outerHTML
+
+
         document.activeElement.blur();
       }
       catch {
@@ -607,6 +571,7 @@ Android version. Maybe javascript to start with.
       }
 
     }
+
 
     gid("picture_box").addEventListener('paste',
       (ev) => {
