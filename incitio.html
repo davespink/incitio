@@ -52,6 +52,16 @@ Android version. Maybe javascript to start with.
       text-align: center;
     }
 
+    .item-grid {
+      width: 100px;
+      height: 100px;
+      padding: 0px;
+      margin: -1px;
+      margin-top: 2px;
+      margin-bottom: 1px;
+      border: 0px;
+    }
+
     body {
       width: 100%;
       margin: 0px;
@@ -64,6 +74,7 @@ Android version. Maybe javascript to start with.
       /* or any custom size */
       height: 100%;
       object-fit: contain;
+      margin: 0px;
     }
 
     .hasFocus {
@@ -431,7 +442,7 @@ I'm unsure what this code is needed for now
 
       <!--    Chain   -->
       <div class="myDiv" style="background-color:white;margin:auto">
-        <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 10px;" text-align: center;>
+        <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 10px;">
           <button class="btn btn-primary" onClick="setCurrentRoot(`0`);" style="padding:0px;margin:0px ">
 
           </button>
@@ -445,12 +456,26 @@ I'm unsure what this code is needed for now
 
       </div>
 
+      <div style="text-align:center;background-color:green ;">
 
-      <div class="myDiv" style="background-color:rgb(92, 68, 119);margin:auto">
-        <h2>This is a third div in a center element</h2>
-        <p>This is some text in a div element.</p>
+        <div style="text-align:center;width:90%;background-color: aquamarine; margin:auto">
+          <button class="item-grid"><img src="./photos/magnifying%20glass.jpg"></button>
+          <button class="item-grid"> <img src="./photos/another%20clamp.jpg"> </button>
+          <button class="item-grid">Tom</button>
+          <button class="item-grid">Tom</button>
+          <button class="item-grid">Tom</button>
+          <button class="item-grid">Tom</button>
+          <button class="item-grid">Tom</button>
+          <button class="item-grid">Tom</button>
+          <button class="item-grid">Tom</button>
+          <button class="item-grid">Tom</button>
+          <button class="item-grid">Tom</button>
+          <button class="item-grid">Tom</button>
+          <button class="item-grid">Tommy</button>
+          <button class="item-grid" style="visibility:hidden">Tom</button>
+
+        </div>
       </div>
-
     </div>
 
     <!-- third column -->
