@@ -252,7 +252,7 @@ Android version. Maybe javascript to start with.
 
       buttonId = "item_" + itemObject.id;
 
-      theHTML = `<button id="${buttonId}" onClick=buttonSelected("${buttonId}")     class="${buttonColor}" style="margin:5px">${itemObject.name}</button>`;
+      theHTML = `<button id="${buttonId}" onClick=buttonSelected("${buttonId}")  ondblclick=setCurrentRoot("${itemObject.id}")    class="${buttonColor}" style="margin:5px">${itemObject.name}</button>`;
 
       newButton.outerHTML = theHTML;
 
