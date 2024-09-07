@@ -121,21 +121,23 @@ Android version. Maybe javascript to start with.
       if (itemObject.image != "?")
         (gid("picture_box")).innerHTML = itemObject.image; else resetPictureBox();
 
+      function fillParentList() {
 
-      // this should be a function 
-      // Fill list of parents
+        let np = gid("newParent");
+        let theHTML = "";
 
-      let np = gid("newParent");
-      let theHTML = "";
-
-      for (i = 0; i < gItemArray.length; i++) {
-        //     
-        if (gItemArray[i].type == "c") {
-          theHTML += `<option value="` + gItemArray[i].id + `">` + gItemArray[i].name + `</option>`;
+        for (i = 0; i < gItemArray.length; i++) {
+          //     
+          if (gItemArray[i].type == "c") {
+            theHTML += `<option value="` + gItemArray[i].id + `">` + gItemArray[i].name + `</option>`;
+          }
         }
+        np.innerHTML = theHTML;
+
       }
 
-      np.innerHTML = theHTML;
+      fillParentList();
+
     }
 
     function getFormValue(id) {
@@ -177,7 +179,7 @@ Android version. Maybe javascript to start with.
         }
       }
 
-     // fromArray();
+      // fromArray();
       setCurrentRoot(getCurrentParentId());
     }
 
@@ -223,13 +225,9 @@ Android version. Maybe javascript to start with.
       let el = document.getElementById("divChain");
       el.appendChild(newButton);
 
-      if (itemObject.type == "c") {
-        buttonColor = `btn btn-primary`;
-      } else {
-        buttonColor = `btn btn-success`;
-      }
+      buttonColor = `btn btn-primary`;
 
-      buttonId = "item_" + itemObject.id;
+      buttonId = "chain_" + itemObject.id;
 
       theHTML = `<button id="${buttonId}" onClick=buttonSelected("${buttonId}")  ondblclick=setCurrentRoot("${itemObject.id}")  class="${buttonColor}" style="margin:5px">${itemObject.name}</button>`;
 
@@ -254,7 +252,7 @@ Android version. Maybe javascript to start with.
 
       buttonId = "item_" + itemObject.id;
 
-      theHTML = `<button id="${buttonId}" onClick=buttonSelected("${buttonId}")  ondblclick=setCurrentRoot("${itemObject.id}")  class="${buttonColor}" style="margin:5px">${itemObject.name}</button>`;
+      theHTML = `<button id="${buttonId}" onClick=buttonSelected("${buttonId}")     class="${buttonColor}" style="margin:5px">${itemObject.name}</button>`;
 
       newButton.outerHTML = theHTML;
 
@@ -264,16 +262,8 @@ Android version. Maybe javascript to start with.
 
     }
 
-    function resetChainDiv(rootId) {
 
-      let elChainDiv = gid("divChain");
-      elChainDiv.innerHTML = ` <button class="btn btn-primary"  onclick="fromArray()" style="padding:0px;margin:0px ">
-                       <h2>Home</h2></button>`;
-      return elChainDiv;
-    }
-
-
-
+    // Maybe move this into setCurrentRoot
     function discoverChain(thisId) {
 
       for (i = 0; i < gItemArray.length; i++) {
@@ -316,16 +306,23 @@ Android version. Maybe javascript to start with.
 
     }
 
+
+    /*
     function resetItemDiv() {
       gid("divItems").innerHTML = "";
 
 
     }
+      */
 
     function fromArray() {
       //     Find all children of Home and make buttons in allButtons
 
       /*
+
+I'm unsure what this code is needed for now
+
+
       gid("divItems").innerHTML = "";
       gid("divChain").innerHTML = "";
       for (i = 0; i < gItemArray.length; i++)
@@ -337,25 +334,22 @@ Android version. Maybe javascript to start with.
     }
 
     function doDebug(message) {
-
       if (message.length == 0) gid("debugWindow").innerHTML = ""; else
         gid("debugWindow").innerHTML = gid("debugWindow").innerHTML + message + "</br>";
 
     }
 
-    function fromJSON() {
-      //   js = '[{\"id\":\"0\",\"type\":\"?\",\"parentId\":\"\",\"name\":\"home\",\"description\":\"the root\",\"image\":\"theImage\"},{\"id\":\"1725214183385\",\"type\":\"i\",\"parentId\":0,\"name\":\"Plate\",\"image\":\"<img src=\\\"data:image/jpeg;base64,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\\\" alt=\\\"PLATE definición y significado | Diccionario Inglés Collins\\\" style=\\\"width: 240px; height: 240px;\\\">\"}]';
 
+    // need better backup etc
+    function fromJSON() {
       // Retrieve
       let js = localStorage.getItem("jsonString");
-      //     js = '[{"id":"0","type":"?","parentId":"?","name":"home","description":"the root","image":"theImage"},{"id":"1725307957660","type":"c","parentId":0,"name":"Small Tool Box","description":"Small Tool Box description","image":"<p><img src=\\"file:///C:/Users/daves/Downloads/Photos-001%20(1)/20240902_140603.jpg\\"></p>"},{"id":"1725307981412","type":"i","parentId":"1725307957660","name":"Magnifying Glass","description":"Magnifying Glass description","image":"?"},{"id":"1725308045531","type":"i","parentId":"1725307957660","name":"Single Hole Punch","description":"Single Hole Punch description","image":"?"},{"id":"1725308123085","type":"i","parentId":"1725307957660","name":"Clamp","description":"Clamp description","image":"?"},{"id":"1725308161629","type":"i","parentId":"1725307957660","name":"Hammer","description":"Hammer description","image":"?"},{"id":"1725308183333","type":"i","parentId":"1725307957660","name":"Clamp","description":"G clamp","image":"?"},{"id":"1725313688194","type":"i","parentId":0,"name":"Hammer","description":"Hammer description","image":"<p><img src=\\"file:///C:/Users/daves/Downloads/Photos-001%20(1)/20240902_141545.jpg\\"></p>"},{"id":"1725313766835","type":"i","parentId":0,"name":"Clamp","description":"Clamp description","image":"<p><img src=\\"file:///C:/Users/daves/Downloads/Photos-001%20(1)/20240902_141504.jpg\\"></p>"},{"id":"1725313857684","type":"i","parentId":0,"name":"One hole punch","description":"One hole punch description","image":"<p><img src=\\"file:///C:/Users/daves/Downloads/20240903_022154.jpg\\"></p>"}]';
 
       gItemArray = JSON.parse(js);
-      //    fromArray();
 
       setCurrentRoot(0);
 
-      alert("from JSON");
+      //  alert("from JSON");
     }
 
     function toJSON() {
@@ -363,12 +357,9 @@ Android version. Maybe javascript to start with.
       // Store
       localStorage.setItem("jsonString", myJSON);
 
-      localStorage.setItem("jsonStringSep4", myJSON);
-
-
-      Object.keys(localStorage).forEach(function (key) {
-        console.log(localStorage.getItem(key));
-      });
+      //    Object.keys(localStorage).forEach(function (key) {
+      //     console.log(localStorage.getItem(key));
+      // });
 
       alert("to JSON");
     }
@@ -413,8 +404,6 @@ Android version. Maybe javascript to start with.
 
       <div class="myDiv" id="debugWindow"
         style="margin-top:20px;width:200px;height:200px;text-align: left; overflow-y:scroll;background-color: aqua blanchedalmond;">
-
-
 
       </div>
 
@@ -489,7 +478,6 @@ Android version. Maybe javascript to start with.
             <div class="form-group">
               <label for="inName">Name:</label>
               <input type="text" class="form-control" id="inName">
-              <!--    <label><input type="checkbox"> Remember me</label> -->
             </div>
 
             <div class="form-group">
@@ -510,7 +498,6 @@ Android version. Maybe javascript to start with.
             <div class="form-group">
               <label for="newParent">Change container:</label>
               <select id="newParent">
-
 
               </select>
             </div>
@@ -557,11 +544,9 @@ Android version. Maybe javascript to start with.
       image: "?"
     };
 
-    let gCurrentParentId = 0;
-
+    let gCurrentParentId = 0; // do I need to persist this?
     function getCurrentParentId() { return gCurrentParentId; }
     function setCurrentParentId(id) { gCurrentParentId = id }
-
 
     let gItemArray = [];
     let gChainArray = [];
@@ -575,11 +560,14 @@ Android version. Maybe javascript to start with.
     function f(el) {
       hid(el);
       let p = el.parentElement;
-      p.innerHTML = '<button   style="height:50%;width:50%; padding:20px;margin:auto" >Now copy an image to the clipboard, THEN right click here to paste it</button>';
+      //     p.innerHTML = '<button   style="height:50%;width:50%; padding:20px;margin:auto" >Now copy an image to the clipboard, THEN right click here to paste it</button>';
+
+
+      p.innerHTML = `<span style="font-size:20px"><p> copy an image to the clipboard and then paste it here</span>`;
     }
 
     let gPictureBoxInnerHTML = `<button id="paste_btn" style="height:90%;width:90%;object-fit:contain;padding:20px;margin:auto" 
-    onclick="f(this);"  >left click here to start paste</button>`;
+    onclick="f(this);">left click here to start paste</button>`;
 
 
     function doBefore() {
@@ -599,6 +587,7 @@ Android version. Maybe javascript to start with.
         thisIndex = getItemObjectIndexById(thisId);
         gItemArray[thisIndex].image = pictureBox.outerHTML; // save the outerHTML
         document.activeElement.blur();
+        window.focus();
       }
       catch {
 
