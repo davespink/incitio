@@ -140,7 +140,12 @@ Android version. Maybe javascript to start with.
         for (i = 0; i < gItemArray.length; i++) {
           //     
           if (gItemArray[i].type == "c") {
-            theHTML += `<option value="` + gItemArray[i].id + `">` + gItemArray[i].name + `</option>`;
+
+            if (gItemArray[i].id == itemObject.parentId)
+
+              theHTML += `<option value="` + gItemArray[i].id + `"  selected >` + gItemArray[i].name   + `</option>`;
+            else
+              theHTML += `<option value="` + gItemArray[i].id + `">` + gItemArray[i].name + `</option>`;
           }
         }
         np.innerHTML = theHTML;
@@ -185,7 +190,7 @@ Android version. Maybe javascript to start with.
         if (gItemArray[i].id == idValue) {
           gItemArray[i].name = nameValue;
           gItemArray[i].description = descriptionValue;
-          gItemArray[i].parentId = getFormValue('newParent');
+          //    gItemArray[i].parentId = getFormValue('newParent');
           break;
         }
       }
@@ -303,8 +308,8 @@ Android version. Maybe javascript to start with.
 
       gid("divChain").innerHTML = "";
 
-      for (i = 0; i < gChainArray.length; i++) {
-        thisId = gChainArray[i];
+      for (j = 0; j < gChainArray.length; j++) {
+        thisId = gChainArray[j];
         thisItemObject = getItemObjectById(thisId);
         thisButton = createChainButton(thisItemObject);
       }
@@ -443,9 +448,14 @@ I'm unsure what this code is needed for now
       <!--    Chain   -->
       <div class="myDiv" style="background-color:white;margin:auto">
         <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 10px;">
-          <button class="btn btn-primary" onClick="setCurrentRoot(`0`);" style="padding:0px;margin:0px ">
+          <!--
+            <button class="btn btn-primary" onClick="setCurrentRoot(`0`);" style="padding:0px;margin:0px ">
+-->
+
 
           </button>
+
+
         </div>
 
         <!--    Items  -->
