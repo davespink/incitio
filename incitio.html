@@ -11,6 +11,8 @@ Impliment.
 Debug Window
 Tidy up
 
+Go to item when picture grid clicked.
+- Find parent, set root then focus on item button.
  
 
 
@@ -56,7 +58,7 @@ Android version. Maybe javascript to start with.
       width: 100px;
       height: 100px;
       padding: 0px;
- 
+
       border: 0px;
     }
 
@@ -108,6 +110,20 @@ Android version. Maybe javascript to start with.
       alert(searchInput.value);
     }
 
+
+    function itemObjectToForm(itemObject) {
+
+
+      (gid("inName")).value = itemObject.name;
+      (gid("inItemId")).value = itemObject.id;
+      (gid("inParentId")).value = itemObject.parentId;
+      (gid("inDescription")).value = itemObject.description;
+      if (itemObject.image != "?")
+        (gid("picture_box")).innerHTML = itemObject.image; else resetPictureBox();
+    }
+
+
+
     function buttonSelected(buttonId) {
 
       let bs = document.getElementsByClassName("hasFocus");
@@ -123,13 +139,15 @@ Android version. Maybe javascript to start with.
       let a = buttonId.split("_");
       let itemObject = getItemObjectById(a[1]);
 
-      (gid("inName")).value = itemObject.name;
-      (gid("inItemId")).value = itemObject.id;
-      (gid("inParentId")).value = itemObject.parentId;
-      (gid("inDescription")).value = itemObject.description;
-      if (itemObject.image != "?")
-        (gid("picture_box")).innerHTML = itemObject.image; else resetPictureBox();
-
+      itemObjectToForm(itemObject);
+      /*
+            (gid("inName")).value = itemObject.name;
+            (gid("inItemId")).value = itemObject.id;
+            (gid("inParentId")).value = itemObject.parentId;
+            (gid("inDescription")).value = itemObject.description;
+            if (itemObject.image != "?")
+              (gid("picture_box")).innerHTML = itemObject.image; else resetPictureBox();
+      */
       function fillParentList() {
 
         let np = gid("newParent");
@@ -207,8 +225,10 @@ Android version. Maybe javascript to start with.
 
       newItemObject = createItem(type);
       if (newItemObject)
-        createItemButton(newItemObject);
+        b = createItemButton(newItemObject);
 
+      //  setTimeout(clickButton(b), 1000);
+      clickButton(b);
     }
 
     // create a new item from user input
@@ -253,6 +273,12 @@ Android version. Maybe javascript to start with.
 
     }
 
+    function clickButton(buttonId) {
+
+      b = gid(buttonId);
+      b.click();
+    }
+
     function createItemButton(itemObject) {
       let newButton = document.createElement('button');
       let el = document.getElementById("divItems");
@@ -269,8 +295,7 @@ Android version. Maybe javascript to start with.
       theHTML = `<button id="${buttonId}" onClick=buttonSelected("${buttonId}")  ondblclick=setCurrentRoot("${itemObject.id}")    class="${buttonColor}" style="margin:5px">${itemObject.name}</button>`;
 
       newButton.outerHTML = theHTML;
-
-      return newButton;
+      return buttonId;
 
       //    resetPictureBox();
 
@@ -292,6 +317,12 @@ Android version. Maybe javascript to start with.
 
 
     function setCurrentRoot(rootId) {
+
+      if (getItemObjectById(rootId).type != "c") {
+        alert("not a container");
+        return;
+      }
+
       doDebug("root is " + rootId);
       setCurrentParentId(rootId);
 
@@ -330,26 +361,48 @@ Android version. Maybe javascript to start with.
       */
 
 
+    function gridPhotoClicked(id) {
+
+      let thisItemObject = getItemObjectById(id);
+  //    itemObjectToForm(thisItemObject);
+
+      setCurrentRoot(thisItemObject.parentId);
+
+      let buttonId = "item_" + id;
+      buttonSelected(buttonId);
+
+      gridId = "image_" + id;
+      (gid(gridId)).classList.add("hasFocus");
+
+
+     //   newButton.classList.add("item-grid");
+    }
+
     function showAllItems() {
 
+      let el = document.getElementById("divPhotos");
+      el.innerHTML = "";
 
       for (i = 0; i < gItemArray.length; i++) {
 
         thisItemObject = gItemArray[i];
+
         if (thisItemObject.image == "?")
           continue;
         {
           let newButton = document.createElement('button');
-          let el = document.getElementById("divPhotos");
+
           el.appendChild(newButton);
 
-          newButton.innerHTML =  thisItemObject.image;
+          newButtonId = "image_" + thisItemObject.id;
 
-          newButton.classList.add("item-grid");
+          newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid" onclick="gridPhotoClicked('${thisItemObject.id}')">` + thisItemObject.image + `</button>`;
 
-          newButton.id = "image" + i;
+          
 
-          x = 1;
+   
+
+
 
         }
       }
@@ -559,8 +612,8 @@ I'm unsure what this code is needed for now
       <div style="text-align:center;background-color:green ;">
 
         <div id="divPhotos" style="text-align:center;width:90%;background-color: aquamarine; margin:auto">
-         
-       
+
+
 
         </div>
       </div>
@@ -731,15 +784,7 @@ I'm unsure what this code is needed for now
 
 
   </script>
-  <!--
 
- jason =   '[{"id":"0","type":"c","parentId":"","name":"home","description":"the root"},{"id":"1724876619107","type":"c","parentId":"0","name":"Kitchen","description":""},{"id":"1724876628283","type":"c","parentId":"0","name":"Study","description":""},{"id":"1724876635379","type":"c","parentId":"0","name":"Shed","description":""},{"id":"1724876671440","type":"i","parentId":"1724876619107","name":"Knife","description":""},{"id":"1724876680143","type":"i","parentId":"1724876619107","name":"Fork","description":""},{"id":"1724876697405","type":"i","parentId":"1724876635379","name":"Spanner","description":""}]'
-
-
-json ='[{"id":"0","type":"c","parentId":"","name":"home","description":"the root"},{"id":"1724876619107","type":"c","parentId":"0","name":"Kitchen","description":""},{"id":"1724876628283","type":"c","parentId":"0","name":"Study","description":""},{"id":"1724876635379","type":"c","parentId":"0","name":"Shed","description":""},{"id":"1724876671440","type":"i","parentId":"1724876619107","name":"Knife","description":""},{"id":"1724876680143","type":"i","parentId":"1724876619107","name":"Fork","description":""},{"id":"1724876697405","type":"i","parentId":"1724876635379","name":"Spanner","description":""},{"id":"1725155019094","type":"i","parentId":"1724876619107","name":"Spoon"},{"id":"1725155029207","type":"i","parentId":"1724876619107","name":"Fridge"},{"id":"1725155040300","type":"i","parentId":"1724876619107","name":"Cupboard"},{"id":"1725155069892","type":"c","parentId":"1724876619107","name":"Drawer"},{"id":"1725155102196","type":"i","parentId":"1725155069892","name":"Chopper"},{"id":"1725155118228","type":"i","parentId":"1725155069892","name":"Mixer"}]'
-
-json = '[{"id":"0","type":"?","parentId":"?","name":"home","description":"the root","image":"theImage"},{"id":"1725307957660","type":"c","parentId":0,"name":"Small Tool Box","description":"Small Tool Box description","image":"?"},{"id":"1725307981412","type":"i","parentId":"1725307957660","name":"Magnifying Glass","description":"Magnifying Glass description","image":"?"},{"id":"1725308045531","type":"i","parentId":"1725307957660","name":"Single Hole Punch","description":"Single Hole Punch description","image":"?"},{"id":"1725308123085","type":"i","parentId":"1725307957660","name":"Clamp","description":"Clamp description","image":"?"},{"id":"1725308161629","type":"i","parentId":"1725307957660","name":"Hammer","description":"Hammer description","image":"?"},{"id":"1725308183333","type":"i","parentId":"1725307957660","name":"Clamp","description":"G clamp","image":"?"}]'
--->
 
 </body>
 
