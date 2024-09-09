@@ -56,9 +56,7 @@ Android version. Maybe javascript to start with.
       width: 100px;
       height: 100px;
       padding: 0px;
-      margin: -1px;
-      margin-top: 2px;
-      margin-bottom: 1px;
+ 
       border: 0px;
     }
 
@@ -143,7 +141,7 @@ Android version. Maybe javascript to start with.
 
             if (gItemArray[i].id == itemObject.parentId)
 
-              theHTML += `<option value="` + gItemArray[i].id + `"  selected >` + gItemArray[i].name   + `</option>`;
+              theHTML += `<option value="` + gItemArray[i].id + `"  selected >` + gItemArray[i].name + `</option>`;
             else
               theHTML += `<option value="` + gItemArray[i].id + `">` + gItemArray[i].name + `</option>`;
           }
@@ -331,6 +329,36 @@ Android version. Maybe javascript to start with.
     }
       */
 
+
+    function showAllItems() {
+
+
+      for (i = 0; i < gItemArray.length; i++) {
+
+        thisItemObject = gItemArray[i];
+        if (thisItemObject.image == "?")
+          continue;
+        {
+          let newButton = document.createElement('button');
+          let el = document.getElementById("divPhotos");
+          el.appendChild(newButton);
+
+          newButton.innerHTML =  thisItemObject.image;
+
+          newButton.classList.add("item-grid");
+
+          newButton.id = "image" + i;
+
+          x = 1;
+
+        }
+      }
+
+    }
+
+    //   <img src="./photos/another%20clamp.jpg">
+    //               ./photos/G%20clamp.jpg
+
     function fromArray() {
       //     Find all children of Home and make buttons in allButtons
 
@@ -356,17 +384,7 @@ I'm unsure what this code is needed for now
     }
 
 
-    // need better backup etc
-    function fromJSON() {
-      // Retrieve
-      let js = localStorage.getItem("jsonString");
 
-      gItemArray = JSON.parse(js);
-
-      setCurrentRoot(0);
-
-      //  alert("from JSON");
-    }
 
     function toJSON() {
       const myJSON = JSON.stringify(gItemArray);
@@ -378,6 +396,52 @@ I'm unsure what this code is needed for now
       // });
 
       alert("to JSON");
+    }
+
+
+    function getJSON() {
+      let js = localStorage.getItem(json.value);
+
+      gItemArray = JSON.parse(js);
+
+      setCurrentRoot(0);
+
+      alert("done get");
+    }
+
+
+    function putJSON() {
+      const myJSON = JSON.stringify(gItemArray);
+      // Store
+      localStorage.setItem(json.value, myJSON);
+
+      alert("done put");
+    }
+
+
+    function newJSON() {
+
+      let key = prompt("input key");
+
+      if (key) {
+        const myJSON = JSON.stringify(gItemArray);
+        // Store
+        localStorage.setItem(key, myJSON);
+
+      }
+
+    }
+
+    function deleteJSON() {
+      localStorage.removeItem(json.value);
+      alert("done delete");
+    }
+
+
+    function clearStorage() {
+      localStorage.clear();
+
+      alert("done clear");
     }
 
   </script>
@@ -413,9 +477,35 @@ I'm unsure what this code is needed for now
 
         <button onclick="toJSON()">To jason</button>
         <button onclick="fromJSON()">From JSON</button>
-        <button onclick="fromArray()">From Array</button>
+        <button onclick="showAllItems()">Show All Items</button>
         <button onclick="setCurrentRoot(getCurrentParentId())">Test</button>
         <button onclick="doDebug(``)">Clear</button>
+      </div>
+
+      <div class="myDiv" style="margin-top:20px">
+
+
+
+        <select id="json">
+
+          <script>
+
+            for (i = 0; i < localStorage.length; i++) {
+              document.write(`<option>` + localStorage.key(i) + `</option>`);
+            }
+
+
+
+          </script>
+
+        </select>
+
+        <p></p>
+        <button onclick="getJSON()">Get</button>
+        <button onclick="putJSON()">Put</button>
+        <button onclick="newJSON()">New</button>
+        <button onclick="deleteJSON()">Delete</button>
+        <button onclick="clearStorage()">Clear</button>
       </div>
 
       <div class="myDiv" id="debugWindow"
@@ -468,21 +558,9 @@ I'm unsure what this code is needed for now
 
       <div style="text-align:center;background-color:green ;">
 
-        <div style="text-align:center;width:90%;background-color: aquamarine; margin:auto">
-          <button class="item-grid"><img src="./photos/magnifying%20glass.jpg"></button>
-          <button class="item-grid"> <img src="./photos/another%20clamp.jpg"> </button>
-          <button class="item-grid">Tom</button>
-          <button class="item-grid">Tom</button>
-          <button class="item-grid">Tom</button>
-          <button class="item-grid">Tom</button>
-          <button class="item-grid">Tom</button>
-          <button class="item-grid">Tom</button>
-          <button class="item-grid">Tom</button>
-          <button class="item-grid">Tom</button>
-          <button class="item-grid">Tom</button>
-          <button class="item-grid">Tom</button>
-          <button class="item-grid">Tommy</button>
-          <button class="item-grid" style="visibility:hidden">Tom</button>
+        <div id="divPhotos" style="text-align:center;width:90%;background-color: aquamarine; margin:auto">
+         
+       
 
         </div>
       </div>
@@ -590,8 +668,9 @@ I'm unsure what this code is needed for now
 
     setCurrentRoot(0);
 
-    ///pictureBox stuff
-
+    //for (i = 0; i < localStorage.length; i++)
+    //   alert(localStorage.key(i));
+    //
     function f(el) {
       hid(el);
       let p = el.parentElement;
@@ -604,6 +683,9 @@ I'm unsure what this code is needed for now
     let gPictureBoxInnerHTML = `<button id="paste_btn" style="height:90%;width:90%;object-fit:contain;padding:20px;margin:auto" 
     onclick="f(this);">left click here to start paste</button>`;
 
+
+
+    resetPictureBox();
 
     function doBefore() {
       let p = document.getElementById("picture_box");
