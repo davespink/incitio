@@ -11,25 +11,32 @@ Impliment.
 Debug Window
 Tidy up
 
-Go to item when picture grid clicked.
+1. Go to item when picture grid clicked.
 - Find parent, set root then focus on item button.
- 
+Done
+
+2. Search name/description.
+
+3. Change container. done
+
+4. Delete container ask what happens to children.
+
+5. Photo of Home done
+
+6. Shortcut keys. Pending. Low priority.
+
+7. Import export.
+
+8. Backups. - make it better Priority 5.
+
+9. Low prioriy. Website. - Now have domain.
+
+10. Android version. Maybe javascript to start with. Priority 10.
 
 
-BUGS: When data changed the fromArray is not working
 
 
-Search name/description.
-Change container.
-Delete container ask what happens to children.
-Grid search with photos.
-Photo of Home
-
-Import export.
-Backups.
-Website.
-
-Android version. Maybe javascript to start with.
+Also, regain some confidence with linux. How Apache works. PHP. etc.
 
 
 
@@ -112,8 +119,6 @@ Android version. Maybe javascript to start with.
 
 
     function itemObjectToForm(itemObject) {
-
-
       (gid("inName")).value = itemObject.name;
       (gid("inItemId")).value = itemObject.id;
       (gid("inParentId")).value = itemObject.parentId;
@@ -122,7 +127,11 @@ Android version. Maybe javascript to start with.
         (gid("picture_box")).innerHTML = itemObject.image; else resetPictureBox();
     }
 
+    function changeParent(){
 
+      gid("inParentId").value = gid("newParent").value;
+
+    }
 
     function buttonSelected(buttonId) {
 
@@ -206,7 +215,7 @@ Android version. Maybe javascript to start with.
         if (gItemArray[i].id == idValue) {
           gItemArray[i].name = nameValue;
           gItemArray[i].description = descriptionValue;
-          //    gItemArray[i].parentId = getFormValue('newParent');
+          gItemArray[i].parentId = getFormValue('newParent');
           break;
         }
       }
@@ -364,7 +373,7 @@ Android version. Maybe javascript to start with.
     function gridPhotoClicked(id) {
 
       let thisItemObject = getItemObjectById(id);
-  //    itemObjectToForm(thisItemObject);
+      //    itemObjectToForm(thisItemObject);
 
       setCurrentRoot(thisItemObject.parentId);
 
@@ -375,7 +384,7 @@ Android version. Maybe javascript to start with.
       (gid(gridId)).classList.add("hasFocus");
 
 
-     //   newButton.classList.add("item-grid");
+      //   newButton.classList.add("item-grid");
     }
 
     function showAllItems() {
@@ -398,9 +407,9 @@ Android version. Maybe javascript to start with.
 
           newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid" onclick="gridPhotoClicked('${thisItemObject.id}')">` + thisItemObject.image + `</button>`;
 
-          
 
-   
+
+
 
 
 
@@ -437,6 +446,16 @@ I'm unsure what this code is needed for now
     }
 
 
+
+    function refreshJSON() {
+
+      let theHTML = "";
+      for (i = 0; i < localStorage.length; i++) {
+        theHTML += (`<option>` + localStorage.key(i) + `</option>`);
+      }
+      gid("json").innerHTML = theHTML;
+
+    }
 
 
     function toJSON() {
@@ -481,6 +500,8 @@ I'm unsure what this code is needed for now
         // Store
         localStorage.setItem(key, myJSON);
 
+        refreshJSON();
+
       }
 
     }
@@ -488,6 +509,8 @@ I'm unsure what this code is needed for now
     function deleteJSON() {
       localStorage.removeItem(json.value);
       alert("done delete");
+
+      refreshJSON();
     }
 
 
@@ -495,6 +518,7 @@ I'm unsure what this code is needed for now
       localStorage.clear();
 
       alert("done clear");
+      refreshJSON();
     }
 
   </script>
@@ -537,23 +561,17 @@ I'm unsure what this code is needed for now
 
       <div class="myDiv" style="margin-top:20px">
 
-
-
         <select id="json">
 
           <script>
-
             for (i = 0; i < localStorage.length; i++) {
               document.write(`<option>` + localStorage.key(i) + `</option>`);
             }
-
-
-
           </script>
 
         </select>
-
         <p></p>
+        <button onclick="refreshJSON()">Reftresh</button>
         <button onclick="getJSON()">Get</button>
         <button onclick="putJSON()">Put</button>
         <button onclick="newJSON()">New</button>
@@ -620,7 +638,7 @@ I'm unsure what this code is needed for now
     </div>
 
     <!-- third column -->
-    <div class="myDiv" style="width:30%;background-color:white">
+    <div class="myDiv" style="width:30%;background-color:rgb(170, 123, 37)">
 
 
       <div class="myDiv" id="picture_box"
@@ -635,7 +653,14 @@ I'm unsure what this code is needed for now
      -->
       </div>
 
-      <button onclick="resetPictureBox()">Reset</button>
+      <button onclick="resetPictureBox()">Reset Image</button>
+      <p></p>
+
+      <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px">
+        <p style="color:yellow">Change Item Details</p>
+        <button type="button" class="btn btn-default btn-primary" onclick="updateItemsFromForm();">Update</button>
+        <button type="button" class="btn btn-default btn-primary" onclick="deleteItem();">Delete</button>
+      </div>
 
       <div style="background-color:white;margin:auto; padding:2px; ">
         <div style="text-align:left;background-color: cornsilk;margin-left: 10px;">
@@ -663,7 +688,7 @@ I'm unsure what this code is needed for now
 
             <div class="form-group">
               <label for="newParent">Change container:</label>
-              <select id="newParent">
+              <select id="newParent" onChange="changeParent()">
 
               </select>
             </div>
@@ -671,16 +696,12 @@ I'm unsure what this code is needed for now
             <p></p>
             <p></p>
 
-            <div style="background-color: blueviolet;text-align:center">
 
-              <button type="button" class="btn btn-default btn-primary" onclick="updateItemsFromForm();">Update</button>
-              <button type="button" class="btn btn-default btn-primary" onclick="deleteItem();">Delete</button>
-            </div>
 
         </div>
       </div>
 
-      <div class="myDiv" id="thirdDiv" style="background-color:rgb(92, 68, 119);margin:auto">
+      <div class="myDiv" id="thirdDiv" style="background-color:rgb(97, 43, 158);margin:auto">
         <h2>This is a third div in a center element</h2>
         <p>This is some text in a div element.</p>
       </div>

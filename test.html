@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .bigbtn {
+            width: 400px;
+            background-color: #6f8670;
+            border: solid black 2px;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+
+
+        .alert {
+            width: 300px;
+            height: 100px;
+            background-color: blue;
+            border: none;
+         
+            position: relative;
+            margin: 0 auto;
+            animation-name: example;
+            animation-duration: 10s;
+            display: block;
+        }
+
+
+        .alertmessage {
+            animation-name: example;
+            animation-duration: 20000ms;
+
+        }
+
+        @keyframes example {
+            0% {
+                opacity:1;
+                top: -200px;
+            }
+
+       
+
+            70% {
+                opacity:1;
+                top: 20px;
+            }
+
+            100% {
+                opacity:0;
+                background-color: transparent
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width:100%;height:500px;background-color: pink" ;>
+
+
+        <h1>CSS Animation</h1>
+      
+        <button id="but1"  class="alert" style="top:-200px;margin:0 auto;display:block">
+            <h1 >message</h1>
+        </button>
+ 
+       
+    </div>
+
+    <script>
+        function displace(el, options) {
+            return window.displacejs(el, options);
+        }
+        function gid(id) {
+            return document.getElementById(id);
+        }
+        function hid(el) {
+            el.style.display = 'none';
+        }
+        function vid(el) {
+            el.style.display = 'initial';
+        }
+        function tvid(el) {
+            if (el.style.display == 'initial')
+                hid(el)
+            else vid(el);
+        }
+        function viz(el) {
+            if (el.style.display == 'initial')
+                return true; else return false;
+        }
+        function isa(el, c) {
+            if (el == undefined || el == null || el == document)
+                return false;
+            if (el.classList.contains(c))
+                return true; else return false;
+        }
+
+
+    //    const myBut = gid("but1");
+       but1.addEventListener("animationend", () => { but1.style = "display:none"; but1.classList.remove("alert") });
+
+
+
+    </script>
+
+</body>
+
+</html>

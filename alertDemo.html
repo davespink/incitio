@@ -1,0 +1,408 @@
+<html>
+
+<head>
+</head>
+<style>
+    .bigbtn {
+        width: 300px;
+        background-color: #6f8670;
+        border: solid black 2px;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        text-decoration: none;
+
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+
+    .smallbtn {
+        width: 150px;
+        background-color: ivory;
+        border: solid 1px;
+        color: black;
+        padding: 8px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        font-size: 12px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    .tinybtn {
+        background-color: cornsilk;
+        border: solid lightgrey 1px;
+        border-radius: 3px;
+        color: black;
+        padding: 4px 4px;
+        text-align: center;
+        text-decoration: none;
+        max-width: 80px;
+        font-size: 10px;
+        margin: 4px -2px;
+        cursor: pointer;
+    }
+
+
+    .newtinybtn {
+
+        background-color: cornsilk;
+        border: solid lightgrey 1px;
+        border-radius: 5px;
+        color: black;
+
+        text-align: left;
+        text-decoration: none;
+        width: 180px;
+
+        font-size: 24px;
+        margin: 0px;
+        padding: 0px;
+        cursor: pointer;
+    }
+
+
+    .newtinybtn.hidden {
+        display: none;
+    }
+
+    .animatedmessage {
+        --topstart: 100px;
+        --topend: 100px;
+        --leftstart: 'center';
+        --leftend: 'center';
+        --rotateend: 0deg;
+
+        position: absolute;
+        left: 400px;
+        top: 200px;
+        padding: 10px;
+        border-radius: 3px;
+        background: black;
+        color: white;
+        display: none;
+        animation-delay: 5s;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+
+        animation-play-state: paused;
+
+    }
+
+    @keyframes animatedmessage {
+        from {
+            top: var(--topstart);
+            left: var(--leftstart);
+            transform: rotate(0deg);
+            opacity: 1.0;
+        }
+
+        to {
+            transform: rotate(var(--rotateend));
+            left: 50vw;
+            top: var(--topend);
+            left: var(--leftend);
+            opacity: 0.0;
+            display: none;
+        }
+    }
+
+    /* some user generated animations */
+    :root {
+        --name: animator;
+        --xlateX: 0px;
+        --xlateY: 0px;
+        --delay: 0s;
+        --duration: 1s;
+        --fillmode: forwards;
+        --direction: normal;
+        --iterationcount: 1;
+        --xlateX: 0px;
+        --xlateY: 0px;
+    }
+
+    .animate-go {
+        animation-name: var(--name);
+        animation-timing-function: linear;
+        animation-delay: var(--delay);
+        animation-duration: var(--duration);
+
+        animation-direction: var(--direction);
+        animation-fill-mode: var(--fillmode);
+        animation-iteration-count: var(--iterationcount);
+
+    }
+
+    .animate-test {
+        animation-name: myspin;
+        animation-duration: 10s;
+    }
+
+    @keyframes animator {
+
+        100% {
+            opacity: var(--opacity);
+            transform: translate(var(--xlateX), var(--xlateY)) rotate(var(--deg)) scale(var(--scale));
+
+        }
+    }
+
+    @keyframes mymove {
+        from {
+            left: 0px;
+        }
+
+        to {
+            left: 200px;
+        }
+    }
+
+    @keyframes myspin {
+        from {
+            background-color: red;
+        }
+
+        to {
+            background-color: yellow;
+        }
+    }
+</style>
+
+
+
+<script>
+
+
+    // the useful functions that were in the main drag
+
+
+
+    function displace(el, options) {
+        return window.displacejs(el, options);
+    }
+    function gid(id) {
+        return document.getElementById(id);
+    }
+    function hid(el) {
+        el.style.display = 'none';
+    }
+    function vid(el) {
+        el.style.display = 'initial';
+    }
+    function tvid(el) {
+        if (el.style.display == 'initial')
+            hid(el)
+        else vid(el);
+    }
+    function viz(el) {
+        if (el.style.display == 'initial')
+            return true; else return false;
+    }
+    function isa(el, c) {
+        if (el == undefined || el == null || el == document)
+            return false;
+        if (el.classList.contains(c))
+            return true; else return false;
+    }
+
+
+    //
+    //    the user messages
+    //
+
+    function tellUser(msg) {
+        var opt = {
+            leftStart: 'center', text: 'black', leftEnd: 'center', color: 'peachpuff', size: 'big', delay: '3s', canClose: false
+        }
+        opt.message = msg;
+
+        showMessage(opt);
+    }
+    function warnUser(msg) {
+        var opt = {
+            leftStart: 'center', text: 'white', leftEnd: 'center', color: 'red', size: 'big', delay: '5s', canClose: false
+        }
+        opt.message = msg;
+
+        showMessage(opt);
+    }
+    function askUser(msg, js) {
+        // let a = "alert('this is it')";
+
+        var opt = {
+            action: js, type: 'yesno', leftStart: 'center', text: 'white', leftEnd: 'center', color: 'red', size: 'big', delay: '10s', canClose: true
+        }
+        opt.message = msg;
+
+        showMessage(opt);
+    }
+    function hintUser(msg) {
+        // let a = "alert('this is it')";
+
+        var opt = {
+            leftStart: 'center', text: 'white', leftEnd: 'center', color: 'green', size: 'big', delay: '5s', canClose: true
+        }
+        opt.message = msg;
+
+        showMessage(opt);
+    }
+
+    // namespaced utils
+
+    const utils = {
+
+        getGuid: function () {
+            // wait a few milisecs to return
+            clock = Date.now();
+
+            while (Date.now() - clock < 1) { }
+
+            return Date.now().toString();
+
+        }
+        ,
+
+        formatDate: function (ms) {
+            date = new Date(ms);
+            var year = date.getFullYear(),
+                month = date.getMonth() + 1, // months are zero indexed
+                day = date.getDate(),
+                hour = date.getHours(),
+                minute = date.getMinutes(),
+                second = date.getSeconds(),
+                hourFormatted = hour % 12 || 12, // hour returned in 24 hour format
+                minuteFormatted = minute < 10 ? "0" + minute : minute,
+                morning = hour < 12 ? "am" : "pm";
+
+            return month + "/" + day + "/" + year + " " + hourFormatted + ":" +
+                minuteFormatted + morning;
+        }
+
+    }
+
+    const defaultopt = {
+        type: 'simple',
+        size: 'small',
+        canClose: true,
+        message: 'hello there',
+        color: 'blue',
+        text: 'white',
+        action: null,
+
+        topStart: '10px',
+        leftStart: '400px',
+
+        topEnd: '10px',
+        leftEnd: '400px',
+
+        delay: '10s',
+        duration: '1s',
+        rotateEnd: '0deg',
+    }
+    //
+    // create element based on guid to allow multiple elements
+    //
+    function showMessage(newopt) {
+        // replace defaults;
+        var opt = {};
+        Object.entries(defaultopt).forEach(([key, value]) => {
+            opt[`${key}`] = `${value}`;
+        });
+
+
+        //overrides
+        Object.entries(newopt).forEach(([key, value]) => {
+            opt[`${key}`] = `${value}`;
+        });
+
+
+        // first create the message html
+        let guid = utils.getGuid();
+        let msg = 'msg' + guid;
+
+        let html;
+
+        if (opt.canClose == 'true') {
+            html = `
+    <div id='` + msg + `'  class="animatedmessage" 
+    style="position:fixed;background-color:blue;padding:20px
+    min-height:100px;width:400px;border: solid black 1px;border-radius:5px;z-index:10000000">
+        <div style="float:right;margin:1px">
+            <button onclick="this.parentElement.parentElement.remove()"
+             style="background-color:transparent;border:none;color: '` + opt.text + `'; "><h1>&times;</h1></button>
+        </div>
+
+        <div style="color:'` + opt.text + `';text-align:center;padding:0px">
+            <h1>` + opt.message + `</h1>
+        </div>
+
+        <div style="display: flex;
+        justify-content: center;">`;
+
+            if (opt.type == 'yesno') {
+                html += `<button class="smallbtn" onclick="
+           this.parentElement.parentElement.remove();`
+                    + opt.action +
+                    ` ">YES</button>
+            <button  class="smallbtn" onclick="this.parentElement.parentElement.remove();">NO</button>`;
+
+            }
+            //      debugger;
+            html += `
+        </div>
+    </div> `;
+
+        }
+        else
+            html = `<div id='` + msg + `' class='animatedmessage'>` + opt.message + `</div>`;
+        document.body.insertAdjacentHTML('beforeend', html);
+
+        let el = document.getElementById(msg);
+        el.addEventListener('animationend', () => {
+            el.remove();
+
+        });
+
+        animateMessage(el, opt);
+        return el;
+    }
+
+    function animateMessage(el, opt) {
+        el.style.setProperty('--topstart', opt.topStart);
+        el.style.setProperty('--topend', opt.topEnd);
+
+        if (opt.leftStart == 'center')
+
+            opt.leftStart = (window.innerWidth / 2 - parseInt(el.style.width) / 2) + 'px';
+
+
+        if (opt.leftEnd == 'center')
+            opt.leftEnd = (window.innerWidth / 2 - parseInt(el.style.width) / 2) + 'px';
+
+        el.style.setProperty('--leftstart', opt.leftStart);
+        el.style.setProperty('--leftend', opt.leftEnd);
+
+        el.style.setProperty('--rotateend', opt.rotateEnd);
+
+        el.style.backgroundColor = opt.color;
+        el.style.color = opt.text;
+        el.style.display = 'initial';
+        el.style.left = opt.leftStart;
+        el.style.top = opt.topStart;
+        el.style.animationDelay = opt.delay;
+        el.style.animationDuration = opt.duration;
+        el.style.animationPlayState = 'running';
+
+        el.style.animationName = 'animatedmessage';
+    }
+
+</script>
+
+<body>
+    <button onclick="warnUser('hello')">Test</button>
+</body>
+
+</html>
