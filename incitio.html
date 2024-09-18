@@ -207,8 +207,8 @@ Also, regain some confidence with linux. How Apache works. PHP. etc.
 
     function doSearch() {
       let searchInput = gid("search");
-     // showAlert(searchInput.value);
-     showAlert("not yet coded");
+      // showAlert(searchInput.value);
+      showAlert("not yet coded");
     }
 
 
@@ -227,6 +227,25 @@ Also, regain some confidence with linux. How Apache works. PHP. etc.
 
     }
 
+
+    function focusGrid(id) {
+      // remove focus from all grid items
+
+      let bs = divPhotos.getElementsByClassName("hasFocus");
+
+      for (i = 0; i < bs.length; i++) {
+        bs[i].classList.remove("hasFocus");
+      }
+
+
+      gridId = "image_" + id;
+      thisGrid = gid(gridId)
+      if (thisGrid)
+        thisGrid.classList.add("hasFocus");
+
+
+    }
+
     function buttonSelected(buttonId) {
 
       let bs = document.getElementsByClassName("hasFocus");
@@ -239,18 +258,13 @@ Also, regain some confidence with linux. How Apache works. PHP. etc.
 
       thisButton.classList.add("hasFocus");
 
-      let a = buttonId.split("_");
-      let itemObject = getItemObjectById(a[1]);
+      let id = buttonId.split("_");
 
+      focusGrid(id[1]);
+
+      let itemObject = getItemObjectById(id[1]);
       itemObjectToForm(itemObject);
-      /*
-            (gid("inName")).value = itemObject.name;
-            (gid("inItemId")).value = itemObject.id;
-            (gid("inParentId")).value = itemObject.parentId;
-            (gid("inDescription")).value = itemObject.description;
-            if (itemObject.image != "?")
-              (gid("picture_box")).innerHTML = itemObject.image; else resetPictureBox();
-      */
+
       function fillParentList() {
 
         let np = gid("newParent");
@@ -402,8 +416,6 @@ Also, regain some confidence with linux. How Apache works. PHP. etc.
       newButton.outerHTML = theHTML;
       return buttonId;
 
-      //    resetPictureBox();
-
     }
 
 
@@ -473,14 +485,20 @@ Also, regain some confidence with linux. How Apache works. PHP. etc.
 
       setCurrentRoot(thisItemObject.parentId);
 
+
+
+      let bs = document.getElementsByClassName("hasFocus");
+
+      for (i = 0; i < bs.length; i++) {
+
+        bs[i].classList.remove("hasFocus");
+      }
+
+      // gridId = "image_" + id;
+      // (gid(gridId)).classList.add("hasFocus");
       let buttonId = "item_" + id;
       buttonSelected(buttonId);
 
-      gridId = "image_" + id;
-      (gid(gridId)).classList.add("hasFocus");
-
-
-      //   newButton.classList.add("item-grid");
     }
 
     function showAllItems() {
@@ -590,7 +608,7 @@ I'm unsure what this code is needed for now
       // Store
       localStorage.setItem(json.value, myJSON);
 
-      let msg = "saved data to " +  json.value;
+      let msg = "saved data to " + json.value;
 
       showAlert(msg);
     }
@@ -740,10 +758,6 @@ I'm unsure what this code is needed for now
       <!--    Chain   -->
       <div class="myDiv" style="background-color:white;margin:auto">
         <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 10px;">
-          <!--
-            <button class="btn btn-primary" onClick="setCurrentRoot(`0`);" style="padding:0px;margin:0px ">
--->
-
 
           </button>
 
@@ -795,6 +809,8 @@ I'm unsure what this code is needed for now
       </div>
 
       <button onclick="resetPictureBox()">Reset Image</button>
+      <h2>OR</h2>
+      <button onclick="uploadImage()">UPLOAD Image</button>
       <p></p>
 
       <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px">
