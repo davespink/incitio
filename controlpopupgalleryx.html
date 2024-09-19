@@ -1,0 +1,178 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery operations</title>
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+    <div id='controlpanel_content'>
+        <div style="display:flex;flex-direction: column;">
+            <h1>Images&nbsp;&nbsp;&nbsp; </h1>
+            <style>
+                .gallery-option {
+                    width: 33%;
+                    border: solid black 1px;
+                    padding: 3px;
+                    margin: 2px;
+                }
+
+                .gallery-button {
+                    position: absolute;
+                    bottom: 10px;
+                    margin-left: 22px;
+
+                }
+            </style>
+
+            <div style="position:relative;height:130px;padding:5px;display:flex;flex-direction: row; ">
+                <div >
+
+                    <div>
+                        <input style="position:absolute;left:0px;margin-bottom:10px;" type="file" name="file" id="file"
+                            onchange='btn_uploadImageFile.click()'>
+                    </div>
+                    <p></p>
+                    <input type="button" id="btn_uploadImageFile" value="Upload" onclick="uploadImageFile();">
+                    <p></p>
+                    <button class="smallbtn " onclick="file.click()">Upload</button>
+
+                </div>
+
+            </div>
+        </div>
+
+        <script>
+
+            function uploadImageFile() {
+                var files = file.files;
+
+                if (files.length > 0) {
+
+                    var formData = new FormData();
+                    formData.append("file", files[0]); // this passes the filename to PHP
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.open("POST", "./uploadincitio.php?&dir=" + theDir, true);
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+
+                            var response = this.responseText;
+
+                            if (response == 0) {
+
+                                // here I need to do a bit of JS to display the picture
+
+
+                                //    alert("Upload successfullyish.");
+                                //  window.top.controlPanelContent.innerHTML = ''
+                                //  window.top.controlPanelIframe.src = './controls/controlpopupgallery.html?dir=images';
+                                alert("File uploaded  OK. " + response);
+                                loadImages(theDir); // dir=image
+                            } else {
+                                alert("File not uploaded. " + response);
+                                loadImages(theDir); // dir=image
+                            }
+                        }
+                    };
+
+                    // Send request with data
+                    xhttp.send(formData);
+
+                } else {
+                    alert("Please select a file");
+                }
+            }
+
+            // ENTRY POINT - this will mot be called
+
+            function loadImages() {
+                return;
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        let resp = this.responseText.trim();
+                        let a = resp.split('-');
+                        a = a.reverse();
+
+                        html = `<div id="theGallery" style="background:ivory;border:solid black 2px;width:586px;height:200px;overflow:auto;margin:6px;padding:10px">`;
+
+                        a.forEach((item) => {
+                            item = item.replace("..", "");
+                            //alert(item);
+                            let p = item;
+
+                            html += '<div style="border:solid black 2px;display:inline-block;margin:2px">';
+                            html += '<image onclick="$wbc().clickPic(this,event)" src="' + p + '" width = 80>'
+                            html += '</div>';
+                        });
+
+                        html += '</div>';
+
+                        if (document.getElementById('theGallery'))
+                            theGallery.remove();
+
+                        controlpanel_content.insertAdjacentHTML('beforeEnd', html);
+                        window.top.controlPanelContent.innerHTML = controlpanel_content.innerHTML;    // this is the html of the
+                        // gallery grid
+
+
+                    }
+                };
+
+                let getString = "gallery.php?dir=" + theDir + "&x=" + Date.now().toString();
+                // alert(getString); 
+
+                xhttp.open("GET", getString, true);
+                xhttp.send();
+            }
+            //
+            // eg 'localhost/windowbox/controls/controlgallery.html?dir=image
+            //
+
+
+            let a = [];
+            let fileList = '';
+
+            /*
+            let q = $wt().theGallery.querySelectorAll('div');
+            for (i = 0; i < q.length; i++) {
+                if (q[i].style.borderColor == 'blue') {
+                    let s = q[i].firstElementChild.src;
+                    let fa = s.split('/');
+                    let fname = fa[fa.length - 1];
+                    fileList += ',' + fname;
+                }
+            }
+*/
+            if (fileList.length > 0)
+                fileList = fileList.substr(1);
+            else
+
+                //   alert('select at least 1 image');
+
+                //  alert(fileList);
+                var xhttp2 = new XMLHttpRequest();
+            xhttp2.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+
+                    let resp = this.responseText.trim();
+
+                    alert('done');
+                    loadImages(theDir);
+                }
+            }
+
+
+        </script>
+
+</body>
+
+</html>
