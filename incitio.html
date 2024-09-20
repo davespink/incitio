@@ -247,11 +247,11 @@ Also, regain some confidence with linux. How Apache works. PHP. etc.
     }
 
 
-function uploadImage(){
+    function uploadImage() {
 
 
 
-}
+    }
 
     function buttonSelected(buttonId) {
 
@@ -651,6 +651,54 @@ I'm unsure what this code is needed for now
       //  refreshJSON();
     }
 
+
+
+    // FILE UPLOAD STUFF
+
+
+    function uploadImageFile() {
+
+      var files = file.files;
+
+      if (files.length > 0) {
+
+        var formData = new FormData();
+        let theDir = "photos";
+
+        formData.append("file", files[0]); // this passes the filename to PHP
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "./uploadincitio.php?&dir=" + theDir, true);
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+
+            var response = this.responseText;
+
+
+            if (response == 1) {
+
+              alert("File not uploaded. ");
+
+            } else {
+
+             // thePhoto.src = response; // heres the display
+
+              picture_box.innerHTML = `"<image src="` + response + `" style="width:200px"</image>`;
+            }
+          }
+        };
+
+        // Send request with data
+        xhttp.send(formData);
+
+      } else {
+        alert("Please select a file");
+      }
+    }
+
+
+
+
   </script>
 </head>
 
@@ -669,7 +717,7 @@ I'm unsure what this code is needed for now
 
       <p></p>
       <button style="border-style: none;background-color: transparent;">
-        <h1> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio</h1>
+        <h1> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitioxx</h1>
       </button>
 
       <div style="margin:auto">
@@ -816,16 +864,31 @@ I'm unsure what this code is needed for now
       </div>
 
       <button onclick="resetPictureBox()">Reset Image</button>
-     <p></p>
+      <p></p>
 
- 
-     <div class="myDiv" style="background-color: rgb(34, 143, 119);text-align:center;padding:5px">
-      <form action="upload.php" method="post" enctype="multipart/form-data">
-        <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="submit" value="Upload Image" name="submit">
-      </form>
 
-    </div>
+      <div class="myDiv" style="background-color: rgb(34, 143, 119);text-align:center;padding:5px">
+
+
+        <div>
+          <img id="thePhoto" style="width:200px">
+        </div>
+
+        <div>
+          <div style="display:none">
+            <input style="position:absolute;left:0px;margin-bottom:10px;" type="file" name="file" id="file"
+              onchange='btn_uploadImageFile.click()'>
+          </div>
+          <input type="button" id="btn_uploadImageFile" value="Upload" style="display:none"
+            onclick="uploadImageFile();">
+
+          <button onclick="file.click()">HAHA</button>
+        </div>
+
+
+
+
+      </div>
 
       <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px">
         <p style="color:yellow">Change Item Details</p>
@@ -929,11 +992,18 @@ I'm unsure what this code is needed for now
     resetPictureBox();
 
     function doBefore() {
-      let p = document.getElementById("picture_box");
+      try {
 
-      p.style.padding = "0px";
-      p.innerHTML = "";
+        let p = document.getElementById("picture_box");
+
+        p.style.padding = "0px";
+        p.innerHTML = "";
+      }
+       catch(e) {   alert(e); }
     }
+
+
+
 
     function doAfter() {
       try {
@@ -943,15 +1013,17 @@ I'm unsure what this code is needed for now
         thisId = (gid("inItemId")).value;
 
         thisIndex = getItemObjectIndexById(thisId);
-        gItemArray[thisIndex].image = pictureBox.outerHTML; // save the outerHTML
+
+
+        //gItemArray[thisIndex].image = pictureBox.outerHTML; // save the outerHTML
         // should I monkey with absoliute paths?
         // Not yet.
         document.activeElement.blur();
         window.focus();
       }
-      catch {
+      catch (e) {
 
-        doDebug("must be some mistake");
+        alert(e);
 
       }
 

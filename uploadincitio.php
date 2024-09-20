@@ -9,32 +9,35 @@ if(!is_dir($dir)){
     die($dir);
 }
 
- global $uploaded;
+global $uploaded;
 
-function cropAndRename($fileName)
+function cropAndRename($fileName,$file_extension)
 {
   //  echo "filename - " . $fileName;
     global $dir;
     global $uploaded;
     $stamp = time(); 
  
-    $uploaded = $dir . '/img_' . $stamp  . '.jpg';
-    $thumb = $dir . '/tn_img_' . $stamp  . '.jpg';
+    $uploaded = $dir . '/img_' . $stamp  . '.' . $file_extension;
+  //  $thumb = $dir . '/tn_img_' . $stamp  . '.jpg';
     rename($fileName,$uploaded);
 
     // is this ok
-    $img = imagecreatefromjpeg($uploaded);
+    if($file_extension=='jpg')
+         $img = imagecreatefromjpeg($uploaded);
+        else
+        $img = imagecreatefrompng($uploaded);
     //list($width, $height) = getimagesize($uploaded);
 
     $width = imagesx($img);
     $height = imagesy($img);
 
-    $new_width =   80; //$width * 0.5;
-    $new_height = $height * $new_width / $width;
-    $newImg = imagecreatetruecolor($new_width, $new_height);
+//    $new_width =   80; //$width * 0.5;
+ //   $new_height = $height * $new_width / $width;
+ //   $newImg = imagecreatetruecolor($new_width, $new_height);
 
-    imagecopyresampled($newImg, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-    imagejpeg($newImg, $thumb);
+  //  imagecopyresampled($newImg, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+  //  imagejpeg($newImg, $thumb);
 
 
     // now resize the image
@@ -44,7 +47,11 @@ function cropAndRename($fileName)
         $newImg = imagecreatetruecolor($new_width, $new_height);
 
         imagecopyresampled($newImg, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-        imagejpeg($newImg, $uploaded);
+
+        if($file_extension=='jpg')
+            imagejpeg($newImg, $uploaded);
+        elseif($file_extension=='png')
+            imagepng($newImg, $uploaded);
   
     }
 
@@ -72,7 +79,7 @@ if (isset($_FILES['file']['name'])) {
     if (in_array($file_extension, $valid_ext)) {
         // Upload file
         if (move_uploaded_file($_FILES['file']['tmp_name'], $location)) {
-            cropAndRename($location);
+            cropAndRename($location,$file_extension);
              
         }
     }
