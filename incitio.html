@@ -217,11 +217,10 @@ Also, regain some confidence with linux. How Apache works. PHP. etc.
       (gid("inItemId")).value = itemObject.id;
       (gid("inParentId")).value = itemObject.parentId;
       (gid("inDescription")).value = itemObject.description;
-      if (itemObject.image != "?")
-      //  (gid("picture_box")).innerHTML = itemObject.image; else resetPictureBox();
-
-
-      thePhoto.src = itemObject.image;
+      if (itemObject.image == "?")
+        thePhoto.src = "./photos/noimage.png";
+      else
+        thePhoto.src = itemObject.image;
     }
 
     function changeParent() {
@@ -298,7 +297,7 @@ Also, regain some confidence with linux. How Apache works. PHP. etc.
       fillParentList();
 
     }
-// ??????
+    // ??????
     function getFormValue(id) {
       let r = document.getElementById(id);
       return r.value
@@ -334,7 +333,7 @@ Also, regain some confidence with linux. How Apache works. PHP. etc.
           gItemArray[i].name = nameValue;
           gItemArray[i].description = descriptionValue;
           gItemArray[i].parentId = getFormValue('newParent');
-      //    gItemArray[i].image = thePhoto.src;
+          //    gItemArray[i].image = thePhoto.src;
           break;
         }
       }
@@ -344,8 +343,9 @@ Also, regain some confidence with linux. How Apache works. PHP. etc.
     }
 
     function resetPictureBox() {
-      let x = gid("picture_box");
-      x.innerHTML = gPictureBoxInnerHTML;
+    //  alert("defunct");
+      //    let x = gid("picture_box");
+      //x.innerHTML = gPictureBoxInnerHTML;
     }
 
 
@@ -534,7 +534,7 @@ Also, regain some confidence with linux. How Apache works. PHP. etc.
             + thisItemObject.name + `</button>`;
 
         }
-
+// <button id="image_1725836282864" class="item-grid hasFocus" onclick="gridPhotoClicked('1725836282864')">./photos/img_1727041984.jpg</button>
         else {
           let newButton = document.createElement('button');
 
@@ -542,7 +542,7 @@ Also, regain some confidence with linux. How Apache works. PHP. etc.
 
           newButtonId = "image_" + thisItemObject.id;
 
-          newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid"  onclick="gridPhotoClicked('${thisItemObject.id}')">` + thisItemObject.image + `</button>`;
+          newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid"  onclick="gridPhotoClicked('${thisItemObject.id}')"> <img src="` + thisItemObject.image + `""></button>`;
 
         }
       }
@@ -694,7 +694,7 @@ I'm unsure what this code is needed for now
 
               let x = 1;
 
-            //  picture_box.innerHTML = `"<image src="` + response + `" style="width:200px"</image>`;
+              //  picture_box.innerHTML = `"<image src="` + response + `" style="width:200px"</image>`;
             }
           }
         };
@@ -730,7 +730,7 @@ I'm unsure what this code is needed for now
       <button style="border-style: none;background-color: transparent;">
         <h1> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitioxx</h1>
       </button>
-
+      <button id="image_1725836282864" class="item-grid hasFocus" onclick="gridPhotoClicked('1725836282864')"><img src = "./photos/img_1727041984.jpg"></button>
       <div style="margin:auto">
         <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown" id="dropdownMenuButton"
           style="border-style: none;  margin-top: 20px;border-radius: 16px; ">
@@ -861,28 +861,28 @@ I'm unsure what this code is needed for now
     <!-- third column -->
     <div class="myDiv" style="width:30%;background-color:rgb(170, 123, 37)">
 
-
+      <!--
       <div class="myDiv" id="picture_box"
         style="height:250px;width:250px;margin:auto;margin-top: 20px;margin-bottom: 20px;padding:5px"
         contenteditable="true">
-        <!--
+   
         <button id="paste_btn" style="height:auto;padding:20px;" onclick="hid(this);
                  let p = this.parentElement;  
                  p.innerText = 'Now copy an image to the clipboard, THEN right click here to paste it'">
           left click here to start paste
         </button>
-     -->
+  
       </div>
 
       <button onclick="resetPictureBox()">Reset Image</button>
       <p></p>
-
+   -->
 
       <div class="myDiv" style="background-color: rgb(34, 143, 119);text-align:center;padding:5px">
 
 
         <div>
-          <img id="thePhoto" style="width:200px">
+          <img id="thePhoto" style="min-width:200px;min-height:200px">
         </div>
 
         <div>
@@ -893,7 +893,7 @@ I'm unsure what this code is needed for now
           <input type="button" id="btn_uploadImageFile" value="Upload" style="display:none"
             onclick="uploadImageFile();">
 
-          <button onclick="file.click()">HAHA</button>
+          <button class="btn-light" onclick="file.click()">UPLOAD PHOTO</button>
         </div>
 
 
@@ -1010,7 +1010,7 @@ I'm unsure what this code is needed for now
         p.style.padding = "0px";
         p.innerHTML = "";
       }
-       catch(e) {   alert(e); }
+      catch (e) { alert(e); }
     }
 
 
