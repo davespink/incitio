@@ -694,6 +694,9 @@ I'm unsure what this code is needed for now
 
               let x = 1;
 
+               showAlert("file uploaded");
+               showAllItems();
+
               //  picture_box.innerHTML = `"<image src="` + response + `" style="width:200px"</image>`;
             }
           }
@@ -728,7 +731,7 @@ I'm unsure what this code is needed for now
 
       <p></p>
       <button style="border-style: none;background-color: transparent;">
-        <h1> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitioxx</h1>
+        <h1> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio V1.1</h1>
       </button>
       <button id="image_1725836282864" class="item-grid hasFocus" onclick="gridPhotoClicked('1725836282864')"><img src = "./photos/img_1727041984.jpg"></button>
       <div style="margin:auto">
@@ -776,8 +779,6 @@ I'm unsure what this code is needed for now
         -->
       </div>
 
-
-
       <div class="myDiv" style="margin-top:20px">
         <button onclick="toJSON()">To jason</button>
         <button onclick="getJSON()">From JSON</button>
@@ -785,7 +786,6 @@ I'm unsure what this code is needed for now
         <button onclick="showAlert('test')">Test</button>
         <button onclick="doDebug(``)">Clear</button>
       </div>
-
 
       <div class="myDiv" id="debugWindow"
         style="margin-top:20px;width:200px;height:200px;text-align: left; overflow-y:scroll;background-color: aqua blanchedalmond;">
@@ -799,14 +799,8 @@ I'm unsure what this code is needed for now
 
     <!-- second column -->
 
-
-
     <div class="myDiv" style="width:70%;background-color:white">
-
-
-
       <div class="myDiv" style="background-color:rgb(68, 119, 94);margin:auto">
-
         <button id="none" class="btn btn-light" style="margin:30px; background-color:blanchedalmond;position: relative;
                 width: 60%;height: 15%; border-radius: 16px; box-shadow: 5px 5px 5px gray;">
           <span class="btn-label" onclick="doSearch();"
@@ -817,43 +811,32 @@ I'm unsure what this code is needed for now
             type="text" id="search" style="padding: 0px; border:0cap; float:right;
               width: 90%;  background-color: rgb(219, 192, 192);
                z-index: 6; left: 0px;" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50">
-
         </button>
       </div>
 
       <!--    Chain   -->
       <div class="myDiv" style="background-color:white;margin:auto">
         <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 10px;">
-
           </button>
-
-
         </div>
 
         <!--    Items  -->
         <div style="text-align: left;padding:10px;background-color:lightcyan ;">
           <button onclick="makeNewButton('i')" style="background-color: green;color:white">+ new item</button>
           <button onclick="makeNewButton('c')" style="background-color: blue;color:white">+ new container</button>
-
         </div>
-
-
-
-
-
 
         <div id="divItems" style="text-align: left;margin-left: 10px;margin-bottom: 10px; ">
-
         </div>
+      </div>
 
+
+      <div class="myDiv">
+        <button type="button" id="updateButton" class="btn btn-primary btn-lg btn-block"  style="width:90%;margin:10px"  onclick="showAllItems();">ShowAllItems</button>
       </div>
 
       <div style="text-align:center;background-color:green ;">
-
-        <div id="divPhotos" style="text-align:center;width:90%;background-color: aquamarine; margin:auto">
-
-
-
+        <div id="divPhotos" style="text-align:center;width:90%;background-color: aquamarine;  padding:10px">
         </div>
       </div>
     </div>
@@ -903,7 +886,7 @@ I'm unsure what this code is needed for now
 
       <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px">
         <p style="color:yellow">Change Item Details</p>
-        <button type="button" class="btn btn-default btn-primary" onclick="updateItemsFromForm();">Update</button>
+        <button type="button" id="updateButton" class="btn btn-default btn-primary" onclick="updateItemsFromForm();">Update</button>
         <button type="button" class="btn btn-default btn-primary" onclick="deleteItem();">Delete</button>
       </div>
 
@@ -933,7 +916,7 @@ I'm unsure what this code is needed for now
 
             <div class="form-group">
               <label for="newParent">Change container:</label>
-              <select id="newParent" onChange="changeParent()">
+              <select id="newParent" onChange="updateButton.click()">
 
               </select>
             </div>
