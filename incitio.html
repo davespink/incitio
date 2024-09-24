@@ -33,6 +33,8 @@ Tidy up
 
 11. On click button focus photo
 
+12. Add timestamp to json download.
+
 
 Also, regain some confidence with linux. How Apache works. PHP. etc.
 
@@ -343,7 +345,7 @@ Also, regain some confidence with linux. How Apache works. PHP. etc.
     }
 
     function resetPictureBox() {
-    //  alert("defunct");
+      //  alert("defunct");
       //    let x = gid("picture_box");
       //x.innerHTML = gPictureBoxInnerHTML;
     }
@@ -489,6 +491,22 @@ Also, regain some confidence with linux. How Apache works. PHP. etc.
       */
 
 
+    function downloadData() {
+
+   
+      let js = localStorage.getItem(json.value);
+      let str = JSON.stringify(js);
+    //  str="abigstringwhatsup";
+      var data = new Blob([str]);
+      var a = document.getElementById('a');
+      a.href = URL.createObjectURL(data);
+
+
+      a.click();
+    }
+
+
+
     function gridPhotoClicked(id) {
 
       let thisItemObject = getItemObjectById(id);
@@ -534,7 +552,7 @@ Also, regain some confidence with linux. How Apache works. PHP. etc.
             + thisItemObject.name + `</button>`;
 
         }
-// <button id="image_1725836282864" class="item-grid hasFocus" onclick="gridPhotoClicked('1725836282864')">./photos/img_1727041984.jpg</button>
+        // <button id="image_1725836282864" class="item-grid hasFocus" onclick="gridPhotoClicked('1725836282864')">./photos/img_1727041984.jpg</button>
         else {
           let newButton = document.createElement('button');
 
@@ -614,6 +632,7 @@ I'm unsure what this code is needed for now
 
     function putJSON() {
       const myJSON = JSON.stringify(gItemArray);
+      alert(myJSON);
       // Store
       localStorage.setItem(json.value, myJSON);
 
@@ -694,8 +713,8 @@ I'm unsure what this code is needed for now
 
               let x = 1;
 
-               showAlert("file uploaded");
-               showAllItems();
+              showAlert("file uploaded");
+              showAllItems();
 
               //  picture_box.innerHTML = `"<image src="` + response + `" style="width:200px"</image>`;
             }
@@ -724,6 +743,12 @@ I'm unsure what this code is needed for now
     <button id="alertBox" class="alert">
       <h1>message</h1>
     </button>
+    <!--
+    
+
+    <a href="download.php">Download File</a>
+
+-->
 
 
     <!-- first column -->
@@ -731,9 +756,10 @@ I'm unsure what this code is needed for now
 
       <p></p>
       <button style="border-style: none;background-color: transparent;">
-        <h1> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio V1.1</h1>
+        <h1> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio V1.11</h1>
       </button>
-      <button id="image_1725836282864" class="item-grid hasFocus" onclick="gridPhotoClicked('1725836282864')"><img src = "./photos/img_1727041984.jpg"></button>
+      <button id="image_1725836282864" class="item-grid hasFocus" onclick="gridPhotoClicked('1725836282864')"><img
+          src="./photos/img_1727041984.jpg"></button>
       <div style="margin:auto">
         <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown" id="dropdownMenuButton"
           style="border-style: none;  margin-top: 20px;border-radius: 16px; ">
@@ -785,7 +811,21 @@ I'm unsure what this code is needed for now
         <button onclick="showAllItems()">Show All Items</button>
         <button onclick="showAlert('test')">Test</button>
         <button onclick="doDebug(``)">Clear</button>
+
+        <button class="btn btn-dark btn-sm" style="width:70%;margin:3px" onclick="newJSON()">Import Data</button>
+        <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="newJSON()">Export Data</button>
+
+
+        <br>
+
+
       </div>
+
+
+      <a id='a' download='JSONDownload.txt' type='text/txt'></a>
+      <button onclick="downloadData()">download</button>
+
+
 
       <div class="myDiv" id="debugWindow"
         style="margin-top:20px;width:200px;height:200px;text-align: left; overflow-y:scroll;background-color: aqua blanchedalmond;">
@@ -832,11 +872,13 @@ I'm unsure what this code is needed for now
 
 
       <div class="myDiv">
-        <button type="button" id="updateButton" class="btn btn-primary btn-lg btn-block"  style="width:90%;margin:10px"  onclick="showAllItems();">ShowAllItems</button>
+        <button type="button" id="updateButton" class="btn btn-primary btn-lg btn-block" style="width:90%;margin:10px"
+          onclick="showAllItems();">ShowAllItems</button>
       </div>
 
       <div style="text-align:center;background-color:green ;">
-        <div id="divPhotos" style="text-align:center;width:90%;background-color: aquamarine;  padding:10px">
+        <div id="divPhotos"
+          style="text-align:center;width:90%;background-color: aquamarine; margin:0 auto; padding:10px">
         </div>
       </div>
     </div>
@@ -886,7 +928,8 @@ I'm unsure what this code is needed for now
 
       <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px">
         <p style="color:yellow">Change Item Details</p>
-        <button type="button" id="updateButton" class="btn btn-default btn-primary" onclick="updateItemsFromForm();">Update</button>
+        <button type="button" id="updateButton" class="btn btn-default btn-primary"
+          onclick="updateItemsFromForm();">Update</button>
         <button type="button" class="btn btn-default btn-primary" onclick="deleteItem();">Delete</button>
       </div>
 
@@ -957,6 +1000,8 @@ I'm unsure what this code is needed for now
       image: "?"
     };
 
+   // alert(screen.width);
+
     let gCurrentParentId = 0; // do I need to persist this?
     function getCurrentParentId() { return gCurrentParentId; }
     function setCurrentParentId(id) { gCurrentParentId = id }
@@ -967,7 +1012,7 @@ I'm unsure what this code is needed for now
     gItemArray.push(itemObject);
 
     setCurrentRoot(0);
-
+ 
     //for (i = 0; i < localStorage.length; i++)
     //   alert(localStorage.key(i));
     //
@@ -1023,19 +1068,19 @@ I'm unsure what this code is needed for now
 
     }
 
- /*   gid("picture_box").addEventListener('paste',
-      (ev) => {
-        doBefore();
-      }, true);
+    /*   gid("picture_box").addEventListener('paste',
+         (ev) => {
+           doBefore();
+         }, true);
+   
+       gid("picture_box").addEventListener('paste',
+         (ev) => {
+           setTimeout(doAfter, 1000);
+   
+         }, false); */
 
-    gid("picture_box").addEventListener('paste',
-      (ev) => {
-        setTimeout(doAfter, 1000);
 
-      }, false); */
-
-
-  //  let x = localStorage.getItem("jsonStringSep4");
+    //  let x = localStorage.getItem("jsonStringSep4");
 
 
 
