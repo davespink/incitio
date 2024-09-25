@@ -1,7 +1,12 @@
 <html>
 
+<script>
+function doDown(){
+    a.click();
 
-
+        alert("");
+}
+</script>
 <body>
 
     <a id='a' download='Download.csv' type='text/csv'></a>
@@ -14,10 +19,12 @@
     </script>
 
     
-<button onclick="a.click()">
+<button onclick="doDown()">
 
     click
 </button>
+
+ 
 
 </body>
 

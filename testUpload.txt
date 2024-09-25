@@ -1,0 +1,31 @@
+<html> 
+
+<body>
+    <form method="post" action=
+        "<?php echo $_SERVER['PHP_SELF'];?>">
+        Name : <input type="text" name="name">
+        <br><br>
+        
+        Age : <input type="text" name="age">
+        <br><br>
+        
+        <input type="submit">
+    </form>
+
+    <?php
+      if ($_SERVER["REQUEST_METHOD"] == "POST") {
+          $name = $_POST['name'];
+          $age = $_POST['age'];
+ 
+          if (empty($name)) 
+              echo "Please enter name";
+          elseif(empty($age))
+              echo "Please enter age";
+          else
+              echo "$name is $age years old.";
+      }
+  ?>
+
+</body>
+
+</html>

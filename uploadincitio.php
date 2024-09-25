@@ -59,8 +59,6 @@ function cropAndRename($fileName, $file_extension)
 
 */
 
-
-
     $width = imagesx($img);
     $height = imagesy($img);
 
@@ -75,10 +73,10 @@ function cropAndRename($fileName, $file_extension)
 
         $rot=imagerotate($newImg,270,0);
 
-        if ($file_extension == 'jpg')
+         if ($file_extension == 'jpg')
             imagejpeg($rot, $uploaded);
         elseif ($file_extension == 'png')
-            imagepng($rot, $uploaded);
+           imagepng($rot, $uploaded);
     }
 
     imagedestroy($img);

@@ -39,6 +39,19 @@ Tidy up
 Also, regain some confidence with linux. How Apache works. PHP. etc.
 
 
+https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-side-in-javascript-in-various-browsers
+
+var file = document.getElementById("fileForUpload").files[0];
+if (file) {
+    var reader = new FileReader();
+    reader.readAsText(file, "UTF-8");
+    reader.onload = function (evt) {
+        document.getElementById("fileContents").innerHTML = evt.target.result;
+    }
+    reader.onerror = function (evt) {
+        document.getElementById("fileContents").innerHTML = "error reading file";
+    }
+}
 
 -->
 
@@ -453,7 +466,7 @@ Also, regain some confidence with linux. How Apache works. PHP. etc.
         return;
       }
 
-      doDebug("root is " + rootId);
+   //   doDebug("root is " + rootId);
       setCurrentParentId(rootId);
 
       gChainArray = [];
@@ -632,7 +645,7 @@ I'm unsure what this code is needed for now
 
     function putJSON() {
       const myJSON = JSON.stringify(gItemArray);
-      alert(myJSON);
+     // alert(myJSON);
       // Store
       localStorage.setItem(json.value, myJSON);
 
