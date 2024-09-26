@@ -14,8 +14,8 @@ global $uploaded;
 function cropAndRename($fileName, $file_extension)
 {
     //  echo "filename - " . $fileName;
-
-    $exif_info =  exif_read_data($fileName);
+   // if ($file_extension == "jpg")
+     //   $exif_info =  exif_read_data($fileName);
 
 
     // read orientation, my camera returns 6.
@@ -71,12 +71,12 @@ function cropAndRename($fileName, $file_extension)
 
         imagecopyresampled($newImg, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 
-        $rot=imagerotate($newImg,270,0);
+        $rot = imagerotate($newImg, 270, 0);
 
-         if ($file_extension == 'jpg')
+        if ($file_extension == 'jpg')
             imagejpeg($rot, $uploaded);
         elseif ($file_extension == 'png')
-           imagepng($rot, $uploaded);
+            imagepng($rot, $uploaded);
     }
 
     imagedestroy($img);
