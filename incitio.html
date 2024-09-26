@@ -510,14 +510,21 @@ if (file) {
 
    
       let js = localStorage.getItem(json.value);
-      let str = JSON.stringify(js);
+    //  let str = JSON.stringify(js);
+      let str = js;
+
+   //   alert(str);
+
+    ///  str="xxx" + str;
+
     //  str="abigstringwhatsup";
       var data = new Blob([str]);
       var a = document.getElementById('a');
       a.href = URL.createObjectURL(data);
 
-
       a.click();
+
+      showAlert("Downloaded " + json.value)
     }
 
 
@@ -630,12 +637,14 @@ I'm unsure what this code is needed for now
       const myJSON = JSON.stringify(gItemArray);
       // Store
       localStorage.setItem("jsonString", myJSON);
-      showAlert("to JSON");
+      showAlert("defunct");
     }
 
 
     function getJSON() {
       let js = localStorage.getItem(json.value);
+
+      //alert(js);
 
       gItemArray = JSON.parse(js);
 
@@ -747,11 +756,17 @@ I'm unsure what this code is needed for now
  
  
     async function readText(event) {
-     const file = event.target.files.item(0)
-    const text = await file.text();
-        
-       document.getElementById("output").innerText = text
-       alert(text);
+        const file = event.target.files.item(0);
+        const text = await file.text();
+
+       // document.getElementById("output").innerText = text;
+     //   alert(text);
+
+       localStorage.setItem(json.value, text);
+//let x = localStorage.getItem("NewItem");
+  //     alert(x);
+
+      showAlert("File uploaded to " + json.value);
 }
 
 
@@ -773,8 +788,7 @@ I'm unsure what this code is needed for now
     <a href="download.php">Download File</a>
 
 -->
-<input type="file" onchange="readText(event)" />
-<pre id="output"></pre>
+
 
 
     <!-- first column -->
@@ -816,7 +830,7 @@ I'm unsure what this code is needed for now
         </select>
         <p></p>
 
-        <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="getJSON()">Get Data</button>
+        <button class="btn btn-primary btn-sm" style="width:70%;margin:3px" onclick="getJSON()">Get Data</button>
         <br>
         <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="putJSON()">Save Data</button>
         <br>
@@ -831,13 +845,30 @@ I'm unsure what this code is needed for now
       </div>
 
       <div class="myDiv" style="margin-top:20px">
-        <button onclick="toJSON()">To jason</button>
+
+        <h4>Backups</h4>
+        <!--
+                <button onclick="toJSON()">To jason</button>
         <button onclick="getJSON()">From JSON</button>
+      
         <button onclick="showAllItems()">Show All Items</button>
         <button onclick="showAlert('test')">Test</button>
         <button onclick="doDebug(``)">Clear</button>
+  -->
 
-        <button class="btn btn-dark btn-sm" style="width:70%;margin:3px" onclick="uploadData()">Upload Data</button>
+        <button class="btn btn-dark btn-sm" style="width:70%;margin:3px" onclick="up.click()">Upload Data</button>
+
+        <div style="display:none">
+          <input type="file" id="up" onchange="readText(event)" />
+          <pre id="output"></pre>
+        </div>
+    
+
+
+        <a id='a' download='JSONDownload.txt' type='text/txt'></a>
+        <button class="btn btn-primary btn-sm" style="width:70%;margin:3px" onclick="a.download='IncitioDownload '  + '.txt'; downloadData()">Download Data</button>
+
+
         <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick=" ">Export Data</button>
 
 
@@ -847,16 +878,12 @@ I'm unsure what this code is needed for now
       </div>
 
 
-      <a id='a' download='JSONDownload.txt' type='text/txt'></a>
-      <button onclick="downloadData()">download</button>
 
 
 
-      <div class="myDiv" id="debugWindow"
-        style="margin-top:20px;width:200px;height:200px;text-align: left; overflow-y:scroll;background-color: aqua blanchedalmond;">
-
-      </div>
-
+<!--
+      
+-->
     </div>
 
     <p>
