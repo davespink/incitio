@@ -6,7 +6,7 @@
         "name": "Launch Chrome",
         "request": "launch",
         "type": "chrome",
-        "url": "http://localhost/incitio.com/incitio/incitio.html",
+        "url": "http://localhost/incitio.com/incitio/",
         "webRoot": "${workspaceFolder}"
     }
     ]
