@@ -744,6 +744,15 @@ I'm unsure what this code is needed for now
       }
     }
 
+ 
+ 
+    async function readText(event) {
+     const file = event.target.files.item(0)
+    const text = await file.text();
+        
+       document.getElementById("output").innerText = text
+       alert(text);
+}
 
 
 
@@ -764,6 +773,8 @@ I'm unsure what this code is needed for now
     <a href="download.php">Download File</a>
 
 -->
+<input type="file" onchange="readText(event)" />
+<pre id="output"></pre>
 
 
     <!-- first column -->
@@ -826,8 +837,8 @@ I'm unsure what this code is needed for now
         <button onclick="showAlert('test')">Test</button>
         <button onclick="doDebug(``)">Clear</button>
 
-        <button class="btn btn-dark btn-sm" style="width:70%;margin:3px" onclick="newJSON()">Import Data</button>
-        <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="newJSON()">Export Data</button>
+        <button class="btn btn-dark btn-sm" style="width:70%;margin:3px" onclick="uploadData()">Upload Data</button>
+        <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick=" ">Export Data</button>
 
 
         <br>
