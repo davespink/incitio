@@ -554,6 +554,9 @@ if (file) {
 
     function showAllItems() {
 
+    
+    //  hid(divItems);
+
       let el = document.getElementById("divPhotos");
       el.innerHTML = "";
 
@@ -777,7 +780,7 @@ I'm unsure what this code is needed for now
 <body>
 
 
-  <div id="topDiv" style="display:inline-flex;width:100%">
+  <div id="topDiv" style="display:inline-flex;width:100%;height:800px ">
 
     <button id="alertBox" class="alert">
       <h1>message</h1>
@@ -792,16 +795,16 @@ I'm unsure what this code is needed for now
 
 
     <!-- first column -->
-    <div id="col1" class="myDiv" style="width:16%;background-color:pink;position:fixed">
+    <div class="myDiv" style="width:20%;background-color:pink">
 
       <p></p>
       <button style="border-style: none;background-color: transparent;">
-        <h1> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio V1.11</h1>
+        <h4> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio V1.11</h4>
       </button>
      
       <div style="margin:auto">
         <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown" id="dropdownMenuButton"
-          style="border-style: none;  margin-top: 20px;border-radius: 16px; ">
+          style="border-style: none;  margin-top: 10px;border-radius: 16px; ">
           <h1>+New</h1>
         </button>
 
@@ -891,7 +894,7 @@ I'm unsure what this code is needed for now
 
     <!-- second column -->
 
-    <div    id="col2" class="myDiv" style="width:68%;background-color:white; margin-left: 16%;">
+    <div class="myDiv" style="width:70%;background-color:white">
       <div class="myDiv" style="background-color:rgb(68, 119, 94);margin:auto">
         <button id="none" class="btn btn-light" style="margin:30px; background-color:blanchedalmond;position: relative;
                 width: 60%;height: 15%; border-radius: 16px; box-shadow: 5px 5px 5px gray;">
@@ -928,15 +931,16 @@ I'm unsure what this code is needed for now
           onclick="showAllItems();">ShowAllItems</button>
       </div>
 
-      <div style="text-align:center;background-color:green ;">
-        <div id="divPhotos"
-          style="text-align:center;width:90%;background-color: aquamarine; margin:0 auto; padding:10px">
+      <!-- photos -->
+      <div class="myDiv" style="text-align:center;background-color:green  ">
+        <div id="divPhotos" class="myDiv"
+          style="text-align:center;width:90%;background-color: aquamarine; margin:0 auto; padding:10px;height:300px;overflow-y: scroll">
         </div>
       </div>
     </div>
 
     <!-- third column -->
-    <div id="col3" class="myDiv" style="width:18%;background-color:rgb(170, 123, 37); margin-left:82%; position:fixed">  
+    <div class="myDiv" style="width:30%;background-color:rgb(170, 123, 37);"> 
       
       <!--
       <div class="myDiv" id="picture_box"
@@ -955,7 +959,7 @@ I'm unsure what this code is needed for now
       <p></p>
    -->
 
-      <div class="myDiv" style="background-color: rgb(34, 143, 119);text-align:center;padding:5px">
+      <div class="myDiv" style="background-color: rgb(34, 143, 119);text-align:center;padding:5px;margin-top:10%">
 
 
         <div>
@@ -1022,10 +1026,7 @@ I'm unsure what this code is needed for now
         </div>
       </div>
 
-      <div class="myDiv" id="thirdDiv" style="background-color:rgb(97, 43, 158);margin:auto">
-        <h2>This is a third div in a center element</h2>
-        <p>This is some text in a div element.</p>
-      </div>
+      
     </div>
   </div>
 
