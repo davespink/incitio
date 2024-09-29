@@ -1,13 +1,17 @@
 {
     "configurations": [
+
+
+        {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost/incitio.com/incitio/incitio.html",
+            "webRoot": "${workspaceFolder}"
+        },
+ 
         
         
-    {
-        "name": "Launch Chrome",
-        "request": "launch",
-        "type": "chrome",
-        "url": "http://localhost/incitio.com/incitio/incitio.html",
-        "webRoot": "${workspaceFolder}"
-    }
+ 
     ]
 }
