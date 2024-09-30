@@ -41,12 +41,27 @@ function isa(el, c) {
 
 function makeNewButton(type) {
   newItemObject = createItem(type);
-  if (newItemObject)
+  if (newItemObject) {
     b = createItemButton(newItemObject);
 
-  //  setTimeout(clickButton(b), 1000);
-  clickButton(b);
+
+
+
+
+
+
+
+
+    clickButton(b);
+  }
+
+
 }
+
+
+
+
+
 
 
 
@@ -200,7 +215,7 @@ function updateItemsFromForm() {
   setCurrentRoot(getCurrentParentId());
 }
 
- 
+
 
 
 
@@ -232,13 +247,21 @@ function createChainButton(itemObject) {
   let el = document.getElementById("divChain");
   el.appendChild(newButton);
 
+
+
+  el.addEventListener("touchstart", touchStart);
+  el.addEventListener("touchend", touchEnd);
+
+
+
   buttonColor = `btn btn-primary`;
 
   buttonId = "chain_" + itemObject.id;
 
   theHTML = `<button id="${buttonId}" 
       onClick=buttonSelected("${buttonId}")  ondblclick=setCurrentRoot("${itemObject.id}") 
-       class="${buttonColor}" style="margin:5px">${itemObject.name}</button><button style="position:relative;bottom:-10px;height:0px;background-color:transparent;border:none"><h1>` + `>` + `</h1></button>`;
+       class="${buttonColor}" style="margin:0px">${itemObject.name}</button>
+       <button style="border:none">></button>`;
 
   newButton.outerHTML = theHTML;
 
@@ -259,6 +282,14 @@ function createItemButton(itemObject) {
   let el = document.getElementById("divItems");
   el.appendChild(newButton);
 
+
+
+  el.addEventListener("touchstart", touchStart);
+  el.addEventListener("touchend", touchEnd);
+
+
+
+
   if (itemObject.type == "c") {
     buttonColor = `btn btn-primary`;
   } else {
@@ -267,7 +298,7 @@ function createItemButton(itemObject) {
 
   buttonId = "item_" + itemObject.id;
 
-  theHTML = `<button id="${buttonId}" onClick=buttonSelected("${buttonId}")  ondblclick=setCurrentRoot("${itemObject.id}")    class="${buttonColor}" style="margin:5px">${itemObject.name}</button>`;
+  theHTML = `<button id="${buttonId}" onClick=buttonSelected("${buttonId}")  ondblclick=setCurrentRoot("${itemObject.id}")    class="${buttonColor}" style="margin:3px">${itemObject.name}</button>`;
 
   newButton.outerHTML = theHTML;
   return buttonId;
@@ -314,6 +345,10 @@ function setCurrentRoot(rootId) {
     thisId = gChainArray[j];
     thisItemObject = getItemObjectById(thisId);
     thisButton = createChainButton(thisItemObject);
+
+  
+
+
   }
 
   gid("divItems").innerHTML = "";
@@ -401,11 +436,11 @@ function showAllItems() {
 
       newButtonId = "image_" + thisItemObject.id;
 
-      newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid" style="font-size:10px;" onclick="gridPhotoClicked('${thisItemObject.id}')">`
+      newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid" style="font-size:10px" onclick="gridPhotoClicked('${thisItemObject.id}')">`
         + thisItemObject.name + `</button>`;
 
     }
-    // <button id="image_1725836282864" class="item-grid hasFocus" onclick="gridPhotoClicked('1725836282864')">./photos/img_1727041984.jpg</button>
+
     else {
       let newButton = document.createElement('button');
 
@@ -413,7 +448,12 @@ function showAllItems() {
 
       newButtonId = "image_" + thisItemObject.id;
 
-      newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid"  onclick="gridPhotoClicked('${thisItemObject.id}')"> <img src="` + thisItemObject.image + `""></button>`;
+      //
+      // take care of rotation
+      //
+
+      newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid"  onclick="gridPhotoClicked('${thisItemObject.id}')"> 
+      <img src="` + thisItemObject.image + `" style="transform:rotate(0deg)"  ></button>`;
 
     }
   }

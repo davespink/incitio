@@ -201,79 +201,26 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
         hid(page1); hid(page2); hid(page3);
 
-
-        if (p == 1) {
-
+        if (p == 1)
             vid(page1);
-        }
-
+        if (p == 2)
+            vid(page2);
+        if (p == 3)
+            vid(page3);
     }
-
-
-    // Long touch
-    let onlongtouch = false;
-    let timer = false;
-    let duration = 800;
-    let touched = false;
-
-    function touchStart(evt) {
-        if (!timer) {
-            timer = setTimeout(onlongtouch, duration);
-            touched = evt.target;
-        }
-    }
-
-    function touchEnd() {
-        if (timer) {
-            clearTimeout(timer)
-            timer = false;
-        }
-    }
-
-
-    onlongtouch = function () {
-      //  touched.innerHTML = touched.id;
-
-        let buttonId = touched.id;
-
-        let id = buttonId.split("_");
-
-        setCurrentRoot(id[1]);
-
- 
-        timer = false;
-        duration = 800;
-        touched = false;
-
-    }
-
-    // document.addEventListener("DOMContentLoaded", function () {
-    //   test.addEventListener("touchstart", touchStart);
-    //  test.querySelector("#area").addEventListener("touchend", touchEnd);
-    // })
-
 
 </script>
 
 <body>
-    <p>
-    <p></p>
-
-    <div id="area">Touchable Area</div>
-
-
     <button id="alertBox" class="alert">
         <h1>message</h1>
     </button>
 
 
-
-
-
     <!-- whole thing -->
 
 
-    <div id="theApp" style="width:400px;margin-left:300px;background-color:pink;height:2000px; ">
+    <div id="theApp" class="myDiv" style="width:400px;margin-left:300px;background-color:pink;height:800px; ">
 
         <div id="toolbar" class="myDiv"
             style="background-color:rgb(152, 192, 59);height:50px;width:300px;margin :auto ">
@@ -281,119 +228,34 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
                 onclick="showPage(3)">Button 3</button>
         </div>
 
-        <!--  PAGE1     -->
-        <div id="page1">
-
-            <!-- the logo -->
-            <button style="border-style: none;position:relative;margin-left: 2px;">
-                <h4> <i class="bi-house" style="font-size: 2rem; color: cornflowerblue"></i>InCitio V1.12a</h4>
-            </button>
-
-            <!-- the new button
-            <div style="margin:auto">
-                <button class="btn btn-primary btn-sm dropdown-toggle " type="button" data-bs-toggle="dropdown"
-                    id="dropdownMenuButton" style="border-style: none;  margin-top: 10px;border-radius: 16px; ">
-                    <h6>+New</h6>
-                </button>
-
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#" onClick="makeNewButton('c');">New Container</a>
-                    </li>
-                    <li><a class="dropdown-item" href="#" onClick="makeNewButton('i');">New Item</a>
-                    </li>
-                </ul>
-            </div>
- -->
-            <p></p>
-            <div style="text-align: center;">
-                <button id="test" class="btn btn-info btn-sm" style="width:70%; " onclick="loadTestData()">Load Test
-                    Data</button>
-
-            </div>
-
-
-            <!---- search  -->
-            <div class="myDiv" style="width:300px  ;margin:auto">
-                <button id="none" class="btn btn-light" style="margin:10px; background-color:blanchedalmond;position:relative;
-                width: 60%;height: 15%; border-radius: 16px; box-shadow: 5px 5px 5px gray;">
-                    <span class="btn-label" onclick="doSearch();"
-                        style="position:absolute;top:0px; left:10px; margin-bottom: 20px;">
-                        <i class="bi-search" style="font-size:30px"></i></span>
-
-                    <input aria-label="Search inCitio" autocomplete="off" placeholder="Search inCitio" value="" name=""
-                        type="text" id="search" style="padding: 0px; border:0cap; float:right;
-              width: 90%;  background-color: rgb(219, 192, 192);
-               z-index: 6; left: 0px;" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50">
-                </button>
-            </div>
-
-
-            <div class="myDiv" style="background-color:white;margin:10px ">
-
-                <!--    Chain   -->
-                <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 5px;padding:0%">
-
-                </div>
-
-                <!--    Create new containers or items  -->
-                <div style="text-align: left;padding:0px;background-color:lightcyan ;">
-                    <button onclick="makeNewButton('i')" style="background-color: green;color:white">+ new
-                        item</button>
-                    <button onclick="makeNewButton('c')" style="background-color: blue;color:white">+ new
-                        container</button>
-                </div>
-
-                <!-- third row where all the items live -->
-                <div id="divItems" style="text-align: left;margin-left: 10px;margin-bottom: 10px; ">
-                </div>
-            </div>
-
-
-
-            <div class="myDiv">
-                <button type="button" id="updateButton" class="btn btn-primary btn-lg btn-block"
-                    style="width:90%;margin:10px" onclick="showAllItems();">ShowAllItems</button>
-            </div>
-
-            <!-- photos -->
-            <div class="myDiv" style="text-align:center;background-color:green  ">
-                <div id="divPhotos" class="myDiv"
-                    style="text-align:center;width:90%;background-color: aquamarine; margin:0 auto; padding:10px;height:300px;overflow-y: scroll">
-                </div>
-            </div>
-
-
-
-
-
-
-
-        </div>
-
-        <!--  PAGE2    -->
-        <!--   show all as buttons or grid etc  -->
-        <div id="page2">
-
-
-        </div>
-
+     
+      
 
         <!--  PAGE3     -->
 
         <!--    the image load and item details    -->
 
         <div id="page3" class="myDiv" style="  background-color:rgb(170, 123, 37); height:8oopx;overflow-y: scroll;">
+            <h1>IMAGE STUFF</h1>
+            <div class="myDiv" style="background-color: rgb(34, 143, 119);text-align:center;padding:5px; ">
+                <div>
+                    <img id="thePhoto" style="width:200px; height:200px;transform: rotate(0deg);">
+                </div>
 
+                <div>
+                    <div style="display:none">
+                        <input   type="file" name="file" id="file"
+                            onchange='btn_uploadImageFile.click()'>
+                    </div>
+                    <input type="button" id="btn_uploadImageFile" value="Upload" style="display:none"
+                        onclick="uploadImageFile();">
 
-
-            <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px;">
-                <button type="button" id="updateButton" class="btn btn-default btn-secondary">Details</button>
-
+                    <button class="btn-light" onclick="file.click()">UPLOAD PHOTO</button>
+                </div>
             </div>
 
-
             <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px;">
-
+                <p style="color:yellow">Change Item Details</p>
                 <button type="button" id="updateButton" class="btn btn-default btn-primary"
                     onclick="updateItemsFromForm();">Update</button>
                 <button type="button" class="btn btn-default btn-primary" onclick="deleteItem();">Delete</button>
