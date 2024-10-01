@@ -2,46 +2,38 @@
 <html lang="en">
 <!--   
 
-Incityo
 
-1 Sep 24. First version that sort of works. Now a TODO list...
+2. Search name/description - todo
 
-Impliment.
-
-Debug Window
-Tidy up
-
-1. Code to remove absolute path to photos.
-
-2. Search name/description.
-
-3. Change container. done
+Improve alert box. Can levels alert. Allow to close the box with a X
 
 4. Delete container ask what happens to children.
 
-5. Photo of Home done
-
-6. Shortcut keys. Pending. Low priority.
+6. Shortcut keys. Pending. Low priority. - Windowbox code.
 
 7. Import export.
 
-8. Backups. - make it better Priority 5.
+8. Backups. - done
 
-9. Low prioriy. Website. - Now have domain.
+9. Low prioriy. Website. - Now have domain. - done
 
-10. Android version. Maybe javascript to start with. Priority 10.
+10. Android version. Cordova.
 
 11. On click button focus photo
 
-12. Add timestamp to json download.
+TODO. Add timestamp to json download.
 
-12a. Alphabetical ordering in chains.
+12a. Alphabetical ordering in chains. - Low priority.
 
-Also, regain some confidence with linux. How Apache works. PHP. etc.
+ 
 
 https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-side-in-javascript-in-various-browsers
+
+ 
  
 -->
+
+
 
 <head>
     <meta charset="UTF-8">
@@ -183,6 +175,8 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 <script>
     function loadTestData() {
 
+        // alert("xx");
+
         let js = `[{"id":"0","type":"c","parentId":"?","name":"home","description":"your humble abode","image":"photos/img_1727275264.jpg"},{"id":"1725836216928","type":"c","parentId":"0","name":"My Study","description":"My den","image":"photos/img_1727270323.jpg"},{"id":"1725836247926","type":"c","parentId":0,"name":"Kitchen","description":"Where the food is","image":"photos/img_1727270506.jpg"},{"id":"1725836282864","type":"c","parentId":"1725836247926","name":"Fridge","description":"Fridge description","image":"photos/img_1727270740.jpg"},{"id":"1725836311136","type":"c","parentId":"1725836247926","name":"Kitchen cupboard","description":"Kitchen cupboard description","image":"photos/img_1727270751.jpg"},{"id":"1725836340744","type":"c","parentId":"1725836311136","name":"Shelf1","description":"Shelf1 description","image":"photos/img_1727270797.jpg"},{"id":"1725836350832","type":"c","parentId":"1725836311136","name":"Shelf2","description":"Shelf2 description","image":"photos/img_1727270964.jpg"},{"id":"1725836362504","type":"c","parentId":"1725836311136","name":"Shelf3","description":"Shelf3 description","image":"photos/img_1727270906.jpg"},{"id":"1725836416633","type":"c","parentId":"1725836216928","name":"Small Tools","description":"Small Tools description","image":"photos/img_1727271380.jpg"},{"id":"1725836714777","type":"i","parentId":"1725836416633","name":"Magnifying glass","description":"Magnifying glass description","image":"photos/img_1727271089.jpg"},{"id":"1725836778378","type":"i","parentId":"1725836416633","name":"Hand Clamp","description":"Small plastic clamp","image":"photos/img_1727271446.jpg"},{"id":"1725836849233","type":"i","parentId":"1725836416633","name":"Scissors","description":"Scissors description","image":"photos/img_1727271075.jpg"},{"id":"1725837016010","type":"i","parentId":"1725836416633","name":"Magnetic Hand","description":"Pick up small screws","image":"photos/img_1727271158.jpg"},{"id":"1725837606726","type":"i","parentId":"1725836416633","name":"G Clamp","description":"G Clamp description","image":"photos/img_1727271464.jpg"},{"id":"1725845183755","type":"c","parentId":"1725836216928","name":"common tools","description":"common tools description","image":"photos/img_1727271477.jpg"},{"id":"1725845205412","type":"i","parentId":"1725845183755","name":"Adjustable spanner","description":"Adjustable spanner description","image":"photos/img_1727271486.jpg"},{"id":"1725845258140","type":"i","parentId":"1725845183755","name":"Leather hole punch","description":"Leather hole punch description","image":"photos/img_1727271494.jpg"},{"id":"1725845412484","type":"i","parentId":"1725845183755","name":"Simple Hack saw","description":"Simple Hack saw description","image":"photos/img_1727271512.jpg"},{"id":"1725845530318","type":"i","parentId":"1725845183755","name":"Mexican spanner","description":"Mexican spanner description","image":"photos/img_1727271237.jpg"},{"id":"1725845752742","type":"c","parentId":"1725836216928","name":"Papeleria","description":"Papeleria description","image":"photos/img_1727271211.jpg"},{"id":"1725845863663","type":"i","parentId":"1725845752742","name":"Ruler","description":"Ruler description","image":"photos/img_1727273723.jpg"},{"id":"1725845908144","type":"i","parentId":"1725845752742","name":"Pens","description":"Pens description","image":"photos/img_1727273739.jpg"},{"id":"1725845948414","type":"i","parentId":"1725845752742","name":"Pencil Sharpeners","description":"Pencil Sharpeners description","image":"photos/img_1727273750.jpg"},{"id":"1725846011336","type":"i","parentId":"1725845752742","name":"Plasticine","description":"Plasticine description","image":"photos/img_1727273760.jpg"},{"id":"1725846326456","type":"i","parentId":"1725845752742","name":"Pencils","description":"Pencils description","image":"photos/img_1727271303.jpg"},{"id":"1725846365857","type":"i","parentId":"1725845752742","name":"Staples","description":"Staples description","image":"photos/img_1727273785.jpg"},{"id":"1725909589897","type":"c","parentId":"1725836216928","name":"box of screwdrivers","description":"box of screwdrivers description","image":"photos/img_1727386433.jpg"},{"id":"1725909799947","type":"i","parentId":"1725909589897","name":"flat heads","description":"Regular screw drivers","image":"photos/img_1727273847.jpg"},{"id":"1725910219318","type":"i","parentId":"1725909589897","name":"cross heads","description":"cross heads description","image":"photos/img_1727273808.jpg"},{"id":"1725925895037","type":"c","parentId":"1725836216928","name":"Glue Box","description":"Glue Box description","image":"photos/img_1727271284.jpg"},{"id":"1725925990470","type":"i","parentId":"1725925895037","name":"Big Glue Gun","description":"Big Glue Gun description","image":"photos/img_1727275386.jpg"},{"id":"1725926011742","type":"i","parentId":"1725925895037","name":"Small Glue Gun","description":"Small Glue Gun description","image":"photos/img_1727275333.jpg"},{"id":"1725926058517","type":"i","parentId":"1725925895037","name":"Spare Glue Sticks","description":"Spare Glue Sticks description","image":"photos/img_1727312387.jpg"},{"id":"1725926086883","type":"i","parentId":"1725925895037","name":"Plastic Steel","description":"Plastic Steal description","image":"photos/img_1727313258.jpg"},{"id":"1726344113129","type":"c","parentId":"0","name":"Master Bedroom","description":"Bedroom description","image":"photos/img_1727270519.jpg"},{"id":"1726344133731","type":"c","parentId":0,"name":"Visitors Room","description":"Visitors Room description","image":"photos/img_1727269459.jpg"},{"id":"1726344242065","type":"c","parentId":0,"name":"Living Room","description":"Living Room description","image":"photos/img_1727270715.jpg"},{"id":"1726345604982","type":"c","parentId":0,"name":"Bodegas","description":"Bodegas description","image":"photos/img_1727385553.jpg"},{"id":"1726345629422","type":"c","parentId":"1726345604982","name":"Front Porch Bodega","description":"Front Porch Bodega description","image":"photos/img_1727270583.jpg"},{"id":"1726345644802","type":"c","parentId":"1726345604982","name":"Back Bodega","description":"Back Bodega description","image":"photos/img_1727385769.jpg"},{"id":"1726345661718","type":"c","parentId":"0","name":"Henry House","description":"Henry House description","image":"photos/img_1727384880.jpg"},{"id":"1726345682710","type":"c","parentId":"0","name":"Alberca Toilet","description":"Alberca Toilet description","image":"photos/img_1727271006.jpg"},{"id":"1726345703720","type":"c","parentId":"0","name":"Kitchen Toilet","description":"Kitchen Toilet description","image":"photos/img_1727269439.jpg"},{"id":"1726345717145","type":"c","parentId":"0","name":"Back Terrace","description":"Back Terrace description","image":"photos/img_1727312447.jpg"},{"id":"1726345726080","type":"c","parentId":"0","name":"Front Terrace","description":"Front Terrace description","image":"photos/img_1727385228.jpg"},{"id":"1726345742273","type":"c","parentId":"0","name":"Entrance","description":"Entrance description","image":"photos/img_1727312491.jpg"},{"id":"1726345808634","type":"c","parentId":"0","name":"Master Toilet","description":"Master Toilet description","image":"photos/img_1727271022.jpg"},{"id":"1726345817514","type":"c","parentId":"0","name":"Lady Toilet","description":"Lady Toilet description","image":"photos/img_1727312415.png"},{"id":"1726345854639","type":"c","parentId":"0","name":"Inside Passage","description":"Inside Passage description","image":"photos/img_1727385640.jpg"},{"id":"1726345899970","type":"c","parentId":"1725836216928","name":"Big Desk","description":"Big Desk description","image":"photos/img_1727273864.jpg"},{"id":"1726345920704","type":"c","parentId":"1725836216928","name":"Blue Cabinet","description":"Blue Cabinet description","image":"photos/img_1727313363.jpg"},{"id":"1726345933256","type":"c","parentId":"1725836216928","name":"Wall Stand","description":"Wall Stand description","image":"photos/img_1727386365.jpg"},{"id":"1726345943818","type":"i","parentId":"1725836216928","name":"Bed","description":"Bed description","image":"photos/img_1727274417.jpg"},{"id":"1726345980896","type":"c","parentId":"1725836216928","name":"Work Table","description":"Work Table description","image":"photos/img_1727386244.jpg"},{"id":"1726345997504","type":"c","parentId":"1725836216928","name":"Shoe Rack","description":"Shoe Rack description","image":"photos/img_1727386164.jpg"},{"id":"1726346033040","type":"i","parentId":"1726345899970","name":"Mini Computer","description":"Mini Computer description","image":"photos/img_1727384489.jpg"},{"id":"1726346057688","type":"i","parentId":"1726345899970","name":"Monitor Speakers","description":"Monitor Speakers description","image":"photos/img_1727385492.jpg"},{"id":"1726346082968","type":"i","parentId":"1726345899970","name":"Sony TV","description":"Sony TV description","image":"photos/img_1727271264.jpg"},{"id":"1726346104248","type":"i","parentId":"1726345899970","name":"Behringer Interface","description":"Behringer  description","image":"photos/img_1727313559.jpg"},{"id":"1726346155927","type":"i","parentId":"1726345899970","name":"Lamp","description":"Lamp description","image":"photos/img_1727384864.jpg"},{"id":"1726346176497","type":"i","parentId":"1726345899970","name":"USB hub 1","description":"USB hub 1 description","image":"photos/img_1727385402.jpg"},{"id":"1726346185673","type":"i","parentId":"1726345899970","name":"USB hub2","description":"USB hub2 description","image":"photos/img_1727385424.jpg"},{"id":"1726346195041","type":"i","parentId":"1726345899970","name":"Usb Hub3","description":"Usb Hub3 description","image":"photos/img_1727385435.jpg"},{"id":"1726347526694","type":"i","parentId":"1726344113129","name":"Bed","description":"Bed description","image":"photos/img_1727273963.jpg"},{"id":"1726347538816","type":"i","parentId":"1726344113129","name":"Bathtub","description":"Bathtub description","image":"photos/img_1727385297.jpg"},{"id":"1726347546681","type":"i","parentId":"1726344113129","name":"Wash basin","description":"Wash basin description","image":"photos/img_1727385867.jpg"},{"id":"1726347563352","type":"c","parentId":"1726344113129","name":"Wardrobe 1","description":"Wardrobe 1 description","image":"photos/img_1727385113.jpg"},{"id":"1726347594829","type":"c","parentId":"1726344113129","name":"Wardrobe 2","description":"Wardrobe 2 description","image":"photos/img_1727385185.jpg"},{"id":"1726347614361","type":"c","parentId":"1726347563352","name":"Trousers","description":"Trousers description","image":"photos/img_1727384823.jpg"},{"id":"1726347631630","type":"i","parentId":"1726347614361","name":"decathlon trousers","description":"decathlon trousers description","image":"photos/img_1727384388.jpg"},{"id":"1726347646086","type":"i","parentId":"1726347614361","name":"Short trousers","description":"Short trousers description","image":"photos/img_1727384404.jpg"},{"id":"1726347662086","type":"i","parentId":"1726347614361","name":"Best Trousers","description":"Best Trousers description","image":"photos/img_1727384415.jpg"},{"id":"1727269713953","type":"c","parentId":"1725836216928","name":"Electrical Repairs","description":"Electrical Repairs description","image":"photos/img_1727385019.jpg"},{"id":"1727269937313","type":"i","parentId":"1727269713953","name":"Insulation Tape","description":"Black tape that goes sticky in hot weather","image":"photos/img_1727269950.jpg"},{"id":"1727269979234","type":"i","parentId":"1727269713953","name":"Electrition Screwdriver","description":"Electrition Screwdriver description","image":"photos/img_1727269991.jpg"},{"id":"1727270011400","type":"i","parentId":"1727269713953","name":"Wire Strippers","description":"Wire Strippers description","image":"photos/img_1727270395.jpg"},{"id":"1727270034963","type":"i","parentId":"1727269713953","name":"Precision Tools","description":"Precision Tools description","image":"photos/img_1727270360.jpg"},{"id":"1727270072755","type":"i","parentId":"1727269713953","name":"Multimeter","description":"Multimeter description","image":"photos/img_1727270096.jpg"},{"id":"1727270113692","type":"i","parentId":"1727269713953","name":"Spare Leads","description":"Spare Leads description","image":"photos/img_1727270135.jpg"},{"id":"1727270164505","type":"i","parentId":"1727269713953","name":"Cutters","description":"Cutters description","image":"photos/img_1727270173.jpg"},{"id":"1727270202659","type":"i","parentId":"1727269713953","name":"Cable Connectors","description":"Cable Connectors description","image":"photos/img_1727270209.jpg"},{"id":"1727270235818","type":"i","parentId":"1727269713953","name":"Needlenosed pliers","description":"Needlenosed pliers description","image":"photos/img_1727270245.jpg"},{"id":"1727312817207","type":"c","parentId":"1725836247926","name":"Freezer","description":"Freezer description","image":"photos/img_1727312854.jpg"},{"id":"1727312881011","type":"i","parentId":"1727312817207","name":"Beans","description":"Beans description","image":"photos/img_1727313067.jpg"}]`;
 
         gItemArray = JSON.parse(js);
@@ -191,7 +185,8 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
         showAlert("loaded");
 
-        showAllItems();
+        showAllItems.click();
+
 
     }
 
@@ -232,7 +227,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
 
     onlongtouch = function () {
-      //  touched.innerHTML = touched.id;
+        //  touched.innerHTML = touched.id;
 
         let buttonId = touched.id;
 
@@ -240,7 +235,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
         setCurrentRoot(id[1]);
 
- 
+
         timer = false;
         duration = 800;
         touched = false;
@@ -275,18 +270,13 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
     <div id="theApp" style="width:400px;margin-left:300px;background-color:pink;height:2000px; ">
 
-        <div id="toolbar" class="myDiv"
-            style="background-color:rgb(152, 192, 59);height:50px;width:300px;margin :auto ">
-            <button onclick="showPage(1)" ;>Button 1</button> <button onclick="showPage(2)">Button 2</button> <button
-                onclick="showPage(3)">Button 3</button>
-        </div>
 
         <!--  PAGE1     -->
         <div id="page1">
 
             <!-- the logo -->
             <button style="border-style: none;position:relative;margin-left: 2px;">
-                <h4> <i class="bi-house" style="font-size: 2rem; color: cornflowerblue"></i>InCitio V1.12a</h4>
+                <h4> <i class="bi-house" style="font-size: 2rem; color: cornflowerblue"></i>InCitio Mobile V1.11</h4>
             </button>
 
             <!-- the new button
@@ -327,173 +317,222 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
                 </button>
             </div>
 
+            <script>
+                function toggleArrow(b, panel) {
+                    if (viz(panel)) {
+                        b.firstElementChild.src = "images/arrow_down_icon.png";
+                        hid(panel);
+
+                    } else {
+                        b.firstElementChild.src = "images/arrow_up_icon.png";
+                        vid(panel);
+                    }
+                }
+            </script>
+
+            <div class="myDiv" style="background-color:white;margin:10px ">
+                <button class="btn btn-info btn-sm" id="test" style="width:100%"
+                    onclick="toggleArrow(this,breadcrumbs)">Breadcrumbs
+                    <img src="images/arrow_down_icon.png" style="position:relative;width:20px;height:20px; float:right">
+                </button>
+                <div id="breadcrumbs" style="display:none">
+                    <!--    Chain   -->
+                    <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 5px;padding:0%">
+                    </div>
+
+                    <!--    Create new containers or items  -->
+                    <div style="text-align: left;padding:0px;background-color:lightcyan ;">
+                        <button onclick="makeNewButton('i')" style="background-color: green;color:white">+ new
+                            item</button>
+                        <button onclick="makeNewButton('c')" style="background-color: blue;color:white">+ new
+                            container</button>
+                    </div>
+
+                    <!-- third row where all the items live -->
+                    <div id="divItems" style="text-align: left;margin-left: 10px;margin-bottom: 10px; ">
+                    </div>
+                </div>
+            </div>
+
 
             <div class="myDiv" style="background-color:white;margin:10px ">
 
-                <!--    Chain   -->
-                <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 5px;padding:0%">
+                <button class="btn btn-info btn-sm" id="test" style="width:100%"
+                    onclick="toggleArrow(this,thePhotos)">Gallery
+                    <img src="images/arrow_down_icon.png" style="position:relative;width:20px;height:20px; float:right">
+                </button>
 
-                </div>
-
-                <!--    Create new containers or items  -->
-                <div style="text-align: left;padding:0px;background-color:lightcyan ;">
-                    <button onclick="makeNewButton('i')" style="background-color: green;color:white">+ new
-                        item</button>
-                    <button onclick="makeNewButton('c')" style="background-color: blue;color:white">+ new
-                        container</button>
-                </div>
-
-                <!-- third row where all the items live -->
-                <div id="divItems" style="text-align: left;margin-left: 10px;margin-bottom: 10px; ">
-                </div>
-            </div>
-
-
-
-            <div class="myDiv">
-                <button type="button" id="updateButton" class="btn btn-primary btn-lg btn-block"
-                    style="width:90%;margin:10px" onclick="showAllItems();">ShowAllItems</button>
-            </div>
-
-            <!-- photos -->
-            <div class="myDiv" style="text-align:center;background-color:green  ">
-                <div id="divPhotos" class="myDiv"
-                    style="text-align:center;width:90%;background-color: aquamarine; margin:0 auto; padding:10px;height:300px;overflow-y: scroll">
-                </div>
-            </div>
-
-
-
-
-
-
-
-        </div>
-
-        <!--  PAGE2    -->
-        <!--   show all as buttons or grid etc  -->
-        <div id="page2">
-
-
-        </div>
-
-
-        <!--  PAGE3     -->
-
-        <!--    the image load and item details    -->
-
-        <div id="page3" class="myDiv" style="  background-color:rgb(170, 123, 37); height:8oopx;overflow-y: scroll;">
-
-
-
-            <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px;">
-                <button type="button" id="updateButton" class="btn btn-default btn-secondary">Details</button>
-
-            </div>
-
-
-            <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px;">
-
-                <button type="button" id="updateButton" class="btn btn-default btn-primary"
-                    onclick="updateItemsFromForm();">Update</button>
-                <button type="button" class="btn btn-default btn-primary" onclick="deleteItem();">Delete</button>
-            </div>
-
-            <div style="background-color:gray;margin:auto; padding:2px; ">
-                <div style="text-align:left;background-color: cornsilk; ">
-                    <form>
-                        <!--    Form   -->
-                        <div class="form-group">
-                            <label for="inName">Name:</label>
-                            <input type="text" class="form-control" id="inName">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="inDescription">Description</label>
-                            <textarea class="form-control" id="inDescription" rows="5"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="inItemId">Item Id</label>
-                            <input type="text" class="form-control" id="inItemId">
-                        </div>
-                        <div class="form-group">
-                            <label for="inParentId">Parent Id</label>
-                            <input type="text" class="form-control" id="inParentId">
-                            <p></p>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="newParent">Change container:</label>
-                            <select id="newParent" onChange="updateButton.click()">
-
-                            </select>
-                        </div>
-
-                        <p></p>
-                        <p></p>
-                </div>
-            </div>
-
-            <!-- database stuff -->
-            <div style="background-color: yellow;">
-
-
-                <div class="myDiv" style="margin-top:20px ">
-                    <h4>Select database</h4>
-                    <select id="json" style="width:90%; background-color:rgb(203, 221, 236);border-radius: 5px;">
-
-                        <script>
-                            for (i = 0; i < localStorage.length; i++) {
-                                // throws a warning
-                                document.write(`<option>` + localStorage.key(i) + `</option>`);
-                            }
-                        </script>
-
-                    </select>
-                    <p></p>
-
-                    <button class="btn btn-primary btn-sm" style="width:70%;margin:3px" onclick="getJSON()">Get
-                        Data</button>
-                    <br>
-                    <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="putJSON()">Save
-                        Data</button>
-                    <br>
-                    <button class="btn btn-success btn-sm" style="width:70%;margin:3px" onclick="newJSON()">New
-                        Database</button>
-                    <br>
-                    <button class="btn btn-danger btn-sm" style="width:70%;margin:3px" onclick="deleteJSON()">Delete
-                        Database</button>
-                </div>
-
-
-                <!-- backups -->
-                <div class="myDiv" style="margin-top:20px;display:none">
-
-                    <h4>Backups</h4>
-                    <button class="btn btn-dark btn-sm" style="width:70%;margin:3px" onclick="up.click()">Upload
-                        Data</button>
-
-                    <div style="display:none">
-                        <input type="file" id="up" onchange="readText(event)" />
-                        <pre id="output"></pre>
+                <div id="thePhotos" style="display:none">
+                    <button id="showAllItems" onclick="showAllItems()">Load</button>
+                    <div id="divPhotos" class="myDiv"
+                        style="text-align:center;width:100%;background-color: aquamarine; margin:0 auto; padding:10px;height:300px;overflow-y: scroll">
                     </div>
 
-                    <a id='a' download='JSONDownload.txt' type='text/txt'></a>
-                    <button class="btn btn-primary btn-sm" style="width:70%;margin:3px" onclick="
-                a.download='IncitioDownload-' + new Date().toLocaleString() + '.txt';
-                 downloadData()">Download Data</button>
-                    <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick=" ">Export
-                        Data</button>
-                    <br>
                 </div>
-
             </div>
 
 
         </div>
 
 
+        <!--    the image load      -->
+        <div class="myDiv" style="background-color: rgb(34, 143, 119);text-align:center;padding:5px ">
+
+
+
+            <button class="btn btn-info btn-sm" id="test" style="width:100%" onclick="toggleArrow(this,thePhoto)">Photo
+                <img src="images/arrow_down_icon.png" style="position:relative;width:20px;height:20px; float:right">
+            </button>
+
+
+            <div>
+                <img id="thePhoto" style="min-width:200px;min-height:200px">
+            </div>
+
+            <div>
+                <div style="display:none">
+                    <input style="position:absolute;left:0px;margin-bottom:10px;" type="file" name="file" id="file"
+                        onchange='btn_uploadImageFile.click()'>
+                </div>
+                <input type="button" id="btn_uploadImageFile" value="Upload" style="display:none"
+                    onclick="uploadImageFile();">
+
+                <button class="btn-light" onclick="file.click()">UPLOAD PHOTO</button>
+            </div>
+        </div>
+
+
+        <!-- the details -->
+
+        <div class="myDiv" style="  background-color:rgb(170, 123, 37); height:8oopx;overflow-y: scroll;">
+
+            <button class="btn btn-info btn-sm" id="test" style="width:100%"
+                onclick="toggleArrow(this,theDetails)">Details
+                <img src="images/arrow_down_icon.png" style="position:relative;width:20px;height:20px; float:right">
+            </button>
+
+            <div id="theDetails">
+
+                <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px;">
+                    <button type="button" id="updateButton" class="btn btn-default btn-secondary">Details</button>
+                </div>
+
+
+                <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px;">
+
+                    <button type="button" id="updateButton" class="btn btn-default btn-primary"
+                        onclick="updateItemsFromForm();">Update</button>
+                    <button type="button" class="btn btn-default btn-primary" onclick="deleteItem();">Delete</button>
+                </div>
+
+                <div style="background-color:gray;margin:auto; padding:2px; ">
+                    <div style="text-align:left;background-color: cornsilk; ">
+                        <form>
+                            <!--    Form   -->
+                            <div class="form-group">
+                                <label for="inName">Name:</label>
+                                <input type="text" class="form-control" id="inName">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inDescription">Description</label>
+                                <textarea class="form-control" id="inDescription" rows="5"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inItemId">Item Id</label>
+                                <input type="text" class="form-control" id="inItemId">
+                            </div>
+                            <div class="form-group">
+                                <label for="inParentId">Parent Id</label>
+                                <input type="text" class="form-control" id="inParentId">
+                                <p></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="newParent">Change container:</label>
+                                <select id="newParent" onChange="updateButton.click()">
+
+                                </select>
+                            </div>
+
+                            <p></p>
+                            <p></p>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+
+        <!-- the database stuff -->
+        <div style="background-color: yellow;height:300px">
+
+            <button class="btn btn-info btn-sm" id="test" style="width:100%"
+                onclick="toggleArrow(this,theBackups)">Backups
+                <img src="images/arrow_down_icon.png" style="position:relative;width:20px;height:20px; float:right">
+            </button>
+
+
+            <div id="theBackups" class="myDiv" style="margin-top:20px ;display:none">
+                <h4>Select database</h4>
+                <select id="json" style="width:90%; background-color:rgb(203, 221, 236);border-radius: 5px;">
+
+                    <script>
+                        for (i = 0; i < localStorage.length; i++) {
+                            // throws a warning
+                            document.write(`<option>` + localStorage.key(i) + `</option>`);
+                        }
+                    </script>
+
+                </select>
+                <p></p>
+
+                <button class="btn btn-primary btn-sm" style="width:70%;margin:3px" onclick="getJSON()">Get
+                    Data</button>
+                <br>
+                <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="putJSON()">Save
+                    Data</button>
+                <br>
+                <button class="btn btn-success btn-sm" style="width:70%;margin:3px" onclick="newJSON()">New
+                    Database</button>
+                <br>
+                <button class="btn btn-danger btn-sm" style="width:70%;margin:3px" onclick="deleteJSON()">Delete
+                    Database</button>
+            </div>
+
+
+            <!-- backups -->
+            <div class="myDiv" style="margin-top:20px;">
+
+                <h4>Backups</h4>
+                <button class="btn btn-dark btn-sm" style="width:70%;margin:3px" onclick="up.click()">Upload
+                    Data</button>
+
+                <div style="display:none">
+                    <input type="file" id="up" onchange="readText(event)" />
+                    <pre id="output"></pre>
+                </div>
+
+                <a id='a' download='JSONDownload.txt' type='text/txt'></a>
+                <button class="btn btn-primary btn-sm" style="width:70%;margin:3px" onclick="
+                a.download='IncitioDownload-' + new Date().toLocaleString() + '.txt';
+                 downloadData()">Download Data</button>
+                <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick=" ">Export
+                    Data</button>
+                <br>
+            </div>
+
+        </div>
 
     </div>
 
