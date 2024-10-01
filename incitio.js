@@ -2,14 +2,7 @@
 
 // TLA helpers
 
-function gid(name) {
-  return document.getElementById(name);
-}
-
-function hid(el) {
-  el.display = "none";
-}
-
+ 
 
 function displace(el, options) {
   return window.displacejs(el, options);
