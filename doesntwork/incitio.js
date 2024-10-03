@@ -2,7 +2,7 @@
 
 // TLA helpers
 
-
+ 
 
 function displace(el, options) {
   return window.displacejs(el, options);
@@ -260,6 +260,7 @@ function createChainButton(itemObject) {
 
   return newButton;
 
+  //    resetPictureBox();
 
 }
 
@@ -301,6 +302,7 @@ function createItemButton(itemObject) {
 // Maybe move this into setCurrentRoot
 function discoverChain(thisId) {
 
+
   for (i = 0; i < gItemArray.length; i++) {
     //     alert(gItemArray[i].id);
     if (gItemArray[i].id == thisId) {
@@ -311,27 +313,8 @@ function discoverChain(thisId) {
   }
 }
 
-function compare(aItem,bItem) {
-
-   aName = aItem.name.toUpperCase();
-   bName = bItem.name.toUpperCase();
-    
-  if ( aName < bName ){
-    return -1;
-  }
-  if ( aName > bName ){
-    return 1;
-  }
-  return 0;
-
-
-
-}
 
 function setCurrentRoot(rootId) {
-
-  //alert("here");
-
 
   if (getItemObjectById(rootId).type != "c") {
     showAlert("not a container");
@@ -343,7 +326,7 @@ function setCurrentRoot(rootId) {
 
   gChainArray = [];
 
-  let thisRoot = rootId;
+  thisRoot = rootId;
 
   while (thisRoot != "?")
     thisRoot = discoverChain(thisRoot);
@@ -357,35 +340,27 @@ function setCurrentRoot(rootId) {
     thisItemObject = getItemObjectById(thisId);
     thisButton = createChainButton(thisItemObject);
 
+  
+
+
   }
 
-  let kids = [];
   gid("divItems").innerHTML = "";
   for (i = 0; i < gItemArray.length; i++)
+
     if (gItemArray[i].parentId == getCurrentParentId())
-      kids.push(gItemArray[i]);
-
-  if (kids.length > 0) {
-
-    kids.sort(compare);
-
-
-  }
-
-  for (i = 0; i < kids.length; i++)
-    createItemButton(kids[i]);
-
-  // the children of divItems;
-
-
-
-
-
-
+      createItemButton(gItemArray[i]);
 
 }
 
 
+/*
+function resetItemDiv() {
+  gid("divItems").innerHTML = "";
+
+
+}
+  */
 
 
 function downloadData() {
@@ -514,7 +489,7 @@ function toJSON() {
 function getJSON() {
   let js = localStorage.getItem(json.value);
 
-  //alert(js);
+  alert(js);
 
   gItemArray = JSON.parse(js);
 

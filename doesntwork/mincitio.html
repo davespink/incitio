@@ -3,8 +3,27 @@
 <!--   
 
 
- 1. Long touch not working on dreamhost but working on local
- try debugging DH version?
+2. Search name/description - todo
+
+Improve alert box. Can levels alert. Allow to close the box with a X
+
+4. Delete container ask what happens to children.
+
+6. Shortcut keys. Pending. Low priority. - Windowbox code.
+
+7. Import export.
+
+8. Backups. - done
+
+9. Low prioriy. Website. - Now have domain. - done
+
+10. Android version. Cordova.
+
+11. On click button focus photo
+
+TODO. Add timestamp to json download.
+
+12a. Alphabetical ordering in chains. - Low priority.
 
  
 
@@ -227,7 +246,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
 
     onlongtouch = function () {
-        touched.innerHTML = touched.id;
+        //  touched.innerHTML = touched.id;
 
         let buttonId = touched.id;
 
@@ -288,7 +307,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
 
         <button style="border-style: none;position:relative;margin-left: 2px;">
-            <h4> <i class="bi-house" style="font-size: 2rem; color: cornflowerblue"></i>InCitio Mobile V1.14</h4>
+            <h4> <i class="bi-house" style="font-size: 2rem; color: cornflowerblue"></i>InCitio Mobile V1.12</h4>
         </button>
 
         <p></p>
@@ -441,17 +460,43 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
 
             </div>
+
         </div>
 
- 
+        <div class="myDiv" style="background-color:rgb(170, 123, 37); margin:10px;display:none">
+            <button style="width:100%">Details2
+                <img src="images/arrow_down_icon.png" style="position:relative;width:20px;height:20px; float:right">
+            </button>
+
+            <div id="theDetails2">
+
+                <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px;">
+                    <button type="button" id="updateButton" class="btn btn-default btn-secondary">Details</button>
+                </div>
+
+
+                <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px;">
+
+                    <button type="button" id="updateButton" class="btn btn-default btn-primary"
+                        onclick="updateItemsFromForm();">Update</button>
+                    <button type="button" class="btn btn-default btn-primary" onclick="deleteItem();">Delete</button>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+
 
         <!-- backups -->
         <div class="myDiv" style="background-color:white;margin:10px ">
-            <div class="btn btn-info btn-sm" onclick="toggleArrow(this,theBackups)"style="width:100%">backups
+            <div class="btn btn-info btn-sm" onclick="alert('1')" style="width:100%">backups
                 <img src="images/arrow_down_icon.png" style="position:relative;width:20px;height:20px; float:right">
             </div>
 
-            <div id="theBackups" style="display:none">
+            <div id="theBackups" style="display:initial">
 
 
                 <div class="myDiv" style="margin-top:20px">
@@ -467,17 +512,17 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
                     </select>
                     <p></p>
 
-                    <div class="btn btn-primary btn-sm" style="width:70%;margin:3px" onclick="getJSON()">Get
-                        Data</div>
+                    <button class="btn btn-primary btn-sm" style="width:70%;margin:3px" onclick="getJSON()">Get
+                        Data</button>
                     <br>
-                    <div class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="putJSON()">Save
-                        Data</div>
+                    <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="putJSON()">Save
+                        Data</button>
                     <br>
-                    <div class="btn btn-success btn-sm" style="width:70%;margin:3px" onclick="newJSON()">New
-                        Database</div>
+                    <button class="btn btn-success btn-sm" style="width:70%;margin:3px" onclick="newJSON()">New
+                        Database</button>
                     <br>
-                    <div class="btn btn-danger btn-sm" style="width:70%;margin:3px" onclick="deleteJSON()">Delete
-                        Database</div>
+                    <button class="btn btn-danger btn-sm" style="width:70%;margin:3px" onclick="deleteJSON()">Delete
+                        Database</button>
 
                     <!--
                     <button onclick="clearStorage()">Clear</button>
@@ -515,11 +560,11 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
         <!-- config -->
         <div class="myDiv" style="background-color:white;margin:10px ">
-            <div class="btn btn-info btn-sm"  onclick="toggleArrow(this,theConfig)" style="width:100%">Configuration
+            <div class="btn btn-info btn-sm" onclick="alert('1')" style="width:100%">Configuration
                 <img src="images/arrow_down_icon.png" style="position:relative;width:20px;height:20px; float:right">
             </div>
 
-            <div id="theConfig" style="display:none">
+            <div id="theConfig" style="display:initial">
 
 
 
@@ -533,11 +578,11 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
         <!-- help -->
         <div class="myDiv" style="background-color:white;margin:10px ">
-            <div class="btn btn-info btn-sm" onclick="toggleArrow(this,theHelp)" style="width:100%">Help
+            <div class="btn btn-info btn-sm" onclick="alert('1')" style="width:100%">Help
                 <img src="images/arrow_down_icon.png" style="position:relative;width:20px;height:20px; float:right">
             </div>
 
-            <div id="theHelp" style="display:none">
+            <div id="theHelp" style="display:initial">
 
 
                 <div class="myDiv" style="margin-top:20px">
@@ -571,7 +616,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
             image: "?"
         };
 
-    //     alert(screen.width);
+        // alert(screen.width);
 
         let gCurrentParentId = 0; // do I need to persist this?
         function getCurrentParentId() { return gCurrentParentId; }
