@@ -6,39 +6,37 @@ Incityo
 
 1 Sep 24. First version that sort of works. Now a TODO list...
 
-Impliment.
+2. Search name/description. Make a search panel
 
-Debug Window
-Tidy up
+Auto backup and painless carry on from where you left off.
+I guess make my master on Dreamhost.   
 
-1. Code to remove absolute path to photos.
+Need to look at Cordova
+Start with npm
+Look at how it works with javascript
 
-2. Search name/description.
+Recode and polish existing codebase
 
-3. Change container. done
+Reengineer the HTML from mobile back to desktop
+
+Tidy all the JSON stuff
+
+Look at image to data url
+
+
+Change parent show breadcrumbs on hover on select
+
+              document.write(`<option  title='sir'     >` + localStorage.key(i) + `</option>`);
+
 
 4. Delete container ask what happens to children.
-
-5. Photo of Home done
-
 6. Shortcut keys. Pending. Low priority.
+10. Android version.Low priority atm . Maybe javascript to start with. Priority 10.
+11. Image rotation
+12. Trash can.
+14. Better track of thumbnails to remove unwanted ones.
 
-7. Import export.
-
-8. Backups. - make it better Priority 5.
-
-9. Low prioriy. Website. - Now have domain.
-
-10. Android version. Maybe javascript to start with. Priority 10.
-
-11. On click button focus photo
-
-12. Add timestamp to json download.
-
-12a. Alphabetical ordering in chains.
-
-
-Also, regain some confidence with linux. How Apache works. PHP. etc.
+Investigate and get comfy with Cordova
 
 
 https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-side-in-javascript-in-various-browsers
@@ -106,11 +104,7 @@ if (file) {
       border: 5px outset purple;
       text-align: center;
     }
-  </style>
-
-
-
-  <style>
+   
     .bigbtn {
       width: 400px;
       background-color: #6f8670;
@@ -173,7 +167,7 @@ if (file) {
 
     }
 
-    /* CSS */
+    /* CSS 
     .button-34 {
       background: #6b6bda;
       border-radius: 30px;
@@ -195,6 +189,10 @@ if (file) {
       word-break: break-word;
       border: 0;
     }
+
+*/
+
+
   </style>
 
 </head>
@@ -271,7 +269,7 @@ if (file) {
 
        
       <button style="border-style: none;background-color: transparent;">
-        <h4> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio V1.14</h4>
+        <h4> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio V1.15</h4>
       </button>
      
       <div style="margin:auto">
@@ -294,18 +292,18 @@ if (file) {
 
       <div class="myDiv" style="margin-top:20px">
         <h4>Select database</h4>
-        <select id="json" style="width:90%; background-color:rgb(203, 221, 236);border-radius: 5px;">
+        <select id="json" style="width:90%; background-color:rgb(203, 221, 236);border-radius: 5px;"   >
 
           <script>
             for (i = 0; i < localStorage.length; i++) {
-              document.write(`<option>` + localStorage.key(i) + `</option>`);
+              document.write(`<option  title='sir'     >` + localStorage.key(i) + `</option>`);
             }
           </script>
 
         </select>
         <p></p>
 
-        <button class="btn btn-primary btn-sm" style="width:70%;margin:3px" onclick="getJSON()">Get Data</button>
+        <button class="btn btn-primary btn-sm" style="width:70%;margin:3px"     onclick="getJSON()">Get Data</button>
         <br>
         <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="putJSON()">Save Data</button>
         <br>
@@ -481,6 +479,8 @@ if (file) {
     function hid(el) {
       el.display = "none";
     }
+ 
+  
 
     const itemObject = {
       id: "0",
@@ -491,7 +491,7 @@ if (file) {
       image: "?"
     };
     
-   //alert(screen.width);
+ 
 
     let gCurrentParentId = 0; // do I need to persist this?
     function getCurrentParentId() { return gCurrentParentId; }
@@ -502,11 +502,29 @@ if (file) {
 
     gItemArray.push(itemObject);
 
-    setCurrentRoot(0);
+// new code ahead
+ //   let js = localStorage.getItem("autosave");
+
+  //alert(js); 
+//  gItemArray = JSON.parse(js);
+
+ // setCurrentRoot(0);
+
+ // showAlert("done get autosave");
+
+// setCurrentRoot(0);
+
+    json.value = "autosave";
+    getJSON();
+
+ 
  
     //for (i = 0; i < localStorage.length; i++)
     //   alert(localStorage.key(i));
     //
+
+
+    /*
     function f(el) {
       hid(el);
       let p = el.parentElement;
@@ -616,6 +634,21 @@ if (file) {
 
 
     alertBox.addEventListener("animationend", () => { alertBox.classList.remove("animate"); });
+
+
+
+  window.onbeforeunload = closingCode;
+  function closingCode() {
+    const myJSON = JSON.stringify(gItemArray);
+  // alert(myJSON);
+  // Store
+  localStorage.setItem("autosave", myJSON);
+
+  let msg = "saved data to " + "autosave";
+
+  alert(msg);
+    return null;
+  }
 
   </script>
 </body>

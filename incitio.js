@@ -502,25 +502,22 @@ function refreshJSON() {
 
 }
 
-
+/*
 function toJSON() {
   const myJSON = JSON.stringify(gItemArray);
   // Store
   localStorage.setItem("jsonString", myJSON);
   showAlert("defunct");
-}
+}*/
 
 
 function getJSON() {
   let js = localStorage.getItem(json.value);
-
-  //alert(js);
-
+   
   gItemArray = JSON.parse(js);
 
   setCurrentRoot(0);
-
-  showAlert("done get");
+  showAlert("done get " + json.value);
 }
 
 
