@@ -4,12 +4,7 @@
 
 Incityo
 
-1 Sep 24. First version that sort of works. Now a TODO list...
-
-2. Search name/description. Make a search panel
-
-Auto backup and painless carry on from where you left off.
-I guess make my master on Dreamhost.   
+Search name/description. Make a search panel
 
 Need to look at Cordova
 Start with npm
@@ -30,19 +25,24 @@ Change parent show breadcrumbs on hover on select
 
 
 - On select put all containers in alpha order
+
 - Check document write
+
 - Look at reverse engineering some of the panels from mobile
 
 make good demos
 
+Delete container ask what happens to children.
 
+ Shortcut keys. Pending. Low priority.
 
-4. Delete container ask what happens to children.
-6. Shortcut keys. Pending. Low priority.
-10. Android version.Low priority atm . Maybe javascript to start with. Priority 10.
-11. Image rotation
-12. Trash can.
-14. Better track of thumbnails to remove unwanted ones.
+  Android version.Low priority atm . Maybe javascript to start with. Priority 10.
+
+  Image rotation
+
+  Trash can.
+
+ Better track of thumbnails to remove unwanted ones.
 
 Investigate and get comfy with Cordova
 
@@ -75,14 +75,12 @@ if (file) {
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
-  <link rel="stylesheet" href="./incitio.css">
+ 
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-
-  <!--
-
+ 
   <style>
     .myDiv {
       border: 5px outset red;
@@ -128,6 +126,22 @@ if (file) {
 
       font-size: 16px;
       margin: 4px 2px;
+      cursor: pointer;
+    }
+
+
+    .btn-arrow {
+      width: 10px;
+      height: 10px;
+      background-color: #790817;
+      border: solid black 2px;
+      color: white;
+      padding: 0px;
+      text-align: center;
+      text-decoration: none;
+
+      font-size: 10px;
+      margin: 0px;
       cursor: pointer;
     }
 
@@ -184,7 +198,7 @@ if (file) {
 
   </style>
   
-  -->
+ 
 </head>
 
 <script src="./incitio.js"></script>
@@ -208,6 +222,8 @@ if (file) {
 
 
  // Long touch
+
+ 
  let onlongtouch = false;
     let timer = false;
     let duration = 800;
@@ -242,7 +258,9 @@ if (file) {
         duration = 800;
         touched = false;
 
-    }
+    }  
+
+
 </script>
 
 <body>
@@ -251,14 +269,11 @@ if (file) {
   </button>
 
   <div id="topDiv" class="myDiv" style="display:inline-flex;width:100%;height:800px;background-color: #6b6bda;">
-
-  
   
     <!-- first column -->
     <div class="myDiv" style="width:20%;background-color:pink;height:800px; ">
-
-       
-      <button style="border-style: none;background-color: transparent;">
+     
+      <button style="border-style: none;background-color: transparent;  ">
         <h4> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio V1.151</h4>
       </button>
      
@@ -382,7 +397,6 @@ if (file) {
         </div>
       </div>
     </div>
-
     <!-- third column -->
     <div class="myDiv" style="width:30%;background-color:rgb(170, 123, 37);height:8oopx;overflow-y: scroll"> 
       <div class="myDiv" style="background-color: rgb(34, 143, 119);text-align:center;padding:5px ">
@@ -519,13 +533,13 @@ if (file) {
     window.onbeforeunload = closingCode;
     function closingCode() {
       const myJSON = JSON.stringify(gItemArray);
-      alert(myJSON);
+   //   alert(myJSON);
       // Store
       localStorage.setItem("autosave", myJSON);
 
-      let msg = "saved data to " + "autosave";
+    //  let msg = "saved data to " + "autosave";
 
-      alert(msg);
+   //   alert(msg);
       return null;
     }
   
