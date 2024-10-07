@@ -36,15 +36,6 @@ function makeNewButton(type) {
   newItemObject = createItem(type);
   if (newItemObject) {
     b = createItemButton(newItemObject);
-
-
-
-
-
-
-
-
-
     clickButton(b);
   }
 
@@ -125,7 +116,7 @@ function buttonSelected(buttonId) {
 
   let bs = document.getElementsByClassName("hasFocus");
 
-  for (i = 0; i < bs.length; i++) {
+  for (let i = 0; i < bs.length; i++) {
     bs[i].classList.remove("hasFocus");
   }
 
@@ -144,16 +135,32 @@ function buttonSelected(buttonId) {
 
     let np = gid("newParent");
     let theHTML = "";
-
-    for (i = 0; i < gItemArray.length; i++) {
+    // debugger;
+    for (let i = 0; i < gItemArray.length; i++) {
       //     
       if (gItemArray[i].type == "c") {
 
+        gChainArray = [];
+        let thisRoot = gItemArray[i].id;
+        if (i > 0)
+          while (thisRoot != "?")
+            thisRoot = discoverChain(thisRoot);
+
+
+        let theTitle = "";
+        //debugger;
+        for (let j = 0; j < gChainArray.length; j++) {
+          thisItem = getItemObjectById(gChainArray[j]);
+          theTitle += thisItem.name + ">";
+
+        }
+
+
         if (gItemArray[i].id == itemObject.parentId)
 
-          theHTML += `<option value="` + gItemArray[i].id + `"  selected >` + gItemArray[i].name + `</option>`;
+          theHTML += `<option value = "${gItemArray[i].id}" selected> ${gItemArray[i].name} </option>`;
         else
-          theHTML += `<option value="` + gItemArray[i].id + `">` + gItemArray[i].name + `</option>`;
+          theHTML += `<option value = "${gItemArray[i].id}"  title="${theTitle}"> ${gItemArray[i].name} </option>`
       }
     }
     np.innerHTML = theHTML;
@@ -240,12 +247,8 @@ function createChainButton(itemObject) {
   let el = document.getElementById("divChain");
   el.appendChild(newButton);
 
-
-
   el.addEventListener("touchstart", touchStart);
   el.addEventListener("touchend", touchEnd);
-
-
 
   buttonColor = `btn btn-primary`;
 
@@ -259,12 +262,49 @@ function createChainButton(itemObject) {
   newButton.outerHTML = theHTML;
 
   return newButton;
+}
 
+
+var timeout;
+
+function hoverStart(e) {
+
+  timeout = setTimeout(function () {
+    showAlert("hello");
+  }, 3000);
+}
+
+
+function hoverEnd(e) {
+  if (timeout) {
+    clearTimeout(timeout);
+  }
 
 }
 
-function clickButton(buttonId) {
+function createTreeButton(itemObject) {
+ /*
 
+  let newButton = document.createElement('button');
+  let el = document.getElementById("divTree");
+  el.appendChild(newButton);
+ 
+
+  buttonColor = `btn btn-dark`;
+
+  buttonId = "tree_" + itemObject.id;
+
+  theHTML = `<button id="${buttonId}" 
+      onClick=buttonSelected("${buttonId}")  onmouseover=hoverStart() onmouseout=hoverEnd()
+       class="${buttonColor}" style="margin:0px">${itemObject.name}</button>
+       <button style="border:none">></button>`;
+
+  newButton.outerHTML = theHTML;
+
+
+  return newButton; */
+}
+function clickButton(buttonId) {
   b = gid(buttonId);
   b.click();
 }
@@ -301,7 +341,7 @@ function createItemButton(itemObject) {
 // Maybe move this into setCurrentRoot
 function discoverChain(thisId) {
 
-  for (i = 0; i < gItemArray.length; i++) {
+  for (let i = 0; i < gItemArray.length; i++) {
     //     alert(gItemArray[i].id);
     if (gItemArray[i].id == thisId) {
       let parentId = gItemArray[i].parentId;
@@ -311,15 +351,15 @@ function discoverChain(thisId) {
   }
 }
 
-function compare(aItem,bItem) {
+function compare(aItem, bItem) {
 
-   aName = aItem.name.toUpperCase();
-   bName = bItem.name.toUpperCase();
-    
-  if ( aName < bName ){
+  aName = aItem.name.toUpperCase();
+  bName = bItem.name.toUpperCase();
+
+  if (aName < bName) {
     return -1;
   }
-  if ( aName > bName ){
+  if (aName > bName) {
     return 1;
   }
   return 0;
@@ -330,7 +370,6 @@ function compare(aItem,bItem) {
 
 function setCurrentRoot(rootId) {
 
-  //alert("here");
 
 
   if (getItemObjectById(rootId).type != "c") {
@@ -352,10 +391,17 @@ function setCurrentRoot(rootId) {
 
   gid("divChain").innerHTML = "";
 
-  for (j = 0; j < gChainArray.length; j++) {
+  for (let j = 0; j < gChainArray.length; j++) {
     thisId = gChainArray[j];
     thisItemObject = getItemObjectById(thisId);
+    // need thisButton?
     thisButton = createChainButton(thisItemObject);
+
+    b = createTreeButton(thisItemObject);
+    
+
+ // b.addEventListener("onmouseover", alert("xxx"));
+ // b.addEventListener("onmouseout", alert("yy"));
 
   }
 
@@ -366,10 +412,7 @@ function setCurrentRoot(rootId) {
       kids.push(gItemArray[i]);
 
   if (kids.length > 0) {
-
     kids.sort(compare);
-
-
   }
 
   for (i = 0; i < kids.length; i++)
@@ -513,7 +556,7 @@ function toJSON() {
 
 function getJSON() {
   let js = localStorage.getItem(json.value);
-   
+
   gItemArray = JSON.parse(js);
 
   setCurrentRoot(0);
