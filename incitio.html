@@ -270,7 +270,7 @@ if (file) {
     <div class="myDiv" style="width:20%;background-color:pink;height:800px; ">
 
       <button style="border-style: none;background-color: transparent;  ">
-        <h4> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio V1.151</h4>
+        <h4> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio V1.16</h4>
       </button>
 
       <div style="margin:auto">
@@ -358,9 +358,22 @@ if (file) {
 
       <script>
 
+
+
+        let arrTree = [];
+
         function test() {
-  //        alert('');
-          
+
+          let level = -1;
+          treeItem = {
+            id: "0",
+            level: "0",
+            name: "home"
+
+          };
+
+
+
           function findKids(obj) {
             let kids = [];
             for (let i = 0; i < gItemArray.length; i++) {
@@ -372,26 +385,56 @@ if (file) {
           }
 
 
-          function showTree(thisItemObject) {
-         
+          function makeTree(thisItemObject) {
+            level++;
+
+            let x = Object.create(treeItem);
+
+            x.id = thisItemObject.id;
+            x.level = level;
+            x.name = thisItemObject.name;
+            arrTree.push(x);
+
+            console.log(level);
+            console.log(thisItemObject.id);
+            console.log(thisItemObject.name);
+
+
+
             let obj = thisItemObject;
             let kids = findKids(obj);
             let l = kids.length;
-           // if(l>0)
-              console.log(l);
-            for(let i = 0;i<kids.length;i++){
-              console.log(kids[i].name);
-              showTree(kids[i]);
+
+            for (let i = 0; i < kids.length; i++) {
+              //    console.log(kids[i].name);
+              makeTree(kids[i]);
             }
+            level--;
 
           }
 
 
           let thisItemObject = gItemArray[0];
-          console.log(thisItemObject.name);
-          showTree(thisItemObject);
+          //   console.log(thisItemObject.name);
+          makeTree(thisItemObject);
+
+
+
+     //     debugger;
+
+          for (let j = 0; j < arrTree.length; j++) {
+
+            let id = arrTree[j].id;
+            let myItem = getItemObjectById(id);
+
+            createTreeButton(myItem,arrTree[j].level);
+
+          }
 
         }
+
+
+
 
 
       </script>
@@ -430,9 +473,34 @@ if (file) {
         </div>
       </div>
 
-      <!-- Tree -->
-      <div class="myDiv" id="divTree" style="background-color:hsl(245, 21%, 54%);margin:auto;margin-top: 0px;">
-        <button onclick="test()">test</button>
+      <!-- Tree 
+      <button onclick="test()">test</button> -->
+      <div class="myDiv" id="divTree" style="background-color:hsl(245, 21%, 54%);
+      margin:auto;margin-top: 0px;display:none">
+        <div class="myDiv"  style="background-color:white ;"  >
+
+        </div>
+        
+        <div class="myDiv"  style="background-color:white ;"  >
+
+        </div>
+        <div class="myDiv"  style="background-color:white ;"  >
+
+        </div>
+        <div class="myDiv"  style="background-color:white ;"  >
+
+        </div>
+        <div class="myDiv"  style="background-color:white ;"  >
+
+        </div>
+        <div class="myDiv"  style="background-color:white ;"  >
+
+        </div>
+        <div class="myDiv"  style="background-color:white ;"  >
+
+        </div>
+
+        
       </div>
 
       <!--Photo Grid-->
@@ -587,7 +655,7 @@ if (file) {
       if (el.classList.contains(c))
         return true; else return false;
     }
-
+ 
 */
 
 

@@ -1,6 +1,6 @@
 
 
-// TLA helpers
+// V1.16
 
 
 
@@ -282,28 +282,7 @@ function hoverEnd(e) {
 
 }
 
-function createTreeButton(itemObject) {
- /*
 
-  let newButton = document.createElement('button');
-  let el = document.getElementById("divTree");
-  el.appendChild(newButton);
- 
-
-  buttonColor = `btn btn-dark`;
-
-  buttonId = "tree_" + itemObject.id;
-
-  theHTML = `<button id="${buttonId}" 
-      onClick=buttonSelected("${buttonId}")  onmouseover=hoverStart() onmouseout=hoverEnd()
-       class="${buttonColor}" style="margin:0px">${itemObject.name}</button>
-       <button style="border:none">></button>`;
-
-  newButton.outerHTML = theHTML;
-
-
-  return newButton; */
-}
 function clickButton(buttonId) {
   b = gid(buttonId);
   b.click();
@@ -314,13 +293,8 @@ function createItemButton(itemObject) {
   let el = document.getElementById("divItems");
   el.appendChild(newButton);
 
-
-
   el.addEventListener("touchstart", touchStart);
   el.addEventListener("touchend", touchEnd);
-
-
-
 
   if (itemObject.type == "c") {
     buttonColor = `btn btn-primary`;
@@ -336,7 +310,29 @@ function createItemButton(itemObject) {
   return buttonId;
 
 }
+function createTreeButton(itemObject,level) {
+  let newButton = document.createElement('button');
+  let el = document.getElementById("divTree");
+  el = el.children[level];
+  el.appendChild(newButton);
 
+  el.addEventListener("touchstart", touchStart);
+  el.addEventListener("touchend", touchEnd);
+
+  if (itemObject.type == "c") {
+    buttonColor = `btn btn-primary`;
+  } else {
+    buttonColor = `btn btn-success`;
+  }
+
+  buttonId = "tree_" + itemObject.id;
+
+  theHTML = `<button id="${buttonId}"    class="${buttonColor}" style="margin:3px">${itemObject.name}</button>`;
+
+  newButton.outerHTML = theHTML;
+  return buttonId;
+
+}
 
 // Maybe move this into setCurrentRoot
 function discoverChain(thisId) {
@@ -370,8 +366,6 @@ function compare(aItem, bItem) {
 
 function setCurrentRoot(rootId) {
 
-
-
   if (getItemObjectById(rootId).type != "c") {
     showAlert("not a container");
     return;
@@ -397,11 +391,11 @@ function setCurrentRoot(rootId) {
     // need thisButton?
     thisButton = createChainButton(thisItemObject);
 
-    b = createTreeButton(thisItemObject);
-    
+    //  b = createTreeButton(thisItemObject);
 
- // b.addEventListener("onmouseover", alert("xxx"));
- // b.addEventListener("onmouseout", alert("yy"));
+
+    // b.addEventListener("onmouseover", alert("xxx"));
+    // b.addEventListener("onmouseout", alert("yy"));
 
   }
 
@@ -418,22 +412,12 @@ function setCurrentRoot(rootId) {
   for (i = 0; i < kids.length; i++)
     createItemButton(kids[i]);
 
-  // the children of divItems;
-
-
-
-
-
-
+ 
 
 }
 
 
-
-
 function downloadData() {
-
-
   let js = localStorage.getItem(json.value);
   //  let str = JSON.stringify(js);
   let str = js;
@@ -457,11 +441,9 @@ function downloadData() {
 function gridPhotoClicked(id) {
 
   let thisItemObject = getItemObjectById(id);
-  //    itemObjectToForm(thisItemObject);
+ 
 
   setCurrentRoot(thisItemObject.parentId);
-
-
 
   let bs = document.getElementsByClassName("hasFocus");
 
@@ -470,8 +452,7 @@ function gridPhotoClicked(id) {
     bs[i].classList.remove("hasFocus");
   }
 
-  // gridId = "image_" + id;
-  // (gid(gridId)).classList.add("hasFocus");
+  
   let buttonId = "item_" + id;
   buttonSelected(buttonId);
 
