@@ -310,7 +310,7 @@ function createItemButton(itemObject) {
   return buttonId;
 
 }
-function createTreeButton(itemObject, level) {
+function createTreeButton(itemObject,level) {
   let newButton = document.createElement('button');
   let el = document.getElementById("divTree");
   el = el.children[level];
@@ -336,7 +336,7 @@ function createTreeButton(itemObject, level) {
 
 // Maybe move this into setCurrentRoot
 function discoverChain(thisId) {
-
+ 
   for (let i = 0; i < gItemArray.length; i++) {
     //     alert(gItemArray[i].id);
     if (gItemArray[i].id == thisId) {
@@ -412,7 +412,7 @@ function setCurrentRoot(rootId) {
   for (i = 0; i < kids.length; i++)
     createItemButton(kids[i]);
 
-
+ 
 
 }
 
@@ -440,13 +440,8 @@ function downloadData() {
 
 function gridPhotoClicked(id) {
 
-  if (id == 0) {
-    chain_0.click();
-    return;
-  }
-
   let thisItemObject = getItemObjectById(id);
-
+ 
 
   setCurrentRoot(thisItemObject.parentId);
 
@@ -457,7 +452,7 @@ function gridPhotoClicked(id) {
     bs[i].classList.remove("hasFocus");
   }
 
-
+  
   let buttonId = "item_" + id;
   buttonSelected(buttonId);
 
@@ -607,61 +602,81 @@ function uploadImageFile() {
     const reader = new FileReader();
 
     reader.addEventListener(
-      "load",
-      () => {
-        // convert image file to base64 string
-        thePhoto.src = reader.result;
-
-        //        alert(thePhoto.src.length);
-
-        var elem = document.createElement('canvas');//create a canvas
-
-        //scale the image to 600 (width) and keep aspect ratio
-        resize_width = 200;
-        var scaleFactor = resize_width / thePhoto.width;
-        elem.width = resize_width;
-        elem.height = thePhoto.height * scaleFactor;
-
-        //draw in canvas
-        var ctx = elem.getContext('2d');
-        ctx.drawImage(thePhoto, 0, 0, elem.width, elem.height);
-
-        var srcEncoded = ctx.canvas.toDataURL('image/png', 1);
-
-        alert(srcEncoded.length);
-
-        //assign it to thumb src
-        thePhoto.src = srcEncoded;
+        "load",
+        () => {
+            // convert image file to base64 string
+            thePhoto.src = reader.result;
 
 
-        // establish the id of the current item
-        thisId = inItemId.value;
-        thisItemObject = getItemObjectById(thisId);
-        thisItemObject.image = thePhoto.src;
-        showAlert("File uploaded to " + thisItemObject.name);
-        showAllItems();
-      },
-      false,
+            // establish the id of the current item
+            thisId = inItemId.value;
+            thisItemObject = getItemObjectById(thisId);
+            thisItemObject.image = thePhoto.src;
+            showAlert("File uploaded to " + thisItemObject.name);
+            showAllItems();
+        },
+        false,
     );
 
     if (imgfile) {
-      reader.readAsDataURL(imgfile);
+        reader.readAsDataURL(imgfile);
     }
-
-
-  }
-
-
-  previewFile();
 
 
 }
 
 
+previewFile();
 
 /*
+  var files = file.files;
 
-function uploadImageFile() {
+  if (files.length > 0) {
+
+    var formData = new FormData();
+    let theDir = "photos";
+
+    formData.append("file", files[0]); // this passes the filename to PHP
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "./uploadincitio.php?&dir=" + theDir, true);
+
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+
+        var response = this.responseText;
+
+
+        if (response == 1) {
+
+          alert("File not uploaded. ");
+
+        } else {
+
+          thePhoto.src = response; // here's the display
+
+          let idValue = getFormValue('inItemId');
+          let theItemObject = getItemObjectById(idValue);
+
+          theItemObject.image = response;
+
+          showAlert("file uploaded");
+          showAllItems();
+
+        }
+      }
+    };
+
+    // Send request with data
+    xhttp.send(formData);
+
+  } else {
+    showAlert("Please select a file");
+  }*/
+}
+
+
+function xuploadImageFile() {
 
   var files = file.files;
 
@@ -719,5 +734,5 @@ async function readText(event) {
   showAlert("File uploaded to " + json.value);
 }
 
-*/
+
 

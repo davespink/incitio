@@ -2,6 +2,21 @@
 <html lang="en">
 <!--   
 
+BUG LIST
+========
+
+
+1. Somthing strange when you click on Home im the grid.
+Exception generated.
+Can click OK in breadcrumbs. What gives?
+
+2. Need to replace the stock photos ( no such image etc ) maybe svg?
+
+3. Need to take care of test data situation
+
+4. Need to find out about modal state.
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal
+
 Incityo
 
 Search name/description. Make a search panel
@@ -17,8 +32,6 @@ Reengineer the HTML from mobile back to desktop
 Tidy all the JSON stuff
 
 Look at image to data url
-
-Need to resize image on canvas - toUrl
 
 
 Change parent show breadcrumbs on hover on select
@@ -514,7 +527,7 @@ if (file) {
       <!-- photos -->
       <div class="myDiv" style="text-align:center;background-color:green  ">
         <div id="divPhotos" class="myDiv"
-          style="text-align:center;width:90%;background-color: aquamarine; margin:0 auto; padding:10px;height:500px;overflow-y: scroll">
+          style="text-align:center;width:90%;background-color: aquamarine; margin:0 auto; padding:10px;height:300px;overflow-y: scroll">
         </div>
       </div>
     </div>
@@ -524,7 +537,7 @@ if (file) {
       <div class="myDiv" style="background-color: rgb(34, 143, 119);text-align:center;padding:5px ">
 
         <!--  The Photo Upload etc-->
-        <div style="margin-top: 30px">
+        <div>
           <img id="thePhoto" style="min-width:200px;min-height:200px">
         </div>
 
@@ -597,7 +610,7 @@ if (file) {
     const itemObject = {
       id: "0",
       type: "c",
-      parentId: "?",
+      parentId: "0",
       name: "home",
       description: "your humble abode",
       image: "?"
@@ -629,7 +642,36 @@ if (file) {
 
   <script>
 
-   
+    /*
+    function displace(el, options) {
+      return window.displacejs(el, options);
+    }
+    function gid(id) {
+      return document.getElementById(id);
+    }
+    function hid(el) {
+      el.style.display = 'none';
+    }
+    function vid(el) {
+      el.style.display = 'initial';
+    }
+    function tvid(el) {
+      if (el.style.display == 'initial')
+        hid(el)
+      else vid(el);
+    }
+    function viz(el) {
+      if (el.style.display == 'initial')
+        return true; else return false;
+    }
+    function isa(el, c) {
+      if (el == undefined || el == null || el == document)
+        return false;
+      if (el.classList.contains(c))
+        return true; else return false;
+    }
+ 
+*/
 
 
 
