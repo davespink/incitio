@@ -586,10 +586,10 @@ function deleteJSON() {
 
 
 function clearStorage() {
-  //localStorage.clear();
+  localStorage.clear();
 
-  //  showAlert("done clear");
-  //  refreshJSON();
+  showAlert("done clear");
+  refreshJSON();
 }
 
 
@@ -598,126 +598,75 @@ function clearStorage() {
 
 
 function uploadImageFile() {
-
-
-
-  function previewFile() {
-    const preview = thePhoto;
-    const imgfile = file.files[0];
-    const reader = new FileReader();
-
-    reader.addEventListener(
-      "load",
-      () => {
-        // convert image file to base64 string
-        thePhoto.src = reader.result;
-
-        //        alert(thePhoto.src.length);
-
+  function resize(){
+    //define the width to resize e.g 600px
+    var resize_width = 200;//without px
+  
+    //get the image selected
+    var item = file.files[0];
+  
+    //create a FileReader
+    var reader = new FileReader();
+   
+    //image turned to base64-encoded Data URI.
+    reader.readAsDataURL(item);
+    reader.name = item.name;//get the image's name
+    reader.size = item.size; //get the image's size
+    reader.onload = function(event) {
+      var img = new Image();//create a image
+      img.src = event.target.result;//result is base64-encoded Data URI
+    
+    //  alert(img.src.length);
+      
+      img.name = event.target.name;//set name (optional)
+      img.size = event.target.size;//set size (optional)
+      img.onload = function(el) {
         var elem = document.createElement('canvas');//create a canvas
-
+  
         //scale the image to 600 (width) and keep aspect ratio
-        resize_width = 200;
-        var scaleFactor = resize_width / thePhoto.width;
+        var scaleFactor = resize_width / el.target.width;
         elem.width = resize_width;
-        elem.height = thePhoto.height * scaleFactor;
-
+        elem.height = el.target.height * scaleFactor;
+  
         //draw in canvas
         var ctx = elem.getContext('2d');
-        ctx.drawImage(thePhoto, 0, 0, elem.width, elem.height);
-
+        ctx.drawImage(el.target, 0, 0, elem.width, elem.height);
+  
+        //get the base64-encoded Data URI from the resize image
         var srcEncoded = ctx.canvas.toDataURL('image/png', 1);
-
-        alert(srcEncoded.length);
-
+  
         //assign it to thumb src
         thePhoto.src = srcEncoded;
+        alert(srcEncoded.length);
+  
+        /*Now you can send "srcEncoded" to the server and
+        convert it to a png o jpg. Also can send
+        "el.target.name" that is the file's name.*/
+        
+        /*Also if you want to download tha image use this*/
+        /*
+        var a = document.createElement("a"); //Create <a>
+        a.href =  srcEncoded; //set srcEncoded as src
+        a.download = "myimage.png"; //set a name for the file
+        a.click();
+        
+        */
+  
+
+        let idValue = getFormValue('inItemId');
+        let theItemObject = getItemObjectById(idValue);
+
+        theItemObject.image = srcEncoded;
 
 
-        // establish the id of the current item
-        thisId = inItemId.value;
-        thisItemObject = getItemObjectById(thisId);
-        thisItemObject.image = thePhoto.src;
-        showAlert("File uploaded to " + thisItemObject.name);
-        showAllItems();
-      },
-      false,
-    );
-
-    if (imgfile) {
-      reader.readAsDataURL(imgfile);
-    }
-
-
-  }
-
-
-  previewFile();
-
-
-}
-
-
-
-/*
-
-function uploadImageFile() {
-
-  var files = file.files;
-
-  if (files.length > 0) {
-
-    var formData = new FormData();
-    let theDir = "photos";
-
-    formData.append("file", files[0]); // this passes the filename to PHP
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "./uploadincitio.php?&dir=" + theDir, true);
-
-    xhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-
-        var response = this.responseText;
-
-
-        if (response == 1) {
-
-          alert("File not uploaded. ");
-
-        } else {
-
-          thePhoto.src = response; // here's the display
-
-          let idValue = getFormValue('inItemId');
-          let theItemObject = getItemObjectById(idValue);
-
-          theItemObject.image = response;
-
-          showAlert("file uploaded");
-          showAllItems();
-
-        }
+  
       }
-    };
-
-    // Send request with data
-    xhttp.send(formData);
-
-  } else {
-    showAlert("Please select a file");
+    }
   }
+  
+  
+
+  resize();
 }
 
-async function readText(event) {
-  const file = event.target.files.item(0);
-  const text = await file.text();
-
-
-  localStorage.setItem(json.value, text);
-
-  showAlert("File uploaded to " + json.value);
-}
-
-*/
 
