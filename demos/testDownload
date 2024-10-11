@@ -8,25 +8,15 @@ function doDown(){
 }
 </script>
 <body>
-
     <a id='a' download='Download.csv' type='text/csv'></a>
-
     <script>
         var csv = 'a,b,c\n1,2,3\n';
         var data = new Blob([csv]);
         var a = document.getElementById('a');
         a.href = URL.createObjectURL(data);
     </script>
-
-    
 <button onclick="doDown()">
-
     click
 </button>
-
- 
-
 </body>
-
-
 </html>

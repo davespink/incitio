@@ -2,6 +2,7 @@
 
 if (isset($_GET['dir'])) {
     $dir = $_GET['dir'];
+  
 }
 
 if (!is_dir($dir)) {
@@ -22,9 +23,13 @@ function cropAndRename($fileName, $file_extension)
 
     global $dir;
     global $uploaded;
-    $stamp = time();
+    global $stamp;
 
-    $uploaded = $dir . '/img_' . $stamp  . '.' . $file_extension;
+     
+    $stamp = time();
+ 
+
+    $uploaded = $dir . '/image_' . $stamp  . '.' . $file_extension;
     //  $thumb = $dir . '/tn_img_' . $stamp  . '.jpg';
     rename($fileName, $uploaded);
 
