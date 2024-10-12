@@ -611,10 +611,13 @@ function uploadImageFile() {
 
 
     // make up name of file
-    let fname = inItemId.value;
+    
 
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "./uploadincitio.php?&dir=" + theDir, true);
+   // let req = "./uploadincitio.php?dir=" + theDir + "&stamp=" + inItemId.value;
+      let req = "./uploadincitio.php?dir=" + theDir + "&stamp=" + Date.now();
+   
+    xhttp.open("POST", req , true);
 
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {

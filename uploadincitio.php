@@ -2,7 +2,12 @@
 
 if (isset($_GET['dir'])) {
     $dir = $_GET['dir'];
-  
+ 
+}
+
+if (isset($_GET['stamp'])) {
+    $stamp = $_GET['stamp'];
+ 
 }
 
 if (!is_dir($dir)) {
@@ -26,7 +31,7 @@ function cropAndRename($fileName, $file_extension)
     global $stamp;
 
      
-    $stamp = time();
+  //  $stamp = time();
  
 
     $uploaded = $dir . '/image_' . $stamp  . '.' . $file_extension;
@@ -76,7 +81,7 @@ function cropAndRename($fileName, $file_extension)
 
         imagecopyresampled($newImg, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 
-        $rot = imagerotate($newImg, 270, 0);
+        $rot = imagerotate($newImg, 0, 0);
 
         if ($file_extension == 'jpg')
             imagejpeg($rot, $uploaded);
