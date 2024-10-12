@@ -19,12 +19,6 @@ global $uploaded;
 
 function cropAndRename($fileName, $file_extension)
 {
-    //  echo "filename - " . $fileName;
-   // if ($file_extension == "jpg")
-     //   $exif_info =  exif_read_data($fileName);
-
-
-    // read orientation, my camera returns 6.
 
     global $dir;
     global $uploaded;
@@ -54,7 +48,11 @@ function cropAndRename($fileName, $file_extension)
 
     /* 
 
+    my phone returns "1" from exif.
+    
 
+    incase of problem with other cameras, here's what to do
+    
 1 = 0 degrees: the correct orientation, no adjustment is required.
 2 = 0 degrees, mirrored: image has been flipped back-to-front.
 3 = 180 degrees: image is upside down.
@@ -63,9 +61,6 @@ function cropAndRename($fileName, $file_extension)
 6 = 90 degrees, mirrored: image is on its side.
 7 270 degrees: image has been flipped back-to-front and is on its far side.
 8 270 degrees, mirrored: image is on its far side.
-
-
-
 
 */
 

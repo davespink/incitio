@@ -79,8 +79,36 @@ function getItemObjectIndexById(id) {
 
 
 function doSearch() {
-  let searchInput = gid("search");
-  showAlert("not yet coded");
+  // debugger;
+
+  divSearch.innerHTML='';
+  let lookFor = (search.value).toUpperCase();
+  if(lookFor.length<3)
+    return;
+
+  for (let i = 0; i < gItemArray.length; i++) {
+    let thisName = (gItemArray[i].name).toUpperCase();
+
+    if (thisName.includes(lookFor)) {
+
+
+      //alert(gItemArray[i].name);
+
+      //let gridButton = gid("image_" + gItemArray[i].id);
+
+      // gridButton.click();
+
+      createSearchButton(gItemArray[i]);
+    }
+
+  }
+
+
+
+
+
+
+  // showAlert("not yet coded " + search.value);
 }
 
 
@@ -267,6 +295,39 @@ function createChainButton(itemObject) {
   return newButton;
 }
 
+function searchButtonClick(itemId) {
+  let gridButton = gid("image_" + itemId);
+  gridButton.click();
+}
+
+
+function createSearchButton(itemObject) {
+
+  let newButton = document.createElement('button');
+  let el = document.getElementById("divSearch");
+  el.appendChild(newButton);
+
+  el.addEventListener("touchstart", touchStart);
+  el.addEventListener("touchend", touchEnd);
+
+  if (itemObject.type == 'c')
+
+    buttonColor = `btn btn-primary`;
+  else
+    buttonColor = `btn btn-success`;
+
+  buttonId = "search_" + itemObject.id;
+
+  theHTML = `<button id="${buttonId}" 
+      onClick="searchButtonClick('${itemObject.id}')" 
+       class="${buttonColor}" style="margin:5px">${itemObject.name}</button>`;
+
+  newButton.outerHTML = theHTML;
+
+  return newButton;
+}
+
+
 
 var timeout;
 
@@ -341,7 +402,7 @@ function createTreeButton(itemObject, level) {
 function discoverChain(thisId) {
 
   for (let i = 0; i < gItemArray.length; i++) {
-    //     alert(gItemArray[i].id);
+
     if (gItemArray[i].id == thisId) {
       let parentId = gItemArray[i].parentId;
       gChainArray.push(thisId);
@@ -397,8 +458,6 @@ function setCurrentRoot(rootId) {
     //  b = createTreeButton(thisItemObject);
 
 
-    // b.addEventListener("onmouseover", alert("xxx"));
-    // b.addEventListener("onmouseout", alert("yy"));
 
   }
 
@@ -425,11 +484,7 @@ function downloadData() {
   //  let str = JSON.stringify(js);
   let str = js;
 
-  //   alert(str);
 
-  ///  str="xxx" + str;
-
-  //  str="abigstringwhatsup";
   var data = new Blob([str]);
   var a = document.getElementById('a');
   a.href = URL.createObjectURL(data);
@@ -599,7 +654,7 @@ function clearStorage() {
 
 // FILE UPLOAD STUFF
 function uploadImageFile() {
-// debugger;
+  // debugger;
   var files = file.files;
 
   if (files.length > 0) {
@@ -611,13 +666,13 @@ function uploadImageFile() {
 
 
     // make up name of file
-    
+
 
     var xhttp = new XMLHttpRequest();
-   // let req = "./uploadincitio.php?dir=" + theDir + "&stamp=" + inItemId.value;
-      let req = "./uploadincitio.php?dir=" + theDir + "&stamp=" + Date.now();
-   
-    xhttp.open("POST", req , true);
+    // let req = "./uploadincitio.php?dir=" + theDir + "&stamp=" + inItemId.value;
+    let req = "./uploadincitio.php?dir=" + theDir + "&stamp=" + Date.now();
+
+    xhttp.open("POST", req, true);
 
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
@@ -654,51 +709,51 @@ function uploadImageFile() {
 }
 
 function xuploadImageFile() {
-  function resize(){
+  function resize() {
     //define the width to resize e.g 600px
     var resize_width = 200;//without px
-  
+
     //get the image selected
     var item = file.files[0];
-  
+
     //create a FileReader
     var reader = new FileReader();
-   
+
     //image turned to base64-encoded Data URI.
     reader.readAsDataURL(item);
     reader.name = item.name;//get the image's name
     reader.size = item.size; //get the image's size
-    reader.onload = function(event) {
+    reader.onload = function (event) {
       var img = new Image();//create a image
       img.src = event.target.result;//result is base64-encoded Data URI
-    
-    //  alert(img.src.length);
-      
+
+      //  alert(img.src.length);
+
       img.name = event.target.name;//set name (optional)
       img.size = event.target.size;//set size (optional)
-      img.onload = function(el) {
+      img.onload = function (el) {
         var elem = document.createElement('canvas');//create a canvas
-  
+
         //scale the image to 600 (width) and keep aspect ratio
         var scaleFactor = resize_width / el.target.width;
         elem.width = resize_width;
         elem.height = el.target.height * scaleFactor;
-  
+
         //draw in canvas
         var ctx = elem.getContext('2d');
         ctx.drawImage(el.target, 0, 0, elem.width, elem.height);
-  
+
         //get the base64-encoded Data URI from the resize image
         var srcEncoded = ctx.canvas.toDataURL('image/png', 1);
-  
+
         //assign it to thumb src
         thePhoto.src = srcEncoded;
-     //   alert(srcEncoded.length);
-  
+        //   alert(srcEncoded.length);
+
         /*Now you can send "srcEncoded" to the server and
         convert it to a png o jpg. Also can send
         "el.target.name" that is the file's name.*/
-        
+
         /*Also if you want to download tha image use this*/
         /*
         var a = document.createElement("a"); //Create <a>
@@ -707,7 +762,7 @@ function xuploadImageFile() {
         a.click();
         
         */
-  
+
 
         let idValue = getFormValue('inItemId');
         let theItemObject = getItemObjectById(idValue);
@@ -715,12 +770,12 @@ function xuploadImageFile() {
         theItemObject.image = srcEncoded;
 
         showAllItems();
-  
+
       }
     }
   }
-  
-  
+
+
 
   resize();
 }
@@ -728,4 +783,3 @@ function xuploadImageFile() {
 
 noImage = "./images/noimage.jpg";
 
- 

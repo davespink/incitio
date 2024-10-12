@@ -6,9 +6,9 @@ Incityo
  
 - Search name/description. Make a search panel ***
 
+- Bottom out the exif issue - Resolved 12/10/24
 
-
-- large circle type tree thing
+- large circle type tree thing - figured out how, will do later
 
 - Need to look at Cordova
 - Start with npm
@@ -256,10 +256,10 @@ if (file) {
     <h1>message</h1>
   </button>
 
-  <div id="topDiv" class="myDiv" style="display:inline-flex;width:100%;height:800px;background-color: #6b6bda;">
+  <div id="topDiv" class="myDiv" style="display:inline-flex;width:100%;height:1000px;background-color: #6b6bda;">
 
     <!-- first column -->
-    <div class="myDiv" style="width:20%;background-color:pink;height:1000px; ">
+    <div class="myDiv" style="width:20%;background-color:pink; ">
 
       <button style="border-style: none;background-color: transparent;  ">
         <h4> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio V1.16</h4>
@@ -283,7 +283,7 @@ if (file) {
       <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="loadTestData()">Load Test Data</button>
 
 
-      <div class="myDiv" style="margin-top:20px">
+      <div class="myDiv" style="margin-top:20px; display:none">
         <h4>Select database</h4>
         <select id="json" style="width:90%; background-color:rgb(203, 221, 236);border-radius: 5px;">
 
@@ -429,20 +429,40 @@ if (file) {
 
     </div>
     <!-- second column -->
-    <div class="myDiv" style="width:70%;background-color:rgb(26, 13, 75);height:800px">
+    <div class="myDiv" style="width:70%;background-color:rgb(26, 13, 75); ">
       <!-- Search-->
-      <div class="myDiv" style="background-color:rgb(68, 119, 94);margin:auto">
+      <div class="myDiv" style="background-color:rgb(68, 119, 94);padding:10px;margin:auto">
         <button id="none" class="btn btn-light" style="margin:10px; background-color:blanchedalmond;position:relative;
                 width: 60%;height: 15%; border-radius: 16px; box-shadow: 5px 5px 5px gray;">
-          <span class="btn-label" onclick="doSearch();"
+          <span class="btn-label" onclick="doSearch()"
             style="position:absolute;top:0px; left:10px; margin-bottom: 20px;">
             <i class="bi-search" style="font-size:30px"></i></span>
 
           <input aria-label="Search inCitio" autocomplete="off" placeholder="Search inCitio" value="" name=""
             type="text" id="search" style="padding: 0px; border:0cap; float:right;
               width: 90%;  background-color: rgb(219, 192, 192);
-               z-index: 6; left: 0px;" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50">
+               z-index: 6; left: 0px;" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50"
+            onkeydown="  
+                  handle(event)
+                ">
         </button>
+
+        <script>
+          function handle(e) {
+            if (e.keyCode === 13) {
+              e.preventDefault(); // Ensure it is only this code that runs
+              doSearch();
+            }
+            let v = search.value;
+            if (v.length > 2)
+              search.innerHTML = "";
+              doSearch();
+          }
+        </script>
+
+        <div id="divSearch">
+
+        </div>
       </div>
 
       <div class="myDiv" style="background-color:white;margin:auto;margin-top: 0px;">
@@ -506,7 +526,7 @@ if (file) {
     </div>
 
     <!-- third column -->
-    <div class="myDiv" style="width:30%;background-color:rgb(170, 123, 37);height:8oopx;overflow-y: scroll">
+    <div class="myDiv" style="width:30%;background-color:rgb(170, 123, 37) ; ">
       <div class="myDiv" style="background-color: rgb(34, 143, 119);text-align:center;padding:5px ">
 
         <!--  The Photo Upload etc-->
@@ -578,6 +598,8 @@ if (file) {
 
   </div>
 
+
+  <!-- STARTUP-->
   <script>
 
     const itemObject = {
@@ -611,7 +633,7 @@ if (file) {
     json.value = 'autosave';
     getJSON();
 
-
+    showAllItems();
 
   </script>
 
@@ -626,10 +648,10 @@ if (file) {
     window.onbeforeunload = function () {
 
 
-    //  const d = new Date();
-     // let text = d.toLocaleDateString() + ` ` + d.toLocaleTimeString();
+      //  const d = new Date();
+      // let text = d.toLocaleDateString() + ` ` + d.toLocaleTimeString();
 
-     // console.log("autosave " + text);
+      // console.log("autosave " + text);
       const myJSON = JSON.stringify(gItemArray);
       localStorage.setItem("autosave", myJSON);
 
