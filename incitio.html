@@ -249,12 +249,21 @@ if (file) {
   }
 
   async function readText(event) {
-     const file = event.target.files.item(0)
+    const file = event.target.files.item(0)
     const text = await file.text();
-        
-       document.getElementById("output").innerText = text
-       alert(text);
-}
+
+    document.getElementById("output").innerText = text
+    alert(text);
+
+
+
+    let js = text;
+    gItemArray = JSON.parse(js);
+
+    setCurrentRoot(0);
+    showAlert("done get " + json.value);
+
+  }
 
 </script>
 
@@ -269,7 +278,7 @@ if (file) {
     <div class="myDiv" style="width:20%;background-color:pink; ">
 
       <button style="border-style: none;background-color: transparent;  ">
-        <h4> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio V1.18</h4>
+        <h4> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio V1.19</h4>
       </button>
 
       <div style="margin:auto">
@@ -463,7 +472,7 @@ if (file) {
             let v = search.value;
             if (v.length > 2)
               search.innerHTML = "";
-              doSearch();
+            doSearch();
           }
         </script>
 
@@ -517,7 +526,19 @@ if (file) {
 
 
       </div>
+      <script>function doXXX() {
 
+          let id = getFormValue('inItemId');
+
+          let el = gid('image_' + id)
+
+          el.children[0].src = el.children[0].src + '?x=' + Date.now();
+ 
+
+        }
+
+
+      </script>
       <!--Photo Grid-->
       <div class="myDiv">
         <button type="button" id="updateButton" class="btn btn-primary btn-lg btn-block" style="width:90%;margin:10px"
@@ -548,7 +569,7 @@ if (file) {
           </div>
           <input type="button" id="btn_uploadImageFile" value="Upload" style="display:none"
             onclick="uploadImageFile();">
-
+          <button id="xxx" onclick="doXXX()">xxx</button>
           <button class="btn-light" onclick="file.click()">UPLOAD PHOTO</button>
         </div>
       </div>
@@ -631,12 +652,8 @@ if (file) {
     // debugger;
 
 
-
     let js = localStorage.getItem('autosave');
-
     gItemArray = JSON.parse(js);
-
-
     json.value = 'autosave';
     getJSON();
 
@@ -654,9 +671,6 @@ if (file) {
 
     window.onbeforeunload = function () {
 
-
-      //  const d = new Date();
-      // let text = d.toLocaleDateString() + ` ` + d.toLocaleTimeString();
 
       // console.log("autosave " + text);
       const myJSON = JSON.stringify(gItemArray);

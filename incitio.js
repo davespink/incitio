@@ -81,9 +81,9 @@ function getItemObjectIndexById(id) {
 function doSearch() {
   // debugger;
 
-  divSearch.innerHTML='';
+  divSearch.innerHTML = '';
   let lookFor = (search.value).toUpperCase();
-  if(lookFor.length<3)
+  if (lookFor.length < 3)
     return;
 
   for (let i = 0; i < gItemArray.length; i++) {
@@ -211,14 +211,14 @@ function deleteItem() {
 
   let idValue = getFormValue('inItemId');
 
-  ar = idValue.split("_");
-  id = ar[1];
 
   thisIndex = getItemObjectIndexById(idValue);
 
   gItemArray.splice(thisIndex, 1);
 
   setCurrentRoot(getCurrentParentId());
+
+  showAllItems();
 }
 
 function updateItemsFromForm() {
@@ -659,6 +659,17 @@ function uploadImageFile() {
 
   if (files.length > 0) {
 
+    let idValue = getFormValue('inItemId');
+
+    let el = gid("image_" + idValue);
+    el.children[0].src = "";
+
+    thePhoto.src = "";
+
+    let theItemObject = getItemObjectById(idValue);
+
+   // theItemObject.image = "";
+
     var formData = new FormData();
     let theDir = "photos";
 
@@ -669,8 +680,9 @@ function uploadImageFile() {
 
 
     var xhttp = new XMLHttpRequest();
-    // let req = "./uploadincitio.php?dir=" + theDir + "&stamp=" + inItemId.value;
-    let req = "./uploadincitio.php?dir=" + theDir + "&stamp=" + Date.now();
+
+    let req = "./uploadincitio.php?dir=" + theDir + "&stamp=" + inItemId.value;
+    // let req = "./uploadincitio.php?dir=" + theDir + "&stamp=" + Date.now();
 
     xhttp.open("POST", req, true);
 
@@ -678,31 +690,31 @@ function uploadImageFile() {
       if (this.readyState == 4 && this.status == 200) {
 
         var response = this.responseText;
-
-
         if (response == 1) {
 
           alert("File not uploaded. ");
 
         } else {
 
-          thePhoto.src = response; // here's the display
-
-          let idValue = getFormValue('inItemId');
-          let theItemObject = getItemObjectById(idValue);
+          thePhoto.src = response; // + "?" + Date.now(); // here's the display
+          el.children[0].src = thePhoto.src;
 
           theItemObject.image = response;
 
-          showAlert("file uploaded");
-          showAllItems();
+          // the grid needs a boot also
+          // take care if not jpg!!!!!
+          //  theItemObject.image = theDir + "/image_" + theItemObject.id + ".jpg?" +  Date.now();;
 
+          //    showAllItems();
+
+          //el.children[0].src = thePhoto.src + '1';
         }
       }
+
     };
 
     // Send request with data
     xhttp.send(formData);
-
   } else {
     showAlert("Please select a file");
   }
