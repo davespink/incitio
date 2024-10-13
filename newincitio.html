@@ -248,13 +248,6 @@ if (file) {
 
   }
 
-  async function readText(event) {
-     const file = event.target.files.item(0)
-    const text = await file.text();
-        
-       document.getElementById("output").innerText = text
-       alert(text);
-}
 
 </script>
 
@@ -269,7 +262,7 @@ if (file) {
     <div class="myDiv" style="width:20%;background-color:pink; ">
 
       <button style="border-style: none;background-color: transparent;  ">
-        <h4> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio V1.18</h4>
+        <h4> <i class="bi-house" style="font-size: 6rem; color: cornflowerblue;"></i>InCitio V1.17</h4>
       </button>
 
       <div style="margin:auto">
@@ -463,7 +456,7 @@ if (file) {
             let v = search.value;
             if (v.length > 2)
               search.innerHTML = "";
-              doSearch();
+            doSearch();
           }
         </script>
 
@@ -519,9 +512,56 @@ if (file) {
       </div>
 
       <!--Photo Grid-->
-      <div class="myDiv">
-        <button type="button" id="updateButton" class="btn btn-primary btn-lg btn-block" style="width:90%;margin:10px"
-          onclick="showAllItems();">ShowAllItems</button>
+      <div style="text-align: left;display:flex;padding:20px">
+
+        <script>function dropMenu(el) {
+
+            el.parentElement.parentElement.previousElementSibling.innerText = el.innerText;
+
+            alert(el.id);
+
+          }</script>
+        <div class="dropdown">
+          <label style="color:white;background-color:transparent">Filter</label>
+          <button id="dropFilter" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+            Both
+          </button>
+
+          <ul class="dropdown-menu">
+            <li><a id="both" class="dropdown-item" onClick="dropMenu(this)">Both</a></li>
+            <li><a id="containers" class="dropdown-item" onClick="dropMenu(this)">Containers</a>
+            </li>
+            <li><a id="items" class="dropdown-item" onClick="dropMenu(this)">Items</a></li>
+          </ul>
+
+        </div>>
+
+        <div class="dropdown">
+          <label style="color:white;background-color:transparent">Order</label>
+          <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+            Old-New
+          </button>
+          <ul class="dropdown-menu">
+            <li><a id="az" class="dropdown-item" onClick="dropMenu(this)">A-Z</a></li>
+            <li><a id="za" class="dropdown-item" onClick="dropMenu(this)">Z-A</a></li>
+            <li><a id="on" class="dropdown-item" onClick="dropMenu(this)">Old-New</a></li>
+            <li><a id="no" class="dropdown-item" onClick="dropMenu(this)">New-Old</a></li>
+          </ul>
+        </div>>
+
+
+        <div class="dropdown">
+          <label style="color:white;background-color:transparent">Presentation</label>
+          <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+            Grid
+          </button>
+          <ul class="dropdown-menu">
+            <li><a id="grid" class="dropdown-item" onClick="dropMenu(this)">Grid</a></li>
+            <li><a id="list" class="dropdown-item" onClick="dropMenu(this)">List</a></li>
+
+          </ul>
+        </div>>
+
       </div>
 
       <!-- photos -->
