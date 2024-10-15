@@ -1,13 +1,13 @@
 <?php
 
-if (isset($_GET['dir'])) {
+
+//copy("dave.jpg","photos\dave2.jpg");
+ if (isset($_GET['dir'])) {
     $dir = $_GET['dir'];
- 
 }
 
 if (isset($_GET['stamp'])) {
     $stamp = $_GET['stamp'];
- 
 }
 
 if (!is_dir($dir)) {
@@ -15,7 +15,7 @@ if (!is_dir($dir)) {
     die($dir);
 }
 
-global $uploaded;
+global $uploaded; //where to write to
 
 function cropAndRename($fileName, $file_extension)
 {
@@ -24,13 +24,14 @@ function cropAndRename($fileName, $file_extension)
     global $uploaded;
     global $stamp;
 
-     
-  //  $stamp = time();
- 
+
+    //  $stamp = time();
+
 
     $uploaded = $dir . '/image_' . $stamp  . '.' . $file_extension;
     //  $thumb = $dir . '/tn_img_' . $stamp  . '.jpg';
     rename($fileName, $uploaded);
+
 
     // is this ok
     if ($file_extension == 'jpg')
@@ -77,11 +78,14 @@ function cropAndRename($fileName, $file_extension)
         imagecopyresampled($newImg, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 
         $rot = imagerotate($newImg, 0, 0);
-
-        if ($file_extension == 'jpg')
-            imagejpeg($rot, $uploaded);
-        elseif ($file_extension == 'png')
-            imagepng($rot, $uploaded);
+        $imposter = str_replace("image_", "imposter_", $uploaded);
+        //   if ($file_extension == 'jpg');{
+       // imagejpeg($rot, $uploaded);
+        
+ 
+       
+       imagejpeg($rot, $uploaded);
+       
     }
 
     imagedestroy($img);
@@ -110,7 +114,10 @@ if (isset($_FILES['file']['name'])) {
         }
     }
 
-    echo $uploaded;
-
+     echo $uploaded;
+ 
+     $new= "./photos/imposter_" . $stamp .  ".jpg";
+     
+     copy ($uploaded,$new);
     exit;
 }

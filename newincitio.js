@@ -654,7 +654,7 @@ function clearStorage() {
 
 // FILE UPLOAD STUFF
 function uploadImageFile() {
-  // debugger;
+   debugger;
   var files = file.files;
 
   if (files.length > 0) {

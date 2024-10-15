@@ -1,8 +1,7 @@
+ 
 
 
-
-
-// V1.16
+ 
 
 
 
@@ -246,10 +245,6 @@ function updateItemsFromForm() {
   setCurrentRoot(getCurrentParentId());
 }
 
-
-
-
-
 // create a new item from user input
 function createItem(type) {
 
@@ -327,8 +322,6 @@ function createSearchButton(itemObject) {
   return newButton;
 }
 
-
-
 var timeout;
 
 function hoverStart(e) {
@@ -343,9 +336,7 @@ function hoverEnd(e) {
   if (timeout) {
     clearTimeout(timeout);
   }
-
 }
-
 
 function clickButton(buttonId) {
   b = gid(buttonId);
@@ -423,9 +414,6 @@ function compare(aItem, bItem) {
     return 1;
   }
   return 0;
-
-
-
 }
 
 function setCurrentRoot(rootId) {
@@ -435,7 +423,6 @@ function setCurrentRoot(rootId) {
     return;
   }
 
-  //   doDebug("root is " + rootId);
   setCurrentParentId(rootId);
 
   gChainArray = [];
@@ -456,9 +443,6 @@ function setCurrentRoot(rootId) {
     thisButton = createChainButton(thisItemObject);
 
     //  b = createTreeButton(thisItemObject);
-
-
-
   }
 
   let kids = [];
@@ -473,19 +457,13 @@ function setCurrentRoot(rootId) {
 
   for (i = 0; i < kids.length; i++)
     createItemButton(kids[i]);
-
-
-
 }
-
 
 function downloadData() {
   let js = localStorage.getItem(json.value);
-  //  let str = JSON.stringify(js);
-  let str = js;
+ // let str = js;
 
-
-  var data = new Blob([str]);
+  var data = new Blob([js]);
   var a = document.getElementById('a');
   a.href = URL.createObjectURL(data);
 
@@ -494,31 +472,28 @@ function downloadData() {
   showAlert("Downloaded " + json.value)
 }
 
-
+function forceImageLoad(imageId){
+    return imageId + "?x=" + Date.now();
+}
 
 function gridPhotoClicked(id) {
-
   if (id == 0) {
     chain_0.click();
     return;
   }
 
   let thisItemObject = getItemObjectById(id);
-
-
   setCurrentRoot(thisItemObject.parentId);
-
   let bs = document.getElementsByClassName("hasFocus");
-
   for (i = 0; i < bs.length; i++) {
-
     bs[i].classList.remove("hasFocus");
   }
-
-
+  // select in itemDiv
   let buttonId = "item_" + id;
   buttonSelected(buttonId);
 
+  let el = gid("image_" + id);
+  thePhoto.src = el.children[0].src;
 }
 
 function showAllItems() {
@@ -654,7 +629,10 @@ function clearStorage() {
 
 // FILE UPLOAD STUFF
 function uploadImageFile() {
-  // debugger;
+
+  //debugger;
+
+  
   var files = file.files;
 
   if (files.length > 0) {
@@ -681,7 +659,7 @@ function uploadImageFile() {
 
     var xhttp = new XMLHttpRequest();
 
-    let req = "./uploadincitio.php?dir=" + theDir + "&stamp=" + inItemId.value;
+    let req = "./uploadincitio.php?dir=" + theDir + "&stamp=" + idValue;
     // let req = "./uploadincitio.php?dir=" + theDir + "&stamp=" + Date.now();
 
     xhttp.open("POST", req, true);
@@ -696,18 +674,24 @@ function uploadImageFile() {
 
         } else {
 
-          thePhoto.src = response; // + "?" + Date.now(); // here's the display
+          
+
+          // also imposter
+          let imposter = response.replace("image_","imposter_");
+          thePhoto.src = imposter + "?x=" + Date.now(); // here's the display
           el.children[0].src = thePhoto.src;
 
           theItemObject.image = response;
 
-          // the grid needs a boot also
-          // take care if not jpg!!!!!
-          //  theItemObject.image = theDir + "/image_" + theItemObject.id + ".jpg?" +  Date.now();;
+          // The browser caching problem.
+          // despite the header directives the browser still caches images.
+          // If they have the same name. ( even with different content ).
 
-          //    showAllItems();
+          // Simple fix was to clear out the imge fields to be populated before
+          // invoking the xttp call. Fill the fields when the reponse comes back,
+          // Simple
 
-          //el.children[0].src = thePhoto.src + '1';
+
         }
       }
 
@@ -785,6 +769,18 @@ function xuploadImageFile() {
 
       }
     }
+  }
+
+  // general tester
+  function doXXX() {
+/*
+    let id = getFormValue('inItemId');
+
+    let el = gid('image_' + id)
+
+    el.children[0].src = el.children[0].src + '?x=' + Date.now();
+*/
+
   }
 
 
