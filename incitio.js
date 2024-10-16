@@ -479,6 +479,7 @@ function forceImageLoad(imageId){
 function gridPhotoClicked(id) {
   if (id == 0) {
     chain_0.click();
+    xxx.click();
     return;
   }
 
@@ -492,8 +493,12 @@ function gridPhotoClicked(id) {
   let buttonId = "item_" + id;
   buttonSelected(buttonId);
 
-  let el = gid("image_" + id);
-  thePhoto.src = el.children[0].src;
+  let el = gid("image_" + id);;
+
+  thePhoto.src = forceImageLoad(el.children[0].src);
+
+
+ // xxx.click();
 }
 
 function showAllItems() {
@@ -674,15 +679,20 @@ function uploadImageFile() {
 
         } else {
 
-          
-
+      
           // also imposter
-          let imposter = response.replace("image_","imposter_");
-          thePhoto.src = imposter + "?x=" + Date.now(); // here's the display
+          thePhoto.src = response; 
           el.children[0].src = thePhoto.src;
 
           theItemObject.image = response;
 
+
+          var delayInMilliseconds = 10; //1 second
+
+          setTimeout(function() {
+             xxx.click();
+          }, delayInMilliseconds);
+          
           // The browser caching problem.
           // despite the header directives the browser still caches images.
           // If they have the same name. ( even with different content ).

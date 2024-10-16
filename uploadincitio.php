@@ -116,8 +116,8 @@ if (isset($_FILES['file']['name'])) {
 
      echo $uploaded;
  
-     $new= "./photos/imposter_" . $stamp .  ".jpg";
+    // $new= "./photos/imposter_" . $stamp .  ".jpg";
      
-     copy ($uploaded,$new);
+    // copy ($uploaded,$new);
     exit;
 }
