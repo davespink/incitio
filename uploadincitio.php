@@ -1,83 +1,61 @@
 <?php
 
-
-//copy("dave.jpg","photos\dave2.jpg");
- if (isset($_GET['dir'])) {
-    $dir = $_GET['dir'];
-}
-
 if (isset($_GET['stamp'])) {
     $stamp = $_GET['stamp'];
 }
 
-if (!is_dir($dir)) {
-    echo 'error no directory ';
-    die($dir);
-}
-
-
- 
-
 global $uploaded; //where to write to
 
-function doLog($str)   {
- 
-    file_put_contents("phpLog.txt",$str."\n",FILE_APPEND);
- 
+function doLog($str)
+{
+
+    file_put_contents("phpLog.txt", $str . "\n", FILE_APPEND);
 }
 
 function cropAndRename($fileName, $file_extension)
 {
 
-    global $dir;
+    //  doLog($file_extension);
+
+
     global $uploaded;
     global $stamp;
 
+    $uploaded = 'photos/' . $stamp  . '.' . $file_extension;
 
-    //  $stamp = time();
 
+    //  
 
-    $uploaded = $dir . '/image_' . $stamp  . '.' . $file_extension;
-    //  $thumb = $dir . '/tn_img_' . $stamp  . '.jpg';
     rename($fileName, $uploaded);
 
-
     // is this ok
-    if ($file_extension == 'jpg')
+    if ($file_extension == 'jpg') {
         $img = imagecreatefromjpeg($uploaded);
-    else
-        $img = imagecreatefrompng($uploaded);
-
-        doLog($fileName);
-
         $exif = exif_read_data($uploaded);
-
-        
-
         if (!empty($exif['Orientation'])) {
             switch ($exif['Orientation']) {
                 case 3:
                     $img = imagerotate($img, 180, 0);
                     doLog("3");
                     break;
-                
+
                 case 6:
                     $img = imagerotate($img, -90, 0);
                     doLog("6");
                     break;
-                
+
                 case 8:
                     $img = imagerotate($img, 90, 0);
                     doLog("8");
                     break;
             }
         }
+    } else
+        $img = imagecreatefrompng($uploaded);
+
+    doLog($fileName);
 
 
-  
-
-
-        
     // $exif_info = var_dump(exif_read_data($filename));
 
 
@@ -113,32 +91,28 @@ function cropAndRename($fileName, $file_extension)
 
         imagecopyresampled($newImg, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 
-      //  $rot = imagerotate($newImg, 0, 0);
+        //  $rot = imagerotate($newImg, 0, 0);
         //$imposter = str_replace("image_", "imposter_", $uploaded);
         //   if ($file_extension == 'jpg');{
-       // imagejpeg($rot, $uploaded);
-        
- 
-       
-       imagejpeg($newImg, $uploaded);
+        // imagejpeg($rot, $uploaded);
 
 
 
-
-
-       
+        imagejpeg($newImg, $uploaded); // seems to work for png????
     }
 
     imagedestroy($img);
 }
 
-
+//
+// starts here
+//
 if (isset($_FILES['file']['name'])) {
     // file name
     $filename = $_FILES['file']['name'];
 
     // Location
-    $location = $dir . '/' . $filename;
+    $location = 'photos/' . $filename;
 
     // file extension
     $file_extension = pathinfo($location, PATHINFO_EXTENSION);
@@ -155,11 +129,10 @@ if (isset($_FILES['file']['name'])) {
         }
     }
 
-     echo $uploaded;
- 
+    echo $uploaded;
+
     // $new= "./photos/imposter_" . $stamp .  ".jpg";
-     
+
     // copy ($uploaded,$new);
     exit;
 }
-?>

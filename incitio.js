@@ -35,7 +35,7 @@ function isa(el, c) {
 
 function makeNewButton(type) {
   newItemObject = createItem(type);
-  newItemObject.image = "./images/noimage.jpg";
+  newItemObject.image = noimage;
   if (newItemObject) {
     b = createItemButton(newItemObject);
     clickButton(b);
@@ -658,7 +658,7 @@ function uploadImageFile() {
 
     var xhttp = new XMLHttpRequest();
 
-    let req = "./uploadincitio.php?dir=" + theDir + "&stamp=" + idValue;
+    let req = "./uploadincitio.php?stamp=" + idValue;
     // let req = "./uploadincitio.php?dir=" + theDir + "&stamp=" + Date.now();
 
     xhttp.open("POST", req, true);
