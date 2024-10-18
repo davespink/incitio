@@ -50,6 +50,34 @@ function cropAndRename($fileName, $file_extension)
 
         doLog($fileName);
 
+        $exif = exif_read_data($uploaded);
+
+        
+
+        if (!empty($exif['Orientation'])) {
+            switch ($exif['Orientation']) {
+                case 3:
+                    $img = imagerotate($img, 180, 0);
+                    doLog("3");
+                    break;
+                
+                case 6:
+                    $img = imagerotate($img, -90, 0);
+                    doLog("6");
+                    break;
+                
+                case 8:
+                    $img = imagerotate($img, 90, 0);
+                    doLog("8");
+                    break;
+            }
+        }
+
+
+  
+
+
+        
     // $exif_info = var_dump(exif_read_data($filename));
 
 
@@ -85,14 +113,19 @@ function cropAndRename($fileName, $file_extension)
 
         imagecopyresampled($newImg, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 
-        $rot = imagerotate($newImg, 0, 0);
+      //  $rot = imagerotate($newImg, 0, 0);
         //$imposter = str_replace("image_", "imposter_", $uploaded);
         //   if ($file_extension == 'jpg');{
        // imagejpeg($rot, $uploaded);
         
  
        
-       imagejpeg($rot, $uploaded);
+       imagejpeg($newImg, $uploaded);
+
+
+
+
+
        
     }
 
