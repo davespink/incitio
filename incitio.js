@@ -273,8 +273,8 @@ function createChainButton(itemObject) {
   let el = document.getElementById("divChain");
   el.appendChild(newButton);
 
-  el.addEventListener("touchstart", touchStart);
-  el.addEventListener("touchend", touchEnd);
+//  el.addEventListener("touchstart", touchStart);
+ // el.addEventListener("touchend", touchEnd);
 
   buttonColor = `btn btn-primary`;
 
@@ -302,8 +302,8 @@ function createSearchButton(itemObject) {
   let el = document.getElementById("divSearch");
   el.appendChild(newButton);
 
-  el.addEventListener("touchstart", touchStart);
-  el.addEventListener("touchend", touchEnd);
+ // el.addEventListener("touchstart", touchStart);
+//  el.addEventListener("touchend", touchEnd);
 
   if (itemObject.type == 'c')
 
@@ -348,8 +348,8 @@ function createItemButton(itemObject) {
   let el = document.getElementById("divItems");
   el.appendChild(newButton);
 
-  el.addEventListener("touchstart", touchStart);
-  el.addEventListener("touchend", touchEnd);
+//  el.addEventListener("touchstart", touchStart);
+ // el.addEventListener("touchend", touchEnd);
 
   if (itemObject.type == "c") {
     buttonColor = `btn btn-primary`;
@@ -362,6 +362,8 @@ function createItemButton(itemObject) {
   theHTML = `<button id="${buttonId}" onClick=buttonSelected("${buttonId}")  ondblclick=setCurrentRoot("${itemObject.id}")    class="${buttonColor}" style="margin:3px">${itemObject.name}</button>`;
 
   newButton.outerHTML = theHTML;
+
+ 
   return buttonId;
 
 }
@@ -457,6 +459,8 @@ function setCurrentRoot(rootId) {
 
   for (i = 0; i < kids.length; i++)
     createItemButton(kids[i]);
+
+  showAllItems();
 }
 
 function downloadData() {
@@ -569,14 +573,6 @@ function refreshJSON() {
 
 }
 
-/*
-function toJSON() {
-  const myJSON = JSON.stringify(gItemArray);
-  // Store
-  localStorage.setItem("jsonString", myJSON);
-  showAlert("defunct");
-}*/
-
 
 function getJSON() {
   let js = localStorage.getItem(json.value);
@@ -630,14 +626,10 @@ function clearStorage() {
   refreshJSON();
 }
 
-
-
 // FILE UPLOAD STUFF
 function uploadImageFile() {
 
-  //debugger;
-
-  
+ //debugger;
   var files = file.files;
 
   if (files.length > 0) {

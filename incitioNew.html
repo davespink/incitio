@@ -204,7 +204,7 @@ if (file) {
 <script src="./incitio.js"></script>
 <script>
 
-  const version = "1.195";
+  const version = "1.192";
 
   function loadTestData() {
 
@@ -224,9 +224,6 @@ if (file) {
   }
 
   // Long touch
-
-  /*
-
   let onlongtouch = false;
   let timer = false;
   let duration = 800;
@@ -263,8 +260,6 @@ if (file) {
 
   }
 
-  */
-
   async function readText(event) {
     const file = event.target.files.item(0)
     const text = await file.text();
@@ -295,9 +290,9 @@ if (file) {
     <div class="myDiv" style="width:20%;background-color:pink; ">
 
       <button style="border-style: none;background-color: transparent;  ">
-        <i class="bi-house" style="font-size: 5rem; color: cornflowerblue;"></i>
-        <script>document.write("Incitio v" + version)</script>
-
+        <h5> <i class="bi-house" style="font-size: 5rem; color: cornflowerblue;"></i>
+          <script>document.write("Incitio v" + version)</script>
+        </h5>
       </button>
 
       <div style="margin:auto">
@@ -557,43 +552,38 @@ if (file) {
 
         <div style="margin:auto">
 
-          <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
+          <button id="dropType" class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
             id="dropdownMenuButton" style="border-radius: 5px;">
-            Filter
+            Show All
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" onClick="makeNewBuxtton('c');">Only Containers</a>
+            <li><a class="dropdown-item" href="#" onClick="gFilter='c';showAllItems( );">Only Containers</a>
             </li>
-            <li><a class="dropdown-item" href="#" onClick="makeNewButxton('i');">Only Items</a>
+            <li><a class="dropdown-item" href="#" onClick="showAllItems('i');">Only Items</a>
             </li>
-            <li><a class="dropdown-item" href="#" onClick="makeNewButxton('i');">ShowAll</a>
+            <li><a class="dropdown-item" href="#" onClick="showAllItems();">ShowAll</a>
             </li>
 
           </ul>
 
 
-          <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
+          <button id="dropSort" class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
             id="dropdownMenuButton" style="border-radius: 5px;">
-            Sort
+            New
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" onClick="makeNewBuxtton('c');">New ThingContainer</a>
+            <li><a class="dropdown-item" href="#" onClick="showAllItems('o');">Old to New</a>
             </li>
-            <li><a class="dropdown-item" href="#" onClick="makeNewButxton('i');">New ThingItem</a>
+            <li><a class="dropdown-item" href="#" onClick="showAllItems('n');">New to Old</a>
             </li>
+            <li><a class="dropdown-item" href="#" onClick="showAllItems('a');">A to Z</a>
+            </li>
+            <li><a class="dropdown-item" href="#" onClick="showAllItems('z');">Z to A</a>
+            </li>
+
           </ul>
 
 
-          <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
-            id="dropdownMenuButton" style="border-radius: 5px;">
-            View
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" onClick="makeNewBuxtton('c');">Photo Grid</a>
-            </li>
-            <li><a class="dropdown-item" href="#" onClick="makeNewButxton('i');">Buttons</a>
-            </li>
-          </ul>
 
         </div>
       </div>
@@ -617,19 +607,10 @@ if (file) {
         <script>function doTest() {
 
             let theImage = thePhoto.src;
-
             thePhoto.src = forceImageLoad(theImage);// + '?x=' + Date.now();
-
-
             let idValue = getFormValue('inItemId');
-
             let el = gid("image_" + idValue);
-
-
             el.children[0].src = forceImageLoad(theImage);
-
-
-            //     image_0.children[0].src = image_0.children[0].src  + '?x=' + Date.now();
 
           }</script>
         <div>
@@ -639,7 +620,7 @@ if (file) {
           </div>
           <input type="button" id="btn_uploadImageFile" value="Upload" style="display:none"
             onclick="uploadImageFile();">
-          <button id="xxx" onclick="doTest()">xxx</button>
+          <button id="xxx" onclick="doTest()" style="display:none">xxx</button>
           <button class="btn-light" onclick="file.click()">UPLOAD PHOTO</button>
         </div>
       </div>
@@ -719,18 +700,18 @@ if (file) {
 
     gItemArray.push(itemObject);
 
-    // debugger;
-    let gFilter = "a";
-    let gOrder = "o";
+    let gFilter = 'a';
+    let gSort = 'o';
 
     let js = localStorage.getItem('autosave');
     gItemArray = JSON.parse(js);
     json.value = 'autosave';
     getJSON();
 
-    showAllItems();
+   // showAllItems();
 
-    chain_0.click();
+//chain_0.click();
+ //   xxx.click();
 
   </script>
 

@@ -15,7 +15,16 @@ if (!is_dir($dir)) {
     die($dir);
 }
 
+
+ 
+
 global $uploaded; //where to write to
+
+function doLog($str)   {
+ 
+    file_put_contents("phpLog.txt",$str."\n",FILE_APPEND);
+ 
+}
 
 function cropAndRename($fileName, $file_extension)
 {
@@ -39,8 +48,7 @@ function cropAndRename($fileName, $file_extension)
     else
         $img = imagecreatefrompng($uploaded);
 
-
-
+        doLog($fileName);
 
     // $exif_info = var_dump(exif_read_data($filename));
 
@@ -78,7 +86,7 @@ function cropAndRename($fileName, $file_extension)
         imagecopyresampled($newImg, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 
         $rot = imagerotate($newImg, 0, 0);
-        $imposter = str_replace("image_", "imposter_", $uploaded);
+        //$imposter = str_replace("image_", "imposter_", $uploaded);
         //   if ($file_extension == 'jpg');{
        // imagejpeg($rot, $uploaded);
         
@@ -121,3 +129,4 @@ if (isset($_FILES['file']['name'])) {
     // copy ($uploaded,$new);
     exit;
 }
+?>
