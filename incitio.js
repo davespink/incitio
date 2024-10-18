@@ -1,7 +1,7 @@
- 
 
 
- 
+
+
 
 
 
@@ -273,8 +273,8 @@ function createChainButton(itemObject) {
   let el = document.getElementById("divChain");
   el.appendChild(newButton);
 
-//  el.addEventListener("touchstart", touchStart);
- // el.addEventListener("touchend", touchEnd);
+  //  el.addEventListener("touchstart", touchStart);
+  // el.addEventListener("touchend", touchEnd);
 
   buttonColor = `btn btn-primary`;
 
@@ -302,8 +302,8 @@ function createSearchButton(itemObject) {
   let el = document.getElementById("divSearch");
   el.appendChild(newButton);
 
- // el.addEventListener("touchstart", touchStart);
-//  el.addEventListener("touchend", touchEnd);
+  // el.addEventListener("touchstart", touchStart);
+  //  el.addEventListener("touchend", touchEnd);
 
   if (itemObject.type == 'c')
 
@@ -348,8 +348,8 @@ function createItemButton(itemObject) {
   let el = document.getElementById("divItems");
   el.appendChild(newButton);
 
-//  el.addEventListener("touchstart", touchStart);
- // el.addEventListener("touchend", touchEnd);
+  //  el.addEventListener("touchstart", touchStart);
+  // el.addEventListener("touchend", touchEnd);
 
   if (itemObject.type == "c") {
     buttonColor = `btn btn-primary`;
@@ -363,7 +363,7 @@ function createItemButton(itemObject) {
 
   newButton.outerHTML = theHTML;
 
- 
+
   return buttonId;
 
 }
@@ -465,7 +465,7 @@ function setCurrentRoot(rootId) {
 
 function downloadData() {
   let js = localStorage.getItem(json.value);
- // let str = js;
+  // let str = js;
 
   var data = new Blob([js]);
   var a = document.getElementById('a');
@@ -476,14 +476,16 @@ function downloadData() {
   showAlert("Downloaded " + json.value)
 }
 
-function forceImageLoad(imageId){
-    return imageId + "?x=" + Date.now();
+function forceImageLoad(imageId) {
+  return imageId + "?x=" + Date.now();
 }
 
 function gridPhotoClicked(id) {
+  //debugger;
   if (id == 0) {
+ 
     chain_0.click();
-    xxx.click();
+    //xxx.click();
     return;
   }
 
@@ -502,7 +504,7 @@ function gridPhotoClicked(id) {
   thePhoto.src = forceImageLoad(el.children[0].src);
 
 
- // xxx.click();
+  // xxx.click();
 }
 
 function showAllItems() {
@@ -629,7 +631,7 @@ function clearStorage() {
 // FILE UPLOAD STUFF
 function uploadImageFile() {
 
- //debugger;
+  //debugger;
   var files = file.files;
 
   if (files.length > 0) {
@@ -643,7 +645,7 @@ function uploadImageFile() {
 
     let theItemObject = getItemObjectById(idValue);
 
-   // theItemObject.image = "";
+    // theItemObject.image = "";
 
     var formData = new FormData();
     let theDir = "photos";
@@ -671,9 +673,9 @@ function uploadImageFile() {
 
         } else {
 
-      
+
           // also imposter
-          thePhoto.src = response; 
+          thePhoto.src = response;
           el.children[0].src = thePhoto.src;
 
           theItemObject.image = response;
@@ -681,10 +683,10 @@ function uploadImageFile() {
 
           var delayInMilliseconds = 10; //1 second
 
-          setTimeout(function() {
-             xxx.click();
+          setTimeout(function () {
+            xxx.click();
           }, delayInMilliseconds);
-          
+
           // The browser caching problem.
           // despite the header directives the browser still caches images.
           // If they have the same name. ( even with different content ).
@@ -775,13 +777,13 @@ function xuploadImageFile() {
 
   // general tester
   function doXXX() {
-/*
-    let id = getFormValue('inItemId');
-
-    let el = gid('image_' + id)
-
-    el.children[0].src = el.children[0].src + '?x=' + Date.now();
-*/
+    /*
+        let id = getFormValue('inItemId');
+    
+        let el = gid('image_' + id)
+    
+        el.children[0].src = el.children[0].src + '?x=' + Date.now();
+    */
 
   }
 
