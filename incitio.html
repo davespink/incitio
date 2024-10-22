@@ -386,8 +386,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
       <script>
 
-
-
+/*
         let arrTree = [];
 
         function test() {
@@ -441,30 +440,21 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
           }
 
-
           let thisItemObject = gItemArray[0];
           //   console.log(thisItemObject.name);
           makeTree(thisItemObject);
-
-
-
           //     debugger;
 
           for (let j = 0; j < arrTree.length; j++) {
-
             let id = arrTree[j].id;
             let myItem = getItemObjectById(id);
-
             createTreeButton(myItem, arrTree[j].level);
-
           }
-
         }
 
+        
 
-
-
-
+*/
       </script>
 
     </div>
@@ -499,10 +489,15 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
             doSearch();
           }
         </script>
+        <!--
 
-        <div id="divSearch">
-
+<div id="divSearch">
         </div>
+
+-->
+
+
+
       </div>
 
       <div class="myDiv" style="background-color:white;margin:auto;margin-top: 0px;">
@@ -522,11 +517,12 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
       </div>
 
       <!-- Tree 
-      <button onclick="test()">test</button> -->
+      <button onclick="test()">test</button>
+      is tree worth the bother?
+      -->
       <div class="myDiv" id="divTree" style="background-color:hsl(245, 21%, 54%);
       margin:auto;margin-top: 0px;display:none">
         <div class="myDiv" style="background-color:white ;">
-
         </div>
 
         <div class="myDiv" style="background-color:white ;">
@@ -534,17 +530,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
         </div>
         <div class="myDiv" style="background-color:white ;">
 
-        </div>
-        <div class="myDiv" style="background-color:white ;">
 
-        </div>
-        <div class="myDiv" style="background-color:white ;">
-
-        </div>
-        <div class="myDiv" style="background-color:white ;">
-
-        </div>
-        <div class="myDiv" style="background-color:white ;">
 
         </div>
 
@@ -646,7 +632,12 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
           </div>
           <input type="button" id="btn_uploadImageFile" value="Upload" style="display:none"
             onclick="uploadImageFile();">
+
           <button id="xxx" onclick="doTest()">xxx</button>
+
+
+          <button id="tester" onclick="doFind()">Find</button>
+
           <button class="btn-light" onclick="file.click()">UPLOAD PHOTO</button>
         </div>
       </div>
@@ -716,7 +707,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
       image: "?"
     };
 
-  
+
     const gShowOptions = {
       filter: "a",
       sort: "o",
@@ -736,7 +727,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
     // debugger;
     //let gFilter = "a";
-   // let gOrder = "o";
+    // let gOrder = "o";
 
     let js = localStorage.getItem('autosave');
     gItemArray = JSON.parse(js);

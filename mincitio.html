@@ -90,9 +90,6 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
             return true; else return false;
     }
 
-
-
-
     // Long touch
     let onlongtouch = false;
     let timer = false;
@@ -175,13 +172,18 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
     <div id="theApp" style="width:100%;background-color:pink;height:3000px; ">
 
 
-        <button style="border-style: none;position:relative;margin-left: 2px;">
-            <h4> <i class="bi-house" style="font-size: 2rem; color: cornflowerblue"></i>InCitio Mobile V1.7</h4>
+        <button  style="border-style: none;position:relative;margin: 12px;">
+            <h4> <i class="bi-house" style="font-size: 2rem; color: cornflowerblue"></i>Incitio Mobile<p id="idVersion"><InCitio Mobil> </p></h4>
         </button>
+
+<script>
+idVersion.innerText = getVersion();
+
+</script>
 
         <p></p>
         <div style="text-align: center;">
-            <button class="btn btn-info btn-sm" style="width:70%; " onclick="loadTestData()">Load Test
+            <button class="btn btn-info btn-sm" style="width:60%; " onclick="loadTestData()">Load Test
                 Data</button>
         </div>
 
@@ -249,7 +251,18 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
                 <img src="images/arrow_down_icon.png" style="position:relative;width:20px;height:20px; float:right">
             </button>
 
+            <script>function doTest() {
+                let theImage = thePhoto.src;
+                thePhoto.src = forceImageLoad(theImage);// + '?x=' + Date.now();
+                let idValue = getFormValue('inItemId');
+                let el = gid("image_" + idValue);
+                el.children[0].src = forceImageLoad(theImage);
+                //     image_0.children[0].src = image_0.children[0].src  + '?x=' + Date.now();
+    
+              }</script>
+
             <div id="thePhotoUpload" style="display:none">
+                <button id="xxx" onclick="doTest()">xxx</button>
                 <div>
                     <img id="thePhoto" style="max-width:400px;max-height:400px">
                 </div>
