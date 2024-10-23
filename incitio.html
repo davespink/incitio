@@ -301,7 +301,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
       <button id="idVersion" style="border-style: none;background-color: transparent;  ">
         <i class="bi-house" style="font-size: 5r; color: cornflowerblue;"></i>
-        <script>idVersion.innerHTML = "<h2>Incitio v" + version + "</h2>";</script>
+        <script>idVersion.innerHTML = "<h2>Incitio v" + getVersion() + "</h2>";</script>
       </button>
       <div style="margin:auto">
         <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown" id="dropdownMenuButton"
@@ -386,75 +386,75 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
       <script>
 
-/*
-        let arrTree = [];
-
-        function test() {
-
-          let level = -1;
-          treeItem = {
-            id: "0",
-            level: "0",
-            name: "home"
-
-          };
-
-
-
-          function findKids(obj) {
-            let kids = [];
-            for (let i = 0; i < gItemArray.length; i++) {
-              if (gItemArray[i].parentId == obj.id) {
-                kids.push(gItemArray[i]);
-              }
-            }
-            return kids;
-          }
-
-
-          function makeTree(thisItemObject) {
-            level++;
-
-            let x = Object.create(treeItem);
-
-            x.id = thisItemObject.id;
-            x.level = level;
-            x.name = thisItemObject.name;
-            arrTree.push(x);
-
-            //   console.log(level);
-            //    console.log(thisItemObject.id);
-            //    console.log(thisItemObject.name);
-
-
-
-            let obj = thisItemObject;
-            let kids = findKids(obj);
-            let l = kids.length;
-
-            for (let i = 0; i < kids.length; i++) {
-              //    console.log(kids[i].name);
-              makeTree(kids[i]);
-            }
-            level--;
-
-          }
-
-          let thisItemObject = gItemArray[0];
-          //   console.log(thisItemObject.name);
-          makeTree(thisItemObject);
-          //     debugger;
-
-          for (let j = 0; j < arrTree.length; j++) {
-            let id = arrTree[j].id;
-            let myItem = getItemObjectById(id);
-            createTreeButton(myItem, arrTree[j].level);
-          }
-        }
-
+        /*
+                let arrTree = [];
         
-
-*/
+                function test() {
+        
+                  let level = -1;
+                  treeItem = {
+                    id: "0",
+                    level: "0",
+                    name: "home"
+        
+                  };
+        
+        
+        
+                  function findKids(obj) {
+                    let kids = [];
+                    for (let i = 0; i < gItemArray.length; i++) {
+                      if (gItemArray[i].parentId == obj.id) {
+                        kids.push(gItemArray[i]);
+                      }
+                    }
+                    return kids;
+                  }
+        
+        
+                  function makeTree(thisItemObject) {
+                    level++;
+        
+                    let x = Object.create(treeItem);
+        
+                    x.id = thisItemObject.id;
+                    x.level = level;
+                    x.name = thisItemObject.name;
+                    arrTree.push(x);
+        
+                    //   console.log(level);
+                    //    console.log(thisItemObject.id);
+                    //    console.log(thisItemObject.name);
+        
+        
+        
+                    let obj = thisItemObject;
+                    let kids = findKids(obj);
+                    let l = kids.length;
+        
+                    for (let i = 0; i < kids.length; i++) {
+                      //    console.log(kids[i].name);
+                      makeTree(kids[i]);
+                    }
+                    level--;
+        
+                  }
+        
+                  let thisItemObject = gItemArray[0];
+                  //   console.log(thisItemObject.name);
+                  makeTree(thisItemObject);
+                  //     debugger;
+        
+                  for (let j = 0; j < arrTree.length; j++) {
+                    let id = arrTree[j].id;
+                    let myItem = getItemObjectById(id);
+                    createTreeButton(myItem, arrTree[j].level);
+                  }
+                }
+        
+        
+        
+        */
       </script>
 
     </div>
@@ -489,14 +489,12 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
             doSearch();
           }
         </script>
-        <!--
-
-<div id="divSearch">
-        </div>
-
+<!--
+        where the search results get displayed
 -->
 
-
+        <div id="divSearch">
+        </div>
 
       </div>
 
@@ -715,8 +713,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
     }
 
-
-    let gCurrentParentId = 0; // do I need to persist this?
+    let gCurrentParentId = 0; 
     function getCurrentParentId() { return gCurrentParentId; }
     function setCurrentParentId(id) { gCurrentParentId = id }
 

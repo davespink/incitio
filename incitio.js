@@ -45,7 +45,10 @@ function makeNewButton(type) {
 }
 
 
+function getVersion(){
 
+  return "1.22";
+}
 
 
 
@@ -497,7 +500,7 @@ function forceImageLoad(imageId) {
 }
 
 function gridPhotoClicked(id) {
-  //debugger;
+  // debugger;
   if (id == 0) {
 
     chain_0.click();
@@ -515,9 +518,12 @@ function gridPhotoClicked(id) {
   let buttonId = "item_" + id;
   buttonSelected(buttonId);
 
+
+  
   let el = gid("image_" + id);;
 
-  thePhoto.src = forceImageLoad(el.children[0].src);
+  if(el.children[0].src)
+    thePhoto.src = forceImageLoad(el.children[0].src);
 
   // xxx.click();
 }
@@ -532,7 +538,7 @@ function showAllItems() {
     thisItemObject = gItemArray[i];
 
     if (thisItemObject.image == "?") {
-      alert(thisItemObject.name + ' has ? image');
+      thisItemObject.image= noImage;
 
       let newButton = document.createElement('button');
       el.appendChild(newButton);
@@ -595,11 +601,9 @@ function getJSON() {
   showAlert("done get " + json.value);
 }
 
-
 function putJSON() {
   const myJSON = JSON.stringify(gItemArray);
-  // alert(myJSON);
-  // Store
+  
   localStorage.setItem(json.value, myJSON);
 
   let msg = "saved data to " + json.value;
@@ -609,24 +613,18 @@ function putJSON() {
 
 
 function newJSON() {
-
   let key = prompt("input key");
-
   if (key) {
     const myJSON = JSON.stringify(gItemArray);
     // Store
     localStorage.setItem(key, myJSON);
-
     refreshJSON();
-
   }
-
 }
 
 function deleteJSON() {
   localStorage.removeItem(json.value);
   showAlert("done delete");
-
   refreshJSON();
 }
 
@@ -641,7 +639,7 @@ function clearStorage() {
 // FILE UPLOAD STUFF
 function uploadImageFile() {
 
-  //debugger;
+       
   var files = file.files;
 
   if (files.length > 0) {
@@ -662,12 +660,11 @@ function uploadImageFile() {
 
     formData.append("file", files[0]); // this passes the filename to PHP
 
-
     // make up name of file
-
 
     var xhttp = new XMLHttpRequest();
 
+    // produces a file with name same as object id + filetype
     let req = "./uploadincitio.php?stamp=" + idValue;
     // let req = "./uploadincitio.php?dir=" + theDir + "&stamp=" + Date.now();
 
@@ -680,31 +677,16 @@ function uploadImageFile() {
         if (response == 1) {
 
           alert("File not uploaded. ");
-
         } else {
-
-
-          // also imposter
           thePhoto.src = response;
           el.children[0].src = thePhoto.src;
 
           theItemObject.image = response;
-
-
           var delayInMilliseconds = 10; //1 second
 
           setTimeout(function () {
             xxx.click();
-          }, delayInMilliseconds);
-
-          // The browser caching problem.
-          // despite the header directives the browser still caches images.
-          // If they have the same name. ( even with different content ).
-
-          // Simple fix was to clear out the imge fields to be populated before
-          // invoking the xttp call. Fill the fields when the reponse comes back,
-          // Simple
-
+          }, delayInMilliseconds); // to force a refresh .. hopefully
 
         }
       }
