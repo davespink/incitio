@@ -37,6 +37,7 @@ function makeNewButton(type) {
   newItemObject = createItem(type);
   newItemObject.image = noImage;
   if (newItemObject) {
+    showAllItems();
     b = createItemButton(newItemObject);
     clickButton(b);
   }
@@ -647,7 +648,7 @@ function uploadImageFile() {
     let idValue = getFormValue('inItemId');
 
     let el = gid("image_" + idValue);
-    el.children[0].src = "";
+  //  el.children[0].src = "";
 
     thePhoto.src = "";
 
