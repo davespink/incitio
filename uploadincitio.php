@@ -4,7 +4,14 @@ if (isset($_GET['stamp'])) {
     $stamp = $_GET['stamp'];
 }
 
+if (isset($_GET['dir'])) {
+    $dir = $_GET['dir'];
+} else $dir = "";
+
+doLog("stamp dir" . $stamp . "-" .  $dir);
+
 global $uploaded; //where to write to
+global $stamp;
 
 function doLog($str)
 {
@@ -20,13 +27,18 @@ function cropAndRename($fileName, $file_extension)
 
     global $uploaded;
     global $stamp;
+    global $dir;
 
-    $uploaded = 'photos/' . $stamp  . '.' . $file_extension;
+   // $dir = "users/spot/";
+    $uploaded = $dir . 'photos/' . $stamp  . '.' . $file_extension;
 
-
+    doLog("uploaded - " . $uploaded);
+    doLog("filename - " . $fileName);
     //  
 
     rename($fileName, $uploaded);
+
+  //  doLog("rename - " + $fileName + "-" + $uploaded);
 
     // is this ok
     if ($file_extension == 'jpg') {
