@@ -68,10 +68,10 @@ function photoDir() {
 }
 
 function goUser(user) {
-   
+
   setUser(user);
   showAlert("Welcome " + user);
-  gid("idUser").innerHTML =  "<h1>" + user + "</h1>";
+  gid("idUser").innerHTML = "<h1>" + user + "</h1>";
 }
 
 /////////////////////////
@@ -164,7 +164,7 @@ function focusGrid(id) {
 
 }
 
- 
+
 
 
 function buttonSelected(buttonId) {
@@ -516,11 +516,37 @@ function downloadData() {
 
   showAlert("Downloaded " + json.value)
 }
- 
+
 function saveDataToDisk() {
-  let js = localStorage.getItem(json.value);
-  
-  showAlert("Saved to disk");
+  const theData = localStorage.getItem(json.value);
+
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "savedatatodisk.php");
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.onload = function () {
+    showAlert(this.responseText);
+  }
+  xhttp.send("data=" + theData);
+}
+
+function loadDataFromDisk() {
+
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "loaddatafromdisk.php");
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.onload = function () {
+    //showAlert(this.responseText);
+    gItemArray = JSON.parse(this.responseText);
+
+    
+    setCurrentRoot(0);
+    showAlert("done load from disk ");
+
+    image_0.click();
+  }
+  xhttp.send();
+
+
 }
 
 function forceImageLoad(imageId) {
@@ -669,7 +695,7 @@ function clearStorage() {
 // FILE UPLOAD STUFF
 function uploadImageFile() {
 
- // debugger;
+  // debugger;
   var files = file.files;
 
   if (files.length > 0) {
@@ -707,7 +733,7 @@ function uploadImageFile() {
     stamp = idValue;
 
     // produces a file with name same as object id + filetype
-    let req = "./uploadincitio.php?dir=" + dir +  "&stamp=" + idValue;
+    let req = "./uploadincitio.php?dir=" + dir + "&stamp=" + idValue;
 
     // let req = "./uploadincitio.php?dir=" + dir + "&stamp=" + Date.now();
 

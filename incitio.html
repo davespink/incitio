@@ -248,16 +248,13 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
     const file = event.target.files.item(0)
     const text = await file.text();
 
-    document.getElementById("output").innerText = text
-    alert(text);
-
-
-
+  //  document.getElementById("output").innerText = text
+    //alert(text);
     let js = text;
     gItemArray = JSON.parse(js);
 
     setCurrentRoot(0);
-    showAlert("done get " + json.value);
+    showAlert("done get upload");
 
   }
 
@@ -315,6 +312,9 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
       <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="loadTestData()">Load Test Data</button>
 
+      <button class="btn btn-info btn-sm" style="width:72%;margin:3px" onclick="saveDataToDisk()">Save Data To Disk</button>
+
+      <button class="btn btn-info btn-sm" style="width:71%;margin:3px" onclick="loadDataFromDisk()">Load Data From Disk</button>
 
       <div class="myDiv" style="margin-top:20px; display:none">
         <h4>Select database</h4>
@@ -348,7 +348,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
       <div class="myDiv" style="margin-top:20px;background-color: #6f8670;padding:10px">
 
         <h4>Backups</h4>
-        <button class="btn btn-dark btn-sm" style="width:70%;margin:3px" onclick="up.click()">Upload Data</button>
+        <button class="btn btn-dark btn-sm" style="width:70%;margin:3px" onclick="up.click();showAllItems();">Upload Data</button>
         <div style="display:none">
           <input type="file" id="up" onchange="readText(event)" />
           <pre id="output"></pre>

@@ -68,3 +68,12 @@ stamp dir0-
 uploaded - photos/0.jpg
 filename - photos/decathlon trousers.jpg
 photos/decathlon trousers.jpg
+stamp dir0-
+uploaded - photos/0.jpg
+filename - photos/20241005_111112.jpg
+6
+photos/20241005_111112.jpg
+stamp dir0-
+uploaded - photos/0.jpg
+filename - photos/henry house.jpg
+photos/henry house.jpg

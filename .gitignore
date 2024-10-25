@@ -1,2 +1,3 @@
 image_.vscode/launch.json
-photos/
+photos/*.*
+*.jpg
