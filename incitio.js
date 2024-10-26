@@ -146,7 +146,7 @@ function itemObjectToForm(itemObject) {
     let itemObjectParent = getItemObjectById(itemObject.parentId);
     inParentId.value += " ( " + itemObjectParent.name + ")";
   }
-  
+
 
   (gid("inDescription")).value = itemObject.description;
   if (itemObject.image == "?")
@@ -181,6 +181,14 @@ function clearAllFocii() {
   }
 }
 
+
+function countObjects(parentId) {
+
+
+
+}
+
+
 function buttonSelected(buttonId) {
 
   clearAllFocii();
@@ -195,6 +203,11 @@ function buttonSelected(buttonId) {
 
   let itemObject = getItemObjectById(id);
   itemObjectToForm(itemObject);
+
+  let c = countDescendants(id);
+//alert(c);
+  console.log(itemObject.name + " has " + c + " descendants");
+
 
   function fillParentList() {
     let np = gid("newParent");
@@ -230,8 +243,7 @@ function buttonSelected(buttonId) {
 
   }
 
-  // fillParentList();
-
+  fillParentList();
 }
 // ??????
 function getFormValue(id) {
@@ -253,8 +265,23 @@ function deleteItem() {
   showAllItems();
 }
 
-function updateItemsFromForm() {
+function updateItemFromForm() {
 
+  function testChangeParent(thisItem, thisParentId) {
+
+    gChainArray = [];
+    let thisRoot = thisParentId;
+
+    while (thisRoot != "?") {
+      thisRoot = discoverChain(thisRoot);
+      if (thisRoot == thisItem.id) {
+
+        return false;
+      }
+    }
+    return true;
+
+  }
   let nameValue = getFormValue('inName');
   let descriptionValue = getFormValue('inDescription');
   let idValue = getFormValue('inItemId');
@@ -262,21 +289,31 @@ function updateItemsFromForm() {
   ar = idValue.split("_");
 
   id = ar[1];
+  let thisItem;
 
   for (let i = 0; i < gItemArray.length; i++) {
-    if (gItemArray[i].id == idValue) {
-      gItemArray[i].name = nameValue;
-      gItemArray[i].description = descriptionValue;
-      // let p = getFormValue('newParent');
-      // if(p!="?")
-      //    gItemArray[i].parentId = getFormValue('newParent');
+    thisItem = gItemArray[i];
+    if (thisItem.id == idValue) {
+      thisItem.name = nameValue;
+      thisItem.description = descriptionValue;
+      let p = getFormValue('newParent');
+      if (p != thisItem.parentId) {
+
+        if (p != "?" && testChangeParent(thisItem, p)) {
+          showAlert("parent changed");
+          thisItem.parentId = getFormValue('newParent');
+          setCurrentRoot(thisItem.parentId);
+        }
+        else {
+          showAlert("operation failed " + getItemObjectById(p).name
+            + " is contained by " + thisItem.name);
+
+        }
+      }
       //    gItemArray[i].image = thePhoto.src;
       break;
     }
   }
-
-
-  // setCurrentRoot(getCurrentParentId());
 }
 
 // create a new item from user input
@@ -632,6 +669,41 @@ function doFind() {
 
   alert("find");
 
+
+}
+
+ 
+function countDescendants(rootId) {
+
+  function findKids(id) {
+    let kids = [];
+    for (let i = 0; i < gItemArray.length; i++) {
+      if (gItemArray[i].parentId == id) {
+        count++;
+        kids.push(gItemArray[i].id);
+//console.log(gItemArray[i].name);
+      }
+    }
+    return kids;
+  }
+
+
+  function makeTree(thisId) {
+    
+   // console.log("+" + count);
+    let kids = findKids(thisId);
+    for (let i = 0; i < kids.length; i++) {
+      obj = getItemObjectById(kids[i]);
+     // console.log(obj.name);
+      makeTree(kids[i]);
+    }
+
+
+  }
+  count = 0;
+
+  makeTree(rootId);
+  return count;
 
 }
 

@@ -275,7 +275,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
         <script>idVersion.innerHTML = "<h2>Incitio v" + getVersion() + "</h2>";</script>
       </button>
       <div style="margin:auto">
-        <button class="btn btn-primary  " type="button" id="dropdownMenuButton"
+        <button class="btn btn-primary" onclick="theTree()" type="button" id="dropdownMenuButton"
           style="border-style: none;  margin-top: 10px;border-radius: 16px; ">
           <h1>+New</h1>
         </button>
@@ -449,6 +449,8 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
         
         
         */
+      
+      
       </script>
 
     </div>
@@ -637,7 +639,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
       <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px">
         <p style="color:yellow">Change Item Details</p>
         <button type="button" id="updateButton" class="btn btn-default btn-primary"
-          onclick="updateItemsFromForm();">Update</button>
+          onclick="updateItemFromForm();">Update</button>
         <button type="button" class="btn btn-default btn-primary" onclick="deleteItem();">Delete</button>
       </div>
 
@@ -719,7 +721,9 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
     //let gFilter = "a";
     // let gOrder = "o";
 
-    loadDataFromDisk();
+   loadDataFromDisk();
+   
+    //loadTestData();
     showAllItems();
 
 
