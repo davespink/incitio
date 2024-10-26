@@ -256,6 +256,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
     setCurrentRoot(0);
     showAlert("done get upload");
 
+    showAllItems();
   }
 
 </script>
@@ -298,10 +299,9 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
       <p></p>
 
  
- <!--
-   </script>   
- -->
+ 
 
+</script>
        
 
       <button class="btn btn-success btn-sm" style="width:70%;margin:3px" onclick="createUser()">Create User</button>
@@ -658,11 +658,11 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
             <div class="form-group">
               <label for="inItemId">Item Id</label>
-              <input type="text" class="form-control" readonly = "true" id="inItemId">
+              <input type="text" class="form-control" id="inItemId">
             </div>
             <div class="form-group">
               <label for="inParentId">Parent Id</label>
-              <input type="text" class="form-control" readonly="true" id="inParentId">
+              <input type="text" class="form-control" id="inParentId">
               <p></p>
             </div>
 
@@ -715,16 +715,27 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
     gItemArray.push(itemObject);
 
+
+ 
+
     // debugger;
     //let gFilter = "a";
     // let gOrder = "o";
 
-    loadDataFromDisk();
-    showAllItems();
+//let js = localStorage.getItem('autosave');
+//    gItemArray = JSON.parse(js);
+//    json.value = 'autosave';
+ //   getJSON();
 
+ // debugger;
 
-    setCurrentRoot(0);
-    //chain_0.click();
+ loadDataFromDisk();
+
+    //showAllItems();
+    // setCurrentRoot(0);
+ 
+
+  //  chain_0.click();
 
   </script>
 
@@ -734,8 +745,9 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
     window.onbeforeunload = function () {
       // console.log("autosave " + text);
+      const myJSON = JSON.stringify(gItemArray);
+    //  localStorage.setItem("autosave", myJSON);
       saveDataToDisk();
-
       return null;
     }
 

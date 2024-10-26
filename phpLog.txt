@@ -77,3 +77,28 @@ stamp dir0-
 uploaded - photos/0.jpg
 filename - photos/henry house.jpg
 photos/henry house.jpg
+stamp dir0-
+uploaded - photos/0.jpeg
+filename - photos/_294543c7-9e6e-46b0-8821-7d831b3c44f5.jpeg
+photos/_294543c7-9e6e-46b0-8821-7d831b3c44f5.jpeg
+stamp dir0-
+uploaded - photos/0.jpg
+filename - photos/20240209_094013.jpg
+photos/20240209_094013.jpg
+stamp dir0-
+uploaded - photos/0.jpg
+filename - photos/IMG-20241007-WA0000.jpg
+photos/IMG-20241007-WA0000.jpg
+stamp dir1729724680834-
+uploaded - photos/1729724680834.jpg
+filename - photos/soulder.jpg
+photos/soulder.jpg
+stamp dir1729790487034-
+uploaded - photos/1729790487034.jpg
+filename - photos/wallstand.jpg
+photos/wallstand.jpg
+stamp dir1725836714777-
+uploaded - photos/1725836714777.jpg
+filename - photos/magnifying glass.jpg
+6
+photos/magnifying glass.jpg

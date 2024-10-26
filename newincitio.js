@@ -137,17 +137,7 @@ function doSearch() {
 function itemObjectToForm(itemObject) {
   (gid("inName")).value = itemObject.name;
   (gid("inItemId")).value = itemObject.id;
-
-
-  inParentId.value = itemObject.parentId;
-
-  let itemObjectParent;
-  if (itemObject.id != "0") {
-    let itemObjectParent = getItemObjectById(itemObject.parentId);
-    inParentId.value += " ( " + itemObjectParent.name + ")";
-  }
-  
-
+  (gid("inParentId")).value = itemObject.parentId;
   (gid("inDescription")).value = itemObject.description;
   if (itemObject.image == "?")
     thePhoto.src = noImage;
@@ -174,32 +164,33 @@ function focusGrid(id) {
 
 }
 
-function clearAllFocii() {
-  let bs = document.getElementsByClassName("hasFocus");
-  for (let i = 0; i < bs.length; i++) {
-    bs[i].classList.remove("hasFocus");
-  }
-}
+
+
 
 function buttonSelected(buttonId) {
 
-  clearAllFocii();
+  let bs = document.getElementsByClassName("hasFocus");
+
+  for (let i = 0; i < bs.length; i++) {
+    bs[i].classList.remove("hasFocus");
+  }
 
   let thisButton = gid(buttonId);
+
   thisButton.classList.add("hasFocus");
 
-  let a = buttonId.split("_");
-  let id = a[1];
+  let id = buttonId.split("_");
 
-  focusGrid(id);
+  focusGrid(id[1]);
 
-  let itemObject = getItemObjectById(id);
+  let itemObject = getItemObjectById(id[1]);
   itemObjectToForm(itemObject);
 
   function fillParentList() {
+
     let np = gid("newParent");
     let theHTML = "";
-    //debugger;
+    // debugger;
     for (let i = 0; i < gItemArray.length; i++) {
       //     
       if (gItemArray[i].type == "c") {
@@ -209,6 +200,7 @@ function buttonSelected(buttonId) {
         if (i > 0)
           while (thisRoot != "?")
             thisRoot = discoverChain(thisRoot);
+
 
         let theTitle = "";
         //debugger;
@@ -230,7 +222,7 @@ function buttonSelected(buttonId) {
 
   }
 
-  // fillParentList();
+  fillParentList();
 
 }
 // ??????
@@ -254,7 +246,7 @@ function deleteItem() {
 }
 
 function updateItemsFromForm() {
-
+return;
   let nameValue = getFormValue('inName');
   let descriptionValue = getFormValue('inDescription');
   let idValue = getFormValue('inItemId');
@@ -263,19 +255,18 @@ function updateItemsFromForm() {
 
   id = ar[1];
 
-  for (let i = 0; i < gItemArray.length; i++) {
+  for (i = 0; i < gItemArray.length; i++) {
+    //     
     if (gItemArray[i].id == idValue) {
       gItemArray[i].name = nameValue;
       gItemArray[i].description = descriptionValue;
-      // let p = getFormValue('newParent');
-      // if(p!="?")
-      //    gItemArray[i].parentId = getFormValue('newParent');
+      gItemArray[i].parentId = getFormValue('newParent');
       //    gItemArray[i].image = thePhoto.src;
       break;
     }
   }
 
-
+  // if(getCurrentParentId != "?")
   // setCurrentRoot(getCurrentParentId());
 }
 
@@ -292,10 +283,7 @@ function createItem(type) {
 
   newItem.id = stamp;
   newItem.type = type;
-  //newItem.parentId = getCurrentParentId();
-
-  newItem.parentId = gid("inItemId").value;
-
+  newItem.parentId = getCurrentParentId();
   newItem.name = pName;
   newItem.description = pName + " description";
   newItem.image = "?";
@@ -433,7 +421,7 @@ function discoverChain(thisId) {
 
   for (let i = 0; i < gItemArray.length; i++) {
 
-    if (gItemArray[i].id == thisId) {
+    if (gItemArray[i].id == thisId + "") {
       let parentId = gItemArray[i].parentId;
       gChainArray.push(thisId);
       return parentId;
@@ -454,11 +442,9 @@ function compare(aItem, bItem) {
   }
   return 0;
 }
-//
-//  Creates all the buttons also
-//
-function setCurrentRoot(rootId) {
 
+function setCurrentRoot(rootId) {
+  // debugger;
   let thisItemObject = getItemObjectById(rootId);
 
   if (thisItemObject.type != "c") {
@@ -469,10 +455,9 @@ function setCurrentRoot(rootId) {
   setCurrentParentId(rootId);
 
   gChainArray = [];
+ 
 
-  let thisRoot = rootId;
-
-  while (thisRoot != "?" && gChainArray.length < 500)
+  while (thisRoot != "?")
     thisRoot = discoverChain(thisRoot);
 
   gChainArray = gChainArray.reverse();
@@ -518,18 +503,17 @@ function loadTestData() {
   chain_0.click();
 }
 
-// Disk operations to load or save data
 function downloadData() {
-
-  let js = JSON.stringify(gItemArray);
+  let js = localStorage.getItem(json.value);
+  // let str = js;
 
   var data = new Blob([js]);
-  var a = document.getElementById('a'); // <-- this is defined near the download button
+  var a = document.getElementById('a');
   a.href = URL.createObjectURL(data);
 
   a.click();
 
-  showAlert("Downloaded " + a.download)
+  showAlert("Downloaded " + json.value)
 }
 
 function saveDataToDisk() {
@@ -545,6 +529,7 @@ function saveDataToDisk() {
 }
 
 function loadDataFromDisk() {
+
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", "loaddatafromdisk.php");
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -552,13 +537,16 @@ function loadDataFromDisk() {
     //showAlert(this.responseText);
     gItemArray = JSON.parse(this.responseText);
 
-    showAllItems();
-    setCurrentRoot(0);
-    showAlert("done load from disk ");
+    gItemArray[0].parentId = "?";
 
-    // image_0.click();
+    setCurrentRoot(0);
+    showAlert("done get loaded from disk");
+    showAllItems();
+
   }
   xhttp.send();
+
+
 }
 
 function forceImageLoad(imageId) {
@@ -638,45 +626,45 @@ function doFind() {
 
 
 function doDebug(message) {
-  // if (message.length == 0) gid("debugWindow").innerHTML = ""; else
-  //  gid("debugWindow").innerHTML = gid("debugWindow").innerHTML + message + "</br>";
+  if (message.length == 0) gid("debugWindow").innerHTML = ""; else
+    gid("debugWindow").innerHTML = gid("debugWindow").innerHTML + message + "</br>";
 
 }
 
 function showAlert(message) {
-  alertBox.innerHTML = "<h3>" + message + "</h3>";
+  alertBox.innerHTML = "<h1>" + message + "</h1>";
   alertBox.classList.add("animate");
 
 }
 
 function refreshJSON() {
 
-  // let theHTML = "";
-  // for (i = 0; i < localStorage.length; i++) {
-  //   theHTML += (`<option>` + localStorage.key(i) + `</option>`);
-  // }
-  // gid("json").innerHTML = theHTML;
+  let theHTML = "";
+  for (i = 0; i < localStorage.length; i++) {
+    theHTML += (`<option>` + localStorage.key(i) + `</option>`);
+  }
+  gid("json").innerHTML = theHTML;
 
 }
 
 
 function getJSON() {
-  // let js = localStorage.getItem(json.value);
+  let js = localStorage.getItem(json.value);
 
-  // gItemArray = JSON.parse(js);
+  gItemArray = JSON.parse(js);
 
-  // setCurrentRoot(0);
-  // showAlert("done get " + json.value);
+  setCurrentRoot(0);
+  showAlert("done get " + json.value);
 }
 
 function putJSON() {
-  // const myJSON = JSON.stringify(gItemArray);
+  const myJSON = JSON.stringify(gItemArray);
 
-  // localStorage.setItem(json.value, myJSON);
+  localStorage.setItem(json.value, myJSON);
 
-  //let msg = "saved data to " + json.value;
+  let msg = "saved data to " + json.value;
 
-  //showAlert(msg);
+  showAlert(msg);
 }
 
 
