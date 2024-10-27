@@ -199,9 +199,11 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 </head>
 
 <script src="./incitio.js"></script>
+
+<script src="./lib/buttons.js"></script>
+<script src="./lib/backend.js"></script>
+ 
 <script>
-
-
 
   // Long touch
 
@@ -249,7 +251,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
     const file = event.target.files.item(0)
     const text = await file.text();
 
-  //  document.getElementById("output").innerText = text
+    //  document.getElementById("output").innerText = text
     //alert(text);
     let js = text;
     gItemArray = JSON.parse(js);
@@ -265,11 +267,11 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
   <button id="alertBox" class="alert">
     <h1>message</h1>
   </button>
-  
-  
+
+
   <div id="topDiv" class="myDiv" style="display:inline-flex;width:100%;height:1000px;background-color: #6b6bda;">
-    
-   
+
+
     <!-- first column -->
     <div class="myDiv" style="width:20%;background-color:pink; ">
 
@@ -300,25 +302,28 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
       <p></p>
 
- 
- <!--
+
+      <!--
    </script>   
  -->
 
-       
+
 
       <button class="btn btn-success btn-sm" style="width:70%;margin:3px" onclick="createUser()">Create User</button>
-     
-     
-      <button class="btn btn-success btn-sm" style="width:71%;margin:3px" onclick="goUser(inUser.value)">Go User</button>
+
+
+      <button class="btn btn-success btn-sm" style="width:71%;margin:3px" onclick="goUser(inUser.value)">Go
+        User</button>
 
       <input type="text" class="form-control" id="inUser" style="margin:30px;width:70%">
 
       <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="loadTestData()">Load Test Data</button>
 
-      <button class="btn btn-info btn-sm" style="width:72%;margin:3px" onclick="saveDataToDisk()">Save Data To Disk</button>
+      <button class="btn btn-info btn-sm" style="width:72%;margin:3px" onclick="saveDataToDisk()">Save Data To
+        Disk</button>
 
-      <button class="btn btn-info btn-sm" style="width:71%;margin:3px" onclick="loadDataFromDisk()">Load Data From Disk</button>
+      <button class="btn btn-info btn-sm" style="width:71%;margin:3px" onclick="loadDataFromDisk()">Load Data From
+        Disk</button>
 
       <div class="myDiv" style="margin-top:20px; display:none">
         <h4>Select database</h4>
@@ -352,7 +357,8 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
       <div class="myDiv" style="margin-top:20px;background-color: #6f8670;padding:10px">
 
         <h4>Backups</h4>
-        <button class="btn btn-dark btn-sm" style="width:70%;margin:3px" onclick="up.click();showAllItems();">Upload Data</button>
+        <button class="btn btn-dark btn-sm" style="width:70%;margin:3px" onclick="up.click();showAllItems();">Upload
+          Data</button>
         <div style="display:none">
           <input type="file" id="up" onchange="readText(event)" />
           <pre id="output"></pre>
@@ -452,8 +458,8 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
         
         
         */
-      
-      
+
+
       </script>
 
     </div>
@@ -498,7 +504,9 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
       </div>
 
       <div class="myDiv" style="background-color:white;margin:auto;margin-top: 0px;">
-        <p id="idUser"><h2></h2></p>
+        <p id="idUser">
+        <h2></h2>
+        </p>
         <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 5px;">
         </div>
 
@@ -631,8 +639,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
           <button id="xxx" onclick="doTest()">xxx</button>
 
-
-          <button id="tester" onclick="doFind()">Find</button>
+ 
 
           <button class="btn-light" onclick="file.click()">UPLOAD PHOTO</button>
         </div>
@@ -663,7 +670,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
             <div class="form-group">
               <label for="inItemId">Item Id</label>
-              <input type="text" class="form-control" readonly = "true" id="inItemId">
+              <input type="text" class="form-control" readonly="true" id="inItemId">
             </div>
             <div class="form-group">
               <label for="inParentId">Parent Id</label>
@@ -724,18 +731,14 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
     //let gFilter = "a";
     // let gOrder = "o";
 
-   loadDataFromDisk();
-   
+    loadDataFromDisk();
+
     //loadTestData();
     showAllItems();
 
 
     setCurrentRoot(0);
     //chain_0.click();
-
-  </script>
-
-  <script>
 
     alertBox.addEventListener("animationend", () => { alertBox.classList.remove("animate"); });
 
