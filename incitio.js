@@ -48,7 +48,7 @@ function makeNewButton(type) {
 
 function getVersion() {
 
-  return "1.22";
+  return "1.23";
 }
 
 function getUser() {
@@ -347,6 +347,7 @@ function createChainButton(itemObject) {
   let el = document.getElementById("divChain");
   el.appendChild(newButton);
 
+
   //  el.addEventListener("touchstart", touchStart);
   // el.addEventListener("touchend", touchEnd);
 
@@ -354,9 +355,13 @@ function createChainButton(itemObject) {
 
   buttonId = "chain_" + itemObject.id;
 
+
+  number = countDescendants(itemObject.id);
+ 
+
   theHTML = `<button id="${buttonId}" 
       onClick=buttonSelected("${buttonId}")  ondblclick=setCurrentRoot("${itemObject.id}") 
-       class="${buttonColor}" style="margin:0px">${itemObject.name}</button>
+       class="${buttonColor}" style="margin:0px">${itemObject.name}  <span class="badge bg-danger">${number}</span></button>
        <button style="border:none">></button>`;
 
   newButton.outerHTML = theHTML;
@@ -418,6 +423,10 @@ function clickButton(buttonId) {
 }
 
 function createItemButton(itemObject) {
+
+  let x = countDescendants(itemObject.id);
+
+
   let newButton = document.createElement('button');
   let el = document.getElementById("divItems");
   el.appendChild(newButton);
@@ -431,9 +440,12 @@ function createItemButton(itemObject) {
     buttonColor = `btn btn-success`;
   }
 
+  
   buttonId = "item_" + itemObject.id;
+  // let x = countDescendants(itemObject.id);
 
-  theHTML = `<button id="${buttonId}" onClick=buttonSelected("${buttonId}")  ondblclick=setCurrentRoot("${itemObject.id}")    class="${buttonColor}" style="margin:3px">${itemObject.name}</button>`;
+  theHTML = `<button id="${buttonId}" onClick=buttonSelected("${buttonId}")
+  ondblclick=setCurrentRoot("${itemObject.id}")    class="${buttonColor}" style="margin:3px">${itemObject.name}${x}</button>`;
 
   newButton.outerHTML = theHTML;
 
@@ -527,7 +539,7 @@ function setCurrentRoot(rootId) {
 
   let kids = [];
   gid("divItems").innerHTML = "";
-  for (i = 0; i < gItemArray.length; i++)
+  for (let i = 0; i < gItemArray.length; i++)
     if (gItemArray[i].parentId == getCurrentParentId())
       kids.push(gItemArray[i]);
 
@@ -535,7 +547,7 @@ function setCurrentRoot(rootId) {
     kids.sort(compare);
   }
 
-  for (i = 0; i < kids.length; i++)
+  for (let i = 0; i < kids.length; i++)
     createItemButton(kids[i]);
 
   // showAllItems();
