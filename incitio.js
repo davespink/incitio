@@ -143,8 +143,8 @@ function itemObjectToForm(itemObject) {
 
   let itemObjectParent;
   if (itemObject.id != "0") {
-    let itemObjectParent = getItemObjectById(itemObject.parentId);
-    inParentId.value += " ( " + itemObjectParent.name + ")";
+    itemObjectParent = getItemObjectById(itemObject.parentId);
+    inParentId.value += " ( " + itemObjectParent.name + " )";
   }
 
 
@@ -182,11 +182,7 @@ function clearAllFocii() {
 }
 
 
-function countObjects(parentId) {
 
-
-
-}
 
 
 function buttonSelected(buttonId) {
@@ -204,9 +200,9 @@ function buttonSelected(buttonId) {
   let itemObject = getItemObjectById(id);
   itemObjectToForm(itemObject);
 
-  let c = countDescendants(id);
+// let c = countDescendants(id);
 //alert(c);
-  console.log(itemObject.name + " has " + c + " descendants");
+ // console.log(itemObject.name + " has " + c + " descendants");
 
 
   function fillParentList() {
@@ -362,7 +358,7 @@ function createChainButton(itemObject) {
   theHTML = `<button id="${buttonId}" 
       onClick=buttonSelected("${buttonId}")  ondblclick=setCurrentRoot("${itemObject.id}") 
        class="${buttonColor}" style="margin:0px">${itemObject.name}  <span class="badge bg-danger">${number}</span></button>
-       <button style="border:none">></button>`;
+       <button style="border:none"></button>`;
 
   newButton.outerHTML = theHTML;
 
@@ -424,7 +420,6 @@ function clickButton(buttonId) {
 
 function createItemButton(itemObject) {
 
-  let x = countDescendants(itemObject.id);
 
 
   let newButton = document.createElement('button');
@@ -433,19 +428,25 @@ function createItemButton(itemObject) {
 
   //  el.addEventListener("touchstart", touchStart);
   // el.addEventListener("touchend", touchEnd);
-
+  let x;
   if (itemObject.type == "c") {
     buttonColor = `btn btn-primary`;
+    x = countDescendants(itemObject.id);
   } else {
     buttonColor = `btn btn-success`;
+    x = "";
   }
 
   
   buttonId = "item_" + itemObject.id;
   // let x = countDescendants(itemObject.id);
 
+
+ 
+
   theHTML = `<button id="${buttonId}" onClick=buttonSelected("${buttonId}")
-  ondblclick=setCurrentRoot("${itemObject.id}")    class="${buttonColor}" style="margin:3px">${itemObject.name}${x}</button>`;
+  ondblclick=setCurrentRoot("${itemObject.id}")
+  class="${buttonColor}" style="margin:3px">${itemObject.name} <span class="badge bg-dark">${x}</span></button>`;
 
   newButton.outerHTML = theHTML;
 
@@ -693,7 +694,6 @@ function countDescendants(rootId) {
       if (gItemArray[i].parentId == id) {
         count++;
         kids.push(gItemArray[i].id);
-//console.log(gItemArray[i].name);
       }
     }
     return kids;
@@ -701,7 +701,6 @@ function countDescendants(rootId) {
 
 
   function makeTree(thisId) {
-    
    // console.log("+" + count);
     let kids = findKids(thisId);
     for (let i = 0; i < kids.length; i++) {
@@ -712,9 +711,10 @@ function countDescendants(rootId) {
 
 
   }
-  count = 0;
+  let count = 0;
 
   makeTree(rootId);
+
   return count;
 
 }
