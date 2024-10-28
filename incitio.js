@@ -230,15 +230,19 @@ function getFormValue(id) {
 }
 
 function deleteItem() {
-
+  //debugger;
   let idValue = getFormValue('inItemId');
 
-
-  thisIndex = getItemObjectIndexById(idValue);
+  let thisIndex = getItemObjectIndexById(idValue);
+  let thisObject = getItemObjectById(idValue);
+  let thisParent = thisObject.parentId;
 
   gItemArray.splice(thisIndex, 1);
 
-  setCurrentRoot(getCurrentParentId());
+  setCurrentRoot(thisParent); // to remove button from view
+
+
+
 
   showAllItems();
 }
@@ -315,6 +319,8 @@ function createItem(type) {
   newItem.description = pName + " description";
   newItem.image = "?";
   gItemArray.push(newItem);
+
+  showAllItems();
 
   return newItem;
 }
@@ -458,10 +464,10 @@ function setCurrentRoot(rootId) {
 
   let thisItemObject = getItemObjectById(rootId);
 
-  if (thisItemObject.type != "c") {
-    showAlert("not a container");
-    return;
-  }
+  //if (thisItemObject.type != "c") {
+  //  showAlert("not a container");
+  //return;
+  //}
 
   setCurrentParentId(rootId);
 

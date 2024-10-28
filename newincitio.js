@@ -233,6 +233,8 @@ function getFormValue(id) {
 
 function deleteItem() {
 
+  debugger;
+
   let idValue = getFormValue('inItemId');
 
 
