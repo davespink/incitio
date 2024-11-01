@@ -44,7 +44,7 @@ function makeNewButton(type) {
 
 function getVersion() {
 
-  return "1.23";
+  return "1.24";
 }
 
 function getUser() {
@@ -169,9 +169,33 @@ function clearAllFocii() {
 
 function buttonSelected(buttonId) {
 
+
+  let x = buttonId.split("_");
+  let thisId = x[1];
+
+
+  // if father of anything....
+  for (let i = 0; i < gItemArray.length; i++) {
+    obj = gItemArray[i];
+    if (obj.parentId == thisId) {
+
+
+      setCurrentRoot(thisId);
+      // its now a chain button
+      buttonId = "chain_" + thisId;
+      break;
+    }
+
+
+  }
+
   clearAllFocii();
 
+
+  console.log("Selectied button - " + buttonId);
+
   let thisButton = gid(buttonId);
+
   thisButton.classList.add("hasFocus");
 
   let a = buttonId.split("_");
@@ -344,7 +368,7 @@ function createChainButton(itemObject) {
 
 
   theHTML = `<button id="${buttonId}" 
-      onClick=buttonSelected("${buttonId}")  ondblclick=setCurrentRoot("${itemObject.id}") 
+      onClick=buttonSelected("${buttonId}")   
        class="${buttonColor}" style="margin:0px">${itemObject.name}  <span class="badge bg-danger">${number}</span></button>
        <button style="border:none"></button>`;
 
@@ -469,8 +493,10 @@ function setCurrentRoot(rootId) {
   //return;
   //}
 
-  setCurrentParentId(rootId);
+  if (thisItemObject.type != 'c')
+    alert("error - " + rootId)
 
+  setCurrentParentId(rootId);
 
   // Create the chain buttons
   gChainArray = [];
@@ -516,30 +542,38 @@ function forceImageLoad(imageId) {
 }
 
 function gridPhotoClicked(id) {
-  // debugger;
+ // debugger;
+  // home has no parent
   if (id == 0) {
     chain_0.click();
     //xxx.click();
     return;
   }
 
-  let thisItemObject = getItemObjectById(id);
-  setCurrentRoot(thisItemObject.parentId);
-  let bs = document.getElementsByClassName("hasFocus");
-  for (i = 0; i < bs.length; i++) {
-    bs[i].classList.remove("hasFocus");
-  }
-  // select in itemDiv
-  let buttonId = "item_" + id;
-  buttonSelected(buttonId);
+  let thisItem = getItemObjectById(id);
 
-  let el = gid("image_" + id);;
+  if (thisItem.type != 'c')
+    setCurrentRoot(thisItem.parentId);
+  else
+    setCurrentRoot(id);
 
-  if (el.children[0].src)
-    thePhoto.src = forceImageLoad(el.children[0].src);
+    let thisButton;
 
-  // xxx.click();
+//  buttonSelected(id); // not right
+  if(thisItem.type=='c')
+  thisButton = "chain_" + id;
+else
+  thisButton = "item_" + id;
+
+  let el = gid(thisButton);
+  
+  el.click();
+
+
 }
+
+
+
 
 function showAllItems() {
   let el = document.getElementById("divPhotos");
