@@ -258,7 +258,8 @@ Investigate and get comfy with Cordova
   }
 
 </script>
-
+<!--
+-->
 <body>
   <button id="alertBox" class="alert">
     <h1>message</h1>
@@ -541,7 +542,7 @@ Investigate and get comfy with Cordova
 
       <div class="myDiv" style="display:inline-flex;width:90%">
         <button type="button" id="updateButton" class="btn btn-dark  " style="width:20%;margin:10px"
-          onclick="showAllItems();">Refresh</button>
+          onclick="setCurrentParentId(0);showAllItems();">Refresh</button>
 
 
         <div style="margin:auto">
@@ -610,20 +611,11 @@ Investigate and get comfy with Cordova
         <script>function doTest() {
 
             let theImage = thePhoto.src;
-
             thePhoto.src = forceImageLoad(theImage);// + '?x=' + Date.now();
-
-
             let idValue = getFormValue('inItemId');
-
             let el = gid("image_" + idValue);
-
-
             el.children[0].src = forceImageLoad(theImage);
-
-
-            //     image_0.children[0].src = image_0.children[0].src  + '?x=' + Date.now();
-
+         
           }</script>
         <div>
           <div style="display:none">
@@ -747,5 +739,5 @@ Investigate and get comfy with Cordova
 
   </script>
 </body>
-
+ 
 </html>
