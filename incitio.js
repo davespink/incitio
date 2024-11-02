@@ -28,17 +28,6 @@ function isa(el, c) {
     return true; else return false;
 }
 
-/*
-function makeNewButton(type) {
-  newItemObject = createItem(type);
-  newItemObject.image = noImage;
-  if (newItemObject) {
-    showAllItems();
-    b = createItemButton(newItemObject);
-    clickButton(b);
-  }
-}
-*/
 
 
 
@@ -63,9 +52,10 @@ function photoDir() {
   return userDir() + "/photos";
 }
 
-function goUser(user) {
-
+function goUser() {
+  let user = prompt("go user");
   setUser(user);
+  loadDataFromDisk();
   showAlert("Welcome " + user);
   gid("idUser").innerHTML = "<h1>" + user + "</h1>";
 }
@@ -141,10 +131,15 @@ function itemObjectToForm(itemObject) {
     thePhoto.src = forceImageLoad(itemObject.image);
 }
 
+/*
 function changeParent() {
-  gid("inParentId").value = gid("newParent").value;
+  if(inParentId==0)
+    showAlert("can't change parent of root");
+  else
+     gid("inParentId").value = gid("newParent").value;
 }
 
+*/
 
 function focusGrid(id) {
   let bs = divPhotos.getElementsByClassName("hasFocus");
@@ -174,23 +169,29 @@ function buttonSelected(buttonId) {
   let thisId = x[1];
 
 
-  // if father of anything....
+  /*
   for (let i = 0; i < gItemArray.length; i++) {
     obj = gItemArray[i];
     if (obj.parentId == thisId) {
-
-
       setCurrentRoot(thisId);
       // its now a chain button
       buttonId = "chain_" + thisId;
       break;
     }
-
-
   }
+*/
 
   clearAllFocii();
 
+  let thisItemObject = getItemObjectById(thisId);
+  // if (thisItemObject.type == 'c')
+  // ;setCurrentRoot(thisId)
+  if (countDescendants(thisId) && thisItemObject.type == 'c')
+    setCurrentRoot(thisId);
+
+  buttonId = "chain_" + thisId;
+  if (!gid(buttonId))
+    buttonId = "item_" + thisId;
 
   console.log("Selectied button - " + buttonId);
 
@@ -247,7 +248,8 @@ function buttonSelected(buttonId) {
 
   fillParentList();
 }
-// ??????
+
+
 function getFormValue(id) {
   let r = document.getElementById(id);
   return r.value
@@ -256,6 +258,14 @@ function getFormValue(id) {
 function deleteItem() {
   //debugger;
   let idValue = getFormValue('inItemId');
+
+
+
+  if (countDescendants(idValue) > 0) {
+    alert("think of the children!");
+    return;
+  }
+
 
   let thisIndex = getItemObjectIndexById(idValue);
   let thisObject = getItemObjectById(idValue);
@@ -274,53 +284,52 @@ function deleteItem() {
 function updateItemFromForm() {
 
   function testChangeParent(thisItem, thisParentId) {
-
     gChainArray = [];
     let thisRoot = thisParentId;
-
     while (thisRoot != "?") {
       thisRoot = discoverChain(thisRoot);
       if (thisRoot == thisItem.id) {
-
         return false;
       }
     }
     return true;
-
   }
-  let nameValue = getFormValue('inName');
-  let descriptionValue = getFormValue('inDescription');
-  let idValue = getFormValue('inItemId');
 
-  ar = idValue.split("_");
+  let id = getFormValue('inItemId');
+  let thisItem = getItemObjectById(id);
 
-  id = ar[1];
-  let thisItem;
+  thisItem.name = getFormValue('inName');
+  thisItem.description = getFormValue('inDescription');
 
-  for (let i = 0; i < gItemArray.length; i++) {
-    thisItem = gItemArray[i];
-    if (thisItem.id == idValue) {
-      thisItem.name = nameValue;
-      thisItem.description = descriptionValue;
-      let p = getFormValue('newParent');
-      if (p != thisItem.parentId) {
+  let np = getFormValue('newParent');
 
-        if (p != "?" && testChangeParent(thisItem, p)) {
-          showAlert("parent changed");
-          thisItem.parentId = getFormValue('newParent');
-          setCurrentRoot(thisItem.parentId);
-        }
-        else {
-          showAlert("operation failed " + getItemObjectById(p).name
-            + " is contained by " + thisItem.name);
+  if (np != thisItem.parentId) {
 
-        }
-      }
-      //    gItemArray[i].image = thePhoto.src;
-      break;
+    if (thisItem.id == 0) {
+      showAlert("can't change parent of home ( it has none )");
+      return;
     }
+    else
+      if (!testChangeParent(thisItem, np))
+        showAlert("operation failed " + getItemObjectById(p).name
+          + " is contained by " + thisItem.name);
+      else {
+        thisItem.parentId = np;
+        
+        //setCurrentRoot(thisItem.parentId);
+        showAlert("parent changed");
+      }
   }
+  //if (thisItem.type == 'c')
+  //  setCurrentRoot(thisItem.id);
+  //else
+    setCurrentRoot(thisItem.parentId);
+
+  clickButton(thisItem.id);
+
 }
+
+
 
 // create a new item from user input
 function createItem(type) {
@@ -425,8 +434,15 @@ function hoverEnd(e) {
   }
 }
 
-function clickButton(buttonId) {
+function clickButton(id) {
+
+  let buttonId = "chain_" + id;
+  let b = gid(buttonId);
+
+  if (!b)
+    buttonId = "item_" + id;
   b = gid(buttonId);
+
   b.click();
 }
 
@@ -458,6 +474,8 @@ function createTreeButton(itemObject, level) {
 // Maybe move this into setCurrentRoot
 function discoverChain(thisId) {
 
+  // if(!thisId)
+  // alert("no id");
   for (let i = 0; i < gItemArray.length; i++) {
 
     if (gItemArray[i].id == thisId) {
@@ -542,7 +560,7 @@ function forceImageLoad(imageId) {
 }
 
 function gridPhotoClicked(id) {
- // debugger;
+  // debugger;
   // home has no parent
   if (id == 0) {
     chain_0.click();
@@ -557,16 +575,16 @@ function gridPhotoClicked(id) {
   else
     setCurrentRoot(id);
 
-    let thisButton;
+  let thisButton;
 
-//  buttonSelected(id); // not right
-  if(thisItem.type=='c')
-  thisButton = "chain_" + id;
-else
-  thisButton = "item_" + id;
+  //  buttonSelected(id); // not right
+  if (thisItem.type == 'c')
+    thisButton = "chain_" + id;
+  else
+    thisButton = "item_" + id;
 
   let el = gid(thisButton);
-  
+
   el.click();
 
 

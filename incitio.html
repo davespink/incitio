@@ -280,18 +280,7 @@ Investigate and get comfy with Cordova
         <button class="btn btn-primary" onclick="theTree()" type="button" id="dropdownMenuButton"
           style="border-style: none;  margin-top: 10px;border-radius: 16px; ">
           <h1>+New</h1>
-        </button>
-        <!--
-       
-        <ul class="dropdown-menu">
-
-          <li><a class="dropdown-item" href="#" onClick="makeNewButton('c');">New Container</a>
-          </li>
-          <li><a class="dropdown-item" href="#" onClick="makeNewButton('i');">New Item</a>
-
-
-          </li>
-        </ul> -->
+        </button> 
 
 
       </div>
@@ -300,19 +289,29 @@ Investigate and get comfy with Cordova
       <p></p>
 
 
-      <!--
-   </script>   
- -->
+ 
 
 
+
+    <div class="myDiv">
+
+      <p style="padding:10px">
+        If you want to be able to save your work, then create a user.
+        Six characters, alphanumeric no special characters please !?$$%#^
+       </p>
 
       <button class="btn btn-success btn-sm" style="width:70%;margin:3px" onclick="createUser()">Create User</button>
-
-
       <button class="btn btn-success btn-sm" style="width:71%;margin:3px" onclick="goUser(inUser.value)">Go
         User</button>
 
-      <input type="text" class="form-control" id="inUser" style="margin:30px;width:70%">
+        <input type="text" class="form-control" id="inUser" style="margin:30px;width:70%">
+    </div>
+ 
+
+
+
+
+    
 
       <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="loadTestData()">Load Test Data</button>
 
@@ -510,6 +509,8 @@ Investigate and get comfy with Cordova
         <div style="text-align: left;padding:10px;background-color:lightcyan ;">
           <button onclick="makeNewButton('i')" style="background-color: green;color:white">+ new item</button>
           <button onclick="makeNewButton('c')" style="background-color: blue;color:white">+ new container</button>
+          <button onclick=" " style="background-color:gray">Open</button>
+     
         </div>
 
         <!--    Items  -->
@@ -610,12 +611,8 @@ Investigate and get comfy with Cordova
         </div>
         <script>function doTest() {
 
-            let theImage = thePhoto.src;
-            thePhoto.src = forceImageLoad(theImage);// + '?x=' + Date.now();
-            let idValue = getFormValue('inItemId');
-            let el = gid("image_" + idValue);
-            el.children[0].src = forceImageLoad(theImage);
-         
+          theImage.src = forceImageLoad(theImage.src);
+          
           }</script>
         <div>
           <div style="display:none">
@@ -718,8 +715,10 @@ Investigate and get comfy with Cordova
     // debugger;
     //let gFilter = "a";
     // let gOrder = "o";
+//debugger;
+    //loadDataFromDisk();
 
-    loadDataFromDisk();
+     loadTestData();
 
     //loadTestData();
     showAllItems();
