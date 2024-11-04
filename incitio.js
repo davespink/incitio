@@ -277,9 +277,6 @@ function deleteItem() {
 
   setCurrentRoot(thisParent); // to remove button from view
 
-
-
-
   showAllItems();
 }
 
@@ -361,33 +358,23 @@ function createItem(type) {
   return newItem;
 }
 
-
-function createChainButton(itemObject) {
-  let newButton = document.createElement('button');
-  let el = document.getElementById("divChain");
-  el.appendChild(newButton);
+ 
+  function doIt(hoverButton){
 
 
-  //  el.addEventListener("touchstart", touchStart);
-  // el.addEventListener("touchend", touchEnd);
+        console.log(hoverButton);
 
-  buttonColor = `btn btn-primary`;
+        // figure the id
+        let a = hoverButton.split("_");
+        id = a[1];
 
-  buttonId = "chain_" + itemObject.id;
+        thisItem = getItemObjectById(id);
+        console.log(thisItem.image);
 
+        theHoverPhoto.src = thisItem.image;
 
-  number = countDescendants(itemObject.id);
-
-
-  theHTML = `<button id="${buttonId}" 
-      onClick=buttonSelected("${buttonId}")   
-       class="${buttonColor}" style="margin:0px">${itemObject.name}  <span class="badge bg-danger">${number}</span></button>
-       <button style="border:none"></button>`;
-
-  newButton.outerHTML = theHTML;
-
-  return newButton;
-}
+  }
+ 
 
 function searchButtonClick(itemId) {
   let gridButton = gid("image_" + itemId);

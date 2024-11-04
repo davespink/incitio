@@ -4,12 +4,15 @@
 
 Incityo - 26/10/24
  
-- on hover over image show name etc
+- on hover over image show name etc ( done )
+
+- maybe show breadcrumbs
 
 - new parent list should be sorted in alpha order
 
 - Error condition for go user and create user ( User.exists )
 
+- BUG: on deleting an item focus is undefined so if you delete again you get an eror.
 
 - revisit mobile version , left behind
 
@@ -286,17 +289,9 @@ Investigate and get comfy with Cordova
           style="border-style: none;  margin-top: 10px;border-radius: 16px; ">
           <h1>+New</h1>
         </button>
-
-
       </div>
 
-
       <p></p>
-
-
-
-
-
 
       <div class="myDiv">
 
@@ -486,19 +481,27 @@ Investigate and get comfy with Cordova
             doSearch();
           }
         </script>
-        <!--
-        where the search results get displayed
--->
-
+        <!-- where the search results get displayed -->
         <div id="divSearch">
         </div>
 
       </div>
 
       <div class="myDiv" style="background-color:white;margin:auto;margin-top: 0px;">
+
+
+     
+  
+
+        <div style="float:inline-end; padding:5px" ><img id="theHoverPhoto" src="./images/noimage.jpg" style="width:150px;height:150px"></div>
+
         <p id="idUser">
-        <h2></h2>
-        </p>
+          <h2></h2>
+          </p>
+
+       
+
+
         <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 5px;">
         </div>
 
