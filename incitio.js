@@ -32,32 +32,44 @@ function isa(el, c) {
 
 
 function getVersion() {
-
   return "1.24";
 }
 
-function getUser() {
-  return gUser;
-}
 
-function setUser(user) {
-  gUser = user;
-}
+const User = {
+  name: "anon",
+  description: "typeical user",
+  language: "en",
 
-function userDir() {
-  return getUser();
-}
+  get() {
+    return (localStorage.getItem('in_user'));
+  },
+  set(user) {
+    localStorage.setItem('in_user', user);
+  },
+  dir() {
+    return this.get();
+  },
+  photoDir() {
+    return this.dir() + "/photos"
+   },
+  go() {
+    let user = prompt("go user");
+    if (!user)
+    {
+      alert('no user');
+      return;
+    }
+    this.set(user);
+    loadDataFromDisk();
+    showAlert("Welcome " + user);
+    gid("idUser").innerHTML = "<h1>" + user + "</h1>";
 
-function photoDir() {
-  return userDir() + "/photos";
-}
+  },
+};
+
 
 function goUser() {
-  let user = prompt("go user");
-  setUser(user);
-  loadDataFromDisk();
-  showAlert("Welcome " + user);
-  gid("idUser").innerHTML = "<h1>" + user + "</h1>";
 }
 
 /////////////////////////
@@ -131,15 +143,6 @@ function itemObjectToForm(itemObject) {
     thePhoto.src = forceImageLoad(itemObject.image);
 }
 
-/*
-function changeParent() {
-  if(inParentId==0)
-    showAlert("can't change parent of root");
-  else
-     gid("inParentId").value = gid("newParent").value;
-}
-
-*/
 
 function focusGrid(id) {
   let bs = divPhotos.getElementsByClassName("hasFocus");
@@ -282,7 +285,7 @@ function deleteItem() {
 }
 
 function updateItemFromForm() {
-
+  // debugger;
   function testChangeParent(thisItem, thisParentId) {
     gChainArray = [];
     let thisRoot = thisParentId;
@@ -303,7 +306,7 @@ function updateItemFromForm() {
 
   let np = getFormValue('newParent');
 
-  if (np != thisItem.parentId) {
+  if (np != thisItem.parentId && !(id == 0)) {
 
     if (thisItem.id == 0) {
       showAlert("can't change parent of home ( it has none )");
@@ -315,7 +318,7 @@ function updateItemFromForm() {
           + " is contained by " + thisItem.name);
       else {
         thisItem.parentId = np;
-        
+
         //setCurrentRoot(thisItem.parentId);
         showAlert("parent changed");
       }
@@ -323,6 +326,7 @@ function updateItemFromForm() {
   //if (thisItem.type == 'c')
   //  setCurrentRoot(thisItem.id);
   //else
+  if (id != 0)
     setCurrentRoot(thisItem.parentId);
 
   clickButton(thisItem.id);
@@ -680,4 +684,3 @@ function clearStorage() {
 
 
 const noImage = "./images/noimage.jpg";
-var gUser = "";

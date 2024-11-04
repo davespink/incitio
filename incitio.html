@@ -4,13 +4,17 @@
 
 Incityo - 26/10/24
  
-= prevent item containing itself ( dont put it in the list )
+- on hover over image show name etc
+
+- new parent list should be sorted in alpha order
+
+- Error condition for go user and create user ( User.exists )
 
 
 - revisit mobile version , left behind
 
 - Bottom out the exif issue - Resolved 12/10/24
-
+ 
 - large circle type tree thing - figured out how, will do later
 
 - Need to look at Cordova
@@ -198,7 +202,7 @@ Investigate and get comfy with Cordova
 
 <script src="./lib/buttons.js"></script>
 <script src="./lib/backend.js"></script>
- 
+
 <script>
 
   // Long touch
@@ -260,6 +264,7 @@ Investigate and get comfy with Cordova
 </script>
 <!--
 -->
+
 <body>
   <button id="alertBox" class="alert">
     <h1>message</h1>
@@ -280,7 +285,7 @@ Investigate and get comfy with Cordova
         <button class="btn btn-primary" onclick="theTree()" type="button" id="dropdownMenuButton"
           style="border-style: none;  margin-top: 10px;border-radius: 16px; ">
           <h1>+New</h1>
-        </button> 
+        </button>
 
 
       </div>
@@ -289,29 +294,29 @@ Investigate and get comfy with Cordova
       <p></p>
 
 
- 
-
-
-
-    <div class="myDiv">
-
-      <p style="padding:10px">
-        If you want to be able to save your work, then create a user.
-        Six characters, alphanumeric no special characters please !?$$%#^
-       </p>
-
-      <button class="btn btn-success btn-sm" style="width:70%;margin:3px" onclick="createUser()">Create User</button>
-      <button class="btn btn-success btn-sm" style="width:71%;margin:3px" onclick="goUser(inUser.value)">Go
-        User</button>
-
-        <input type="text" class="form-control" id="inUser" style="margin:30px;width:70%">
-    </div>
- 
 
 
 
 
-    
+      <div class="myDiv">
+
+        <p style="padding:10px">
+          If you want to be able to save your work, then create a user.
+          Six characters, alphanumeric no special characters please !?$$%#^
+        </p>
+
+        <button class="btn btn-success btn-sm" style="width:70%;margin:3px" onclick="createUser()">Create User</button>
+        <button class="btn btn-success btn-sm" style="width:71%;margin:3px" onclick="User.go();">Go
+          User</button>
+
+        
+      </div>
+
+
+
+
+
+
 
       <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="loadTestData()">Load Test Data</button>
 
@@ -510,7 +515,7 @@ Investigate and get comfy with Cordova
           <button onclick="makeNewButton('i')" style="background-color: green;color:white">+ new item</button>
           <button onclick="makeNewButton('c')" style="background-color: blue;color:white">+ new container</button>
           <button onclick=" " style="background-color:gray">Open</button>
-     
+
         </div>
 
         <!--    Items  -->
@@ -611,8 +616,8 @@ Investigate and get comfy with Cordova
         </div>
         <script>function doTest() {
 
-          theImage.src = forceImageLoad(theImage.src);
-          
+            theImage.src = forceImageLoad(theImage.src);
+
           }</script>
         <div>
           <div style="display:none">
@@ -624,7 +629,7 @@ Investigate and get comfy with Cordova
 
           <button id="xxx" onclick="doTest()">xxx</button>
 
- 
+
 
           <button class="btn-light" onclick="file.click()">UPLOAD PHOTO</button>
         </div>
@@ -686,6 +691,7 @@ Investigate and get comfy with Cordova
   <!-- STARTUP-->
   <script>
 
+
     const itemObject = {
       id: "0",
       type: "c",
@@ -715,10 +721,12 @@ Investigate and get comfy with Cordova
     // debugger;
     //let gFilter = "a";
     // let gOrder = "o";
-//debugger;
-    //loadDataFromDisk();
+    //debugger;
+    gid("idUser").innerHTML = "<h1>" + User.get() + "</h1>";
 
-     loadTestData();
+    loadDataFromDisk();
+
+    //  loadTestData();
 
     //loadTestData();
     showAllItems();
@@ -738,5 +746,5 @@ Investigate and get comfy with Cordova
 
   </script>
 </body>
- 
+
 </html>
