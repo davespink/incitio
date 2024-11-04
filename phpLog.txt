@@ -594,3 +594,25 @@ stamp dir1729375007275-users/spot/
 uploaded - users/spot/photos/1729375007275.jpg
 filename - photos/sink.jpg
 photos/sink.jpg
+stamp dir1730740318080-users/spot/
+uploaded - users/spot/photos/1730740318080.jpg
+filename - photos/switches.jpg
+photos/switches.jpg
+stamp dir1730740318080-users/spot/
+uploaded - users/spot/photos/1730740318080.jpg
+filename - photos/trousers2.jpg
+photos/trousers2.jpg
+stamp dir1730740318080-users/spot/
+uploaded - users/spot/photos/1730740318080.jpg
+filename - photos/20241023_165606.jpg
+6
+photos/20241023_165606.jpg
+stamp dir1730740318080-users/spot/
+uploaded - users/spot/photos/1730740318080.jpg
+filename - photos/switches.jpg
+photos/switches.jpg
+stamp dir1725836849233-users/spot/
+uploaded - users/spot/photos/1725836849233.jpg
+filename - photos/scissors.jpg
+6
+photos/scissors.jpg

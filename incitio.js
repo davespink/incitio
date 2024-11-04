@@ -168,7 +168,10 @@ function buttonSelected(buttonId) {
 
 
   let x = buttonId.split("_");
-  let thisId = x[1];
+  if (x.length == 1)
+    thisId = buttonId;
+  else
+    thisId = x[1];
 
 
   /*
@@ -260,22 +263,20 @@ function getFormValue(id) {
 function deleteItem() {
   //debugger;
   let idValue = getFormValue('inItemId');
-
-
-
-  if (countDescendants(idValue) > 0) {
-    alert("think of the children!");
-    return;
-  }
-
-
   let thisIndex = getItemObjectIndexById(idValue);
   let thisObject = getItemObjectById(idValue);
   let thisParent = thisObject.parentId;
 
+  if (countDescendants(idValue) > 0 && thisObject.type=='c') {
+    alert("think of the children!");
+    return;
+  }
+ 
   gItemArray.splice(thisIndex, 1);
 
   setCurrentRoot(thisParent); // to remove button from view
+
+  buttonSelected(thisParent);
 
   showAllItems();
 }
@@ -353,28 +354,43 @@ function createItem(type) {
   newItem.image = "?";
   gItemArray.push(newItem);
 
+  //buttonSelected(newItem.id);
+
+
   showAllItems();
+
+ 
 
   return newItem;
 }
 
- 
-  function doIt(hoverButton){
+
+function doHoverButton(hoverButton) {
 
 
-        console.log(hoverButton);
+  console.log(hoverButton);
 
-        // figure the id
-        let a = hoverButton.split("_");
-        id = a[1];
+  // figure the id
+  let a = hoverButton.split("_");
+  id = a[1];
 
-        thisItem = getItemObjectById(id);
-        console.log(thisItem.image);
+  thisItem = getItemObjectById(id);
+  console.log(thisItem.image);
 
-        theHoverPhoto.src = thisItem.image;
+  //     alert(response);
+  var delayInMilliseconds = 500; //1 second
 
-  }
- 
+  setTimeout(function () {
+  //  thePhoto.src = forceImageLoad(thePhoto.src);
+    theHoverPhoto.src = thisItem.image;
+  }, delayInMilliseconds); // to force a refresh .. hopefully
+
+
+
+
+
+}
+
 
 function searchButtonClick(itemId) {
   let gridButton = gid("image_" + itemId);
@@ -502,7 +518,11 @@ function setCurrentRoot(rootId) {
   //}
 
   if (thisItemObject.type != 'c')
-    alert("error - " + rootId)
+  {
+    alert("set current root not container - " + rootId);
+    setCurrentRoot(thisItemObject.parentId);
+    return;
+  }
 
   setCurrentParentId(rootId);
 
