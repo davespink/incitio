@@ -52,11 +52,10 @@ const User = {
   },
   photoDir() {
     return this.dir() + "/photos"
-   },
+  },
   go() {
     let user = prompt("go user");
-    if (!user)
-    {
+    if (!user) {
       alert('no user');
       return;
     }
@@ -611,7 +610,9 @@ function showAllItems() {
       let newButton = document.createElement('button');
       el.appendChild(newButton);
       newButtonId = "image_" + thisItemObject.id;
-      newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid" style="font-size:10px" onclick="gridPhotoClicked('${thisItemObject.id}')">`
+      newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid" style="font-size:10px"
+     onmouseenter="tester.innerHTML =  '${thisItemObject.name}' "
+      onclick="gridPhotoClicked('${thisItemObject.id}')">`
         + thisItemObject.name + `</button>`;
 
     }
@@ -621,7 +622,9 @@ function showAllItems() {
       newButtonId = "image_" + thisItemObject.id;
 
       // maybe rotate?
-      newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid"  onclick="gridPhotoClicked('${thisItemObject.id}')"> 
+      newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid" 
+      onmouseenter="tester.innerHTML =  '${thisItemObject.name}' "
+      onclick="gridPhotoClicked('${thisItemObject.id}')"> 
       <img src="` + forceImageLoad(thisItemObject.image) + `" style="transform:rotate(0deg)"  ></button>`;
 
     }

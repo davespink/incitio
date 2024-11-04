@@ -555,3 +555,42 @@ uploaded - users/spot/photos/1725845530318.jpg
 filename - photos/mexican spanner.jpg
 8
 photos/mexican spanner.jpg
+stamp dir1729374998139-users/spot/
+uploaded - users/spot/photos/1729374998139.jpeg
+filename - photos/sink.jpeg
+photos/sink.jpeg
+stamp dir1729374998139-users/spot/
+uploaded - users/spot/photos/1729374998139.jpg
+filename - photos/Leather Punch.jpg
+8
+photos/Leather Punch.jpg
+stamp dir1729374998139-users/spot/
+uploaded - users/spot/photos/1729374998139.jpeg
+filename - photos/sink.jpeg
+photos/sink.jpeg
+stamp dir1729374998139-users/spot/
+uploaded - users/spot/photos/1729374998139.jpg
+filename - photos/sink.jpg
+photos/sink.jpg
+stamp dir1729375007275-users/spot/
+uploaded - users/spot/photos/1729375007275.jpg
+filename - photos/20241023_074641.jpg
+6
+photos/20241023_074641.jpg
+stamp dir1729375007275-users/spot/
+uploaded - users/spot/photos/1729375007275.jpeg
+filename - photos/sink.jpeg
+photos/sink.jpeg
+stamp dir1729375007275-users/spot/
+uploaded - users/spot/photos/1729375007275.jpg
+filename - photos/cabbage.jpg
+photos/cabbage.jpg
+stamp dir1729375004379-users/spot/
+uploaded - users/spot/photos/1729375004379.jpg
+filename - photos/20241023_165601.jpg
+6
+photos/20241023_165601.jpg
+stamp dir1729375007275-users/spot/
+uploaded - users/spot/photos/1729375007275.jpg
+filename - photos/sink.jpg
+photos/sink.jpg
