@@ -616,3 +616,21 @@ uploaded - users/spot/photos/1725836849233.jpg
 filename - photos/scissors.jpg
 6
 photos/scissors.jpg
+stamp dir1730762499792-users/spot/
+uploaded - users/spot/photos/1730762499792.jpg
+filename - photos/20241005_111417.jpg
+6
+photos/20241005_111417.jpg
+stamp dir1730768509383-users/spot/
+uploaded - users/spot/photos/1730768509383.jpg
+filename - photos/apples.jpg
+photos/apples.jpg
+stamp dir1730769357750-users/spot/
+uploaded - users/spot/photos/1730769357750.jpg
+filename - photos/garden.jpg
+photos/garden.jpg
+stamp dir1730769936244-users/spot/
+uploaded - users/spot/photos/1730769936244.jpg
+filename - photos/spirit level.jpg
+3
+photos/spirit level.jpg

@@ -191,7 +191,7 @@ function buttonSelected(buttonId) {
   let thisItemObject = getItemObjectById(thisId);
   // if (thisItemObject.type == 'c')
   // ;setCurrentRoot(thisId)
-  if (countDescendants(thisId) && thisItemObject.type == 'c')
+  if (thisItemObject.type == 'c')
     setCurrentRoot(thisId);
 
   buttonId = "chain_" + thisId;
@@ -345,22 +345,13 @@ function createItem(type) {
 
   newItem.id = stamp;
   newItem.type = type;
-  // newItem.parentId = getCurrentParentId();
 
-  newItem.parentId = gid("inItemId").value;
+  newItem.parentId = getCurrentParentId();
 
   newItem.name = pName;
   newItem.description = pName + " description";
-  newItem.image = "?";
-  gItemArray.push(newItem);
-
-  //buttonSelected(newItem.id);
-
-
-  showAllItems();
-
+  newItem.image = "./images/noimage.jpg";
  
-
   return newItem;
 }
 
@@ -480,8 +471,7 @@ function createTreeButton(itemObject, level) {
 // Maybe move this into setCurrentRoot
 function discoverChain(thisId) {
 
-  // if(!thisId)
-  // alert("no id");
+   
   for (let i = 0; i < gItemArray.length; i++) {
 
     if (gItemArray[i].id == thisId) {
@@ -549,7 +539,9 @@ function setCurrentRoot(rootId) {
   gid("divItems").innerHTML = "";
   let kids = [];
   for (let i = 0; i < gItemArray.length; i++)
-    if (gItemArray[i].parentId == getCurrentParentId())
+//if (gItemArray[i].parentId == getCurrentParentId())
+
+if (gItemArray[i].parentId == rootId)
       kids.push(gItemArray[i]);
 
   if (kids.length > 0) {

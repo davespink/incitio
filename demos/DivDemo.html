@@ -101,10 +101,7 @@ Demo Divs
 
         // create a new item from user input
         function createItem(type) {
-
             newItem = Object.create(itemObject);
-
-
 
             inName = prompt('Enter item name', 'unNamed');
             if (inName == null) return false;
@@ -122,32 +119,21 @@ Demo Divs
             newItem.description - "";
 
             return newItem;
-
         }
 
         function createButton(itemObject) {
-
             let newButton = document.createElement('button');
             let elItemsDiv = document.getElementById("divItems");
             elItemsDiv.appendChild(newButton);
 
-
-
             if (itemObject.type == "c") {
                 buttonColor = `btn btn-primary`;
-
 
             } else {
                 buttonColor = `btn btn-success`;
             }
 
             buttonId = "item_" + itemObject.id;
-
-
-
-
-
-
             let theHTML =
                 `<button id="` + buttonId
                 + `" onClick=buttonSelected("`
@@ -163,7 +149,6 @@ Demo Divs
 
         }
 
-
         function resetChainDiv(rootId) {
             let elChainDiv = gid("divChain");
             elChainDiv.innerHTML = ` <button class="btn btn-primary"  ondblclick="resetChainDiv()" style="padding:0px;margin:0px ">
@@ -172,15 +157,8 @@ Demo Divs
         }
 
         function setCurrentRoot(rootId) {
-
             let elChainDiv = resetChainDiv();
-
-
-
             function discoverChain(thisId) {
-
-
-
 
                 for (i = 0; i < gItemArray.length; i++) {
                     //     alert(gItemArray[i].id);

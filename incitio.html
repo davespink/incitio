@@ -262,6 +262,9 @@ Investigate and get comfy with Cordova
     setCurrentRoot(0);
     showAlert("done get upload");
 
+    chain_0.click();
+
+
   }
 
 </script>
@@ -506,8 +509,8 @@ Investigate and get comfy with Cordova
         </div>
 
         <div style="text-align: left;padding:10px;background-color:lightcyan ;">
-          <button onclick="makeNewButton('i')" style="background-color: green;color:white">+ new item</button>
-          <button onclick="makeNewButton('c')" style="background-color: blue;color:white">+ new container</button>
+          <button onclick="makeNewItem('i')" style="background-color: green;color:white">+ new item</button>
+          <button onclick="makeNewItem('c')" style="background-color: blue;color:white">+ new container</button>
           <button onclick=" " style="background-color:gray">Open</button>
 
         </div>
@@ -607,7 +610,7 @@ Investigate and get comfy with Cordova
 
         <!--  The Photo Upload etc-->
         <div style="margin-top: 30px">
-          <img id="thePhoto" style="width:200px;height:200px;border:solid">
+          <img id="thePhoto" style="width:300px;height:300px;border:solid">
         </div>
         <script>function doTest() {
 
@@ -719,15 +722,14 @@ Investigate and get comfy with Cordova
     //debugger;
     gid("idUser").innerHTML = "<h1>" + User.get() + "</h1>";
 
-    loadDataFromDisk();
+    //loadDataFromDisk();
 
-    //  loadTestData();
-
-    //loadTestData();
+ 
+    loadTestData();
     showAllItems();
 
 
-    setCurrentRoot(0);
+    //setCurrentRoot(0);
     //chain_0.click();
 
     alertBox.addEventListener("animationend", () => { alertBox.classList.remove("animate"); });
