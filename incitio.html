@@ -694,12 +694,13 @@ Investigate and get comfy with Cordova
 function doIt(id){
   myArray = [];
   function getParent(id){
-      let o = getItemObjectById(id);
-      return o.parentId;
+      let ob = getItemObjectById(id);
+      console.log(ob);
+      return ob.parentId;
     }
 
     let p = id; // shoe rack
-
+//debugger;
     while(p!="?"){
       myArray.push(p);
       console.log(p);
@@ -709,7 +710,7 @@ return myArray;
 }
 
 
-debugger;
+//debugger;
     let xr = doIt(1726345997504);
 
 

@@ -102,12 +102,14 @@ function goUser() {
 //
 ////////////////////////
 function getItemObjectById(id) {
-  for (i = 0; i < gItemArray.length; i++) {
+  for (let z = 0; z < gItemArray.length; z++) {
     //     
-    if (gItemArray[i].id == id) {
-      return gItemArray[i];
+    if (gItemArray[z].id == id) {
+      console.log(id + ' - ' + gItemArray[z].id);
+      return gItemArray[z];
     }
   }
+  alert("not found " + id + " len " + id.length)
 }
 
 function getItemObjectIndexById(id) {
@@ -641,22 +643,12 @@ function doGridHover(id) {
   debugger;
   console.log(id);
 
+ 
+  //breadCrumbs(id);
 
-  breadCrumbs(id);
-//gChainArray = [];
+let abc = doIt(id);
+let f = 2;
 
- // thisRoot = id;
- // while (thisRoot != "?" && gChainArray.length < 500) // remove this fix!
-// thisRoot = discoverChain(thisRoot);
-
-
-
-//  tester.innerHTML = id;
-
- // console.log(breadCrumbs(id));
- // tester.innerHTML = breadCrumbs(id);
-
-//let z=4;
 }
 
 
@@ -679,7 +671,7 @@ function showAllItems() {
 
 
       newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid" style="font-size:10px"
-     onmouseenter="doGridHover( '${thisItemObject.id} ') "
+     onmouseenter="doGridHover('${thisItemObject.id}') "
       onclick="gridPhotoClicked('${thisItemObject.id}')">`
         + thisItemObject.name + `</button>`;
 
@@ -693,7 +685,7 @@ function showAllItems() {
 
       // maybe rotate?
       newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid" 
-      onmouseenter="doGridHover( '${thisItemObject.id} ') "
+      onmouseenter="doGridHover( '${thisItemObject.id}') "
       onclick="gridPhotoClicked('${thisItemObject.id}')"> 
       <img src="` + forceImageLoad(thisItemObject.image) + `" style="transform:rotate(0deg)"  ></button>`;
 
