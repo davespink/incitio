@@ -324,11 +324,8 @@ Investigate and get comfy with Cordova
             for (i = 0; i < localStorage.length; i++) {
               theHTML += `<option  title='lady' >` + localStorage.key(i) + `</option>`;
             }
-
             json.innerHTML = theHTML;
           </script>
-
-
 
         </select>
         <p></p>
@@ -353,9 +350,7 @@ Investigate and get comfy with Cordova
           <input type="file" id="up" onchange="readText(event)" />
           <pre id="output"></pre>
         </div>
-
-
-
+        
         <a id='a' download='JSONDownload.txt' type='text/txt'></a>
         <button class="btn btn-primary btn-sm" style="width:70%;margin:3px" onclick=" 
          
@@ -445,8 +440,6 @@ Investigate and get comfy with Cordova
                   }
                 }
         
-        
-        
         */
 
 
@@ -491,19 +484,11 @@ Investigate and get comfy with Cordova
       </div>
 
       <div class="myDiv" style="background-color:white;margin:auto;margin-top: 0px;">
-
-
-     
-  
-
         <div style="float:inline-end; padding:5px" ><img id="theHoverPhoto" src="./images/noimage.jpg" style="width:150px;height:150px"></div>
 
         <p id="idUser">
           <h2></h2>
           </p>
-
-       
-
 
         <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 5px;">
         </div>
@@ -533,20 +518,12 @@ Investigate and get comfy with Cordova
 
         </div>
         <div class="myDiv" style="background-color:white ;">
-
-
-
         </div>
-
-
       </div>
-      <script>
-      </script>
-
+      
       <div class="myDiv" style="display:inline-flex;width:90%">
         <button type="button" id="updateButton" class="btn btn-dark  " style="width:20%;margin:10px"
           onclick="setCurrentParentId(0);showAllItems();">Refresh</button>
-
 
         <div style="margin:auto">
 
@@ -563,7 +540,6 @@ Investigate and get comfy with Cordova
             </li>
           </ul>
 
-
           <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
             id="dropdownMenuButton" style="border-radius: 5px;">
             Sort
@@ -577,9 +553,7 @@ Investigate and get comfy with Cordova
             </li>
             <li><a class="dropdown-item" href="#" onClick="gShowOptions.sort='a';">Z to A</a>
             </li>
-
           </ul>
-
 
           <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
             id="dropdownMenuButton" style="border-radius: 5px;">
@@ -624,10 +598,7 @@ Investigate and get comfy with Cordova
           </div>
           <input type="button" id="btn_uploadImageFile" value="Upload" style="display:none"
             onclick="uploadImageFile();">
-
           <button id="xxx" onclick="doTest()">xxx</button>
-
-
 
           <button class="btn-light" onclick="file.click()">UPLOAD PHOTO</button>
         </div>
@@ -678,11 +649,7 @@ Investigate and get comfy with Cordova
 
         </div>
       </div>
-
-
     </div>
-
-
   </div>
 
 
@@ -716,17 +683,34 @@ Investigate and get comfy with Cordova
 
     gItemArray.push(itemObject);
 
-    // debugger;
-    //let gFilter = "a";
-    // let gOrder = "o";
-    //debugger;
+    
     gid("idUser").innerHTML = "<h1>" + User.get() + "</h1>";
 
     //loadDataFromDisk();
-
  
     loadTestData();
-    showAllItems();
+ //   showAllItems();
+
+function doIt(id){
+  myArray = [];
+  function getParent(id){
+      let o = getItemObjectById(id);
+      return o.parentId;
+    }
+
+    let p = id; // shoe rack
+
+    while(p!="?"){
+      myArray.push(p);
+      console.log(p);
+      p = getParent(p);
+    }
+return myArray;
+}
+
+
+debugger;
+    let xr = doIt(1726345997504);
 
 
     //setCurrentRoot(0);

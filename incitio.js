@@ -32,7 +32,7 @@ function isa(el, c) {
 
 
 function getVersion() {
-  return "1.24";
+  return "1.24a";
 }
 
 
@@ -67,6 +67,31 @@ const User = {
   },
 };
 
+const Item = {
+
+  create(type) {
+    newItem = Object.create(gItemArray[0]);
+
+    pName = prompt('Enter item name', 'unNamed');
+    if (pName == null) return false;
+
+    let stampx = new Date().getTime();
+    let stamp = stampx.toString();
+
+    newItem.id = stamp;
+    newItem.type = type;
+
+    newItem.parentId = getCurrentParentId();
+
+    newItem.name = pName;
+    newItem.description = pName + " description";
+    newItem.image = "./images/noimage.jpg";
+
+    return newItem;
+  },
+
+}
+
 
 function goUser() {
 }
@@ -94,6 +119,26 @@ function getItemObjectIndexById(id) {
   }
 }
 ////////////////////////////////
+
+
+function breadCrumbs(id) {
+
+  //return id + "bread";
+
+
+ 
+  gChainArray = [];
+  
+    while (id != "?"){
+      id = discoverChain(id);
+      console.log(id);
+    }
+
+
+
+    let x = 1;
+}
+
 
 
 
@@ -165,7 +210,7 @@ function clearAllFocii() {
 }
 
 function buttonSelected(buttonId) {
-
+  //let a2 = findChain(buttonId);
 
   let x = buttonId.split("_");
   if (x.length == 1)
@@ -185,6 +230,7 @@ function buttonSelected(buttonId) {
     }
   }
 */
+
 
   clearAllFocii();
 
@@ -267,11 +313,11 @@ function deleteItem() {
   let thisObject = getItemObjectById(idValue);
   let thisParent = thisObject.parentId;
 
-  if (countDescendants(idValue) > 0 && thisObject.type=='c') {
+  if (countDescendants(idValue) > 0 && thisObject.type == 'c') {
     alert("think of the children!");
     return;
   }
- 
+
   gItemArray.splice(thisIndex, 1);
 
   setCurrentRoot(thisParent); // to remove button from view
@@ -333,7 +379,7 @@ function updateItemFromForm() {
 
 
 // create a new item from user input
-function createItem(type) {
+/*function createItem(type) {
 
   newItem = Object.create(gItemArray[0]);
 
@@ -351,9 +397,9 @@ function createItem(type) {
   newItem.name = pName;
   newItem.description = pName + " description";
   newItem.image = "./images/noimage.jpg";
- 
+
   return newItem;
-}
+}*/
 
 
 function doHoverButton(hoverButton) {
@@ -372,7 +418,7 @@ function doHoverButton(hoverButton) {
   var delayInMilliseconds = 500; //1 second
 
   setTimeout(function () {
-  //  thePhoto.src = forceImageLoad(thePhoto.src);
+    //  thePhoto.src = forceImageLoad(thePhoto.src);
     theHoverPhoto.src = thisItem.image;
   }, delayInMilliseconds); // to force a refresh .. hopefully
 
@@ -471,7 +517,7 @@ function createTreeButton(itemObject, level) {
 // Maybe move this into setCurrentRoot
 function discoverChain(thisId) {
 
-   
+
   for (let i = 0; i < gItemArray.length; i++) {
 
     if (gItemArray[i].id == thisId) {
@@ -507,8 +553,7 @@ function setCurrentRoot(rootId) {
   //return;
   //}
 
-  if (thisItemObject.type != 'c')
-  {
+  if (thisItemObject.type != 'c') {
     alert("set current root not container - " + rootId);
     setCurrentRoot(thisItemObject.parentId);
     return;
@@ -539,9 +584,9 @@ function setCurrentRoot(rootId) {
   gid("divItems").innerHTML = "";
   let kids = [];
   for (let i = 0; i < gItemArray.length; i++)
-//if (gItemArray[i].parentId == getCurrentParentId())
+    //if (gItemArray[i].parentId == getCurrentParentId())
 
-if (gItemArray[i].parentId == rootId)
+    if (gItemArray[i].parentId == rootId)
       kids.push(gItemArray[i]);
 
   if (kids.length > 0) {
@@ -592,6 +637,27 @@ function gridPhotoClicked(id) {
 
 }
 
+function doGridHover(id) {
+  debugger;
+  console.log(id);
+
+
+  breadCrumbs(id);
+//gChainArray = [];
+
+ // thisRoot = id;
+ // while (thisRoot != "?" && gChainArray.length < 500) // remove this fix!
+// thisRoot = discoverChain(thisRoot);
+
+
+
+//  tester.innerHTML = id;
+
+ // console.log(breadCrumbs(id));
+ // tester.innerHTML = breadCrumbs(id);
+
+//let z=4;
+}
 
 
 
@@ -609,8 +675,11 @@ function showAllItems() {
       let newButton = document.createElement('button');
       el.appendChild(newButton);
       newButtonId = "image_" + thisItemObject.id;
+
+
+
       newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid" style="font-size:10px"
-     onmouseenter="tester.innerHTML =  '${thisItemObject.name}' "
+     onmouseenter="doGridHover( '${thisItemObject.id} ') "
       onclick="gridPhotoClicked('${thisItemObject.id}')">`
         + thisItemObject.name + `</button>`;
 
@@ -620,9 +689,11 @@ function showAllItems() {
       el.appendChild(newButton);
       newButtonId = "image_" + thisItemObject.id;
 
+//let rr = findChain(thisItemObject.id);
+
       // maybe rotate?
       newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid" 
-      onmouseenter="tester.innerHTML =  '${thisItemObject.name}' "
+      onmouseenter="doGridHover( '${thisItemObject.id} ') "
       onclick="gridPhotoClicked('${thisItemObject.id}')"> 
       <img src="` + forceImageLoad(thisItemObject.image) + `" style="transform:rotate(0deg)"  ></button>`;
 
