@@ -128,17 +128,17 @@ function breadCrumbs(id) {
   //return id + "bread";
 
 
- 
+
   gChainArray = [];
-  
-    while (id != "?"){
-      id = discoverChain(id);
-      console.log(id);
-    }
+
+  while (id != "?") {
+    id = discoverChain(id);
+    console.log(id);
+  }
 
 
 
-    let x = 1;
+  let x = 1;
 }
 
 
@@ -639,21 +639,53 @@ function gridPhotoClicked(id) {
 
 }
 
-function doGridHover(id) {
-  debugger;
-  console.log(id);
+function getItemPath(id) {
+  console.log(event.currentTarget.id);
+  myArray = [];
+  function getParent(id) {
+    let ob = getItemObjectById(id);
+    console.log(ob);
+    return ob.parentId;
+  }
+  let p = id;
+  while (p != "?") {
+    myArray.push(p);
+    console.log(p);
+    p = getParent(p);
+  }
+  return myArray;
+}
 
- 
-  //breadCrumbs(id);
+function breadCrumbs(id) {
 
-let abc = doIt(id);
-let f = 2;
+  let str = "";
 
+  let theChain = getItemPath(id);
+  for (let i = 0; i < theChain.length; i++) {
+    let thisItem = getItemObjectById(theChain[i]);
+
+    str += thisItem.name + " > ";
+  }
+  return str;
 }
 
 
+function doGridHover() {
+
+  buttonId = event.currentTarget.id;
+  let a = buttonId.split("_");
+  let id = a[1];
+  //console.log(id);
+  gridBreadcrumbs.innerHTML = breadCrumbs(id);
+
+}
+
+//
+// This is the grid
+//
 
 function showAllItems() {
+
   let el = document.getElementById("divPhotos");
   el.innerHTML = "";
 
@@ -668,10 +700,8 @@ function showAllItems() {
       el.appendChild(newButton);
       newButtonId = "image_" + thisItemObject.id;
 
-
-
       newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid" style="font-size:10px"
-     onmouseenter="doGridHover('${thisItemObject.id}') "
+     onmouseenter="doGridHover()"
       onclick="gridPhotoClicked('${thisItemObject.id}')">`
         + thisItemObject.name + `</button>`;
 
@@ -681,11 +711,8 @@ function showAllItems() {
       el.appendChild(newButton);
       newButtonId = "image_" + thisItemObject.id;
 
-//let rr = findChain(thisItemObject.id);
-
-      // maybe rotate?
       newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid" 
-      onmouseenter="doGridHover( '${thisItemObject.id}') "
+      onmouseenter="doGridHover()"
       onclick="gridPhotoClicked('${thisItemObject.id}')"> 
       <img src="` + forceImageLoad(thisItemObject.image) + `" style="transform:rotate(0deg)"  ></button>`;
 

@@ -571,7 +571,7 @@ Investigate and get comfy with Cordova
 
       <!-- photos -->
       <div class="myDiv" style="text-align:center;background-color:green ">
-        <button id="tester" style="width:80%;border-radius: 10px;margin:5px;">hover</button>
+        <button id="gridBreadcrumbs" style="width:80%;border-radius: 10px;margin:5px;">hover</button>
         <div id="divPhotos" class="myDiv"
           style="text-align:center;width:90%;background-color: aquamarine; margin:0 auto; padding:10px;height:500px;overflow-y: scroll">
         </div>
@@ -691,27 +691,11 @@ Investigate and get comfy with Cordova
     loadTestData();
  //   showAllItems();
 
-function doIt(id){
-  myArray = [];
-  function getParent(id){
-      let ob = getItemObjectById(id);
-      console.log(ob);
-      return ob.parentId;
-    }
 
-    let p = id; // shoe rack
-//debugger;
-    while(p!="?"){
-      myArray.push(p);
-      console.log(p);
-      p = getParent(p);
-    }
-return myArray;
-}
 
 
 //debugger;
-    let xr = doIt(1726345997504);
+   // let xr = doIt(1726345997504);
 
 
     //setCurrentRoot(0);
