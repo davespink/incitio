@@ -97,6 +97,22 @@ const Item = {
     return newItem;
   },
 
+
+  getChildren(id) {
+
+    let children = [];
+    for (let i = 0; i < gItemArray.length; i++) {
+      //     
+      if (gItemArray[i].parentId == id) {
+        children.push(gItemArray[i].id);
+        thisItemObject = gItemArray[i].id; // debug
+      }
+    }
+    return children;
+  },
+
+
+
 }
 
 
@@ -488,7 +504,6 @@ function createTreeButton(itemObject, level) {
 // Maybe move this into setCurrentRoot
 function discoverChain(thisId) {
 
-
   for (let i = 0; i < gItemArray.length; i++) {
 
     if (gItemArray[i].id == thisId) {
@@ -512,10 +527,76 @@ function compare(aItem, bItem) {
   }
   return 0;
 }
+function compareAlpha(aItem, bItem) {
+
+  let aName = getItemObjectById(aItem).name;
+  let bName = getItemObjectById(bItem).name;
+
+  aName = aName.toUpperCase();
+  bName = bName.toUpperCase();
+
+  if (aName < bName) {
+    return -1;
+  }
+  if (aName > bName) {
+    return 1;
+  }
+  return 0;
+}
+function paintBreadCrumbs(id) {
+
+  function clearBreadCrumbs() {
+    divChain.innerHTML = "";
+    divItems.innerHTML = "";
+  }
+
+  function paintChildren(id) {
+    function paintChild(id) {
+      thisItemObject = getItemObjectById(id);
+      createItemButton(thisItemObject);
+    }
+
+    let children = Item.getChildren(id);
+    children.sort(compareAlpha);
+    children.forEach((item) => {
+      paintChild(item);
+    });
+
+  }
+
+  function paintParents() {
+    function paintParent(item){
+      thisItemObject = getItemObjectById(item);
+      createChainButton(thisItemObject); 
+    }
+
+    let test = chainArray;
+    chainArray.forEach((item) => {
+      paintParent(item);
+    });
+  }
+  let chainArray = getItemPath(id);
+  chainArray.reverse();
+  
+  clearBreadCrumbs();
+
+  paintChildren(id);
+  paintParents();
+  
+}
+
+
+ 
+
 //
 //  Creates all the buttons also
 //
 function setCurrentRoot(rootId) {
+  //debugger;
+  paintBreadCrumbs(rootId);
+  //debugger;
+
+return;
 
   let thisItemObject = getItemObjectById(rootId);
 
