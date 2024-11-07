@@ -372,79 +372,7 @@ Investigate and get comfy with Cordova
 
 
 
-      <script>
-
-        /*
-                let arrTree = [];
-        
-                function test() {
-        
-                  let level = -1;
-                  treeItem = {
-                    id: "0",
-                    level: "0",
-                    name: "home"
-        
-                  };
-        
-        
-        
-                  function findKids(obj) {
-                    let kids = [];
-                    for (let i = 0; i < gItemArray.length; i++) {
-                      if (gItemArray[i].parentId == obj.id) {
-                        kids.push(gItemArray[i]);
-                      }
-                    }
-                    return kids;
-                  }
-        
-        
-                  function makeTree(thisItemObject) {
-                    level++;
-        
-                    let x = Object.create(treeItem);
-        
-                    x.id = thisItemObject.id;
-                    x.level = level;
-                    x.name = thisItemObject.name;
-                    arrTree.push(x);
-        
-                    //   console.log(level);
-                    //    console.log(thisItemObject.id);
-                    //    console.log(thisItemObject.name);
-        
-        
-        
-                    let obj = thisItemObject;
-                    let kids = findKids(obj);
-                    let l = kids.length;
-        
-                    for (let i = 0; i < kids.length; i++) {
-                      //    console.log(kids[i].name);
-                      makeTree(kids[i]);
-                    }
-                    level--;
-        
-                  }
-        
-                  let thisItemObject = gItemArray[0];
-                  //   console.log(thisItemObject.name);
-                  makeTree(thisItemObject);
-                  //     debugger;
-        
-                  for (let j = 0; j < arrTree.length; j++) {
-                    let id = arrTree[j].id;
-                    let myItem = getItemObjectById(id);
-                    createTreeButton(myItem, arrTree[j].level);
-                  }
-                }
-        
-        */
-
-
-      </script>
-
+   
     </div>
     <!-- second column -->
     <div class="myDiv" style="width:70%;background-color:rgb(26, 13, 75); ">
@@ -704,7 +632,7 @@ Investigate and get comfy with Cordova
     alertBox.addEventListener("animationend", () => { alertBox.classList.remove("animate"); });
 
     window.onbeforeunload = function () {
-      // console.log("autosave " + text);
+      // Utils.doDebug("autosave " + text);
       saveDataToDisk();
 
       return null;
@@ -714,3 +642,83 @@ Investigate and get comfy with Cordova
 </body>
 
 </html>
+
+
+<script>
+
+
+
+
+  /*
+
+    OLD tree stuff
+
+  let arrTree = [];
+  
+          function test() {
+  
+            let level = -1;
+            treeItem = {
+              id: "0",
+              level: "0",
+              name: "home"
+  
+            };
+  
+  
+  
+            function findKids(obj) {
+              let kids = [];
+              for (let i = 0; i < gItemArray.length; i++) {
+                if (gItemArray[i].parentId == obj.id) {
+                  kids.push(gItemArray[i]);
+                }
+              }
+              return kids;
+            }
+  
+  
+            function makeTree(thisItemObject) {
+              level++;
+  
+              let x = Object.create(treeItem);
+  
+              x.id = thisItemObject.id;
+              x.level = level;
+              x.name = thisItemObject.name;
+              arrTree.push(x);
+  
+              //   Utils.doDebug(level);
+              //    Utils.doDebug(thisItemObject.id);
+              //    Utils.doDebug(thisItemObject.name);
+  
+  
+  
+              let obj = thisItemObject;
+              let kids = findKids(obj);
+              let l = kids.length;
+  
+              for (let i = 0; i < kids.length; i++) {
+                //    Utils.doDebug(kids[i].name);
+                makeTree(kids[i]);
+              }
+              level--;
+  
+            }
+  
+            let thisItemObject = gItemArray[0];
+            //   Utils.doDebug(thisItemObject.name);
+            makeTree(thisItemObject);
+            //     debugger;
+  
+            for (let j = 0; j < arrTree.length; j++) {
+              let id = arrTree[j].id;
+              let myItem = getItemObjectById(id);
+              createTreeButton(myItem, arrTree[j].level);
+            }
+          }
+  
+  */
+
+
+</script>

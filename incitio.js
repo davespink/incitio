@@ -28,13 +28,20 @@ function isa(el, c) {
     return true; else return false;
 }
 
-
-
-
 function getVersion() {
-  return "1.24a";
+  return "1.24b";
 }
 
+function isDebug() {
+  return false;
+}
+
+const Utils = {
+  doDebug(s) {
+    if (isDebug())
+      console.log(s);
+  }
+}
 
 const User = {
   name: "anon",
@@ -105,7 +112,9 @@ function getItemObjectById(id) {
   for (let z = 0; z < gItemArray.length; z++) {
     //     
     if (gItemArray[z].id == id) {
-      console.log(id + ' - ' + gItemArray[z].id);
+
+      Utils.doDebug(id + ' - ' + gItemArray[z].id);
+
       return gItemArray[z];
     }
   }
@@ -125,23 +134,13 @@ function getItemObjectIndexById(id) {
 
 function breadCrumbs(id) {
 
-  //return id + "bread";
-
-
-
   gChainArray = [];
 
   while (id != "?") {
     id = discoverChain(id);
-    console.log(id);
+    Utils.doDebug(id);
   }
-
-
-
-  let x = 1;
 }
-
-
 
 
 function doSearch() {
@@ -157,21 +156,10 @@ function doSearch() {
 
     if (thisName.includes(lookFor)) {
 
-
-      //alert(gItemArray[i].name);
-
-      //let gridButton = gid("image_" + gItemArray[i].id);
-
-      // gridButton.click();
-
       createSearchButton(gItemArray[i]);
     }
 
   }
-
-
-
-
 
 
   // showAlert("not yet coded " + search.value);
@@ -212,27 +200,8 @@ function clearAllFocii() {
 }
 
 function buttonSelected(buttonId) {
-  //let a2 = findChain(buttonId);
 
-  let x = buttonId.split("_");
-  if (x.length == 1)
-    thisId = buttonId;
-  else
-    thisId = x[1];
-
-
-  /*
-  for (let i = 0; i < gItemArray.length; i++) {
-    obj = gItemArray[i];
-    if (obj.parentId == thisId) {
-      setCurrentRoot(thisId);
-      // its now a chain button
-      buttonId = "chain_" + thisId;
-      break;
-    }
-  }
-*/
-
+  let thisId = Button.idToItem(buttonId);
 
   clearAllFocii();
 
@@ -246,7 +215,7 @@ function buttonSelected(buttonId) {
   if (!gid(buttonId))
     buttonId = "item_" + thisId;
 
-  console.log("Selectied button - " + buttonId);
+  Utils.doDebug("Selectied button - " + buttonId);
 
   let thisButton = gid(buttonId);
 
@@ -262,7 +231,7 @@ function buttonSelected(buttonId) {
 
   // let c = countDescendants(id);
   //alert(c);
-  // console.log(itemObject.name + " has " + c + " descendants");
+  // Utils.doDebug(itemObject.name + " has " + c + " descendants");
 
 
   function fillParentList() {
@@ -407,14 +376,14 @@ function updateItemFromForm() {
 function doHoverButton(hoverButton) {
 
 
-  console.log(hoverButton);
+  // Utils.doDebug(hoverButton);
 
   // figure the id
   let a = hoverButton.split("_");
   id = a[1];
 
   thisItem = getItemObjectById(id);
-  console.log(thisItem.image);
+  // Utils.doDebug(thisItem.image);
 
   //     alert(response);
   var delayInMilliseconds = 500; //1 second
@@ -550,11 +519,6 @@ function setCurrentRoot(rootId) {
 
   let thisItemObject = getItemObjectById(rootId);
 
-  //if (thisItemObject.type != "c") {
-  //  showAlert("not a container");
-  //return;
-  //}
-
   if (thisItemObject.type != 'c') {
     alert("set current root not container - " + rootId);
     setCurrentRoot(thisItemObject.parentId);
@@ -598,7 +562,6 @@ function setCurrentRoot(rootId) {
   for (let i = 0; i < kids.length; i++)
     createItemButton(kids[i]);
 
-  // showAllItems();
 }
 
 
@@ -640,17 +603,17 @@ function gridPhotoClicked(id) {
 }
 
 function getItemPath(id) {
-  console.log(event.currentTarget.id);
+  //Utils.doDebug(event.currentTarget.id);
   myArray = [];
   function getParent(id) {
     let ob = getItemObjectById(id);
-    console.log(ob);
+    //   Utils.doDebug(ob);
     return ob.parentId;
   }
   let p = id;
   while (p != "?") {
     myArray.push(p);
-    console.log(p);
+    //    Utils.doDebug(p);
     p = getParent(p);
   }
   return myArray;
@@ -675,7 +638,7 @@ function doGridHover() {
   buttonId = event.currentTarget.id;
   let a = buttonId.split("_");
   let id = a[1];
-  //console.log(id);
+  //Utils.doDebug(id);
   gridBreadcrumbs.innerHTML = breadCrumbs(id);
 
 }
@@ -735,11 +698,11 @@ function countDescendants(rootId) {
 
 
   function makeTree(thisId) {
-    // console.log("+" + count);
+    // Utils.doDebug("+" + count);
     let kids = findKids(thisId);
     for (let i = 0; i < kids.length; i++) {
       obj = getItemObjectById(kids[i]);
-      // console.log(obj.name);
+      // Utils.doDebug(obj.name);
       makeTree(kids[i]);
     }
 
