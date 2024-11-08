@@ -1,4 +1,6 @@
-
+function getVersion() {
+  return "1.24c";
+}
 
 function displace(el, options) {
   return window.displacejs(el, options);
@@ -28,9 +30,7 @@ function isa(el, c) {
     return true; else return false;
 }
 
-function getVersion() {
-  return "1.24b";
-}
+
 
 function isDebug() {
   return false;
@@ -159,6 +159,7 @@ function breadCrumbs(id) {
 }
 
 
+
 function doSearch() {
   // debugger;
 
@@ -213,28 +214,57 @@ function clearAllFocii() {
   for (let i = 0; i < bs.length; i++) {
     bs[i].classList.remove("hasFocus");
   }
+
+  hid(openContainer);
 }
+
+
+function openItem() {
+  let selected = getFormValue("inItemId");
+  hid(openContainer);
+  paintBreadCrumbs(selected);
+}
+
 
 function buttonSelected(buttonId) {
 
-  let thisId = Button.idToItem(buttonId);
+  function showOpenButton() {
 
+    let thisItemObject = getItemObjectById(thisId);
+    vid(openContainer);
+    openContainer.innerHTML = "<h2>open " + thisItemObject.name + "</h2>";
+
+
+  }
+
+  let thisId = Button.idToItem(buttonId);
+  // debugger;
   clearAllFocii();
+
+  // get parent and test if this button is chain
 
   let thisItemObject = getItemObjectById(thisId);
   // if (thisItemObject.type == 'c')
   // ;setCurrentRoot(thisId)
-  if (thisItemObject.type == 'c')
-    setCurrentRoot(thisId);
 
-  buttonId = "chain_" + thisId;
-  if (!gid(buttonId))
-    buttonId = "item_" + thisId;
+  let isItem = buttonId.includes("item_");
+
+  if (thisItemObject.type == 'c' && isItem || countDescendants(thisId)) {
+    if (countDescendants(thisId))
+      paintBreadCrumbs(thisId);
+    else showOpenButton();
+  }
+
+
+
 
   Utils.doDebug("Selectied button - " + buttonId);
 
-  let thisButton = gid(buttonId);
+  //let thisButton = gid("item_" + thisId);
+  // if(!thisButton)
+  //   thisButton = gid("chain_" + thisId);
 
+  let thisButton = Button.selectById(thisId);
   thisButton.classList.add("hasFocus");
 
   let a = buttonId.split("_");
@@ -242,12 +272,12 @@ function buttonSelected(buttonId) {
 
   focusGrid(id);
 
+
+  // this is form stuff now ( maybe move it?? )
+
+
   let itemObject = getItemObjectById(id);
   itemObjectToForm(itemObject);
-
-  // let c = countDescendants(id);
-  //alert(c);
-  // Utils.doDebug(itemObject.name + " has " + c + " descendants");
 
 
   function fillParentList() {
@@ -271,8 +301,6 @@ function buttonSelected(buttonId) {
           theTitle += thisItem.name + ">";
 
         }
-
-
         if (gItemArray[i].id == itemObject.parentId)
 
           theHTML += `<option value = "${gItemArray[i].id}" selected> ${gItemArray[i].name} </option>`;
@@ -307,9 +335,10 @@ function deleteItem() {
 
   gItemArray.splice(thisIndex, 1);
 
-  setCurrentRoot(thisParent); // to remove button from view
+  paintBreadCrumbs(thisParent); // to remove button from view
 
-  buttonSelected(thisParent);
+  // buttonSelected(thisParent);
+  Button.click("chain_" + thisParent);
 
   showAllItems();
 }
@@ -357,7 +386,7 @@ function updateItemFromForm() {
   //  setCurrentRoot(thisItem.id);
   //else
   if (id != 0)
-    setCurrentRoot(thisItem.parentId);
+    paintBreadCrumbs(thisItem.parentId);
 
   clickButton(thisItem.id);
 
@@ -565,9 +594,9 @@ function paintBreadCrumbs(id) {
   }
 
   function paintParents() {
-    function paintParent(item){
+    function paintParent(item) {
       thisItemObject = getItemObjectById(item);
-      createChainButton(thisItemObject); 
+      createChainButton(thisItemObject);
     }
 
     let test = chainArray;
@@ -576,17 +605,19 @@ function paintBreadCrumbs(id) {
     });
   }
   let chainArray = getItemPath(id);
+  setCurrentParentId(id);
   chainArray.reverse();
-  
+
   clearBreadCrumbs();
 
   paintChildren(id);
   paintParents();
-  
+
+
 }
 
 
- 
+
 
 //
 //  Creates all the buttons also
@@ -596,7 +627,7 @@ function setCurrentRoot(rootId) {
   paintBreadCrumbs(rootId);
   //debugger;
 
-return;
+  return;
 
   let thisItemObject = getItemObjectById(rootId);
 
@@ -664,9 +695,9 @@ function gridPhotoClicked(id) {
   let thisItem = getItemObjectById(id);
 
   if (thisItem.type != 'c')
-    setCurrentRoot(thisItem.parentId);
+    paintBreadCrumbs(thisItem.parentId);
   else
-    setCurrentRoot(id);
+    paintBreadCrumbs(id);
 
   let thisButton;
 

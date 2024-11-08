@@ -259,7 +259,7 @@ Investigate and get comfy with Cordova
     let js = text;
     gItemArray = JSON.parse(js);
 
-    setCurrentRoot(0);
+    paintBreadCrumbs(0);
     showAlert("done get upload");
 
     chain_0.click();
@@ -424,7 +424,8 @@ Investigate and get comfy with Cordova
         <div style="text-align: left;padding:10px;background-color:lightcyan ;">
           <button onclick="makeNewItem('i')" style="background-color: green;color:white">+ new item</button>
           <button onclick="makeNewItem('c')" style="background-color: blue;color:white">+ new container</button>
-          <button onclick=" " style="background-color:gray">Open</button>
+          <button onclick="openItem()" id = "openContainer"
+           style="position:relative;background-color:orange;display:initial;margin-left:20px;padding:10px;bottom:25px;height:100px;border-radius: 5px;">Open</button>
 
         </div>
 
