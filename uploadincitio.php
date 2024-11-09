@@ -120,13 +120,6 @@ function cropAndRename($fileName, $file_extension)
 // starts here
 //
 
-if (thisItemObject.type == 'c' && )
-if (countDescendants(thisId)) {
-  paintBreadCrumbs(thisId);
-}
-else {
-  showOpenButton();
-}
 
 if (isset($_FILES['file']['name'])) {
     // file name

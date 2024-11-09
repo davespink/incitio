@@ -2,21 +2,21 @@
 <html lang="en">
 <!--   
 
-Incityo - 26/10/24
+Incityo - 8/11/24
  
 - on hover over image show name etc ( done )
 
-- maybe show breadcrumbs
+- maybe show breadcrumbs { done }
 
 - new parent list should be sorted in alpha order
 
 - Error condition for go user and create user ( User.exists )
 
-- BUG: on deleting an item focus is undefined so if you delete again you get an eror.
+- BUG: on deleting an item focus is undefined so if you delete again you get an eror.(done)
 
 - revisit mobile version , left behind
 
-- Bottom out the exif issue - Resolved 12/10/24
+- Bottom out the exif issue - Resolved 12/10/24 ( done )
  
 - large circle type tree thing - figured out how, will do later
 
@@ -24,9 +24,8 @@ Incityo - 26/10/24
 - Start with npm
 - Look at how it works with javascript
 
-- Recode and polish existing codebase
-
-- Reengineer the HTML from mobile back to desktop ? not sure now
+- Recode and polish existing codebase ( doing )
+ 
 
 A lot of no image, but also broken links
 https://gomakethings.com/handling-missing-images-with-vanilla-js/
@@ -39,13 +38,10 @@ Change parent show breadcrumbs on hover on select
 
 - On select put all containers in alpha order
  
- 
-
-- Look at reverse engineering some of the panels from mobile
 
 make good demos
 
-Delete container ask what happens to children.
+Delete container ask what happens to children. ( sort of )
 
 Prevent change container for home , id 0
 
@@ -53,15 +49,11 @@ Prevent change container for home , id 0
 
   Android version.Low priority atm . Maybe javascript to start with. Priority 10.
 
-  Image rotation
+  Image rotation ( not needed )
 
   Trash can.
 
  Better track of thumbnails to remove unwanted ones.
-
-Investigate and get comfy with Cordova
- 
- 
 
  May need to $POST in which case
 
@@ -350,7 +342,7 @@ Investigate and get comfy with Cordova
           <input type="file" id="up" onchange="readText(event)" />
           <pre id="output"></pre>
         </div>
-        
+
         <a id='a' download='JSONDownload.txt' type='text/txt'></a>
         <button class="btn btn-primary btn-sm" style="width:70%;margin:3px" onclick=" 
          
@@ -372,7 +364,7 @@ Investigate and get comfy with Cordova
 
 
 
-   
+
     </div>
     <!-- second column -->
     <div class="myDiv" style="width:70%;background-color:rgb(26, 13, 75); ">
@@ -412,11 +404,12 @@ Investigate and get comfy with Cordova
       </div>
 
       <div class="myDiv" style="background-color:white;margin:auto;margin-top: 0px;">
-        <div style="float:inline-end; padding:5px" ><img id="theHoverPhoto" src="./images/noimage.jpg" style="width:150px;height:150px"></div>
+        <div style="float:inline-end; padding:5px"><img id="theHoverPhoto" src="./images/noimage.jpg"
+            style="width:150px;height:150px"></div>
 
         <p id="idUser">
-          <h2></h2>
-          </p>
+        <h2></h2>
+        </p>
 
         <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 5px;">
         </div>
@@ -424,8 +417,8 @@ Investigate and get comfy with Cordova
         <div style="text-align: left;padding:10px;background-color:lightcyan ;">
           <button onclick="makeNewItem('i')" style="background-color: green;color:white">+ new item</button>
           <button onclick="makeNewItem('c')" style="background-color: blue;color:white">+ new container</button>
-          <button onclick="openItem()" id = "openContainer"
-           style="position:relative;background-color:orange;display:initial;margin-left:20px;padding:10px;bottom:25px;height:100px;border-radius: 5px;">Open</button>
+          <button onclick="openItem()" id="openContainer"
+            style="position:relative;background-color:orange;display:initial;margin-left:20px;padding:10px;bottom:25px;height:100px;border-radius: 5px;">Open</button>
 
         </div>
 
@@ -449,7 +442,7 @@ Investigate and get comfy with Cordova
         <div class="myDiv" style="background-color:white ;">
         </div>
       </div>
-      
+
       <div class="myDiv" style="display:inline-flex;width:90%">
         <button type="button" id="updateButton" class="btn btn-dark  " style="width:20%;margin:10px"
           onclick="setCurrentParentId(0);showAllItems();">Refresh</button>
@@ -586,6 +579,11 @@ Investigate and get comfy with Cordova
   <script>
 
 
+
+
+
+
+
     const itemObject = {
       id: "0",
       type: "c",
@@ -612,30 +610,26 @@ Investigate and get comfy with Cordova
 
     gItemArray.push(itemObject);
 
-    
+    if (!User.get()) {
+      let stampx = new Date().getTime();
+      let stamp = stampx.toString();
+      User.set("GUEST"+stamp);
+
+      createUser();
+      loadTestData();
+
+    } else {
+      loadDataFromDisk();
+    }
+
     gid("idUser").innerHTML = "<h1>" + User.get() + "</h1>";
 
-    //loadDataFromDisk();
- 
-    loadTestData();
- //   showAllItems();
-
-
-
-
-//debugger;
-   // let xr = doIt(1726345997504);
-
-
-    //setCurrentRoot(0);
-    //chain_0.click();
 
     alertBox.addEventListener("animationend", () => { alertBox.classList.remove("animate"); });
 
     window.onbeforeunload = function () {
       // Utils.doDebug("autosave " + text);
       saveDataToDisk();
-
       return null;
     }
 
