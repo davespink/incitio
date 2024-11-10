@@ -241,7 +241,7 @@ function buttonSelected(buttonId) {
 
     let thisItemObject = getItemObjectById(thisId);
     vid(openContainer);
-    openContainer.innerHTML = "<h2>open " + thisItemObject.name + "</h2>";
+    openContainer.innerHTML = "open " + thisItemObject.name ;
 
 
   }

@@ -417,9 +417,10 @@ Prevent change container for home , id 0
         <div style="text-align: left;padding:10px;background-color:lightcyan ;">
           <button onclick="makeNewItem('i')" style="background-color: green;color:white">+ new item</button>
           <button onclick="makeNewItem('c')" style="background-color: blue;color:white">+ new container</button>
-          <button onclick="openItem()" id="openContainer"
-            style="position:relative;background-color:orange;display:initial;margin-left:20px;padding:10px;bottom:25px;height:100px;border-radius: 5px;">Open</button>
+          <button id="openContainer" onclick="openItem()" style="background-color: black;color:white">open</button>
+ 
 
+ 
         </div>
 
         <!--    Items  -->
@@ -493,7 +494,7 @@ Prevent change container for home , id 0
 
       <!-- photos -->
       <div class="myDiv" style="text-align:center;background-color:green ">
-        <button id="gridBreadcrumbs" style="width:80%;border-radius: 10px;margin:5px;">hover</button>
+        <button id="gridBreadcrumbs" style="width:80%;border-radius: 10px;margin:5px;">hover over image</button>
         <div id="divPhotos" class="myDiv"
           style="text-align:center;width:90%;background-color: aquamarine; margin:0 auto; padding:10px;height:500px;overflow-y: scroll">
         </div>
@@ -574,75 +575,68 @@ Prevent change container for home , id 0
     </div>
   </div>
 
-
-  <!-- STARTUP-->
-  <script>
-
-
-
-
-
-
-
-    const itemObject = {
-      id: "0",
-      type: "c",
-      parentId: "?",
-      name: "home",
-      description: "your humble abode",
-      image: "?"
-    };
- 
-
-    const gShowOptions = {
-      filter: "a",
-      sort: "o",
-      view: "g"
-
-    }
-
-    let gCurrentParentId = 0;
-    function getCurrentParentId() { return gCurrentParentId; }
-    function setCurrentParentId(id) { gCurrentParentId = id }
-
-    let gItemArray = [];
-    let gChainArray = [];
-
-    gItemArray.push(itemObject);
-
-    if (!User.get()) {
-      let stampx = new Date().getTime();
-      let stamp = stampx.toString();
-      User.set("GUEST"+stamp);
-
-      createUser();
-      loadTestData();
-
-    } else {
-      loadDataFromDisk();
-    }
-
-    gid("idUser").innerHTML = "<h6>" + User.get() + "</h6>";
-
-
-    alertBox.addEventListener("animationend", () => { alertBox.classList.remove("animate"); });
-
-    window.onbeforeunload = function () {
-      // Utils.doDebug("autosave " + text);
-      saveDataToDisk();
-      return null;
-    }
-
-  </script>
-</body>
-
-</html>
-
+  <!--   STARTS HERE -->
 
 <script>
 
 
+const itemObject = {
+    id: "0",
+    type: "c",
+    parentId: "?",
+    name: "home",
+    description: "your humble abode",
+    image: "?"
+  };
 
+
+  const gShowOptions = {
+    filter: "a",
+    sort: "o",
+    view: "g"
+
+  }
+
+  let gCurrentParentId = 0;
+  function getCurrentParentId() { return gCurrentParentId; }
+  function setCurrentParentId(id) { gCurrentParentId = id }
+
+  let gItemArray = [];
+  let gChainArray = [];
+
+  gItemArray.push(itemObject);
+
+  if (!User.get()) {
+    let stampx = new Date().getTime();
+    let stamp = stampx.toString();
+    User.set("GUEST"+stamp);
+
+    createUser();
+    loadTestData();
+
+  } else {
+    loadDataFromDisk();
+  }
+
+  gid("idUser").innerHTML = "<h6>" + User.get() + "</h6>";
+
+  alertBox.addEventListener("animationend", () => { alertBox.classList.remove("animate"); });
+
+  window.onbeforeunload = function () {
+    // Utils.doDebug("autosave " + text);
+    saveDataToDisk();
+    return null;
+  }
+
+
+
+</script>
+
+
+</body>
+</html>
+
+<script>
 
   /*
 
@@ -714,6 +708,5 @@ Prevent change container for home , id 0
           }
   
   */
-
 
 </script>
