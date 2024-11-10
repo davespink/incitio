@@ -47,9 +47,16 @@ const User = {
   name: "anon",
   description: "typeical user",
   language: "en",
-
   get() {
-    return (localStorage.getItem('in_user'));
+    let l = location.href;
+    let a = l.split("?");
+    if (a.length > 1) {
+      a = a[1].split("=");
+      let u = a[1];
+      return u;
+    }
+    else
+      return (localStorage.getItem('in_user'));
   },
   set(user) {
     localStorage.setItem('in_user', user);
@@ -96,8 +103,6 @@ const Item = {
 
     return newItem;
   },
-
-
   getChildren(id) {
 
     let children = [];
@@ -110,13 +115,17 @@ const Item = {
     }
     return children;
   },
+  hasChildren(id) {
 
-
-
+    return children(id).length;
+  },
 }
 
 
 function goUser() {
+
+  // currently unused
+
 }
 
 /////////////////////////
