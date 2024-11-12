@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open incitio.html",
-            "url":"http://localhost:80/incitio.com/incitio/incitio.html"
+            "url":"http://localhost/incitio.com/incitio/incitio.html"
         }
     ]
 }

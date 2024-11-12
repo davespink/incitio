@@ -1,5 +1,5 @@
 function getVersion() {
-  return "1.24c";
+  return "1.24d";
 }
 
 function displace(el, options) {
@@ -45,7 +45,7 @@ const Utils = {
 
 const User = {
   name: "anon",
-  description: "typeical user",
+  description: "typical user",
   language: "en",
   get() {
     let l = location.href;
@@ -117,16 +117,43 @@ const Item = {
   },
   hasChildren(id) {
 
-    return children(id).length;
+    return this.getChildren(id).length;
   },
+  getById(id) {
+
+    for (let z = 0; z < gItemArray.length; z++) {
+      //     
+      if (gItemArray[z].id == id) {
+
+        Utils.doDebug(id + ' - ' + gItemArray[z].id);
+
+        return gItemArray[z];
+      }
+    }
+    alert("not found " + id + " len " + id.length)
+  },
+
+
+  getIndexById(id) {
+
+    for (i = 0; i < gItemArray.length; i++) {
+      //     
+      if (gItemArray[i].id == id) {
+        return i;
+      }
+    }
+
+
+  },
+
 }
 
 
-function goUser() {
+//function goUser() {
 
-  // currently unused
+// currently unused
 
-}
+//}
 
 /////////////////////////
 //
@@ -134,40 +161,32 @@ function goUser() {
 //
 ////////////////////////
 function getItemObjectById(id) {
-  for (let z = 0; z < gItemArray.length; z++) {
-    //     
-    if (gItemArray[z].id == id) {
-
-      Utils.doDebug(id + ' - ' + gItemArray[z].id);
-
-      return gItemArray[z];
-    }
-  }
-  alert("not found " + id + " len " + id.length)
+  return Item.getById(id);
 }
 
 function getItemObjectIndexById(id) {
-  for (i = 0; i < gItemArray.length; i++) {
-    //     
-    if (gItemArray[i].id == id) {
-      return i;
-    }
-  }
+
+
+  return Item.getIndexById(id);
+
+  
 }
 ////////////////////////////////
 
-
+/*
 function breadCrumbs(id) {
+  alert("xx");
+
+  return;
 
   gChainArray = [];
-
   while (id != "?") {
     id = discoverChain(id);
     Utils.doDebug(id);
   }
 }
 
-
+*/
 
 function doSearch() {
   // debugger;
@@ -241,7 +260,7 @@ function buttonSelected(buttonId) {
 
     let thisItemObject = getItemObjectById(thisId);
     vid(openContainer);
-    openContainer.innerHTML = "open " + thisItemObject.name ;
+    openContainer.innerHTML = "open " + thisItemObject.name;
 
 
   }
@@ -253,8 +272,6 @@ function buttonSelected(buttonId) {
   // get parent and test if this button is chain
 
   let thisItemObject = getItemObjectById(thisId);
-  // if (thisItemObject.type == 'c')
-  // ;setCurrentRoot(thisId)
 
   let isItem = buttonId.includes("item_");
 
@@ -264,14 +281,7 @@ function buttonSelected(buttonId) {
     else showOpenButton();
   }
 
-
-
-
   Utils.doDebug("Selectied button - " + buttonId);
-
-  //let thisButton = gid("item_" + thisId);
-  // if(!thisButton)
-  //   thisButton = gid("chain_" + thisId);
 
   let thisButton = Button.selectById(thisId);
   thisButton.classList.add("hasFocus");
@@ -284,15 +294,47 @@ function buttonSelected(buttonId) {
 
   // this is form stuff now ( maybe move it?? )
 
-
   let itemObject = getItemObjectById(id);
   itemObjectToForm(itemObject);
 
+  function makeParentList() {
+
+    let parents = [];
+
+    gItemArray.forEach((item) => {
+      if (item.type == 'c')
+        parents.push(item);
+    });
+
+    parents.sort(compare); // change name to compareItems
+
+    theHTML = "";
+
+    parents.forEach((item) => {
+      title = breadCrumbs(item.id);
+      if (item.id == itemObject.parentId)
+        theHTML += `<option value = "${item.id}" selected> ${item.name} </option>`;
+      else
+        theHTML += `<option value = "${item.id}"  title="${title}" > ${item.name} </option>`;
+    });
+
+
+
+    let np = gid("newParent");
+    np.innerHTML = theHTML;
+
+  }
+
 
   function fillParentList() {
+     
+    makeParentList();
+    return;
+
+
     let np = gid("newParent");
     let theHTML = "";
-    //debugger;
+  
     for (let i = 0; i < gItemArray.length; i++) {
       //     
       if (gItemArray[i].type == "c") {
@@ -304,7 +346,7 @@ function buttonSelected(buttonId) {
             thisRoot = discoverChain(thisRoot);
 
         let theTitle = "";
-        //debugger;
+         
         for (let j = 0; j < gChainArray.length; j++) {
           thisItem = getItemObjectById(gChainArray[j]);
           theTitle += thisItem.name + ">";
@@ -331,7 +373,7 @@ function getFormValue(id) {
 }
 
 function deleteItem() {
-  //debugger;
+  
   let idValue = getFormValue('inItemId');
   let thisIndex = getItemObjectIndexById(idValue);
   let thisObject = getItemObjectById(idValue);
@@ -353,7 +395,7 @@ function deleteItem() {
 }
 
 function updateItemFromForm() {
-  // debugger;
+  
   function testChangeParent(thisItem, thisParentId) {
     gChainArray = [];
     let thisRoot = thisParentId;
@@ -581,6 +623,7 @@ function compareAlpha(aItem, bItem) {
   }
   return 0;
 }
+
 function paintBreadCrumbs(id) {
 
   function clearBreadCrumbs() {
@@ -632,56 +675,56 @@ function paintBreadCrumbs(id) {
 //  Creates all the buttons also
 //
 function setCurrentRoot(rootId) {
-  //debugger;
+  
   paintBreadCrumbs(rootId);
-  //debugger;
+  debugger;
 
   return;
-
-  let thisItemObject = getItemObjectById(rootId);
-
-  if (thisItemObject.type != 'c') {
-    alert("set current root not container - " + rootId);
-    setCurrentRoot(thisItemObject.parentId);
-    return;
-  }
-
-  setCurrentParentId(rootId);
-
-  // Create the chain buttons
-  gChainArray = [];
-
-  let thisRoot = rootId;
-  while (thisRoot != "?" && gChainArray.length < 500) // remove this fix!
-    thisRoot = discoverChain(thisRoot);
-
-  gChainArray = gChainArray.reverse();
-  gid("divChain").innerHTML = "";
-
-  for (let j = 0; j < gChainArray.length; j++) {
-    thisId = gChainArray[j];
-    thisItemObject = getItemObjectById(thisId);
-    // need thisButton?
-    thisButton = createChainButton(thisItemObject);
-  } // end while
-
-  //
-  // Now the children of the current root
-  //
-  gid("divItems").innerHTML = "";
-  let kids = [];
-  for (let i = 0; i < gItemArray.length; i++)
-    //if (gItemArray[i].parentId == getCurrentParentId())
-
-    if (gItemArray[i].parentId == rootId)
-      kids.push(gItemArray[i]);
-
-  if (kids.length > 0) {
-    kids.sort(compare);
-  }
-
-  for (let i = 0; i < kids.length; i++)
-    createItemButton(kids[i]);
+  /*
+    let thisItemObject = getItemObjectById(rootId);
+  
+    if (thisItemObject.type != 'c') {
+      alert("set current root not container - " + rootId);
+      setCurrentRoot(thisItemObject.parentId);
+      return;
+    }
+  
+    setCurrentParentId(rootId);
+  
+    // Create the chain buttons
+    gChainArray = [];
+  
+    let thisRoot = rootId;
+    while (thisRoot != "?" && gChainArray.length < 500) // remove this fix!
+      thisRoot = discoverChain(thisRoot);
+  
+    gChainArray = gChainArray.reverse();
+    gid("divChain").innerHTML = "";
+  
+    for (let j = 0; j < gChainArray.length; j++) {
+      thisId = gChainArray[j];
+      thisItemObject = getItemObjectById(thisId);
+      // need thisButton?
+      thisButton = createChainButton(thisItemObject);
+    } // end while
+  
+    //
+    // Now the children of the current root
+    //
+    gid("divItems").innerHTML = "";
+    let kids = [];
+    for (let i = 0; i < gItemArray.length; i++)
+      //if (gItemArray[i].parentId == getCurrentParentId())
+  
+      if (gItemArray[i].parentId == rootId)
+        kids.push(gItemArray[i]);
+  
+    if (kids.length > 0) {
+      kids.sort(compare);
+    }
+  
+    for (let i = 0; i < kids.length; i++)
+      createItemButton(kids[i]);*/
 
 }
 
@@ -759,7 +802,8 @@ function doGridHover() {
   buttonId = event.currentTarget.id;
   let a = buttonId.split("_");
   let id = a[1];
-  //Utils.doDebug(id);
+  Utils.doDebug(id);
+
   gridBreadcrumbs.innerHTML = breadCrumbs(id);
 
 }

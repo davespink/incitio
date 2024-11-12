@@ -29,7 +29,7 @@ function cropAndRename($fileName, $file_extension)
     global $stamp;
     global $dir;
 
-   // $dir = "users/spot/";
+    // $dir = "users/spot/";
     $uploaded = $dir . 'photos/' . $stamp  . '.' . $file_extension;
 
     doLog("uploaded - " . $uploaded);
@@ -38,10 +38,10 @@ function cropAndRename($fileName, $file_extension)
 
     rename($fileName, $uploaded);
 
-  //  doLog("rename - " + $fileName + "-" + $uploaded);
+    //  doLog("rename - " + $fileName + "-" + $uploaded);
 
     // is this ok
-    if ($file_extension == 'jpg') {
+    if ($file_extension == 'jpg' ||  $file_extension == 'jpeg') {
         $img = imagecreatefromjpeg($uploaded);
         $exif = exif_read_data($uploaded);
         if (!empty($exif['Orientation'])) {
