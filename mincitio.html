@@ -30,43 +30,46 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
     <link rel="stylesheet" href="./incitio.css">
 
 </head>
 
 <script src="./incitio.js"></script>
 
+<script src="./lib/buttons.js"></script>
+<script src="./lib/backend.js"></script>
+
+
+
 <script>
-    /*
-    function loadTestData() {
-
-        // alert("xx");
-
-        let js = `[{"id":"0","type":"c","parentId":"?","name":"home","description":"your humble abode","image":"photos/img_1727275264.jpg"},{"id":"1725836216928","type":"c","parentId":"0","name":"My Study","description":"My den","image":"photos/img_1727270323.jpg"},{"id":"1725836247926","type":"c","parentId":0,"name":"Kitchen","description":"Where the food is","image":"photos/img_1727270506.jpg"},{"id":"1725836282864","type":"c","parentId":"1725836247926","name":"Fridge","description":"Fridge description","image":"photos/img_1727270740.jpg"},{"id":"1725836311136","type":"c","parentId":"1725836247926","name":"Kitchen cupboard","description":"Kitchen cupboard description","image":"photos/img_1727270751.jpg"},{"id":"1725836340744","type":"c","parentId":"1725836311136","name":"Shelf1","description":"Shelf1 description","image":"photos/img_1727270797.jpg"},{"id":"1725836350832","type":"c","parentId":"1725836311136","name":"Shelf2","description":"Shelf2 description","image":"photos/img_1727270964.jpg"},{"id":"1725836362504","type":"c","parentId":"1725836311136","name":"Shelf3","description":"Shelf3 description","image":"photos/img_1727270906.jpg"},{"id":"1725836416633","type":"c","parentId":"1725836216928","name":"Small Tools","description":"Small Tools description","image":"photos/img_1727271380.jpg"},{"id":"1725836714777","type":"i","parentId":"1725836416633","name":"Magnifying glass","description":"Magnifying glass description","image":"photos/img_1727271089.jpg"},{"id":"1725836778378","type":"i","parentId":"1725836416633","name":"Hand Clamp","description":"Small plastic clamp","image":"photos/img_1727271446.jpg"},{"id":"1725836849233","type":"i","parentId":"1725836416633","name":"Scissors","description":"Scissors description","image":"photos/img_1727271075.jpg"},{"id":"1725837016010","type":"i","parentId":"1725836416633","name":"Magnetic Hand","description":"Pick up small screws","image":"photos/img_1727271158.jpg"},{"id":"1725837606726","type":"i","parentId":"1725836416633","name":"G Clamp","description":"G Clamp description","image":"photos/img_1727271464.jpg"},{"id":"1725845183755","type":"c","parentId":"1725836216928","name":"common tools","description":"common tools description","image":"photos/img_1727271477.jpg"},{"id":"1725845205412","type":"i","parentId":"1725845183755","name":"Adjustable spanner","description":"Adjustable spanner description","image":"photos/img_1727271486.jpg"},{"id":"1725845258140","type":"i","parentId":"1725845183755","name":"Leather hole punch","description":"Leather hole punch description","image":"photos/img_1727271494.jpg"},{"id":"1725845412484","type":"i","parentId":"1725845183755","name":"Simple Hack saw","description":"Simple Hack saw description","image":"photos/img_1727271512.jpg"},{"id":"1725845530318","type":"i","parentId":"1725845183755","name":"Mexican spanner","description":"Mexican spanner description","image":"photos/img_1727271237.jpg"},{"id":"1725845752742","type":"c","parentId":"1725836216928","name":"Papeleria","description":"Papeleria description","image":"photos/img_1727271211.jpg"},{"id":"1725845863663","type":"i","parentId":"1725845752742","name":"Ruler","description":"Ruler description","image":"photos/img_1727273723.jpg"},{"id":"1725845908144","type":"i","parentId":"1725845752742","name":"Pens","description":"Pens description","image":"photos/img_1727273739.jpg"},{"id":"1725845948414","type":"i","parentId":"1725845752742","name":"Pencil Sharpeners","description":"Pencil Sharpeners description","image":"photos/img_1727273750.jpg"},{"id":"1725846011336","type":"i","parentId":"1725845752742","name":"Plasticine","description":"Plasticine description","image":"photos/img_1727273760.jpg"},{"id":"1725846326456","type":"i","parentId":"1725845752742","name":"Pencils","description":"Pencils description","image":"photos/img_1727271303.jpg"},{"id":"1725846365857","type":"i","parentId":"1725845752742","name":"Staples","description":"Staples description","image":"photos/img_1727273785.jpg"},{"id":"1725909589897","type":"c","parentId":"1725836216928","name":"box of screwdrivers","description":"box of screwdrivers description","image":"photos/img_1727386433.jpg"},{"id":"1725909799947","type":"i","parentId":"1725909589897","name":"flat heads","description":"Regular screw drivers","image":"photos/img_1727273847.jpg"},{"id":"1725910219318","type":"i","parentId":"1725909589897","name":"cross heads","description":"cross heads description","image":"photos/img_1727273808.jpg"},{"id":"1725925895037","type":"c","parentId":"1725836216928","name":"Glue Box","description":"Glue Box description","image":"photos/img_1727271284.jpg"},{"id":"1725925990470","type":"i","parentId":"1725925895037","name":"Big Glue Gun","description":"Big Glue Gun description","image":"photos/img_1727275386.jpg"},{"id":"1725926011742","type":"i","parentId":"1725925895037","name":"Small Glue Gun","description":"Small Glue Gun description","image":"photos/img_1727275333.jpg"},{"id":"1725926058517","type":"i","parentId":"1725925895037","name":"Spare Glue Sticks","description":"Spare Glue Sticks description","image":"photos/img_1727312387.jpg"},{"id":"1725926086883","type":"i","parentId":"1725925895037","name":"Plastic Steel","description":"Plastic Steal description","image":"photos/img_1727313258.jpg"},{"id":"1726344113129","type":"c","parentId":"0","name":"Master Bedroom","description":"Bedroom description","image":"photos/img_1727270519.jpg"},{"id":"1726344133731","type":"c","parentId":0,"name":"Visitors Room","description":"Visitors Room description","image":"photos/img_1727269459.jpg"},{"id":"1726344242065","type":"c","parentId":0,"name":"Living Room","description":"Living Room description","image":"photos/img_1727270715.jpg"},{"id":"1726345604982","type":"c","parentId":0,"name":"Bodegas","description":"Bodegas description","image":"photos/img_1727385553.jpg"},{"id":"1726345629422","type":"c","parentId":"1726345604982","name":"Front Porch Bodega","description":"Front Porch Bodega description","image":"photos/img_1727270583.jpg"},{"id":"1726345644802","type":"c","parentId":"1726345604982","name":"Back Bodega","description":"Back Bodega description","image":"photos/img_1727385769.jpg"},{"id":"1726345661718","type":"c","parentId":"0","name":"Henry House","description":"Henry House description","image":"photos/img_1727384880.jpg"},{"id":"1726345682710","type":"c","parentId":"0","name":"Alberca Toilet","description":"Alberca Toilet description","image":"photos/img_1727271006.jpg"},{"id":"1726345703720","type":"c","parentId":"0","name":"Kitchen Toilet","description":"Kitchen Toilet description","image":"photos/img_1727269439.jpg"},{"id":"1726345717145","type":"c","parentId":"0","name":"Back Terrace","description":"Back Terrace description","image":"photos/img_1727312447.jpg"},{"id":"1726345726080","type":"c","parentId":"0","name":"Front Terrace","description":"Front Terrace description","image":"photos/img_1727385228.jpg"},{"id":"1726345742273","type":"c","parentId":"0","name":"Entrance","description":"Entrance description","image":"photos/img_1727312491.jpg"},{"id":"1726345808634","type":"c","parentId":"0","name":"Master Toilet","description":"Master Toilet description","image":"photos/img_1727271022.jpg"},{"id":"1726345817514","type":"c","parentId":"0","name":"Lady Toilet","description":"Lady Toilet description","image":"photos/img_1727312415.png"},{"id":"1726345854639","type":"c","parentId":"0","name":"Inside Passage","description":"Inside Passage description","image":"photos/img_1727385640.jpg"},{"id":"1726345899970","type":"c","parentId":"1725836216928","name":"Big Desk","description":"Big Desk description","image":"photos/img_1727273864.jpg"},{"id":"1726345920704","type":"c","parentId":"1725836216928","name":"Blue Cabinet","description":"Blue Cabinet description","image":"photos/img_1727313363.jpg"},{"id":"1726345933256","type":"c","parentId":"1725836216928","name":"Wall Stand","description":"Wall Stand description","image":"photos/img_1727386365.jpg"},{"id":"1726345943818","type":"i","parentId":"1725836216928","name":"Bed","description":"Bed description","image":"photos/img_1727274417.jpg"},{"id":"1726345980896","type":"c","parentId":"1725836216928","name":"Work Table","description":"Work Table description","image":"photos/img_1727386244.jpg"},{"id":"1726345997504","type":"c","parentId":"1725836216928","name":"Shoe Rack","description":"Shoe Rack description","image":"photos/img_1727386164.jpg"},{"id":"1726346033040","type":"i","parentId":"1726345899970","name":"Mini Computer","description":"Mini Computer description","image":"photos/img_1727384489.jpg"},{"id":"1726346057688","type":"i","parentId":"1726345899970","name":"Monitor Speakers","description":"Monitor Speakers description","image":"photos/img_1727385492.jpg"},{"id":"1726346082968","type":"i","parentId":"1726345899970","name":"Sony TV","description":"Sony TV description","image":"photos/img_1727271264.jpg"},{"id":"1726346104248","type":"i","parentId":"1726345899970","name":"Behringer Interface","description":"Behringer  description","image":"photos/img_1727313559.jpg"},{"id":"1726346155927","type":"i","parentId":"1726345899970","name":"Lamp","description":"Lamp description","image":"photos/img_1727384864.jpg"},{"id":"1726346176497","type":"i","parentId":"1726345899970","name":"USB hub 1","description":"USB hub 1 description","image":"photos/img_1727385402.jpg"},{"id":"1726346185673","type":"i","parentId":"1726345899970","name":"USB hub2","description":"USB hub2 description","image":"photos/img_1727385424.jpg"},{"id":"1726346195041","type":"i","parentId":"1726345899970","name":"Usb Hub3","description":"Usb Hub3 description","image":"photos/img_1727385435.jpg"},{"id":"1726347526694","type":"i","parentId":"1726344113129","name":"Bed","description":"Bed description","image":"photos/img_1727273963.jpg"},{"id":"1726347538816","type":"i","parentId":"1726344113129","name":"Bathtub","description":"Bathtub description","image":"photos/img_1727385297.jpg"},{"id":"1726347546681","type":"i","parentId":"1726344113129","name":"Wash basin","description":"Wash basin description","image":"photos/img_1727385867.jpg"},{"id":"1726347563352","type":"c","parentId":"1726344113129","name":"Wardrobe 1","description":"Wardrobe 1 description","image":"photos/img_1727385113.jpg"},{"id":"1726347594829","type":"c","parentId":"1726344113129","name":"Wardrobe 2","description":"Wardrobe 2 description","image":"photos/img_1727385185.jpg"},{"id":"1726347614361","type":"c","parentId":"1726347563352","name":"Trousers","description":"Trousers description","image":"photos/img_1727384823.jpg"},{"id":"1726347631630","type":"i","parentId":"1726347614361","name":"decathlon trousers","description":"decathlon trousers description","image":"photos/img_1727384388.jpg"},{"id":"1726347646086","type":"i","parentId":"1726347614361","name":"Short trousers","description":"Short trousers description","image":"photos/img_1727384404.jpg"},{"id":"1726347662086","type":"i","parentId":"1726347614361","name":"Best Trousers","description":"Best Trousers description","image":"photos/img_1727384415.jpg"},{"id":"1727269713953","type":"c","parentId":"1725836216928","name":"Electrical Repairs","description":"Electrical Repairs description","image":"photos/img_1727385019.jpg"},{"id":"1727269937313","type":"i","parentId":"1727269713953","name":"Insulation Tape","description":"Black tape that goes sticky in hot weather","image":"photos/img_1727269950.jpg"},{"id":"1727269979234","type":"i","parentId":"1727269713953","name":"Electrition Screwdriver","description":"Electrition Screwdriver description","image":"photos/img_1727269991.jpg"},{"id":"1727270011400","type":"i","parentId":"1727269713953","name":"Wire Strippers","description":"Wire Strippers description","image":"photos/img_1727270395.jpg"},{"id":"1727270034963","type":"i","parentId":"1727269713953","name":"Precision Tools","description":"Precision Tools description","image":"photos/img_1727270360.jpg"},{"id":"1727270072755","type":"i","parentId":"1727269713953","name":"Multimeter","description":"Multimeter description","image":"photos/img_1727270096.jpg"},{"id":"1727270113692","type":"i","parentId":"1727269713953","name":"Spare Leads","description":"Spare Leads description","image":"photos/img_1727270135.jpg"},{"id":"1727270164505","type":"i","parentId":"1727269713953","name":"Cutters","description":"Cutters description","image":"photos/img_1727270173.jpg"},{"id":"1727270202659","type":"i","parentId":"1727269713953","name":"Cable Connectors","description":"Cable Connectors description","image":"photos/img_1727270209.jpg"},{"id":"1727270235818","type":"i","parentId":"1727269713953","name":"Needlenosed pliers","description":"Needlenosed pliers description","image":"photos/img_1727270245.jpg"},{"id":"1727312817207","type":"c","parentId":"1725836247926","name":"Freezer","description":"Freezer description","image":"photos/img_1727312854.jpg"},{"id":"1727312881011","type":"i","parentId":"1727312817207","name":"Beans","description":"Beans description","image":"photos/img_1727313067.jpg"}]`;
-
-        gItemArray = JSON.parse(js);
-
-        setCurrentRoot(0);
-
-        showAlert("loaded");
-
-        //   showAllItems.click();
 
 
-    }*/
 
+async function readText(event) {
+    debugger;
+    const file = event.target.files.item(0)
+    const text = await file.text();
+
+    //  document.getElementById("output").innerText = text
+    //alert(text);
+    let js = text;
+    gItemArray = JSON.parse(js);
+
+    paintBreadCrumbs(0);
+    Alert.show("done get upload");
+
+    chain_0.click();
+
+
+  }
+
+
+    
     function gid(id) {
         return document.getElementById(id);
-
-
-        return document.getElementById(id);
+        
     }
     function hid(el) {
         el.style.display = 'none';
@@ -100,6 +103,7 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
         if (!timer) {
             timer = setTimeout(onlongtouch, duration);
             touched = evt.target;
+            doHoverButton(touched);
         }
     }
 
@@ -126,11 +130,6 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
         touched = false;
 
     }
-
-    // document.addEventListener("DOMContentLoaded", function () {
-    //   test.addEventListener("touchstart", touchStart);
-    //  test.querySelector("#area").addEventListener("touchend", touchEnd);
-    // })
 
 
 </script>
@@ -172,36 +171,62 @@ https://stackoverflow.com/questions/750032/reading-file-contents-on-the-client-s
     <div id="theApp" style="width:100%;background-color:pink;height:3000px; ">
 
 
-        <button  style="border-style: none;position:relative;margin: 12px;">
-            <h4> <i class="bi-house" style="font-size: 2rem; color: cornflowerblue"></i>Incitio Mobile<p id="idVersion"><InCitio Mobil> </p></h4>
+        <button style="border-style: none;position:relative;margin: 12px;">
+            <h4> <i class="bi-house" style="font-size: 2rem; color: cornflowerblue"></i>Incitio Mobile<p id="idVersion">
+                    <InCitio Mobil>
+                </p>
+            </h4>
         </button>
 
-<script>
-idVersion.innerText = getVersion();
+        <script>
+            idVersion.innerText = getVersion();
 
-</script>
+        </script>
 
         <p></p>
-        <div style="text-align: center;">
+        <div style="text-align: center;display:none">
             <button class="btn btn-info btn-sm" style="width:60%; " onclick="loadTestData()">Load Test
                 Data</button>
         </div>
+        <p id="idUser">
+            <h2></h2>
+            </p>
+    
 
-
-        <!---- search  -->
-        <div class="myDiv" style="width:300px  ;margin:auto">
+        <div class="myDiv" style="background-color:rgb(68, 119, 94);padding:10px;margin:auto">
             <button id="none" class="btn btn-light" style="margin:10px; background-color:blanchedalmond;position:relative;
-                width: 60%;height: 15%; border-radius: 16px; box-shadow: 5px 5px 5px gray;">
-                <span class="btn-label" onclick="doSearch();"
-                    style="position:absolute;top:0px; left:10px; margin-bottom: 20px;">
-                    <i class="bi-search" style="font-size:30px"></i></span>
-
-                <input aria-label="Search inCitio" autocomplete="off" placeholder="Search inCitio" value="" name=""
-                    type="text" id="search" style="padding: 0px; border:0cap; float:right;
-              width: 90%;  background-color: rgb(219, 192, 192);
-               z-index: 6; left: 0px;" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50">
+                    width: 60%;height: 15%; border-radius: 16px; box-shadow: 5px 5px 5px gray;">
+              <span class="btn-label" onclick="doSearch()"
+                style="position:absolute;top:0px; left:10px; margin-bottom: 20px;">
+                <i class="bi-search" style="font-size:30px"></i></span>
+    
+              <input aria-label="Search inCitio" autocomplete="off" placeholder="Search inCitio" value="" name=""
+                type="text" id="search" style="padding: 0px; border:0cap; float:right;
+                  width: 90%;  background-color: rgb(219, 192, 192);
+                   z-index: 6; left: 0px;" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50"
+                onkeydown="  
+                      handle(event)
+                    ">
             </button>
-        </div>
+    
+            <script>
+              function handle(e) {
+                if (e.keyCode === 13) {
+                  e.preventDefault(); // Ensure it is only this code that runs
+                  doSearch();
+                }
+                let v = search.value;
+                if (v.length > 2)
+                  search.innerHTML = "";
+                doSearch();
+              }
+            </script>
+            <!-- where the search results get displayed -->
+            <div id="divSearch">
+            </div>
+    
+          </div>
+    
 
 
         <!-- breadcrumbs -->
@@ -210,23 +235,41 @@ idVersion.innerText = getVersion();
                 <img src="images/arrow_down_icon.png" style="position:relative;width:20px;height:20px; float:right">
             </button>
             <div id="breadcrumbs" style="display:none">
-                <!--    Chain   -->
-                <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 5px;padding:0%">
-                </div>
+<!-- starts-->
+                <div class="myDiv" style="background-color:white;margin:auto;margin-top: 0px;">
+                    <div style="float:inline-end; padding:5px"><img id="theHoverPhoto" src="./images/noimage.jpg"
+                        style="width:150px;height:150px"></div>
+            
+                    <p id="idUser">
+                    <h2></h2>
+                    </p>
+            
+                    <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 5px;">
+                    </div>
+            
+                    <div style="text-align: left;padding:10px;background-color:lightcyan ;">
+                      <button onclick="makeNewItem('i')" style="background-color: green;color:white">+ new item</button>
+                      <button onclick="makeNewItem('c')" style="background-color: blue;color:white">+ new container</button>
+                      <button id="openContainer" onclick="openItem()" style="background-color: black;color:white;margin-top: 10px;">open</button>
+                    </div>
+            
+                    <!--    Items  -->
+                    <div id="divItems" style="text-align: left;margin-left: 10px;margin-bottom: 10px; ">
+                    </div>
+                  </div>
 
-                <!--    Create new containers or items  -->
-                <div style="text-align: left;padding:0px;background-color:lightcyan ;">
-                    <button onclick="makeNewButton('i')" style="background-color: green;color:white">+ new
-                        item</button>
-                    <button onclick="makeNewButton('c')" style="background-color: blue;color:white">+ new
-                        container</button>
-                </div>
 
-                <!-- third row where all the items live -->
-                <div id="divItems" style="text-align: left;margin-left: 10px;margin-bottom: 10px; ">
-                </div>
+
             </div>
+
+
+
+
+            
         </div>
+
+
+
         <p></p>
 
         <!-- the gallery -->
@@ -238,6 +281,7 @@ idVersion.innerText = getVersion();
 
             <div id="thePhotos" style="display:none">
                 <button id="showAllItems" onclick="showAllItems()">Load</button>
+                <button id="gridBreadcrumbs" style="width:80%;border-radius: 10px;margin:5px;">hover over image</button>
                 <div id="divPhotos" class="myDiv"
                     style="text-align:center;width:100%;background-color: aquamarine; margin:0 auto; padding:10px;height:300px;overflow-y: scroll">
                 </div>
@@ -251,32 +295,39 @@ idVersion.innerText = getVersion();
                 <img src="images/arrow_down_icon.png" style="position:relative;width:20px;height:20px; float:right">
             </button>
 
-            <script>function doTest() {
-                let theImage = thePhoto.src;
-                thePhoto.src = forceImageLoad(theImage);// + '?x=' + Date.now();
-                let idValue = getFormValue('inItemId');
-                let el = gid("image_" + idValue);
-                el.children[0].src = forceImageLoad(theImage);
-                //     image_0.children[0].src = image_0.children[0].src  + '?x=' + Date.now();
-    
-              }</script>
-
             <div id="thePhotoUpload" style="display:none">
-                <button id="xxx" onclick="doTest()">xxx</button>
-                <div>
-                    <img id="thePhoto" style="max-width:400px;max-height:400px">
-                </div>
+                <!-- photo upload stuff -->
 
-                <div>
-                    <div style="display:none">
-                        <input style="position:absolute;left:0px;margin-bottom:10px;" type="file" name="file" id="file"
-                            onchange='btn_uploadImageFile.click()'>
+
+
+
+                <div class="myDiv" style="background-color: rgb(34, 143, 119);text-align:center;padding:5px ">
+                    <!--  The Photo Upload etc-->
+                    <div style="margin-top: 30px">
+                      <img id="thePhoto" style="width:90%;height:90%;border:solid">
                     </div>
-                    <input type="button" id="btn_uploadImageFile" value="Upload" style="display:none"
+                    <script>function doTest() {
+            
+                        thePhoto.src = forceImageLoad(thePhoto.src);
+            
+                      }</script>
+                    <div>
+                      <div style="display:none">
+                        <input style="position:absolute;left:0px;margin-bottom:10px;" type="file" name="file" id="file"
+                          onchange='btn_uploadImageFile.click()'>
+                      </div>
+                      <input type="button" id="btn_uploadImageFile" value="Upload" style="display:none"
                         onclick="uploadImageFile();">
+                      <button id="xxx" onclick="doTest()">xxx</button>
+            
+                      <button class="btn-light" onclick="file.click()">UPLOAD PHOTO</button>
+                    </div>
+                  </div>
 
-                    <button class="btn-light" onclick="file.click()">UPLOAD PHOTO</button>
-                </div>
+
+
+
+
 
             </div>
         </div>
@@ -290,10 +341,6 @@ idVersion.innerText = getVersion();
             </button>
 
             <div id="theDetails" style="display:none">
-
-                <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px;">
-                    <button type="button" id="updateButton" class="btn btn-default btn-secondary">Details</button>
-                </div>
 
 
                 <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px;">
@@ -344,8 +391,6 @@ idVersion.innerText = getVersion();
             </div>
         </div>
 
-
-
         <!-- backups -->
         <div class="myDiv" style="background-color:white;margin:10px ">
             <div class="btn btn-info btn-sm" onclick="toggleArrow(this,theBackups)" style="width:100%">backups
@@ -353,58 +398,30 @@ idVersion.innerText = getVersion();
             </div>
 
             <div id="theBackups" style="display:none">
+                
+            
 
-
-                <div class="myDiv" style="margin-top:20px">
-                    <h4>Select database</h4>
-                    <select id="json" style="width:90%; background-color:rgb(203, 221, 236);border-radius: 5px;">
-
-                        <script>
-                            for (i = 0; i < localStorage.length; i++) {
-                                document.write(`<option>` + localStorage.key(i) + `</option>`);
-                            }
-                        </script>
-
-                    </select>
-                    <p></p>
-
-                    <div class="btn btn-primary btn-sm" style="width:70%;margin:3px" onclick="getJSON()">Get
-                        Data</div>
-                    <br>
-                    <div class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="putJSON()">Save
-                        Data</div>
-                    <br>
-                    <div class="btn btn-success btn-sm" style="width:70%;margin:3px" onclick="newJSON()">New
-                        Database</div>
-                    <br>
-                    <div class="btn btn-danger btn-sm" style="width:70%;margin:3px" onclick="deleteJSON()">Delete
-                        Database</div>
-
-                    <!--
-                    <button onclick="clearStorage()">Clear</button>
-                    -->
-                </div>
-
-
-                <div class="myDiv" style="margin-top:20px">
-
+                <div class="myDiv" style="margin-top:20px;background-color: #6f8670;padding:10px">
                     <h4>Backups</h4>
-
-                    <button class="btn btn-dark btn-sm" style="width:70%;margin:3px" onclick="up.click()">Upload
-                        Data</button>
-
+                    <button class="btn btn-dark btn-sm" style="width:70%;margin:3px"
+                    onclick="up.click()">Upload Data</button>
                     <div style="display:none">
-                        <input type="file" id="up" onchange="readText(event)" />
-                        <pre id="output"></pre>
+                      <input type="file" id="up" onchange="readText(event)" />
+                      <pre id="output"></pre>
                     </div>
 
+
+                    
+            
                     <a id='a' download='JSONDownload.txt' type='text/txt'></a>
-                    <button class="btn btn-primary btn-sm" style="width:70%;margin:3px" onclick="
-                        a.download='IncitioDownload-' + new Date().toLocaleString() + '.txt';
-                         downloadData()">Download Data</button>
-                    <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick=" ">Export Data</button>
-                    <br>
-                </div>
+                    <button class="btn btn-primary btn-sm" style="width:70%;margin:3px" onclick=" 
+                     
+                      const d = new Date();
+                      let text = d.toLocaleDateString() + ` ` + d.toLocaleTimeString();
+                      a.download='IncitioDownload '  +  text + '.txt';          
+                      downloadData()">Download Data</button>
+                  </div>
+            
 
 
 
@@ -447,118 +464,17 @@ idVersion.innerText = getVersion();
 
 
                 </div>
-
-
-
-
-
             </div>
         </div>
         <p></p>
 
-
-
     </div>
 
 
-    <script>
+  <!--   STARTS HERE -->
 
-        const itemObject = {
-            id: "0",
-            type: "c",
-            parentId: "?",
-            name: "home",
-            description: "your humble abode",
-            image: "?"
-        };
+  <script src="./startup.js"></script>
 
-        //     alert(screen.width);
-
-        let gCurrentParentId = 0; // do I need to persist this?
-        function getCurrentParentId() { return gCurrentParentId; }
-        function setCurrentParentId(id) { gCurrentParentId = id }
-
-        let gItemArray = [];
-        let gChainArray = [];
-
-        gItemArray.push(itemObject);
-
-        json.value = "autosave";
-        getJSON();
-
-
-        //for (i = 0; i < localStorage.length; i++)
-        //   alert(localStorage.key(i));
-        //
-
-        /*
-        function f(el) {
-            hid(el);
-            let p = el.parentElement;
- 
-            p.innerHTML = `<span style="font-size:20px"><p> copy an image to the clipboard and then paste it here</span>`;
-        }
- 
-        let gPictureBoxInnerHTML = `<button id="paste_btn" style="height:90%;width:90%;object-fit:contain;padding:20px;margin:auto" 
-    onclick="f(this);">left click here to start paste</button>`;
-*/
-        /*
-            function doBefore() {
-              try {
-        
-                let p = document.getElementById("picture_box");
-        
-                p.style.padding = "0px";
-                p.innerHTML = "";
-              }
-              catch (e) { alert(e); }
-            }
-        
-        
-            function doAfter() {
-              try {
-                let p = document.getElementById("picture_box");
-                let pictureBox = p.firstElementChild;
-        
-                thisId = (gid("inItemId")).value;
-        
-                thisIndex = getItemObjectIndexById(thisId);
-        
-        
-                //gItemArray[thisIndex].image = pictureBox.outerHTML; // save the outerHTML
-                // should I monkey with absoliute paths?
-                // Not yet.
-                document.activeElement.blur();
-                window.focus();
-              }
-              catch (e) {
-        
-                alert(e);
-        
-              }
-        
-            }
-        */
-
-        alertBox.addEventListener("animationend", () => { alertBox.classList.remove("animate"); });
-
-
-
-        window.onbeforeunload = closingCode;
-        function closingCode() {
-            const myJSON = JSON.stringify(gItemArray);
-            // alert(myJSON);
-            // Store
-            localStorage.setItem("autosave", myJSON);
-
-          //  let msg = "saved data to " + "autosave";
-
-           // alert(msg);
-            return null;
-        }
-
-
-    </script>
 </body>
 
 </html>

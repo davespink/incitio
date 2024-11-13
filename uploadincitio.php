@@ -38,7 +38,7 @@ function cropAndRename($fileName, $file_extension)
 
     rename($fileName, $uploaded);
 
-    //  doLog("rename - " + $fileName + "-" + $uploaded);
+    //  doLog("rename - " + $fileName + "-" + $uploadTest);
 
     // is this ok
     if ($file_extension == 'jpg' ||  $file_extension == 'jpeg') {

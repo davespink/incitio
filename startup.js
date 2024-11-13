@@ -15,6 +15,8 @@ const gShowOptions = {
 
 }
 
+debugger;
+
 let gCurrentParentId = 0;
 function getCurrentParentId() { return gCurrentParentId; }
 function setCurrentParentId(id) { gCurrentParentId = id }
@@ -30,7 +32,6 @@ if (!User.get()) {
   User.set("GUEST"+stamp);
 
   createUser();
-  loadTestData();
 
 } else {
   loadDataFromDisk();

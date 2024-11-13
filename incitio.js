@@ -30,8 +30,6 @@ function isa(el, c) {
     return true; else return false;
 }
 
-
-
 function isDebug() {
   return false;
 }
@@ -41,6 +39,15 @@ const Utils = {
     if (isDebug())
       console.log(s);
   }
+}
+
+
+const Alert = {
+  show(message) {
+    alertBox.innerHTML = "<h3>" + message + "</h3>";
+    alertBox.classList.add("animate");
+  },
+
 }
 
 const User = {
@@ -82,7 +89,7 @@ const User = {
 };
 
 const Item = {
-
+// belongs in UI
   create(type) {
     newItem = Object.create(gItemArray[0]);
 
@@ -149,12 +156,7 @@ const Item = {
 }
 
 
-//function goUser() {
-
-// currently unused
-
-//}
-
+ 
 /////////////////////////
 //
 // array operations
@@ -165,11 +167,7 @@ function getItemObjectById(id) {
 }
 
 function getItemObjectIndexById(id) {
-
-
   return Item.getIndexById(id);
-
-  
 }
 ////////////////////////////////
 
@@ -257,12 +255,9 @@ function openItem() {
 function buttonSelected(buttonId) {
 
   function showOpenButton() {
-
-    let thisItemObject = getItemObjectById(thisId);
+    let thisItemObject = Item.getById(thisId);//(thisId);
     vid(openContainer);
     openContainer.innerHTML = "open " + thisItemObject.name;
-
-
   }
 
   let thisId = Button.idToItem(buttonId);
@@ -306,7 +301,7 @@ function buttonSelected(buttonId) {
         parents.push(item);
     });
 
-    parents.sort(compare); // change name to compareItems
+    parents.sort(compareItems); // change name to compareItems
 
     theHTML = "";
 
@@ -325,45 +320,7 @@ function buttonSelected(buttonId) {
 
   }
 
-
-  function fillParentList() {
-     
-    makeParentList();
-    return;
-
-
-    let np = gid("newParent");
-    let theHTML = "";
-  
-    for (let i = 0; i < gItemArray.length; i++) {
-      //     
-      if (gItemArray[i].type == "c") {
-
-        gChainArray = [];
-        let thisRoot = gItemArray[i].id;
-        if (i > 0)
-          while (thisRoot != "?")
-            thisRoot = discoverChain(thisRoot);
-
-        let theTitle = "";
-         
-        for (let j = 0; j < gChainArray.length; j++) {
-          thisItem = getItemObjectById(gChainArray[j]);
-          theTitle += thisItem.name + ">";
-
-        }
-        if (gItemArray[i].id == itemObject.parentId)
-
-          theHTML += `<option value = "${gItemArray[i].id}" selected> ${gItemArray[i].name} </option>`;
-        else
-          theHTML += `<option value = "${gItemArray[i].id}"  title="${theTitle}"> ${gItemArray[i].name} </option>`
-      }
-    }
-    np.innerHTML = theHTML;
-
-  }
-
-  fillParentList();
+  makeParentList();
 }
 
 
@@ -373,7 +330,7 @@ function getFormValue(id) {
 }
 
 function deleteItem() {
-  
+
   let idValue = getFormValue('inItemId');
   let thisIndex = getItemObjectIndexById(idValue);
   let thisObject = getItemObjectById(idValue);
@@ -395,7 +352,7 @@ function deleteItem() {
 }
 
 function updateItemFromForm() {
-  
+
   function testChangeParent(thisItem, thisParentId) {
     gChainArray = [];
     let thisRoot = thisParentId;
@@ -482,16 +439,12 @@ function doHoverButton(hoverButton) {
   // Utils.doDebug(thisItem.image);
 
   //     alert(response);
-  var delayInMilliseconds = 500; //1 second
+  var delayInMilliseconds = 100; //1 second
 
   setTimeout(function () {
     //  thePhoto.src = forceImageLoad(thePhoto.src);
     theHoverPhoto.src = thisItem.image;
   }, delayInMilliseconds); // to force a refresh .. hopefully
-
-
-
-
 
 }
 
@@ -530,14 +483,12 @@ function createSearchButton(itemObject) {
 
 var timeout;
 
+// unused
 function hoverStart(e) {
-
   timeout = setTimeout(function () {
     showAlert("hello");
   }, 3000);
 }
-
-
 function hoverEnd(e) {
   if (timeout) {
     clearTimeout(timeout);
@@ -594,7 +545,7 @@ function discoverChain(thisId) {
   }
 }
 
-function compare(aItem, bItem) {
+function compareItems(aItem, bItem) {
 
   aName = aItem.name.toUpperCase();
   bName = bItem.name.toUpperCase();
@@ -668,66 +619,15 @@ function paintBreadCrumbs(id) {
 
 }
 
-
-
-
 //
 //  Creates all the buttons also
 //
 function setCurrentRoot(rootId) {
-  
+alert("what??");
   paintBreadCrumbs(rootId);
   debugger;
-
   return;
-  /*
-    let thisItemObject = getItemObjectById(rootId);
-  
-    if (thisItemObject.type != 'c') {
-      alert("set current root not container - " + rootId);
-      setCurrentRoot(thisItemObject.parentId);
-      return;
-    }
-  
-    setCurrentParentId(rootId);
-  
-    // Create the chain buttons
-    gChainArray = [];
-  
-    let thisRoot = rootId;
-    while (thisRoot != "?" && gChainArray.length < 500) // remove this fix!
-      thisRoot = discoverChain(thisRoot);
-  
-    gChainArray = gChainArray.reverse();
-    gid("divChain").innerHTML = "";
-  
-    for (let j = 0; j < gChainArray.length; j++) {
-      thisId = gChainArray[j];
-      thisItemObject = getItemObjectById(thisId);
-      // need thisButton?
-      thisButton = createChainButton(thisItemObject);
-    } // end while
-  
-    //
-    // Now the children of the current root
-    //
-    gid("divItems").innerHTML = "";
-    let kids = [];
-    for (let i = 0; i < gItemArray.length; i++)
-      //if (gItemArray[i].parentId == getCurrentParentId())
-  
-      if (gItemArray[i].parentId == rootId)
-        kids.push(gItemArray[i]);
-  
-    if (kids.length > 0) {
-      kids.sort(compare);
-    }
-  
-    for (let i = 0; i < kids.length; i++)
-      createItemButton(kids[i]);*/
-
 }
-
 
 function forceImageLoad(imageId) {
   let a = imageId.split("?x=");
@@ -889,10 +789,8 @@ function doDebug(message) {
 
 }
 
-function showAlert(message) {
-  alertBox.innerHTML = "<h3>" + message + "</h3>";
-  alertBox.classList.add("animate");
-
+function showAlert(message, type) {
+  Alert.show(message);
 }
 
 function clearStorage() {
