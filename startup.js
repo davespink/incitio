@@ -14,8 +14,7 @@ const gShowOptions = {
   view: "g"
 
 }
-
-debugger;
+// alert(window.innerWidth);
 
 let gCurrentParentId = 0;
 function getCurrentParentId() { return gCurrentParentId; }

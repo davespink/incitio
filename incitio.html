@@ -54,7 +54,14 @@ Prevent change container for home , id 0
 
  https://www.w3schools.com/php/php_superglobals_post.asp
 
+
+how to change stylesheets on the fly!!!
+https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-apply-the-new-style-to-the-page
+
+
 -->
+
+
 
 <head>
   <meta charset="UTF-8">
@@ -68,17 +75,50 @@ Prevent change container for home , id 0
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link id="x" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
+  <script>
+ // x.href = x.href + "xxx";
+ // console.log("crafty " + x.href)
+ // well well well
+ console.log(screen.width);
+ alert("XXX");
+  </script>
+
   <style>
+    
     .myDiv {
       border: 5px outset red;
       text-align: center;
+     
     }
+/*
+    .topDiv {
+      display: inline-flex;
+      width: 100%;
+      height: fit-content;
+      background-color: #6b6bda;
+    }
+
+    .col1 {
+      width: 15%;
+      background-color: pink;
+    }
+
+    .col2 {
+      width: 65%;
+      background-color: rgb(26, 13, 75);
+    }
+
+    .col3 {
+      width: 30%;
+      background-color: rgb(170, 123, 37)
+    }
+
+ 
+*/
 
     .item-grid {
       width: 100px;
@@ -254,6 +294,9 @@ Prevent change container for home , id 0
 
   }
 
+function mobile() { return true; }
+
+
 </script>
 
 <body>
@@ -262,10 +305,10 @@ Prevent change container for home , id 0
     <h1>message</h1>
   </button>
 
+  <div id="topDiv" class="myDiv topDiv">
 
-  <div id="topDiv" class="myDiv" style="display:inline-flex;width:100%;height:1000px;background-color: #6b6bda;">
     <!-- first column -->
-    <div class="myDiv" style="width:15%;background-color:pink; ">
+    <div class="myDiv col1">
       <button id="idVersion" style="border-style: none;background-color: transparent;">
         <i class="bi-house" style="font-size: 5r; color: cornflowerblue;"></i>
         <script>idVersion.innerHTML = "<h2>Incitio v" + getVersion() + "</h2>";</script>
@@ -315,11 +358,11 @@ Prevent change container for home , id 0
     </div>
 
     <!-- second column -->
-    <div class="myDiv" style="width:65%;background-color:rgb(26, 13, 75); ">
+    <div class="myDiv col2">
 
+    <div style="background-color: gray;">THE MENU</div>
 
       <!-- Search-->
-       
       <div class="myDiv" style="background-color:rgb(68, 119, 94);padding:10px;margin:auto">
         <button id="none" class="btn btn-light" style="margin:10px; background-color:blanchedalmond;position:relative;
                 width: 60%;height: 15%; border-radius: 16px; box-shadow: 5px 5px 5px gray;">
@@ -353,17 +396,10 @@ Prevent change container for home , id 0
         </div>
 
       </div>
-
       <!-- end search -->
 
-
-
-
-
-
-
-
-      <div class="myDiv" style="background-color:white;margin:auto;margin-top: 0px;">
+      <!-- breadcrumbs -->
+      <div id="divBreadCrumbs" class="myDiv" style="background-color:white;margin:auto;margin-top: 0px;">
         <div style="float:inline-end; padding:5px"><img id="theHoverPhoto" src="./images/noimage.jpg"
             style="width:150px;height:150px"></div>
 
@@ -384,157 +420,138 @@ Prevent change container for home , id 0
         <div id="divItems" style="text-align: left;margin-left: 10px;margin-bottom: 10px; ">
         </div>
 
-
-
-
       </div>
 
-      <!-- Tree 
-      <button onclick="test()">test</button>
-      is tree worth the bother?
-      -->
-      <div class="myDiv" id="divTree" style="background-color:hsl(245, 21%, 54%);
-      margin:auto;margin-top: 0px;display:none">
-        <div class="myDiv" style="background-color:white ;">
-        </div>
-
-        <div class="myDiv" style="background-color:white ;">
-
-        </div>
-        <div class="myDiv" style="background-color:white ;">
-        </div>
-      </div>
-
-      <div class="myDiv" style="display:inline-flex;width:90%">
-        <button type="button" id="updateButton" class="btn btn-dark  " style="width:20%;margin:10px"
-          onclick="showAllItems();">Refresh</button>
-        <div style="margin:auto">
-
-          <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
-            id="dropdownMenuButton" style="border-radius: 5px;">
-            Filter
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" onClick="gShowOptions.filter='c';">Only Containers</a>
-            </li>
-            <li><a class="dropdown-item" href="#" onClick="gShowOptions.filter='i';">Only Items</a>
-            </li>
-            <li><a class="dropdown-item" href="#" onClick="gShowOptions.filter='a';">ShowAll</a>
-            </li>
-          </ul>
-
-          <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
-            id="dropdownMenuButton" style="border-radius: 5px;">
-            Sort
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" onClick="gShowOptions.sort='o';">Old to new</a>
-            </li>
-            <li><a class="dropdown-item" href="#" onClick="gShowOptions.sort='n';">New to Old</a>
-            </li>
-            <li><a class="dropdown-item" href="#" onClick="gShowOptions.sort='a';">A to Z</a>
-            </li>
-            <li><a class="dropdown-item" href="#" onClick="gShowOptions.sort='a';">Z to A</a>
-            </li>
-          </ul>
-
-          <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
-            id="dropdownMenuButton" style="border-radius: 5px;">
-            View
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" onClick="gShowOptions.view='g';">Grid</a>
-            </li>
-            <li><a class="dropdown-item" href="#" onClick="gShowOptions.view='l';">List</a>
-            </li>
-          </ul>
-
-        </div>
-      </div>
 
       <!-- photos -->
-      <div class="myDiv" style="text-align:center;background-color:green ">
+      <div id="divImages" class="myDiv" style="text-align:center;background-color:green ">
+        <div class="myDiv" style="display:inline-flex;width:90%">
+          <button type="button" id="updateButton" class="btn btn-dark  " style="width:20%;margin:10px"
+            onclick="showAllItems();">Refresh</button>
+          <div style="margin:auto">
+
+            <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
+              id="dropdownMenuButton" style="border-radius: 5px;">
+              Filter
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onClick="gShowOptions.filter='c';">Only Containers</a>
+              </li>
+              <li><a class="dropdown-item" href="#" onClick="gShowOptions.filter='i';">Only Items</a>
+              </li>
+              <li><a class="dropdown-item" href="#" onClick="gShowOptions.filter='a';">ShowAll</a>
+              </li>
+            </ul>
+
+            <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
+              id="dropdownMenuButton" style="border-radius: 5px;">
+              Sort
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onClick="gShowOptions.sort='o';">Old to new</a>
+              </li>
+              <li><a class="dropdown-item" href="#" onClick="gShowOptions.sort='n';">New to Old</a>
+              </li>
+              <li><a class="dropdown-item" href="#" onClick="gShowOptions.sort='a';">A to Z</a>
+              </li>
+              <li><a class="dropdown-item" href="#" onClick="gShowOptions.sort='a';">Z to A</a>
+              </li>
+            </ul>
+
+            <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
+              id="dropdownMenuButton" style="border-radius: 5px;">
+              View
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onClick="gShowOptions.view='g';">Grid</a>
+              </li>
+              <li><a class="dropdown-item" href="#" onClick="gShowOptions.view='l';">List</a>
+              </li>
+            </ul>
+
+          </div>
+        </div>
         <button id="gridBreadcrumbs" style="width:80%;border-radius: 10px;margin:5px;">hover over image</button>
         <div id="divPhotos" class="myDiv"
-          style="text-align:center;width:90%;background-color: aquamarine; margin:0 auto; padding:10px;height:500px;overflow-y: scroll">
+          style="text-align:center;background-color: aquamarine; margin:0 auto; padding:0px;height:500px;overflow-y: scroll">
         </div>
       </div>
-    </div>
+
+    </div> <!--end second column -->
 
     <!-- third column -->
-    <div class="myDiv" style="width:30%;background-color:rgb(170, 123, 37) ; ">
+    <div class="myDiv col3">
 
 
       <!-- the photo stuff-->
-      <div class="myDiv" style="background-color: rgb(34, 143, 119);text-align:center;padding:5px ">
-        <!--  The Photo Upload etc-->
-        <div style="margin-top: 30px">
-          <img id="thePhoto" style="width:100%;height:100%;border:solid">
-        </div>
-        <script>function doTest() {
-
-            thePhoto.src = forceImageLoad(thePhoto.src);
-
-          }</script>
-        <div>
-          <div style="display:none">
-            <input style="position:absolute;left:0px;margin-bottom:10px;" type="file" name="file" id="file"
-              onchange='btn_uploadImageFile.click()'>
-          </div>
-          <input type="button" id="btn_uploadImageFile" value="Upload" style="display:none"
-            onclick="uploadImageFile();">
-          <button id="xxx" onclick="doTest()">xxx</button>
-
-          <button class="btn-light" onclick="file.click()">UPLOAD PHOTO</button>
-        </div>
+      <div class=" myDiv" style="background-color: rgb(34, 143, 119);text-align:center;padding:5px ">
+      <!--  The Photo Upload etc-->
+      <div style="margin-top: 30px">
+        <img id="thePhoto" style="width:100%;height:100%;border:solid">
       </div>
+      <script>function doTest() {
 
-      <!-- the Details update button -->
-      <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px">
-        <p style="color:yellow">Change Item Details</p>
-        <button type="button" id="updateButton" class="btn btn-default btn-primary"
-          onclick="updateItemFromForm();">Update</button>
-        <button type="button" class="btn btn-default btn-primary" onclick="deleteItem();">Delete</button>
-      </div>
+          thePhoto.src = forceImageLoad(thePhoto.src);
 
-      <!-- The form -->
-      <div style="background-color:white;margin:auto; padding:2px; ">
-        <div style="text-align:left;background-color: cornsilk;margin-left: 10px;">
-          <form>
-            <!--    Form   -->
-            <div class="form-group">
-              <label for="inName">Name:</label>
-              <input type="text" class="form-control" id="inName">
-            </div>
-
-            <div class="form-group">
-              <label for="inDescription">Description</label>
-              <textarea class="form-control" id="inDescription" rows="5"></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="inItemId">Item Id</label>
-              <input type="text" class="form-control" readonly="true" id="inItemId">
-            </div>
-            <div class="form-group">
-              <label for="inParentId">Parent Id</label>
-              <input type="text" class="form-control" readonly="true" id="inParentId">
-              <p></p>
-            </div>
-
-            <!-- Change parent -->
-            <div class="form-group">
-              <label for="newParent">Change container:</label>
-              <select id="newParent" onChange="updateButton.click">
-              </select>
-            </div>
-
-            <p></p>
-            <p></p>
-
+        }</script>
+      <div>
+        <div style="display:none">
+          <input style="position:absolute;left:0px;margin-bottom:10px;" type="file" name="file" id="file"
+            onchange='btn_uploadImageFile.click()'>
         </div>
+        <input type="button" id="btn_uploadImageFile" value="Upload" style="display:none" onclick="uploadImageFile();">
+        <button id="xxx" onclick="doTest()">xxx</button>
+
+        <button class="btn-light" onclick="file.click()">UPLOAD PHOTO</button>
       </div>
     </div>
+
+    <!-- the Details update button -->
+    <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px">
+      <p style="color:yellow">Change Item Details</p>
+      <button type="button" id="updateButton" class="btn btn-default btn-primary"
+        onclick="updateItemFromForm();">Update</button>
+      <button type="button" class="btn btn-default btn-primary" onclick="deleteItem();">Delete</button>
+    </div>
+
+    <!-- The form -->
+    <div style="background-color:white;margin:auto; padding:2px; ">
+      <div style="text-align:left;background-color: cornsilk;margin-left: 10px;">
+        <form>
+          <!--    Form   -->
+          <div class="form-group">
+            <label for="inName">Name:</label>
+            <input type="text" class="form-control" id="inName">
+          </div>
+
+          <div class="form-group">
+            <label for="inDescription">Description</label>
+            <textarea class="form-control" id="inDescription" rows="5"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="inItemId">Item Id</label>
+            <input type="text" class="form-control" readonly="true" id="inItemId">
+          </div>
+          <div class="form-group">
+            <label for="inParentId">Parent Id</label>
+            <input type="text" class="form-control" readonly="true" id="inParentId">
+            <p></p>
+          </div>
+
+          <!-- Change parent -->
+          <div class="form-group">
+            <label for="newParent">Change container:</label>
+            <select id="newParent" onChange="updateButton.click">
+            </select>
+          </div>
+
+          <p></p>
+          <p></p>
+
+      </div>
+    </div>
+  </div>
   </div>
 
   <!--   STARTS HERE -->
