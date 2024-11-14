@@ -139,8 +139,6 @@ const Item = {
     }
     alert("not found " + id + " len " + id.length)
   },
-
-
   getIndexById(id) {
 
     for (i = 0; i < gItemArray.length; i++) {
@@ -286,7 +284,7 @@ function buttonSelected(buttonId) {
 
   focusGrid(id);
 
-
+  divName.innerHTML = thisItemObject.name + '<br>' + thisItemObject.description;
   // this is form stuff now ( maybe move it?? )
 
   let itemObject = getItemObjectById(id);
@@ -402,28 +400,7 @@ function updateItemFromForm() {
 
 
 
-// create a new item from user input
-/*function createItem(type) {
-
-  newItem = Object.create(gItemArray[0]);
-
-  pName = prompt('Enter item name', 'unNamed');
-  if (pName == null) return false;
-
-  let stampx = new Date().getTime();
-  let stamp = stampx.toString();
-
-  newItem.id = stamp;
-  newItem.type = type;
-
-  newItem.parentId = getCurrentParentId();
-
-  newItem.name = pName;
-  newItem.description = pName + " description";
-  newItem.image = "./images/noimage.jpg";
-
-  return newItem;
-}*/
+ 
 
 
 function doHoverButton(hoverButton) {

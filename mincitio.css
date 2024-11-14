@@ -1,32 +1,11 @@
 .myDiv {
-    border: 5px outset red;
+    border: 5px outset;
+    border-radius: 10px;
+    border-color: cornsilk;
     text-align: center;
    
   }
-/*      comment */
-  .topDiv {
-    display: inline-flex;
-    width: 100%;
-    height: fit-content;
-    background-color: #6b6bda;
-  }
-
-  .col1 {
-    width: 15%;
-    background-color: pink;
-  }
-
-  .col2 {
-    width: 65%;
-    background-color: rgb(26, 13, 75);
-  }
-
-  .col3 {
-    width: 30%;
-    background-color: rgb(170, 123, 37)
-  }
-
-
+ 
 
   .item-grid {
     width: 100px;

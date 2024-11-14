@@ -79,151 +79,12 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
+  <link id="theCss" rel="stylesheet" href="./incitio.css">
   <script>
- // x.href = x.href + "xxx";
- // console.log("crafty " + x.href)
- // well well well
- console.log(screen.width);
- alert("XXX");
+    if (confirm("is mobile?")) {
+      theCss.href = "./mincitio.css";
+    }
   </script>
-
-  <style>
-    
-    .myDiv {
-      border: 5px outset red;
-      text-align: center;
-     
-    }
-/*
-    .topDiv {
-      display: inline-flex;
-      width: 100%;
-      height: fit-content;
-      background-color: #6b6bda;
-    }
-
-    .col1 {
-      width: 15%;
-      background-color: pink;
-    }
-
-    .col2 {
-      width: 65%;
-      background-color: rgb(26, 13, 75);
-    }
-
-    .col3 {
-      width: 30%;
-      background-color: rgb(170, 123, 37)
-    }
-
- 
-*/
-
-    .item-grid {
-      width: 100px;
-      height: 100px;
-      padding: 1px;
-      border-color: black;
-      border-width: 2px;
-    }
-
-    body {
-      width: 100%;
-      margin: 0px;
-      padding: 0px;
-      margin: 0px;
-    }
-
-    img {
-      width: 100%;
-      /* or any custom size */
-      height: 100%;
-      object-fit: contain;
-      margin: 0px;
-    }
-
-    .hasFocus {
-      border: 5px outset purple;
-      text-align: center;
-    }
-
-    .bigbtn {
-      width: 400px;
-      background-color: #6f8670;
-      border: solid black 2px;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      text-decoration: none;
-
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-    }
-
-    .btn-arrow {
-      width: 10px;
-      height: 10px;
-      background-color: #790817;
-      border: solid black 2px;
-      color: white;
-      padding: 0px;
-      text-align: center;
-      text-decoration: none;
-
-      font-size: 10px;
-      margin: 0px;
-      cursor: pointer;
-    }
-
-    .alert {
-      left: calc(50% - 150px);
-      width: 300px;
-      height: 200px;
-      top: -250px;
-      border-radius: 10px;
-      text-align: center;
-      background-color: peachpuff;
-      border: none;
-      position: fixed;
-      margin: 0 auto;
-      display: block;
-      z-index: 50;
-    }
-
-    .animate {
-
-      animation-name: example;
-      animation-duration: 5s;
-
-    }
-
-    @keyframes example {
-      0% {
-        opacity: 1;
-        top: -200px;
-      }
-
-      15% {
-        opacity: 1;
-        top: 50px;
-      }
-
-      85% {
-        top: 50px;
-        opacity: 1;
-
-      }
-
-      99% {
-        top: 50px;
-        opacity: 0;
-
-      }
-
-    }
-  </style>
 
 
 </head>
@@ -294,7 +155,9 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
 
   }
 
-function mobile() { return true; }
+  function mobile() {
+    return true;
+  }
 
 
 </script>
@@ -308,31 +171,31 @@ function mobile() { return true; }
   <div id="topDiv" class="myDiv topDiv">
 
     <!-- first column -->
-    <div class="myDiv col1">
-      <button id="idVersion" style="border-style: none;background-color: transparent;">
-        <i class="bi-house" style="font-size: 5r; color: cornflowerblue;"></i>
-        <script>idVersion.innerHTML = "<h2>Incitio v" + getVersion() + "</h2>";</script>
-      </button>
-      <div style="margin:auto">
-        <!--   New + not used -->
-        <button class="btn btn-primary" onclick="" type="button" id="dropdownMenuButton"
-          style="border-style: none;  margin-top: 10px;border-radius: 16px; ">
-          <h1>+New</h1>
+    <div class="myDiv col1 panelDiv">
+      <div>
+        <button id="idVersion" style="border-style: none;background-color: transparent;">
+          <i class="bi-house" style="font-size: 5r; color: cornflowerblue;"></i>
+          <script>idVersion.innerHTML = "<h2>Incitio v" + getVersion() + "</h2>";</script>
         </button>
+        <div style="margin:auto">
+          <!--   New + not used -->
+          <button class="btn btn-primary" onclick="" type="button" id="dropdownMenuButton"
+            style="border-style: none;  margin-top: 10px;border-radius: 16px; ">
+            <h1>+New</h1>
+          </button>
+        </div>
+        <p></p>
+        <div class="myDiv">
+          <p style="padding:10px">
+            A user reference has been created for you.
+            This should mean that the program will preserve
+            any changes to the data in a multi user environment.
+            You may want to take a note of the reference number.
+          </p>
+        </div>
       </div>
 
-      <p></p>
 
-      <div class="myDiv">
-
-        <p style="padding:10px">
-          A user reference has been created for you.
-          This should mean that the program will preserve
-          any changes to the data in a multi user environment.
-          You may want to take a note of the reference number.
-        </p>
-
-      </div>
       <br>
       <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="loadTestData()">Load Test Data</button>
 
@@ -360,7 +223,12 @@ function mobile() { return true; }
     <!-- second column -->
     <div class="myDiv col2">
 
-    <div style="background-color: gray;">THE MENU</div>
+      <div style="background-color: gray;padding:5px;margin:5px">
+        <h2><br>
+          <p id="idUser">
+        </h2>
+        </p>
+      </div>
 
       <!-- Search-->
       <div class="myDiv" style="background-color:rgb(68, 119, 94);padding:10px;margin:auto">
@@ -403,21 +271,30 @@ function mobile() { return true; }
         <div style="float:inline-end; padding:5px"><img id="theHoverPhoto" src="./images/noimage.jpg"
             style="width:150px;height:150px"></div>
 
-        <p id="idUser">
-        <h2></h2>
-        </p>
 
-        <div id="divChain" style="text-align: left;margin-left: 10px;margin-bottom: 5px;">
+
+        <div id="divName2" style="width:45%;height:150px;border-radius: 5px; 
+         background-color: antiquewhite; margin:5%;overflow-y: auto;">
+        </div>
+        <div>
+          <textarea id="divName" name="divName" rows="4" cols="50">
+At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
+</textarea>
         </div>
 
-        <div style="text-align: left;padding:10px;background-color:lightcyan ;">
+
+        <div id="divChain" style="text-align:center;margin-left: 10px;margin-bottom: 5px;">
+        </div>
+
+        <div style="text-align: center;padding:10px;background-color:lightcyan;">
           <button onclick="makeNewItem('i')" style="background-color: green;color:white">+ new item</button>
           <button onclick="makeNewItem('c')" style="background-color: blue;color:white">+ new container</button>
-          <button id="openContainer" onclick="openItem()" style="background-color: black;color:white">open</button>
+          <button id="openContainer" onclick="openItem()"
+            style="margin:5px;background-color: black;color:white">open</button>
         </div>
 
         <!--    Items  -->
-        <div id="divItems" style="text-align: left;margin-left: 10px;margin-bottom: 10px; ">
+        <div id="divItems" style="text-align: center;margin-left: 10px;margin-bottom: 5px; ">
         </div>
 
       </div>
@@ -485,73 +362,74 @@ function mobile() { return true; }
 
       <!-- the photo stuff-->
       <div class=" myDiv" style="background-color: rgb(34, 143, 119);text-align:center;padding:5px ">
-      <!--  The Photo Upload etc-->
-      <div style="margin-top: 30px">
-        <img id="thePhoto" style="width:100%;height:100%;border:solid">
-      </div>
-      <script>function doTest() {
-
-          thePhoto.src = forceImageLoad(thePhoto.src);
-
-        }</script>
-      <div>
-        <div style="display:none">
-          <input style="position:absolute;left:0px;margin-bottom:10px;" type="file" name="file" id="file"
-            onchange='btn_uploadImageFile.click()'>
+        <!--  The Photo Upload etc-->
+        <div style="margin-top: 30px">
+          <img id="thePhoto" style="width:100%;height:100%;border:solid">
         </div>
-        <input type="button" id="btn_uploadImageFile" value="Upload" style="display:none" onclick="uploadImageFile();">
-        <button id="xxx" onclick="doTest()">xxx</button>
+        <script>function doTest() {
 
-        <button class="btn-light" onclick="file.click()">UPLOAD PHOTO</button>
+            thePhoto.src = forceImageLoad(thePhoto.src);
+
+          }</script>
+        <div>
+          <div style="display:none">
+            <input style="position:absolute;left:0px;margin-bottom:10px;" type="file" name="file" id="file"
+              onchange='btn_uploadImageFile.click()'>
+          </div>
+          <input type="button" id="btn_uploadImageFile" value="Upload" style="display:none"
+            onclick="uploadImageFile();">
+          <button id="xxx" onclick="doTest()">xxx</button>
+
+          <button class="btn-light" onclick="file.click()">UPLOAD PHOTO</button>
+        </div>
       </div>
-    </div>
 
-    <!-- the Details update button -->
-    <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px">
-      <p style="color:yellow">Change Item Details</p>
-      <button type="button" id="updateButton" class="btn btn-default btn-primary"
-        onclick="updateItemFromForm();">Update</button>
-      <button type="button" class="btn btn-default btn-primary" onclick="deleteItem();">Delete</button>
-    </div>
+      <!-- the Details update button -->
+      <div class="myDiv" style="background-color: blueviolet;text-align:center;padding:5px">
+        <p style="color:yellow">Change Item Details</p>
+        <button type="button" id="updateButton" class="btn btn-default btn-primary"
+          onclick="updateItemFromForm();">Update</button>
+        <button type="button" class="btn btn-default btn-primary" onclick="deleteItem();">Delete</button>
+      </div>
 
-    <!-- The form -->
-    <div style="background-color:white;margin:auto; padding:2px; ">
-      <div style="text-align:left;background-color: cornsilk;margin-left: 10px;">
-        <form>
-          <!--    Form   -->
-          <div class="form-group">
-            <label for="inName">Name:</label>
-            <input type="text" class="form-control" id="inName">
-          </div>
+      <!-- The form -->
+      <div style="background-color:white;margin:auto; padding:2px; ">
+        <div style="text-align:left;background-color: cornsilk;margin-left: 10px;">
+          <form>
+            <!--    Form   -->
+            <div class="form-group">
+              <label for="inName">Name:</label>
+              <input type="text" class="form-control" id="inName">
+            </div>
 
-          <div class="form-group">
-            <label for="inDescription">Description</label>
-            <textarea class="form-control" id="inDescription" rows="5"></textarea>
-          </div>
+            <div class="form-group">
+              <label for="inDescription">Description</label>
+              <textarea class="form-control" id="inDescription" rows="5"></textarea>
+            </div>
 
-          <div class="form-group">
-            <label for="inItemId">Item Id</label>
-            <input type="text" class="form-control" readonly="true" id="inItemId">
-          </div>
-          <div class="form-group">
-            <label for="inParentId">Parent Id</label>
-            <input type="text" class="form-control" readonly="true" id="inParentId">
+            <div class="form-group">
+              <label for="inItemId">Item Id</label>
+              <input type="text" class="form-control" readonly="true" id="inItemId">
+            </div>
+            <div class="form-group">
+              <label for="inParentId">Parent Id</label>
+              <input type="text" class="form-control" readonly="true" id="inParentId">
+              <p></p>
+            </div>
+
+            <!-- Change parent -->
+            <div class="form-group">
+              <label for="newParent">Change container:</label>
+              <select id="newParent" onChange="updateButton.click">
+              </select>
+            </div>
+
             <p></p>
-          </div>
+            <p></p>
 
-          <!-- Change parent -->
-          <div class="form-group">
-            <label for="newParent">Change container:</label>
-            <select id="newParent" onChange="updateButton.click">
-            </select>
-          </div>
-
-          <p></p>
-          <p></p>
-
+        </div>
       </div>
     </div>
-  </div>
   </div>
 
   <!--   STARTS HERE -->
