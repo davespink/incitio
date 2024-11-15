@@ -1,138 +1,157 @@
 .myDiv {
-    border: 5px outset red;
-    text-align: center;
-   
-  }
+  border: 5px outset red;
+  text-align: center;
+
+}
+
 /*      comment */
-  .topDiv {
-    display: inline-flex;
-    width: 100%;
-    height: fit-content;
-    background-color: #6b6bda;
+.topDiv {
+  display: inline-flex;
+  width: 100%;
+  height: fit-content;
+  background-color: #6b6bda;
+}
+
+.chainDiv {
+
+  text-align: center;
+  margin-left: 10px;
+  margin-bottom: 5px;
+
+}
+
+.itemDiv {
+
+  text-align: center;
+  margin-left: 10px;
+  margin-bottom: 5px;
+
+}
+
+.col1 {
+  width: 15%;
+  background-color: pink;
+}
+
+.col2 {
+  width: 65%;
+  background-color: rgb(26, 13, 75);
+}
+
+.col3 {
+  width: 30%;
+  background-color: rgb(170, 123, 37)
+}
+
+.bc-button {
+  margin: 3px;
+
+}
+
+
+.item-grid {
+  width: 100px;
+  height: 100px;
+  padding: 1px;
+  border-color: black;
+  border-width: 2px;
+}
+
+body {
+  width: 100%;
+  padding: 10px;
+  margin: 0px;
+}
+
+img {
+  width: 100%;
+  /* or any custom size */
+  height: 100%;
+  object-fit: contain;
+  margin: 0px;
+}
+
+.hasFocus {
+  border: 5px outset purple;
+  text-align: center;
+}
+
+.bigbtn {
+  width: 400px;
+  background-color: #6f8670;
+  border: solid black 2px;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.btn-arrow {
+  width: 10px;
+  height: 10px;
+  background-color: #790817;
+  border: solid black 2px;
+  color: white;
+  padding: 0px;
+  text-align: center;
+  text-decoration: none;
+
+  font-size: 10px;
+  margin: 0px;
+  cursor: pointer;
+}
+
+.alert {
+  left: calc(50% - 150px);
+  width: 300px;
+  height: 200px;
+  top: -250px;
+  border-radius: 10px;
+  text-align: center;
+  background-color: peachpuff;
+  border: none;
+  position: fixed;
+  margin: 0 auto;
+  display: block;
+  z-index: 50;
+}
+
+.animate {
+
+  animation-name: example;
+  animation-duration: 5s;
+
+}
+
+@keyframes example {
+  0% {
+    opacity: 1;
+    top: -200px;
   }
 
-  .col1 {
-    width: 15%;
-    background-color: pink;
+  15% {
+    opacity: 1;
+    top: 50px;
   }
 
-  .col2 {
-    width: 65%;
-    background-color: rgb(26, 13, 75);
-  }
-
-  .col3 {
-    width: 30%;
-    background-color: rgb(170, 123, 37)
-  }
-
-
-
-  .item-grid {
-    width: 100px;
-    height: 100px;
-    padding: 1px;
-    border-color: black;
-    border-width: 2px;
-  }
-
-  body {
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-    margin: 0px;
-  }
-
-  img {
-    width: 100%;
-    /* or any custom size */
-    height: 100%;
-    object-fit: contain;
-    margin: 0px;
-  }
-
-  .hasFocus {
-    border: 5px outset purple;
-    text-align: center;
-  }
-
-  .bigbtn {
-    width: 400px;
-    background-color: #6f8670;
-    border: solid black 2px;
-    color: white;
-    padding: 15px;
-    text-align: center;
-    text-decoration: none;
-
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-  }
-
-  .btn-arrow {
-    width: 10px;
-    height: 10px;
-    background-color: #790817;
-    border: solid black 2px;
-    color: white;
-    padding: 0px;
-    text-align: center;
-    text-decoration: none;
-
-    font-size: 10px;
-    margin: 0px;
-    cursor: pointer;
-  }
-
-  .alert {
-    left: calc(50% - 150px);
-    width: 300px;
-    height: 200px;
-    top: -250px;
-    border-radius: 10px;
-    text-align: center;
-    background-color: peachpuff;
-    border: none;
-    position: fixed;
-    margin: 0 auto;
-    display: block;
-    z-index: 50;
-  }
-
-  .animate {
-
-    animation-name: example;
-    animation-duration: 5s;
+  85% {
+    top: 50px;
+    opacity: 1;
 
   }
 
-  @keyframes example {
-    0% {
-      opacity: 1;
-      top: -200px;
-    }
-
-    15% {
-      opacity: 1;
-      top: 50px;
-    }
-
-    85% {
-      top: 50px;
-      opacity: 1;
-
-    }
-
-    99% {
-      top: 50px;
-      opacity: 0;
-
-    }
+  99% {
+    top: 50px;
+    opacity: 0;
 
   }
+
+}
 
 
 
 /* CSS */
-

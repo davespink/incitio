@@ -1,11 +1,15 @@
 .myDiv {
-    border: 5px outset;
+    border: 1px outset;
     border-radius: 10px;
+    width:100%;
     border-color: cornsilk;
     text-align: center;
    
   }
  
+  .topDiv{
+    width:100%;
+  }
 
   .item-grid {
     width: 100px;
@@ -17,9 +21,10 @@
 
   body {
     width: 100%;
-    margin: 0px;
-    padding: 0px;
-    margin: 0px;
+  
+    padding: 10px;
+    margin-left: 10px;
+    margin-top:0px;
   }
 
   img {
@@ -33,6 +38,11 @@
   .hasFocus {
     border: 5px outset purple;
     text-align: center;
+  }
+
+  .bc-button {
+    margin: 3px;
+     width:90%;
   }
 
   .bigbtn {

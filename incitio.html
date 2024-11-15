@@ -81,7 +81,7 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
 
   <link id="theCss" rel="stylesheet" href="./incitio.css">
   <script>
-    if (confirm("is mobile?")) {
+    if (screen.width < 500) {
       theCss.href = "./mincitio.css";
     }
   </script>
@@ -170,8 +170,13 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
 
   <div id="topDiv" class="myDiv topDiv">
 
-    <!-- first column -->
-    <div class="myDiv col1 panelDiv">
+
+
+    <!-- first column 
+
+  -->
+
+    <div id="panelIntro" class="myDiv col1">
       <div>
         <button id="idVersion" style="border-style: none;background-color: transparent;">
           <i class="bi-house" style="font-size: 5r; color: cornflowerblue;"></i>
@@ -193,45 +198,55 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
             You may want to take a note of the reference number.
           </p>
         </div>
-      </div>
 
 
-      <br>
-      <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="loadTestData()">Load Test Data</button>
+        <div id="panelData">
+          <br>
+          <div class="myDiv" style="margin-top:20px;background-color: #6f8670;padding:10px">
+            <h4>Data</h4>
+            <button class="btn btn-info btn-sm" style="width:70%;margin:3px" onclick="loadTestData()">Load Test
+              Data</button>
 
-      <div class="myDiv" style="margin-top:20px;background-color: #6f8670;padding:10px">
-        <h4>Backups</h4>
-        <button class="btn btn-dark btn-sm" style="width:70%;margin:3px" onclick="up.click();showAllItems();">Upload
-          Data</button>
-        <div style="display:none">
-          <input type="file" id="up" onchange="readText(event)" />
-          <pre id="output"></pre>
+            <button class="btn btn-dark btn-sm" style="width:70%;margin:3px" onclick="up.click();showAllItems();">Upload
+              Data</button>
+            <div style="display:none">
+              <input type="file" id="up" onchange="readText(event)" />
+              <pre id="output"></pre>
+            </div>
+
+            <a id='a' download='JSONDownload.txt' type='text/txt'></a>
+            <button class="btn btn-primary btn-sm" style="width:70%;margin:3px" onclick=" 
+             
+              const d = new Date();
+              let text = d.toLocaleDateString() + ` ` + d.toLocaleTimeString();
+              a.download='IncitioDownload '  +  text + '.txt';          
+              downloadData()">Download Data</button>
+          </div>
         </div>
 
-        <a id='a' download='JSONDownload.txt' type='text/txt'></a>
-        <button class="btn btn-primary btn-sm" style="width:70%;margin:3px" onclick=" 
-         
-          const d = new Date();
-          let text = d.toLocaleDateString() + ` ` + d.toLocaleTimeString();
-          a.download='IncitioDownload '  +  text + '.txt';          
-          downloadData()">Download Data</button>
+
+
       </div>
-
-
     </div>
+
+
+
+
 
     <!-- second column -->
     <div class="myDiv col2">
 
-      <div style="background-color: gray;padding:5px;margin:5px">
-        <h2><br>
-          <p id="idUser">
-        </h2>
-        </p>
-      </div>
+
 
       <!-- Search-->
       <div class="myDiv" style="background-color:rgb(68, 119, 94);padding:10px;margin:auto">
+
+        <div id="panelMenu" style="background-color: gray;padding:5px;margin:5px">
+          <h2><br>
+            <p id="idUser">
+          </h2>
+          </p>
+        </div>
         <button id="none" class="btn btn-light" style="margin:10px; background-color:blanchedalmond;position:relative;
                 width: 60%;height: 15%; border-radius: 16px; box-shadow: 5px 5px 5px gray;">
           <span class="btn-label" onclick="doSearch()"
@@ -275,15 +290,18 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
 
         <div id="divName2" style="width:45%;height:150px;border-radius: 5px; 
          background-color: antiquewhite; margin:5%;overflow-y: auto;">
-        </div>
-        <div>
-          <textarea id="divName" name="divName" rows="4" cols="50">
-At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
-</textarea>
+          <div>
+            <textarea id="divDescription" name="divDescription" rows="4" cols="40">
+some text </textarea>
+          </div>
+
         </div>
 
 
-        <div id="divChain" style="text-align:center;margin-left: 10px;margin-bottom: 5px;">
+
+
+        <!-- chain -->
+        <div id="divChain" class="chainDiv">
         </div>
 
         <div style="text-align: center;padding:10px;background-color:lightcyan;">
@@ -294,7 +312,7 @@ At w3schools.com you will learn how to make a website. They offer free tutorials
         </div>
 
         <!--    Items  -->
-        <div id="divItems" style="text-align: center;margin-left: 10px;margin-bottom: 5px; ">
+        <div id="divItems" class="itemDiv" style="text-align: center;margin-left: 10px;margin-bottom: 5px; ">
         </div>
 
       </div>

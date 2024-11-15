@@ -284,7 +284,7 @@ function buttonSelected(buttonId) {
 
   focusGrid(id);
 
-  divName.innerHTML = thisItemObject.name + '<br>' + thisItemObject.description;
+  divDescription.innerHTML = thisItemObject.name + '\n' + thisItemObject.description;
   // this is form stuff now ( maybe move it?? )
 
   let itemObject = getItemObjectById(id);

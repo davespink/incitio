@@ -14,7 +14,8 @@ const gShowOptions = {
   view: "g"
 
 }
-// alert(window.innerWidth);
+
+
 
 let gCurrentParentId = 0;
 function getCurrentParentId() { return gCurrentParentId; }
@@ -28,7 +29,7 @@ gItemArray.push(itemObject);
 if (!User.get()) {
   let stampx = new Date().getTime();
   let stamp = stampx.toString();
-  User.set("GUEST"+stamp);
+  User.set("GUEST" + stamp);
 
   createUser();
 
@@ -39,6 +40,12 @@ if (!User.get()) {
 gid("idUser").innerHTML = "<h6>" + User.get() + "</h6>";
 
 alertBox.addEventListener("animationend", () => { alertBox.classList.remove("animate"); });
+
+if (screen.width<500) {
+  topDiv.appendChild(panelData);
+  topDiv.appendChild(panelData);
+}
+
 
 window.onbeforeunload = function () {
   // Utils.doDebug("autosave " + text);
