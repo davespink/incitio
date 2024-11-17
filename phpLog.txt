@@ -185,3 +185,23 @@ stamp dir1725846365857-users/GUEST1731521251792/
 uploaded - users/GUEST1731521251792/photos/1725846365857.jpg
 filename - photos/staples.jpg
 photos/staples.jpg
+stamp dir0-users/GUEST1731662087384/
+uploaded - users/GUEST1731662087384/photos/0.png
+filename - photos/kitchen4.png
+photos/kitchen4.png
+stamp dir0-users/GUEST1731662087384/
+uploaded - users/GUEST1731662087384/photos/0.jpg
+filename - photos/best trousers.jpg
+photos/best trousers.jpg
+stamp dir0-users/GUEST1731882381986/
+uploaded - users/GUEST1731882381986/photos/0.jpg
+filename - photos/20241005_111433.jpg
+photos/20241005_111433.jpg
+stamp dir0-users/GUEST1731882381986/
+uploaded - users/GUEST1731882381986/photos/0.png
+filename - photos/kitchen3.png
+photos/kitchen3.png
+stamp dir0-users/GUEST1731882381986/
+uploaded - users/GUEST1731882381986/photos/0.png
+filename - photos/home.png
+photos/home.png

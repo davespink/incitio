@@ -109,7 +109,7 @@ img {
   margin: 0px;
   cursor: pointer;
 }
-
+ 
 .alert {
   left: calc(50% - 150px);
   width: 300px;
@@ -117,10 +117,10 @@ img {
   top: -250px;
   border-radius: 10px;
   text-align: center;
-  background-color: peachpuff;
-  border: none;
+  background-color: palegreen;
+  border: 4mm ridge rgba(211, 220, 50, .6);
   position: fixed;
-  margin: 0 auto;
+  margin-top: -20px;
   display: block;
   z-index: 50;
 }

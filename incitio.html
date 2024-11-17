@@ -160,18 +160,27 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
     return screen.width < 500;
   }
 
+  function stopIt(){
+debugger;
+      alert("xx");
+
+  }
 
 </script>
 
 <body>
 
-  <button id="alertBox" class="alert">
-    <h1>message</h1>
+  
+  <button id="alertBox" class="alert"  onClick="alertBox.style.display='none';">
+   <p id="alertText" class="center">some text</p>
   </button>
 
+
+
+
+
+
   <div id="topDiv" class="myDiv topDiv">
-
-
 
     <!-- first column 
 

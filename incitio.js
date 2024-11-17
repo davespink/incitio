@@ -44,7 +44,7 @@ const Utils = {
 
 const Alert = {
   show(message) {
-    alertBox.innerHTML = "<h3>" + message + "</h3>";
+    alertText.innerHTML = "<h3>" + message + "</h3>";
     alertBox.classList.add("animate");
   },
 
@@ -791,8 +791,6 @@ function getDescendants(rootId) {
 // let count = 0;
 
   makeTree(rootId);
- 
-  
   return fullMonte;
 }
 
