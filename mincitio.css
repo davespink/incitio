@@ -35,6 +35,11 @@
     margin: 0px;
   }
 
+  .hover-bc-photo {
+    width: 150px;
+    height: 150px;
+  }
+
   .hasFocus {
     border: 5px outset purple;
     text-align: center;

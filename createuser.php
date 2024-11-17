@@ -19,5 +19,5 @@ foreach ($dir as $fileinfo) {
     }
 }
 
-echo "created user " . $user;
+echo "0_created user " . $user;
 ?>

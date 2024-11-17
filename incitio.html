@@ -14,7 +14,8 @@ Incityo - 8/11/24
 
 - BUG: on deleting an item focus is undefined so if you delete again you get an eror.(done)
 
-- revisit mobile version , left behind
+- revisit let gChainArray = []; 
+ version , left behind
 
 - Bottom out the exif issue - Resolved 12/10/24 ( done )
  
@@ -156,7 +157,7 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
   }
 
   function mobile() {
-    return true;
+    return screen.width < 500;
   }
 
 
@@ -184,7 +185,7 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
         </button>
         <div style="margin:auto">
           <!--   New + not used -->
-          <button class="btn btn-primary" onclick="" type="button" id="dropdownMenuButton"
+          <button class="btn btn-primary" onclick="if(mobile()) hid(panelIntro)" type="button" id="dropdownMenuButton"
             style="border-style: none;  margin-top: 10px;border-radius: 16px; ">
             <h1>+New</h1>
           </button>
@@ -216,11 +217,13 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
 
             <a id='a' download='JSONDownload.txt' type='text/txt'></a>
             <button class="btn btn-primary btn-sm" style="width:70%;margin:3px" onclick=" 
-             
               const d = new Date();
               let text = d.toLocaleDateString() + ` ` + d.toLocaleTimeString();
               a.download='IncitioDownload '  +  text + '.txt';          
               downloadData()">Download Data</button>
+
+            <button onclick="localStorage.clear();alert('cleared storage')">clear storage</button>
+
           </div>
         </div>
 
@@ -239,22 +242,18 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
 
 
       <!-- Search-->
-      <div class="myDiv" style="background-color:rgb(68, 119, 94);padding:10px;margin:auto">
+      <div   style="background-color:snow;padding:10px;margin:auto;text-align: center;">
 
-        <div id="panelMenu" style="background-color: gray;padding:5px;margin:5px">
-          <h2><br>
-            <p id="idUser">
-          </h2>
-          </p>
-        </div>
+       <button id="idUser"></button>
+
         <button id="none" class="btn btn-light" style="margin:10px; background-color:blanchedalmond;position:relative;
-                width: 60%;height: 15%; border-radius: 16px; box-shadow: 5px 5px 5px gray;">
+                width: 80%;height: 15%; border-radius: 16px; box-shadow: 5px 5px 5px gray;">
           <span class="btn-label" onclick="doSearch()"
             style="position:absolute;top:0px; left:10px; margin-bottom: 20px;">
             <i class="bi-search" style="font-size:30px"></i></span>
 
           <input aria-label="Search inCitio" autocomplete="off" placeholder="Search inCitio" value="" name=""
-            type="text" id="search" style="padding: 0px; border:0cap; float:right;
+            type="text" id="search" style="padding: 0px;   float:right;
               width: 90%;  background-color: rgb(219, 192, 192);
                z-index: 6; left: 0px;" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50"
             onkeydown="  
@@ -283,20 +282,19 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
 
       <!-- breadcrumbs -->
       <div id="divBreadCrumbs" class="myDiv" style="background-color:white;margin:auto;margin-top: 0px;">
-        <div style="float:inline-end; padding:5px"><img id="theHoverPhoto" src="./images/noimage.jpg"
-            style="width:150px;height:150px"></div>
 
 
 
-        <div id="divName2" style="width:45%;height:150px;border-radius: 5px; 
-         background-color: antiquewhite; margin:5%;overflow-y: auto;">
-          <div>
-            <textarea id="divDescription" name="divDescription" rows="4" cols="40">
-some text </textarea>
-          </div>
+
+
+
+        <div style="background-color: beige;">
+
+          <div id="theName" style="float:center">button1</div>
+          <img id="theHoverPhoto" class="hover-bc-photo" style=" position:relative;margin: 5px;float:right"
+            src="./images/noimage.jpg">
 
         </div>
-
 
 
 
@@ -323,6 +321,8 @@ some text </textarea>
         <div class="myDiv" style="display:inline-flex;width:90%">
           <button type="button" id="updateButton" class="btn btn-dark  " style="width:20%;margin:10px"
             onclick="showAllItems();">Refresh</button>
+<!--
+
           <div style="margin:auto">
 
             <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
@@ -365,6 +365,10 @@ some text </textarea>
             </ul>
 
           </div>
+        -->
+
+
+
         </div>
         <button id="gridBreadcrumbs" style="width:80%;border-radius: 10px;margin:5px;">hover over image</button>
         <div id="divPhotos" class="myDiv"
@@ -396,7 +400,7 @@ some text </textarea>
           </div>
           <input type="button" id="btn_uploadImageFile" value="Upload" style="display:none"
             onclick="uploadImageFile();">
-          <button id="xxx" onclick="doTest()">xxx</button>
+          <button id="xxx" onclick="doTest()" style="display: none;">xxx</button>
 
           <button class="btn-light" onclick="file.click()">UPLOAD PHOTO</button>
         </div>

@@ -1,5 +1,5 @@
 .myDiv {
-  border: 5px outset red;
+  border: 3px outset powderblue;
   text-align: center;
 
 }
@@ -18,6 +18,11 @@
   margin-left: 10px;
   margin-bottom: 5px;
 
+}
+
+.hover-bc-photo {
+  width: 150px;
+  height: 150px;
 }
 
 .itemDiv {

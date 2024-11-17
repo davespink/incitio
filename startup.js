@@ -15,14 +15,12 @@ const gShowOptions = {
 
 }
 
-
-
 let gCurrentParentId = 0;
 function getCurrentParentId() { return gCurrentParentId; }
 function setCurrentParentId(id) { gCurrentParentId = id }
 
 let gItemArray = [];
-let gChainArray = [];
+// let gChainArray = [];
 
 gItemArray.push(itemObject);
 
@@ -37,18 +35,17 @@ if (!User.get()) {
   loadDataFromDisk();
 }
 
-gid("idUser").innerHTML = "<h6>" + User.get() + "</h6>";
+idUser.innerHTML = "<h6>" + User.get() + "</h6>";
 
 alertBox.addEventListener("animationend", () => { alertBox.classList.remove("animate"); });
 
-if (screen.width<500) {
+if (mobile()) {
   topDiv.appendChild(panelData);
-  topDiv.appendChild(panelData);
+ // topDiv.appendChild(panelData);
 }
 
 
 window.onbeforeunload = function () {
-  // Utils.doDebug("autosave " + text);
   saveDataToDisk();
   return null;
 }

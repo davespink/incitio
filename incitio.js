@@ -1,5 +1,5 @@
 function getVersion() {
-  return "1.24d";
+  return "1.25";
 }
 
 function displace(el, options) {
@@ -83,13 +83,13 @@ const User = {
     this.set(user);
     loadDataFromDisk();
     showAlert("Welcome " + user);
-    gid("idUser").innerHTML = "<h1>" + user + "</h1>";
+    gid("idUser").innerHTML = "<H1>" + user + "</H1>";
 
   },
 };
 
 const Item = {
-// belongs in UI
+  // belongs in UI
   create(type) {
     newItem = Object.create(gItemArray[0]);
 
@@ -154,7 +154,7 @@ const Item = {
 }
 
 
- 
+
 /////////////////////////
 //
 // array operations
@@ -274,7 +274,7 @@ function buttonSelected(buttonId) {
     else showOpenButton();
   }
 
-  Utils.doDebug("Selectied button - " + buttonId);
+  Utils.doDebug("Selected button - " + buttonId);
 
   let thisButton = Button.selectById(thisId);
   thisButton.classList.add("hasFocus");
@@ -284,7 +284,10 @@ function buttonSelected(buttonId) {
 
   focusGrid(id);
 
-  divDescription.innerHTML = thisItemObject.name + '\n' + thisItemObject.description;
+  theHoverPhoto.src = thisItemObject.image;
+
+  theName.innerHTML = thisItemObject.name;
+  //divDescription.innerHTML =  thisItemObject.description;
   // this is form stuff now ( maybe move it?? )
 
   let itemObject = getItemObjectById(id);
@@ -400,13 +403,12 @@ function updateItemFromForm() {
 
 
 
- 
+
 
 
 function doHoverButton(hoverButton) {
 
 
-  // Utils.doDebug(hoverButton);
 
   // figure the id
   let a = hoverButton.split("_");
@@ -600,7 +602,7 @@ function paintBreadCrumbs(id) {
 //  Creates all the buttons also
 //
 function setCurrentRoot(rootId) {
-alert("what??");
+  alert("what??");
   paintBreadCrumbs(rootId);
   debugger;
   return;
@@ -636,9 +638,8 @@ function gridPhotoClicked(id) {
   else
     thisButton = "item_" + id;
 
-  let el = gid(thisButton);
+  Button.click(thisButton);
 
-  el.click();
 
 
 }
@@ -725,14 +726,51 @@ function showAllItems() {
   }
 }
 
-
-function countDescendants(rootId) {
+/*
+function getDescendants(rootId) {
+  let kids = [];
   function findKids(id) {
-    let kids = [];
     for (let i = 0; i < gItemArray.length; i++) {
       if (gItemArray[i].parentId == id) {
         count++;
         kids.push(gItemArray[i].id);
+      }
+    }
+    return kids;
+  }
+
+  function makeTree(thisId) {
+    // Utils.doDebug("+" + count);
+    kids = findKids(thisId);
+    for (let i = 0; i < kids.length; i++) {
+      obj = getItemObjectById(kids[i]);
+      // Utils.doDebug(obj.name);
+      makeTree(kids[i]);
+    }
+  }
+  let count = 0;
+
+  makeTree(rootId);
+
+  return kids;
+}
+ 
+function countDescendants(id){
+return 0;
+  return getDescendants(id).length;
+  
+}
+*/
+
+function getDescendants(rootId) {
+  let fullMonte = [];
+  function findKids(id) {
+    let kids = [];
+    for (let i = 0; i < gItemArray.length; i++) {
+      if (gItemArray[i].parentId == id) {
+      //  count++;
+        kids.push(gItemArray[i].id);
+        fullMonte.push(gItemArray[i].id);
       }
     }
     return kids;
@@ -750,15 +788,27 @@ function countDescendants(rootId) {
 
 
   }
-  let count = 0;
+// let count = 0;
 
   makeTree(rootId);
+ 
+  
+  return fullMonte;
+}
 
-  return count;
+function countDescendants(rootId){
+
+  let fm = getDescendants(rootId);
+  return fm.length;
 
 }
 
 
+
+
+
+   
+ 
 
 function doDebug(message) {
   // if (message.length == 0) gid("debugWindow").innerHTML = ""; else
