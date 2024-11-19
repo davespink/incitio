@@ -1,5 +1,5 @@
 function getVersion() {
-  return "1.25";
+  return "1.25a";
 }
 
 function displace(el, options) {
@@ -110,6 +110,9 @@ const Item = {
 
     return newItem;
   },
+
+
+  
   getChildren(id) {
 
     let children = [];
@@ -122,6 +125,9 @@ const Item = {
     }
     return children;
   },
+
+
+
   hasChildren(id) {
 
     return this.getChildren(id).length;
@@ -201,11 +207,18 @@ function doSearch() {
     }
 
   }
-
-
-  // showAlert("not yet coded " + search.value);
 }
 
+
+function doExplode(id) {
+
+
+  paintExplosion(id);
+
+  
+
+
+}
 
 function itemObjectToForm(itemObject) {
   (gid("inName")).value = itemObject.name;
@@ -284,7 +297,7 @@ function buttonSelected(buttonId) {
 
   focusGrid(id);
 
-  theHoverPhoto.src = thisItemObject.image;
+  theHoverPhoto.src = forceImageLoad(thisItemObject.image);
 
   theName.innerHTML = thisItemObject.name;
   //divDescription.innerHTML =  thisItemObject.description;
@@ -422,7 +435,7 @@ function doHoverButton(hoverButton) {
 
   setTimeout(function () {
     //  thePhoto.src = forceImageLoad(thePhoto.src);
-    theHoverPhoto.src = thisItem.image;
+    theHoverPhoto.src = forceImageLoad(thisItem.image);
   }, delayInMilliseconds); // to force a refresh .. hopefully
 
 }
@@ -596,7 +609,37 @@ function paintBreadCrumbs(id) {
   paintParents();
 
 
+
 }
+
+
+
+
+function paintExplosion(id) {
+
+  function clearItems() {
+    divItems.innerHTML = "";
+  }
+
+  function paintDescendants(id) {
+    function paintChild(id) {
+      thisItemObject = getItemObjectById(id);
+      createItemButton(thisItemObject);
+    }
+    let children = getDescendants(id);
+    children.sort(compareAlpha);
+    children.forEach((item) => {
+      paintChild(item);
+    });
+
+  }
+
+  clearItems();
+
+  paintDescendants(id);
+
+}
+
 
 //
 //  Creates all the buttons also
@@ -726,41 +769,7 @@ function showAllItems() {
   }
 }
 
-/*
-function getDescendants(rootId) {
-  let kids = [];
-  function findKids(id) {
-    for (let i = 0; i < gItemArray.length; i++) {
-      if (gItemArray[i].parentId == id) {
-        count++;
-        kids.push(gItemArray[i].id);
-      }
-    }
-    return kids;
-  }
-
-  function makeTree(thisId) {
-    // Utils.doDebug("+" + count);
-    kids = findKids(thisId);
-    for (let i = 0; i < kids.length; i++) {
-      obj = getItemObjectById(kids[i]);
-      // Utils.doDebug(obj.name);
-      makeTree(kids[i]);
-    }
-  }
-  let count = 0;
-
-  makeTree(rootId);
-
-  return kids;
-}
  
-function countDescendants(id){
-return 0;
-  return getDescendants(id).length;
-  
-}
-*/
 
 function getDescendants(rootId) {
   let fullMonte = [];
@@ -768,7 +777,7 @@ function getDescendants(rootId) {
     let kids = [];
     for (let i = 0; i < gItemArray.length; i++) {
       if (gItemArray[i].parentId == id) {
-      //  count++;
+        //  count++;
         kids.push(gItemArray[i].id);
         fullMonte.push(gItemArray[i].id);
       }
@@ -788,13 +797,13 @@ function getDescendants(rootId) {
 
 
   }
-// let count = 0;
+  // let count = 0;
 
   makeTree(rootId);
   return fullMonte;
 }
 
-function countDescendants(rootId){
+function countDescendants(rootId) {
 
   let fm = getDescendants(rootId);
   return fm.length;
@@ -805,8 +814,8 @@ function countDescendants(rootId){
 
 
 
-   
- 
+
+
 
 function doDebug(message) {
   // if (message.length == 0) gid("debugWindow").innerHTML = ""; else

@@ -205,3 +205,47 @@ stamp dir0-users/GUEST1731882381986/
 uploaded - users/GUEST1731882381986/photos/0.png
 filename - photos/home.png
 photos/home.png
+stamp dir0-users/GUEST1731521251792/
+uploaded - users/GUEST1731521251792/photos/0.png
+filename - photos/house.png
+photos/house.png
+stamp dir1726345682710-users/GUEST1731521251792/
+uploaded - users/GUEST1731521251792/photos/1726345682710.png
+filename - photos/toilet2.png
+photos/toilet2.png
+stamp dir1726344242065-users/GUEST1731521251792/
+uploaded - users/GUEST1731521251792/photos/1726344242065.jpg
+filename - photos/livingroom'.jpg
+photos/livingroom'.jpg
+stamp dir1726344242065-users/GUEST1731521251792/
+uploaded - users/GUEST1731521251792/photos/1726344242065.png
+filename - photos/lounge.png
+photos/lounge.png
+stamp dir1726344113129-users/GUEST1731521251792/
+uploaded - users/GUEST1731521251792/photos/1726344113129.png
+filename - photos/bedroom2.png
+photos/bedroom2.png
+stamp dir0-users/GUEST1731889571075/
+uploaded - users/GUEST1731889571075/photos/0.jpeg
+filename - photos/testcard.jpeg
+photos/testcard.jpeg
+stamp dir1725836216928-users/GUEST1731889571075/
+uploaded - users/GUEST1731889571075/photos/1725836216928.jpg
+filename - photos/Labor_-_Force_Ouvriere_Workers_at_Home_-_DPLA_-_3390f414ab3099ef7db03d7a71672007.jpg
+photos/Labor_-_Force_Ouvriere_Workers_at_Home_-_DPLA_-_3390f414ab3099ef7db03d7a71672007.jpg
+stamp dir1726345899970-users/GUEST1731889571075/
+uploaded - users/GUEST1731889571075/photos/1726345899970.jpg
+filename - photos/desk.jpg
+photos/desk.jpg
+stamp dir1726346033040-users/GUEST1731889571075/
+uploaded - users/GUEST1731889571075/photos/1726346033040.png
+filename - photos/computer.png
+photos/computer.png
+stamp dir1726344242065-users/GUEST1731889571075/
+uploaded - users/GUEST1731889571075/photos/1726344242065.jpg
+filename - photos/livingroom.jpg
+photos/livingroom.jpg
+stamp dir1726345717145-users/GUEST1731889571075/
+uploaded - users/GUEST1731889571075/photos/1726345717145.jpg
+filename - photos/terrace.jpg
+photos/terrace.jpg

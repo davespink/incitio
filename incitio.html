@@ -2,6 +2,30 @@
 <html lang="en">
 <!--   
 
+Task list
+=========
+
+Impliment explode
+Improve the alert system
+Produce a good sample - pick a style and make a house etc
+Change the sample data to be file based.
+
+Timebox the work
+Spend all day looking busy , anyway, that's not so bad is it? But need to make use of my
+time allowance on the software.
+
+Learn git hub, can sneak in youtube vidoes
+
+Install ssh no password login to improve workflow to dreamhost ( no tegngas mierdo )
+
+Keep up exercise.
+
+Use wiki for test images!
+
+
+
+
+
 Incityo - 8/11/24
  
 - on hover over image show name etc ( done )
@@ -160,19 +184,15 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
     return screen.width < 500;
   }
 
-  function stopIt(){
-debugger;
-      alert("xx");
 
-  }
 
 </script>
 
 <body>
 
-  
-  <button id="alertBox" class="alert"  onClick="alertBox.style.display='none';">
-   <p id="alertText" class="center">some text</p>
+
+  <button id="alertBox" class="alert" onClick="alertBox.style.display='none';">
+    <p id="alertText" class="center">some text</p>
   </button>
 
 
@@ -251,9 +271,9 @@ debugger;
 
 
       <!-- Search-->
-      <div   style="background-color:snow;padding:10px;margin:auto;text-align: center;">
+      <div style="background-color:snow;padding:10px;margin:auto;text-align: center;">
 
-       <button id="idUser"></button>
+        <button id="idUser"></button>
 
         <button id="none" class="btn btn-light" style="margin:10px; background-color:blanchedalmond;position:relative;
                 width: 80%;height: 15%; border-radius: 16px; box-shadow: 5px 5px 5px gray;">
@@ -316,6 +336,8 @@ debugger;
           <button onclick="makeNewItem('c')" style="background-color: blue;color:white">+ new container</button>
           <button id="openContainer" onclick="openItem()"
             style="margin:5px;background-color: black;color:white">open</button>
+          <button id="explodeContainer" onclick="doExplode(getCurrentParentId())"
+            style="margin:5px;background-color: white;color:black">show TOTAL content</button>
         </div>
 
         <!--    Items  -->
@@ -330,7 +352,7 @@ debugger;
         <div class="myDiv" style="display:inline-flex;width:90%">
           <button type="button" id="updateButton" class="btn btn-dark  " style="width:20%;margin:10px"
             onclick="showAllItems();">Refresh</button>
-<!--
+          <!--
 
           <div style="margin:auto">
 
