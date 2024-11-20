@@ -249,3 +249,11 @@ stamp dir1726345717145-users/GUEST1731889571075/
 uploaded - users/GUEST1731889571075/photos/1726345717145.jpg
 filename - photos/terrace.jpg
 photos/terrace.jpg
+stamp dir0-users/GUEST1732058543453/
+uploaded - users/GUEST1732058543453/photos/0.jpeg
+filename - photos/testcard.jpeg
+photos/testcard.jpeg
+stamp dir0-users/GUEST1732058852532/
+uploaded - users/GUEST1732058852532/photos/0.png
+filename - photos/house2.png
+photos/house2.png

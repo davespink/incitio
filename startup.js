@@ -32,7 +32,7 @@ if (!User.get()) {
   createUser();
 
 } else {
-  loadDataFromDisk();
+  loadUserDataFromDisk();
 }
 
 idUser.innerHTML = "<h6>" + User.get() + "</h6>";

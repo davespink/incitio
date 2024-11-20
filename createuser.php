@@ -7,6 +7,8 @@ $file = "0.jpeg";
 @mkdir("users/" . $user);
 @mkdir("users/" . $user . "/photos");
  
+
+/*
 copy("photos/" . $file , "users/" . $user . "/photos/" . $file);
 
 // iterate directory
@@ -18,6 +20,8 @@ foreach ($dir as $fileinfo) {
         copy("photos/" . $file , "users/" . $user . "/photos/" . $file);
     }
 }
+*/
+
 
 echo "0_created user " . $user;
 ?>

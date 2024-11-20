@@ -1,11 +1,8 @@
 <?php
 
-if (isset($_GET['user'])) {
-    $user = $_GET['user'];
+if (isset($_GET['filename'])) {
+    $fileName = $_GET['filename'];
 }
-
-$fileName = "autosave_" . $user . ".txt";
- 
  
 $js = file_get_contents($fileName);
 

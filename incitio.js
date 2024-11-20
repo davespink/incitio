@@ -1,5 +1,5 @@
 function getVersion() {
-  return "1.25a";
+  return "1.25b";
 }
 
 function displace(el, options) {
@@ -110,9 +110,6 @@ const Item = {
 
     return newItem;
   },
-
-
-  
   getChildren(id) {
 
     let children = [];
@@ -125,11 +122,7 @@ const Item = {
     }
     return children;
   },
-
-
-
   hasChildren(id) {
-
     return this.getChildren(id).length;
   },
   getById(id) {
@@ -156,10 +149,99 @@ const Item = {
 
 
   },
+  getDescendants(rootId) {
+    let fullMonte = [];
+    function findKids(id) {
+      let kids = [];
+      for (let i = 0; i < gItemArray.length; i++) {
+        if (gItemArray[i].parentId == id) {
+          //  count++;
+          kids.push(gItemArray[i].id);
+          fullMonte.push(gItemArray[i].id);
+        }
+      }
+      return kids;
+    }
+
+    function makeTree(thisId) {
+      // Utils.doDebug("+" + count);
+      let kids = findKids(thisId);
+      for (let i = 0; i < kids.length; i++) {
+        obj = getItemObjectById(kids[i]);
+        // Utils.doDebug(obj.name);
+        makeTree(kids[i]);
+      }
+
+
+    }
+
+    makeTree(rootId);
+    return fullMonte;
+
+
+  },
+
+  countDescendants(id) {
+    return this.getDescendants(id).length;
+    // return fm.length;
+
+  },
 
 }
 
+const UI = {
 
+  showAllItems() {
+
+
+   let x = getCurrentParentId();
+
+    let el = document.getElementById("divPhotos");
+    el.innerHTML = "";
+
+    function showItem(thisItemObject) {
+      if (thisItemObject.image == "?") {
+        thisItemObject.image = noImage;
+
+        let newButton = document.createElement('button');
+        el.appendChild(newButton);
+        newButtonId = "image_" + thisItemObject.id;
+
+        newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid" style="font-size:10px"
+       onmouseenter="doGridHover()"
+        onclick="gridPhotoClicked('${thisItemObject.id}')">`
+          + thisItemObject.name + `</button>`;
+
+      }
+      else {
+        let newButton = document.createElement('button');
+        el.appendChild(newButton);
+        newButtonId = "image_" + thisItemObject.id;
+
+        newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid" 
+        onmouseenter="doGridHover()"
+        onclick="gridPhotoClicked('${thisItemObject.id}')"> 
+        <img src="` + forceImageLoad(thisItemObject.image) + `" style="transform:rotate(0deg)"  ></button>`;
+
+      }
+
+    }
+
+    let showArray = gItemArray;
+
+  
+    showArray = Item.getDescendants(getCurrentParentId());
+
+    showArray.forEach(id => {
+       
+      showItem(Item.getById(id));
+    }
+  ) 
+
+
+  },
+
+}
 
 /////////////////////////
 //
@@ -215,7 +297,7 @@ function doExplode(id) {
 
   paintExplosion(id);
 
-  
+
 
 
 }
@@ -335,6 +417,8 @@ function buttonSelected(buttonId) {
   }
 
   makeParentList();
+
+  showAllItems();
 }
 
 
@@ -735,6 +819,10 @@ function doGridHover() {
 
 function showAllItems() {
 
+  UI.showAllItems();
+
+  return;
+
   let el = document.getElementById("divPhotos");
   el.innerHTML = "";
 
@@ -769,9 +857,12 @@ function showAllItems() {
   }
 }
 
- 
+
 
 function getDescendants(rootId) {
+
+  return Item.getDescendants(rootId);
+  // moved to Item
   let fullMonte = [];
   function findKids(id) {
     let kids = [];
@@ -785,7 +876,6 @@ function getDescendants(rootId) {
     return kids;
   }
 
-
   function makeTree(thisId) {
     // Utils.doDebug("+" + count);
     let kids = findKids(thisId);
@@ -797,13 +887,14 @@ function getDescendants(rootId) {
 
 
   }
-  // let count = 0;
 
   makeTree(rootId);
   return fullMonte;
 }
 
 function countDescendants(rootId) {
+
+  return Item.countDescendants(rootId);
 
   let fm = getDescendants(rootId);
   return fm.length;
