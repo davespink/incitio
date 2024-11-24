@@ -40,8 +40,9 @@ idUser.innerHTML = "<h6>" + User.get() + "</h6>";
 alertBox.addEventListener("animationend", () => { alertBox.classList.remove("animate"); });
 
 if (mobile()) {
-  topDiv.appendChild(panelData);
  // topDiv.appendChild(panelData);
+ // topDiv.appendChild(panelData);
+ hid(divImages);hid(divDetails);hid(panelIntro);
 }
 
 

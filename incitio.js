@@ -194,7 +194,7 @@ const UI = {
   showAllItems() {
 
 
-   let x = getCurrentParentId();
+    let x = getCurrentParentId();
 
     let el = document.getElementById("divPhotos");
     el.innerHTML = "";
@@ -229,14 +229,14 @@ const UI = {
 
     let showArray = gItemArray;
 
-  
+
     showArray = Item.getDescendants(getCurrentParentId());
 
     showArray.forEach(id => {
-       
+
       showItem(Item.getById(id));
     }
-  ) 
+    )
 
 
   },
@@ -297,7 +297,7 @@ function doExplode(id) {
 
   paintExplosion(id);
 
-
+  hid(gid("explodeContainer"));
 
 
 }
@@ -353,11 +353,12 @@ function buttonSelected(buttonId) {
     openContainer.innerHTML = "open " + thisItemObject.name;
   }
 
-  let thisId = Button.idToItem(buttonId);
+
   // debugger;
   clearAllFocii();
 
   // get parent and test if this button is chain
+  let thisId = Button.idToItem(buttonId);
 
   let thisItemObject = getItemObjectById(thisId);
 
@@ -366,7 +367,13 @@ function buttonSelected(buttonId) {
   if (thisItemObject.type == 'c' && isItem || countDescendants(thisId)) {
     if (countDescendants(thisId))
       paintBreadCrumbs(thisId);
-    else showOpenButton();
+    else
+      showOpenButton();
+
+  } else {
+
+    paintBreadCrumbs(thisItemObject.parentId);
+
   }
 
   Utils.doDebug("Selected button - " + buttonId);
@@ -381,7 +388,8 @@ function buttonSelected(buttonId) {
 
   theHoverPhoto.src = forceImageLoad(thisItemObject.image);
 
-  theName.innerHTML = thisItemObject.name;
+ 
+  theName.innerHTML = breadCrumbs(thisId);
   //divDescription.innerHTML =  thisItemObject.description;
   // this is form stuff now ( maybe move it?? )
 
@@ -505,11 +513,9 @@ function updateItemFromForm() {
 
 function doHoverButton(hoverButton) {
 
-
-
-  // figure the id
-  let a = hoverButton.split("_");
-  id = a[1];
+  id = Button.idToItem(hoverButton);
+  theName.innerHTML = breadCrumbs(id);
+return;
 
   thisItem = getItemObjectById(id);
   // Utils.doDebug(thisItem.image);
@@ -682,6 +688,10 @@ function paintBreadCrumbs(id) {
     chainArray.forEach((item) => {
       paintParent(item);
     });
+
+    if (Item.countDescendants(id) > Item.getChildren(id).length)
+      vid(gid("explodeContainer"));
+
   }
   let chainArray = getItemPath(id);
   setCurrentParentId(id);
@@ -793,6 +803,8 @@ function breadCrumbs(id) {
   let str = "";
 
   let theChain = getItemPath(id);
+  theChain = theChain.reverse();
+
   for (let i = 0; i < theChain.length; i++) {
     let thisItem = getItemObjectById(theChain[i]);
 

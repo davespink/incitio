@@ -257,3 +257,15 @@ stamp dir0-users/GUEST1732058852532/
 uploaded - users/GUEST1732058852532/photos/0.png
 filename - photos/house2.png
 photos/house2.png
+stamp dir1725846365857-users/GUEST1732058852532/
+uploaded - users/GUEST1732058852532/photos/1725846365857.jpg
+filename - photos/staples.jpg
+photos/staples.jpg
+stamp dir0-users/GUEST1732067287930/
+uploaded - users/GUEST1732067287930/photos/0.jpeg
+filename - photos/testcard.jpeg
+photos/testcard.jpeg
+stamp dir1725836849233-users/GUEST1732151461082/
+uploaded - users/GUEST1732151461082/photos/1725836849233.jpeg
+filename - photos/Gemini_Generated_Image_c0nyr3c0nyr3c0ny.jpeg
+photos/Gemini_Generated_Image_c0nyr3c0nyr3c0ny.jpeg
