@@ -96,8 +96,8 @@ function cropAndRename($fileName, $file_extension)
 
 
     // now resize the image
-    if ($width > 500) {
-        $new_width =   500; //$width * 0.5;
+    if ($width > 200) {
+        $new_width =   200; //$width * 0.5;
         $new_height = $height * $new_width / $width;
         $newImg = imagecreatetruecolor($new_width, $new_height);
 

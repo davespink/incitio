@@ -269,3 +269,23 @@ stamp dir1725836849233-users/GUEST1732151461082/
 uploaded - users/GUEST1732151461082/photos/1725836849233.jpeg
 filename - photos/Gemini_Generated_Image_c0nyr3c0nyr3c0ny.jpeg
 photos/Gemini_Generated_Image_c0nyr3c0nyr3c0ny.jpeg
+stamp dir0-users/GUEST1732287072188/
+uploaded - users/GUEST1732287072188/photos/0.jpeg
+filename - photos/240_F_696644402_DQKlMwk8KootoBxj9cwvmlCa7SiMM28n.jpeg
+photos/240_F_696644402_DQKlMwk8KootoBxj9cwvmlCa7SiMM28n.jpeg
+stamp dir0-users/GUEST1732287072188/
+uploaded - users/GUEST1732287072188/photos/0.jpg
+filename - photos/cabbage.jpg
+photos/cabbage.jpg
+stamp dir1726345682710-users/GUEST1732287072188/
+uploaded - users/GUEST1732287072188/photos/1726345682710.jpg
+filename - photos/front.jpg
+photos/front.jpg
+stamp dir1726345682710-users/GUEST1732287072188/
+uploaded - users/GUEST1732287072188/photos/1726345682710.png
+filename - photos/home.png
+photos/home.png
+stamp dir0-users/GUEST1732287072188/
+uploaded - users/GUEST1732287072188/photos/0.png
+filename - photos/house2.png
+photos/house2.png

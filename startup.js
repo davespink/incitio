@@ -20,19 +20,16 @@ function getCurrentParentId() { return gCurrentParentId; }
 function setCurrentParentId(id) { gCurrentParentId = id }
 
 let gItemArray = [];
-// let gChainArray = [];
-
 gItemArray.push(itemObject);
 
 if (!User.get()) {
   let stampx = new Date().getTime();
   let stamp = stampx.toString();
   User.set("GUEST" + stamp);
-
   createUser();
 
 } else {
-  loadUserDataFromDisk();
+  Disk.loadCurrentData();
 }
 
 idUser.innerHTML = "<h6>" + User.get() + "</h6>";
@@ -40,13 +37,12 @@ idUser.innerHTML = "<h6>" + User.get() + "</h6>";
 alertBox.addEventListener("animationend", () => { alertBox.classList.remove("animate"); });
 
 if (mobile()) {
- // topDiv.appendChild(panelData);
- // topDiv.appendChild(panelData);
- hid(divImages);hid(divDetails);hid(panelIntro);
+
+  hid(divImages); hid(divDetails); hid(panelIntro);
 }
 
 
 window.onbeforeunload = function () {
-  saveDataToDisk();
+  Disk.saveCurrentData();
   return null;
 }

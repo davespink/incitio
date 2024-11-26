@@ -1,5 +1,5 @@
 function getVersion() {
-  return "1.25b";
+  document.write("Incitio v1.25c");
 }
 
 function displace(el, options) {
@@ -388,7 +388,7 @@ function buttonSelected(buttonId) {
 
   theHoverPhoto.src = forceImageLoad(thisItemObject.image);
 
- 
+
   theName.innerHTML = breadCrumbs(thisId);
   //divDescription.innerHTML =  thisItemObject.description;
   // this is form stuff now ( maybe move it?? )
@@ -508,25 +508,32 @@ function updateItemFromForm() {
 
 
 
-
+var flag;
 
 
 function doHoverButton(hoverButton) {
-
+  if (mobile()) return;
   id = Button.idToItem(hoverButton);
   theName.innerHTML = breadCrumbs(id);
-return;
 
   thisItem = getItemObjectById(id);
   // Utils.doDebug(thisItem.image);
 
   //     alert(response);
-  var delayInMilliseconds = 100; //1 second
+  var delayInMilliseconds = 2000; 
+  flag = true;
 
   setTimeout(function () {
-    //  thePhoto.src = forceImageLoad(thePhoto.src);
-    theHoverPhoto.src = forceImageLoad(thisItem.image);
+    if (flag){
+      theHoverPhoto.src = forceImageLoad(thisItem.image);
+     // console.log(flag);
+    }
   }, delayInMilliseconds); // to force a refresh .. hopefully
+}
+
+function killHoverButton() {
+
+  flag = false;
 
 }
 

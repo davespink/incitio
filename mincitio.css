@@ -1,9 +1,14 @@
-.myDiv {
-  border: 1px outset;
-  border-radius: 10px;
-  width: 100%;
-  border-color: cornsilk;
-  text-align: center;
+.inDiv{
+  width:100%;
+  background-color: cornsilk;
+  border: 1px inset black;
+  outline: 1px solid white;
+  box-shadow: 0 0 0 1px gray;
+  border-radius: 3px;
+  font: bold 1rem sans-serif;
+  margin: 1px;
+  padding: 1px;
+  outline-offset: 1px;
 
 }
 

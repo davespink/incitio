@@ -4,7 +4,24 @@
 
 }
 
-/*      comment */
+.inDiv {
+  background-color: cornsilk;
+  border: 1px inset black;
+  outline: 1px solid white;
+  box-shadow: 0 0 0 1px gray;
+  border-radius: 3px;
+  font: bold 1rem sans-serif;
+  margin: 1px;
+  padding: 1px;
+  outline-offset: 1px;
+
+}
+
+.breadCrumbs {
+
+  margin-bottom: 40px;
+}
+
 .topDiv {
   display: inline-flex;
   width: 100%;
@@ -26,10 +43,13 @@
 }
 
 .itemDiv {
-
+  max-height: 300px;
   text-align: center;
   margin-left: 10px;
   margin-bottom: 5px;
+  background-color: white;
+  overflow-y: scroll;
+  margin-bottom: 30px;
 
 }
 
@@ -109,7 +129,7 @@ img {
   margin: 0px;
   cursor: pointer;
 }
- 
+
 .alert {
   left: calc(50% - 150px);
   width: 300px;
