@@ -438,6 +438,12 @@ function getFormValue(id) {
 function deleteItem() {
 
   let idValue = getFormValue('inItemId');
+  if(!idValue.length){
+    alert('select an item first');
+    return;
+  }
+
+
   let thisIndex = getItemObjectIndexById(idValue);
   let thisObject = getItemObjectById(idValue);
   let thisParent = thisObject.parentId;

@@ -1,1 +1,1 @@
-[{"id":"0","type":"c","parentId":"?","name":"home","description":"your humble abode","image":"./images/noimage.jpg"}]
+[{"id":"0","type":"c","parentId":"?","name":"home","description":"your humble abode","image":"?"}]
