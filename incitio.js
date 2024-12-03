@@ -1,5 +1,5 @@
 function getVersion() {
-  return("Incitio v1.25e");
+  return("Incitio v1.25f");
 }
 
 function displace(el, options) {
