@@ -1,6 +1,6 @@
-.inDiv{
-  width:100%;
-  background-color: cornsilk;
+.inDiv {
+  width: 100%;
+  background-color: snow;
   border: 1px inset black;
   outline: 1px solid white;
   box-shadow: 0 0 0 1px gray;
@@ -9,7 +9,52 @@
   margin: 1px;
   padding: 1px;
   outline-offset: 1px;
+  text-align: center;
+}
 
+.fixed {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  height: 80px;
+ background-color: gray;
+  margin-top: 0px;
+  margin-bottom: 15px;
+  text-align: center;
+  z-index: 5;
+
+}
+
+.main-content {
+  position: absolute;
+  overflow: hidden;
+  left: 0px;
+  right: 0px;
+}
+
+
+.toolbar {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: #48195c;
+  color: #fff;
+  height: 35px;
+  overflow: hidden;
+  text-align: center;
+}
+
+
+
+
+.itemDiv {
+
+  display: block;
+  text-align: center;
+  height: 300px;
+  overflow-y: auto;
 }
 
 .bcDiv {
@@ -19,14 +64,15 @@
   height: 500px
 }
 
-.col2 {
-  background-color: indianred;
-}
+
 
 .topDiv {
   width: 100%;
   height: 100vh;
-  background-color: #6f8670;
+ 
+  text-align: center;
+  margin-top: 60px;
+  margin-left: 0px;
 }
 
 .item-grid {
@@ -39,9 +85,10 @@
 
 body {
   width: 100%;
-  height: 600px;
+  height: 100%;
   padding: 2px;
   margin-left: 10px;
+  margin-right: 10px;
   margin-top: 0px;
 }
 
@@ -58,10 +105,12 @@ img {
   padding: 2px;
   background-color: lightcyan;
 }
-.action-button{
-  width:25%;
-  margin:5px;
+
+.action-button {
+  width: 25%;
+  margin: 5px;
 }
+
 .hover-bc-photo {
   width: 8em;
   height: 8em;

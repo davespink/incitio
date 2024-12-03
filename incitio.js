@@ -1,5 +1,5 @@
 function getVersion() {
-  document.write("Incitio v1.25c");
+  return("Incitio v1.25e");
 }
 
 function displace(el, options) {
@@ -125,6 +125,9 @@ const Item = {
   hasChildren(id) {
     return this.getChildren(id).length;
   },
+  countChildren(id) {
+    return this.getChildren(id).length;
+  },
   getById(id) {
 
     for (let z = 0; z < gItemArray.length; z++) {
@@ -221,7 +224,9 @@ const UI = {
         newButton.outerHTML = `<button id= "${newButtonId}" class="item-grid" 
         onmouseenter="doGridHover()"
         onclick="gridPhotoClicked('${thisItemObject.id}')"> 
-        <img src="` + forceImageLoad(thisItemObject.image) + `" style="transform:rotate(0deg)"  ></button>`;
+        <img src="` + forceImageLoad(thisItemObject.image) + `"></button>`;
+
+        
 
       }
 
@@ -438,12 +443,6 @@ function getFormValue(id) {
 function deleteItem() {
 
   let idValue = getFormValue('inItemId');
-  if(!idValue.length){
-    alert('select an item first');
-    return;
-  }
-
-
   let thisIndex = getItemObjectIndexById(idValue);
   let thisObject = getItemObjectById(idValue);
   let thisParent = thisObject.parentId;
@@ -543,6 +542,14 @@ function killHoverButton() {
 
 }
 
+function doTouch(touchButton){
+ 
+  console.log(touchButton);
+  id = Button.idToItem(touchButton);
+  theName.innerHTML = breadCrumbs(id);
+
+
+}
 
 function searchButtonClick(itemId) {
   let gridButton = gid("image_" + itemId);
@@ -715,7 +722,10 @@ function paintBreadCrumbs(id) {
   paintChildren(id);
   paintParents();
 
+  if(countDescendants(id) == Item.countChildren(id)) {
 
+    hid(gid("explodeContainer"));
+  }
 
 }
 

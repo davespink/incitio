@@ -34,11 +34,15 @@ if (!User.get()) {
 
 idUser.innerHTML = "<h6>" + User.get() + "</h6>";
 
+idVersion.innerHTML = getVersion();
+
 alertBox.addEventListener("animationend", () => { alertBox.classList.remove("animate"); });
 
 if (mobile()) {
-
-  hid(divImages); hid(divDetails); hid(panelIntro);
+  let el = gid("panelData");
+  el.remove();
+  //hid(divDetails); hid(panelIntro);
+  topDiv.appendChild(el);
 }
 
 

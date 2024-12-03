@@ -5,7 +5,7 @@
 }
 
 .inDiv {
-  background-color: cornsilk;
+  background-color: lightgrey;
   border: 1px inset black;
   outline: 1px solid white;
   box-shadow: 0 0 0 1px gray;
@@ -14,8 +14,20 @@
   margin: 1px;
   padding: 1px;
   outline-offset: 1px;
+text-align: center;
+}
+
+.fixed{
+
+display:none;
 
 }
+ 
+#panelIntro{
+
+  margin-top:0px
+}
+
 
 .breadCrumbs {
 
@@ -26,7 +38,6 @@
   display: inline-flex;
   width: 100%;
   height: fit-content;
-  background-color: #6b6bda;
 }
 
 .chainDiv {
