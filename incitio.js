@@ -686,7 +686,7 @@ function paintBreadCrumbs(id) {
 
   function paintChildren(id) {
     function paintChild(id) {
-      thisItemObject = getItemObjectById(id);
+      let thisItemObject = getItemObjectById(id);
       createItemButton(thisItemObject);
     }
 
@@ -700,7 +700,7 @@ function paintBreadCrumbs(id) {
 
   function paintParents() {
     function paintParent(item) {
-      thisItemObject = getItemObjectById(item);
+      let thisItemObject = getItemObjectById(item);
       createChainButton(thisItemObject);
     }
 
@@ -723,9 +723,11 @@ function paintBreadCrumbs(id) {
   paintParents();
 
   if(countDescendants(id) == Item.countChildren(id)) {
-
     hid(gid("explodeContainer"));
   }
+
+  let thisItemObject = getItemObjectById(id);
+  explodeContainer.innerHTML = "show total content of " + thisItemObject.name;
 
 }
 
