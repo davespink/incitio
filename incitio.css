@@ -14,18 +14,18 @@
   margin: 1px;
   padding: 1px;
   outline-offset: 1px;
-text-align: center;
+  text-align: center;
 }
 
-.fixed{
+.fixed {
 
-display:none;
+  display: none;
 
 }
+
  
-#panelIntro{
-
-  margin-top:0px
+#panelIntro {
+  margin-top: 0px
 }
 
 
@@ -65,18 +65,19 @@ display:none;
 }
 
 .col1 {
-  width: 15%;
-  background-color: pink;
+  width: 20%;
+ 
+  padding:5px;
 }
 
 .col2 {
   width: 65%;
-  background-color: rgb(26, 13, 75);
+  
 }
 
 .col3 {
   width: 30%;
-  background-color: rgb(170, 123, 37)
+ 
 }
 
 .bc-button {

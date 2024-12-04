@@ -9,7 +9,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open incitio.html",
-            "url":"http://localhost/incitio.com/incitio/incitio.html"
+            "url":"http://192.168.1.71/incitio.com/incitio/incitio.html?user=GUEST1732897603708"
         }
     ]
 }

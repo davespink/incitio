@@ -171,11 +171,14 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
 
 
 <div class="fixed">
-  <div style="margin-top:20px ;margin-bottom:20px">
-    <button onclick="doIt('divSearch')">Crumbs</button>
-    <button onclick="doIt('divImages')">Images</button>
-    <button onclick="doIt('divDetails')">Details</button>
-    <button onclick="doIt('panelData')">Data</button>
+  <div style="margin-top:20px ;margin-bottom:20px;text-align: center;">
+    <div
+      style="width:90%;background-color:lightblue;margin:auto; margin-top:0px;  padding:20px;border-style: double;border-radius: 10px">
+      <button onclick="doIt('divSearch')">Crumbs</button>
+      <button onclick="doIt('divImages')">Images</button>
+      <button onclick="doIt('divDetails')">Details</button>
+      <button onclick="doIt('panelData')">Data</button>
+    </div>
   </div>
 </div>
 
@@ -207,9 +210,8 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
 
 
     <div id="panelIntro" class="inDiv col1">
-
       <div>
-        <div style="margin:auto">
+        <div class="inDiv" style="margin:auto">
           <!--   New + not used -->
           <button class="btn btn-primary" onclick="if(mobile()) hid(panelIntro)" type="button" id="dropdownMenuButton"
             style="border-style: none;  margin-top: 20px;border-radius: 16px; ">
@@ -217,7 +219,7 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
           </button>
         </div>
         <p></p>
-        <div class="inDiv" style="font-size: small;">
+        <div class="inDiv" style="font-size: small">
           <p style="padding:10px">
             A user reference has been created for you.
             This should mean that the program will preserve
@@ -230,7 +232,7 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
           <p></p>
           <p>Use this link</p>
 
-          <p id="theLink"></p>
+          <p id="theLink" style="font-size:smaller;padding:10px"></p>
 
           <p>And bookmark it</p>
 
@@ -282,11 +284,13 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
     </div>
 
     <!-- second column -->
-    <div class=" col2">
+    <div class="inDiv col2">
 
       <!-- Search-->
-      <div id="divSearch" style="padding:10px;margin:auto;text-align: center;">
-        <div class="inDiv" style="padding:10px">
+      <div id="divSearch" class="inDiv" style="padding:10px;margin:auto;text-align: center;">
+
+
+        <div id="divVersion" class="inDiv" style="padding:10px">
           <button id="idVersion" style="width:40%;margin-top: 5px;"></button>
         </div>
 
@@ -381,12 +385,15 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
       </div>
 
 
-      <!-- photos -->
-      <div id="divImages" class="myDiv" style="text-align:center;background-color:green ">
+      <!-- grid of thumbnails -->
+      <div id="divImages" class="inDiv" style="text-align:center">
         <div class="myDiv" style="display:inline-flex;width:90%">
-          <button type="button" id="updateButton" class="btn btn-dark  " style="width:20%;margin:10px"
-            onclick="showAllItems();">Refresh</button>
+
+
           <!--
+      <button type="button" id="updateButton" class="btn btn-dark  " style="width:20%;margin:10px"
+            onclick="showAllItems();">Refresh</button>
+
 
           <div style="margin:auto">
 
@@ -431,24 +438,22 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
 
           </div>
         -->
-
-
-
         </div>
-        <button id="gridBreadcrumbs" style="width:80%;border-radius: 10px;margin:5px;">hover over image</button>
-        <div id="divPhotos" class="inDiv"
-          style="text-align:center;background-color: aquamarine; margin:0 auto; padding:0px;height:500px;overflow-y: scroll">
+        <div id="idHoverOver">
+          <button id="gridBreadcrumbs" style="width:80%;border-radius: 10px;margin:5px;">hover over image</button>
+
+          <div id="divPhotos" class="inDiv"
+            style="text-align:center; margin:0 auto; padding:0px;height:500px;overflow-y: scroll">
+          </div>
         </div>
       </div>
 
     </div> <!--end second column -->
 
     <!-- third column -->
-    <div id="divDetails" class="myDiv col3">
-
-
+    <div id="divDetails" class="inDiv col3">
       <!-- the photo stuff-->
-      <div class=" myDiv" style="background-color: rgb(34, 143, 119);text-align:center;padding:5px ">
+      <div class="inDiv" style="text-align:center;padding:5px">
         <!--  The Photo Upload etc-->
         <div style="margin-top: 30px">
           <img id="thePhoto" style="width:90%;height:90%;border:solid">
@@ -472,7 +477,7 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
       </div>
 
       <!-- the Details update button -->
-      <div class="inDiv" style="background-color: blueviolet;text-align:center;padding:5px">
+      <div class="inDiv" style="padding:5px">
         <p style="color:yellow">Change Item Details</p>
         <button type="button" id="updateButton" class="btn btn-default btn-primary"
           onclick="updateItemFromForm();">Update</button>
