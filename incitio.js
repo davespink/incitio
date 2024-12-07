@@ -1,10 +1,10 @@
 function getVersion() {
-  return("Incitio v1.25f");
+  return ("Incitio v1.25f");
 }
-
+/*
 function displace(el, options) {
   return window.displacejs(el, options);
-}
+}*/
 function gid(id) {
   return document.getElementById(id);
 }
@@ -193,10 +193,7 @@ const Item = {
 }
 
 const UI = {
-
   showAllItems() {
-
-
     let x = getCurrentParentId();
 
     let el = document.getElementById("divPhotos");
@@ -226,7 +223,7 @@ const UI = {
         onclick="gridPhotoClicked('${thisItemObject.id}')"> 
         <img src="` + forceImageLoad(thisItemObject.image) + `"></button>`;
 
-        
+
 
       }
 
@@ -245,6 +242,63 @@ const UI = {
 
 
   },
+
+
+  paintBreadCrumbs(id) {
+
+    function clearBreadCrumbs() {
+      divChain.innerHTML = "";
+      divItems.innerHTML = "";
+    }
+
+    function paintChildren(id) {
+      function paintChild(id) {
+        let thisItemObject = getItemObjectById(id);
+        createItemButton(thisItemObject);
+      }
+
+      let children = Item.getChildren(id);
+      children.sort(compareAlpha);
+      children.forEach((item) => {
+        paintChild(item);
+      });
+
+    }
+
+    function paintParents() {
+      function paintParent(item) {
+        let thisItemObject = getItemObjectById(item);
+        createChainButton(thisItemObject);
+      }
+
+      let test = chainArray;
+      chainArray.forEach((item) => {
+        paintParent(item);
+      });
+
+      if (Item.countDescendants(id) > Item.getChildren(id).length)
+        vid(gid("explodeContainer"));
+
+    }
+    let chainArray = getItemPath(id);
+    setCurrentParentId(id);
+    chainArray.reverse();
+
+    clearBreadCrumbs();
+
+    paintChildren(id);
+    paintParents();
+
+    if (countDescendants(id) == Item.countChildren(id)) {
+      hid(gid("explodeContainer"));
+    }
+
+    let thisItemObject = getItemObjectById(id);
+    explodeContainer.innerHTML = "show total content of " + thisItemObject.name;
+
+  },
+
+
 
 }
 
@@ -280,7 +334,7 @@ function breadCrumbs(id) {
 function doSearch() {
   // debugger;
 
-  divSearch.innerHTML = '';
+  divSearchResults.innerHTML = '';
   let lookFor = (search.value).toUpperCase();
   if (lookFor.length < 3)
     return;
@@ -295,6 +349,7 @@ function doSearch() {
 
   }
 }
+
 
 
 function doExplode(id) {
@@ -346,7 +401,7 @@ function clearAllFocii() {
 function openItem() {
   let selected = getFormValue("inItemId");
   hid(openContainer);
-  paintBreadCrumbs(selected);
+  UI.paintBreadCrumbs(selected);
 }
 
 
@@ -371,13 +426,13 @@ function buttonSelected(buttonId) {
 
   if (thisItemObject.type == 'c' && isItem || countDescendants(thisId)) {
     if (countDescendants(thisId))
-      paintBreadCrumbs(thisId);
+      UI.paintBreadCrumbs(thisId);
     else
       showOpenButton();
 
   } else {
 
-    paintBreadCrumbs(thisItemObject.parentId);
+    UI.paintBreadCrumbs(thisItemObject.parentId);
 
   }
 
@@ -448,13 +503,24 @@ function deleteItem() {
   let thisParent = thisObject.parentId;
 
   if (countDescendants(idValue) > 0 && thisObject.type == 'c') {
-    alert("think of the children!");
-    return;
+    reply = confirm("do you want to delete " + thisObject.name + "? , this will delete " + Item.countDescendants(idValue) + " other items");
+    if (!reply)
+      return;
+
+    let progeny = Item.getDescendants(idValue);
+
+    progeny.forEach(id => {
+      let index = Item.getIndexById(id);
+      gItemArray.splice(thisindex, 1);
+    });
+
+
+    alert("done");
   }
 
   gItemArray.splice(thisIndex, 1);
 
-  paintBreadCrumbs(thisParent); // to remove button from view
+  UI.paintBreadCrumbs(thisParent); // to remove button from view
 
   // buttonSelected(thisParent);
   Button.click("chain_" + thisParent);
@@ -505,7 +571,7 @@ function updateItemFromForm() {
   //  setCurrentRoot(thisItem.id);
   //else
   if (id != 0)
-    paintBreadCrumbs(thisItem.parentId);
+    UI.paintBreadCrumbs(thisItem.parentId);
 
   clickButton(thisItem.id);
 
@@ -525,13 +591,13 @@ function doHoverButton(hoverButton) {
   // Utils.doDebug(thisItem.image);
 
   //     alert(response);
-  var delayInMilliseconds = 2000; 
+  var delayInMilliseconds = 2000;
   flag = true;
 
   setTimeout(function () {
-    if (flag){
+    if (flag) {
       theHoverPhoto.src = forceImageLoad(thisItem.image);
-     // console.log(flag);
+      // console.log(flag);
     }
   }, delayInMilliseconds); // to force a refresh .. hopefully
 }
@@ -542,8 +608,8 @@ function killHoverButton() {
 
 }
 
-function doTouch(touchButton){
- 
+function doTouch(touchButton) {
+
   console.log(touchButton);
   id = Button.idToItem(touchButton);
   theName.innerHTML = breadCrumbs(id);
@@ -560,7 +626,7 @@ function searchButtonClick(itemId) {
 function createSearchButton(itemObject) {
 
   let newButton = document.createElement('button');
-  let el = document.getElementById("divSearch");
+  let el = document.getElementById("divSearchResults");
   el.appendChild(newButton);
 
   // el.addEventListener("touchstart", touchStart);
@@ -677,61 +743,6 @@ function compareAlpha(aItem, bItem) {
   return 0;
 }
 
-function paintBreadCrumbs(id) {
-
-  function clearBreadCrumbs() {
-    divChain.innerHTML = "";
-    divItems.innerHTML = "";
-  }
-
-  function paintChildren(id) {
-    function paintChild(id) {
-      let thisItemObject = getItemObjectById(id);
-      createItemButton(thisItemObject);
-    }
-
-    let children = Item.getChildren(id);
-    children.sort(compareAlpha);
-    children.forEach((item) => {
-      paintChild(item);
-    });
-
-  }
-
-  function paintParents() {
-    function paintParent(item) {
-      let thisItemObject = getItemObjectById(item);
-      createChainButton(thisItemObject);
-    }
-
-    let test = chainArray;
-    chainArray.forEach((item) => {
-      paintParent(item);
-    });
-
-    if (Item.countDescendants(id) > Item.getChildren(id).length)
-      vid(gid("explodeContainer"));
-
-  }
-  let chainArray = getItemPath(id);
-  setCurrentParentId(id);
-  chainArray.reverse();
-
-  clearBreadCrumbs();
-
-  paintChildren(id);
-  paintParents();
-
-  if(countDescendants(id) == Item.countChildren(id)) {
-    hid(gid("explodeContainer"));
-  }
-
-  let thisItemObject = getItemObjectById(id);
-  explodeContainer.innerHTML = "show total content of " + thisItemObject.name;
-
-}
-
-
 
 
 function paintExplosion(id) {
@@ -760,12 +771,14 @@ function paintExplosion(id) {
 }
 
 
+function paintBreadCrumbs(id) { return UI.paintBreadCrumbs(id); }
+
 //
 //  Creates all the buttons also
 //
 function setCurrentRoot(rootId) {
   alert("what??");
-  paintBreadCrumbs(rootId);
+  UI.paintBreadCrumbs(rootId);
   debugger;
   return;
 }
@@ -788,9 +801,9 @@ function gridPhotoClicked(id) {
   let thisItem = getItemObjectById(id);
 
   if (thisItem.type != 'c')
-    paintBreadCrumbs(thisItem.parentId);
+    UI.paintBreadCrumbs(thisItem.parentId);
   else
-    paintBreadCrumbs(id);
+    UI.paintBreadCrumbs(id);
 
   let thisButton;
 

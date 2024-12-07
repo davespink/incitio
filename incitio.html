@@ -6,6 +6,13 @@ Task list
 =========
 
  
+Move the js files from lib
+Continue to make static objects
+
+Impliment delete for containers
+
+On upload of photo change the breadcrumb picture as well
+
 Improve the alert system
 Produce a good sample - pick a style and make a house etc
 
@@ -97,8 +104,8 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
 
 <script src="./incitio.js"></script>
 
-<script src="./lib/buttons.js"></script>
-<script src="./lib/backend.js"></script>
+<script src="buttons.js"></script>
+<script src="backend.js"></script>
 
 <script>
 
@@ -200,6 +207,7 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
 
 
     <script>
+    // the scroll stuff
       function doIt(theDiv) {
 
         gid(theDiv).scrollIntoView({ behavior: 'smooth' });
@@ -238,13 +246,9 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
 
 
           <script>
-            //           debugger;
             let u = User.get();
             href = "www.incityo.com/incitio/incitio.html?user=" + u;
-
             theLink.innerHTML = href;
-
-
           </script>
 
         </div>
@@ -304,9 +308,7 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
             type="text" id="search" style="padding: 0px;   float:right;
               width: 90%;  background-color: rgb(219, 192, 192);
                z-index: 6; left: 0px;" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50"
-            onkeydown="  
-                  handle(event)
-                ">
+            onkeydown="handle(event)" onclick=' divSearchResults.innerHTML=""  '>
         </button>
 
         <script>
@@ -322,7 +324,7 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
           }
         </script>
         <!-- where the search results get displayed -->
-        <div id="divSearch">
+        <div id="divSearchResults">
         </div>
 
       </div>
@@ -346,7 +348,6 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
 
 
           <div class="inDiv">
-
             <button class="action-button" onclick="makeNewItem('i')"
               style="background-color: green;color:white">+item</button>
             <button class="action-button" onclick="makeNewItem('c')"
@@ -361,8 +362,6 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
             <div style="text-align: center;background-color:grey;width:50%">
               <img id="theHoverPhoto" class="hover-bc-photo" src="./images/noimage.jpg">
             </div>
-
-
             <div class="inDiv">
               <div>
                 this is sample text
@@ -371,77 +370,18 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
                 <button style="margin-bottom: 10px;">Click me</button>
               </div>
             </div>
-
-
           </div>
 
-
         </div>
-
         <!--    Items  -->
         <div id="divItems" class="itemDiv">
         </div>
-
       </div>
-
 
       <!-- grid of thumbnails -->
       <div id="divImages" class="inDiv" style="text-align:center">
-        <div class="myDiv" style="display:inline-flex;width:90%">
-
-
-          <!--
-      <button type="button" id="updateButton" class="btn btn-dark  " style="width:20%;margin:10px"
-            onclick="showAllItems();">Refresh</button>
-
-
-          <div style="margin:auto">
-
-            <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
-              id="dropdownMenuButton" style="border-radius: 5px;">
-              Filter
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#" onClick="gShowOptions.filter='c';">Only Containers</a>
-              </li>
-              <li><a class="dropdown-item" href="#" onClick="gShowOptions.filter='i';">Only Items</a>
-              </li>
-              <li><a class="dropdown-item" href="#" onClick="gShowOptions.filter='a';">ShowAll</a>
-              </li>
-            </ul>
-
-            <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
-              id="dropdownMenuButton" style="border-radius: 5px;">
-              Sort
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#" onClick="gShowOptions.sort='o';">Old to new</a>
-              </li>
-              <li><a class="dropdown-item" href="#" onClick="gShowOptions.sort='n';">New to Old</a>
-              </li>
-              <li><a class="dropdown-item" href="#" onClick="gShowOptions.sort='a';">A to Z</a>
-              </li>
-              <li><a class="dropdown-item" href="#" onClick="gShowOptions.sort='a';">Z to A</a>
-              </li>
-            </ul>
-
-            <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
-              id="dropdownMenuButton" style="border-radius: 5px;">
-              View
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#" onClick="gShowOptions.view='g';">Grid</a>
-              </li>
-              <li><a class="dropdown-item" href="#" onClick="gShowOptions.view='l';">List</a>
-              </li>
-            </ul>
-
-          </div>
-        -->
-        </div>
         <div id="idHoverOver">
           <button id="gridBreadcrumbs" style="width:80%;border-radius: 10px;margin:5px;">hover over image</button>
-
           <div id="divPhotos" class="inDiv"
             style="text-align:center; margin:0 auto; padding:0px;height:500px;overflow-y: scroll">
           </div>
@@ -455,7 +395,7 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
       <!-- the photo stuff-->
       <div class="inDiv" style="text-align:center;padding:5px">
         <!--  The Photo Upload etc-->
-        <div style="margin-top: 30px">
+        <div style="margin-top: 30px;margin-bottom:10px">
           <img id="thePhoto" style="width:90%;height:90%;border:solid">
         </div>
         <script>function doTest() {
@@ -478,7 +418,7 @@ https://stackoverflow.com/questions/19844545/replacing-css-file-on-the-fly-and-a
 
       <!-- the Details update button -->
       <div class="inDiv" style="padding:5px">
-        <p style="color:yellow">Change Item Details</p>
+        <p style="color:black">Change Item Details</p>
         <button type="button" id="updateButton" class="btn btn-default btn-primary"
           onclick="updateItemFromForm();">Update</button>
         <button type="button" class="btn btn-default btn-primary" onclick="deleteItem();">Delete</button>

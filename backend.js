@@ -121,6 +121,7 @@ const Disk = {
             setTimeout(function () {
               //xxx.click();
               thePhoto.src = forceImageLoad(thePhoto.src);
+              theHoverPhoto.src = thePhoto.src;
             }, delayInMilliseconds); // to force a refresh .. hopefully
           }
         }

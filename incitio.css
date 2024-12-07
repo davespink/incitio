@@ -5,10 +5,10 @@
 }
 
 .inDiv {
-  background-color: lightgrey;
-  border: 1px inset black;
-  outline: 1px solid white;
-  box-shadow: 0 0 0 1px gray;
+  background-color: darkgray;
+  border: 1px inset lightblue;
+  outline: 1px solid grey;
+  box-shadow: 0 0 0 1px darkgray;
   border-radius: 3px;
   font: bold 1rem sans-serif;
   margin: 1px;

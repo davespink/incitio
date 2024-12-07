@@ -24,3 +24,126 @@ autosave_GUEST1732670542875.txt
 autosave_GUEST1732670542875.txt
 autosave_GUEST1732670542875.txt
 autosave_GUEST1732670542875.txt
+stamp dir0-users/HOME/
+uploaded - users/HOME/photos/0.jpeg
+filename - photos/Gemini_Generated_Image_cygb05cygb05cygb.jpeg
+photos/Gemini_Generated_Image_cygb05cygb05cygb.jpeg
+stamp dir1733391925968-users/HOME/
+uploaded - users/HOME/photos/1733391925968.jpeg
+filename - photos/Gemini_Generated_Image_vqgz9mvqgz9mvqgz.jpeg
+photos/Gemini_Generated_Image_vqgz9mvqgz9mvqgz.jpeg
+stamp dir1733391983340-users/HOME/
+uploaded - users/HOME/photos/1733391983340.jpeg
+filename - photos/Gemini_Generated_Image_hwwu2ohwwu2ohwwu.jpeg
+photos/Gemini_Generated_Image_hwwu2ohwwu2ohwwu.jpeg
+stamp dir1733392004721-users/HOME/
+uploaded - users/HOME/photos/1733392004721.jpeg
+filename - photos/Gemini_Generated_Image_m38j57m38j57m38j.jpeg
+photos/Gemini_Generated_Image_m38j57m38j57m38j.jpeg
+stamp dir1729380368219-users/HOME/
+uploaded - users/HOME/photos/1729380368219.jpg
+filename - photos/20241203_172407.jpg
+6
+photos/20241203_172407.jpg
+stamp dir1729380368219-users/HOME/
+uploaded - users/HOME/photos/1729380368219.jpeg
+filename - photos/Gemini_Generated_Image_m38j57m38j57m38j.jpeg
+photos/Gemini_Generated_Image_m38j57m38j57m38j.jpeg
+stamp dir1733392004721-users/HOME/
+uploaded - users/HOME/photos/1733392004721.jpeg
+filename - photos/Gemini_Generated_Image_m319qtm319qtm319.jpeg
+photos/Gemini_Generated_Image_m319qtm319qtm319.jpeg
+stamp dir1725836247926-users/HOME/
+uploaded - users/HOME/photos/1725836247926.jpeg
+filename - photos/Gemini_Generated_Image_e4ug8he4ug8he4ug.jpeg
+photos/Gemini_Generated_Image_e4ug8he4ug8he4ug.jpeg
+stamp dir1725836247926-users/HOME/
+uploaded - users/HOME/photos/1725836247926.jpeg
+filename - photos/Gemini_Generated_Image_e4ug8he4ug8he4ug.jpeg
+photos/Gemini_Generated_Image_e4ug8he4ug8he4ug.jpeg
+stamp dir1725836282864-users/HOME/
+uploaded - users/HOME/photos/1725836282864.jpeg
+filename - photos/Gemini_Generated_Image_9q57j69q57j69q57.jpeg
+photos/Gemini_Generated_Image_9q57j69q57j69q57.jpeg
+stamp dir1727312817207-users/HOME/
+uploaded - users/HOME/photos/1727312817207.jpeg
+filename - photos/Gemini_Generated_Image_vtpywcvtpywcvtpy.jpeg
+photos/Gemini_Generated_Image_vtpywcvtpywcvtpy.jpeg
+stamp dir1725836247926-users/HOME/
+uploaded - users/HOME/photos/1725836247926.jpg
+filename - photos/rizal-ramadhany-ThAf2whH6b4-unsplash.jpg
+photos/rizal-ramadhany-ThAf2whH6b4-unsplash.jpg
+stamp dir1725836282864-users/HOME/
+uploaded - users/HOME/photos/1725836282864.jpg
+filename - photos/graphicook-studio-oAxxcuuMr8M-unsplash.jpg
+photos/graphicook-studio-oAxxcuuMr8M-unsplash.jpg
+stamp dir1725836282864-users/HOME/
+uploaded - users/HOME/photos/1725836282864.jpg
+filename - photos/round-icons-f8qhUBhOFUA-unsplash.jpg
+photos/round-icons-f8qhUBhOFUA-unsplash.jpg
+stamp dir1727312817207-users/HOME/
+uploaded - users/HOME/photos/1727312817207.jpg
+filename - photos/adri-ansyah-tj3gEBn4nGk-unsplash.jpg
+photos/adri-ansyah-tj3gEBn4nGk-unsplash.jpg
+stamp dir1726345717145-users/HOME/
+uploaded - users/HOME/photos/1726345717145.jpg
+filename - photos/getty-images-DfOqRFoQu1E-unsplash.jpg
+photos/getty-images-DfOqRFoQu1E-unsplash.jpg
+stamp dir1726345742273-users/HOME/
+uploaded - users/HOME/photos/1726345742273.jpg
+filename - photos/siti-heyho-dQI6K-giM5A-unsplash.jpg
+photos/siti-heyho-dQI6K-giM5A-unsplash.jpg
+stamp dir1725836311136-users/HOME/
+uploaded - users/HOME/photos/1725836311136.jpg
+filename - photos/hanin-abouzeid--GiJZNmyMCY-unsplash.jpg
+photos/hanin-abouzeid--GiJZNmyMCY-unsplash.jpg
+stamp dir1725836340744-users/HOME/
+uploaded - users/HOME/photos/1725836340744.jpg
+filename - photos/eva-wahyuni-OmQoMQAdlHY-unsplash.jpg
+photos/eva-wahyuni-OmQoMQAdlHY-unsplash.jpg
+stamp dir1725836350832-users/HOME/
+uploaded - users/HOME/photos/1725836350832.jpg
+filename - photos/hanin-abouzeid--GiJZNmyMCY-unsplash (1).jpg
+photos/hanin-abouzeid--GiJZNmyMCY-unsplash (1).jpg
+stamp dir1725836350832-users/HOME/
+uploaded - users/HOME/photos/1725836350832.jpg
+filename - photos/eva-wahyuni-OmQoMQAdlHY-unsplash.jpg
+photos/eva-wahyuni-OmQoMQAdlHY-unsplash.jpg
+stamp dir1725836362504-users/HOME/
+uploaded - users/HOME/photos/1725836362504.jpg
+filename - photos/20241203_161557.jpg
+3
+photos/20241203_161557.jpg
+stamp dir1725836362504-users/HOME/
+uploaded - users/HOME/photos/1725836362504.jpg
+filename - photos/eva-wahyuni-OmQoMQAdlHY-unsplash.jpg
+photos/eva-wahyuni-OmQoMQAdlHY-unsplash.jpg
+stamp dir1726344113129-users/HOME/
+uploaded - users/HOME/photos/1726344113129.jpg
+filename - photos/tehangat-studio-DMtqtVn0bX4-unsplash.jpg
+photos/tehangat-studio-DMtqtVn0bX4-unsplash.jpg
+stamp dir1726347563352-users/HOME/
+uploaded - users/HOME/photos/1726347563352.jpg
+filename - photos/masantocreative-u2T0EOktldQ-unsplash.jpg
+photos/masantocreative-u2T0EOktldQ-unsplash.jpg
+stamp dir1726347614361-users/HOME/
+uploaded - users/HOME/photos/1726347614361.jpg
+filename - photos/owl-illustration-agency-RrehkP5h53s-unsplash.jpg
+photos/owl-illustration-agency-RrehkP5h53s-unsplash.jpg
+stamp dir1726347646086-users/HOME/
+uploaded - users/HOME/photos/1726347646086.jpg
+filename - photos/owl-illustration-agency-OVHJss823lU-unsplash.jpg
+photos/owl-illustration-agency-OVHJss823lU-unsplash.jpg
+stamp dir1733395314005-users/HOME/
+uploaded - users/HOME/photos/1733395314005.jpg
+filename - photos/owl-illustration-agency-RrehkP5h53s-unsplash.jpg
+photos/owl-illustration-agency-RrehkP5h53s-unsplash.jpg
+stamp dir1733264535750-users/GUEST1732897603708/
+uploaded - users/GUEST1732897603708/photos/1733264535750.jpg
+filename - photos/20241203_161557 (1).jpg
+3
+photos/20241203_161557 (1).jpg
+stamp dir1733390076041-users/GUEST1732897603708/
+uploaded - users/GUEST1732897603708/photos/1733390076041.jpg
+filename - photos/siti-heyho-dQI6K-giM5A-unsplash.jpg
+photos/siti-heyho-dQI6K-giM5A-unsplash.jpg
