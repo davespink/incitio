@@ -507,13 +507,11 @@ function deleteItem() {
     if (!reply)
       return;
 
-    let progeny = Item.getDescendants(idValue);
+ //   let progeny = Item.getDescendants(idValue);
 
-    progeny.forEach(id => {
-      let index = Item.getIndexById(id);
-      gItemArray.splice(thisindex, 1);
+    Item.getDescendants(idValue).forEach(id => {
+      gItemArray.splice(Item.getIndexById(id), 1);
     });
-
 
     alert("done");
   }
