@@ -92,6 +92,9 @@ const Disk = {
       //let req = "./uploadincitio.php?stamp=" + idValue;
 
 
+        //  $('input[type="file"]').val(null);
+
+
       let dir = User.dir();
 
       if (dir.length > 0)
@@ -122,6 +125,11 @@ const Disk = {
               //xxx.click();
               thePhoto.src = forceImageLoad(thePhoto.src);
               theHoverPhoto.src = thePhoto.src;
+
+              // https://stackoverflow.com/questions/9155136/chrome-file-upload-bug-on-change-event-wont-be-executed-twice-with-the-same-fi
+
+              file.value = null;
+
             }, delayInMilliseconds); // to force a refresh .. hopefully
           }
         }

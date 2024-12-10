@@ -226,12 +226,9 @@ const UI = {
 
 
       }
-
     }
 
     let showArray = gItemArray;
-
-
     showArray = Item.getDescendants(getCurrentParentId());
 
     showArray.forEach(id => {
@@ -253,8 +250,10 @@ const UI = {
 
     function paintChildren(id) {
       function paintChild(id) {
-        let thisItemObject = getItemObjectById(id);
-        createItemButton(thisItemObject);
+        //let thisItemObject = getItemObjectById(id);
+
+     //   Button.createItem(itemObject)
+        Button.createItem(getItemObjectById(id));
       }
 
       let children = Item.getChildren(id);
@@ -266,20 +265,22 @@ const UI = {
     }
 
     function paintParents() {
-      function paintParent(item) {
-        let thisItemObject = getItemObjectById(item);
-        createChainButton(thisItemObject);
+      function paintParent(itemId) {
+        Button.createChain(getItemObjectById(itemId));
       }
 
-      let test = chainArray;
-      chainArray.forEach((item) => {
-        paintParent(item);
+     // let test = chainArray;
+      chainArray.forEach((itemId) => {
+        paintParent(itemId);
       });
 
-      if (Item.countDescendants(id) > Item.getChildren(id).length)
+      if (Item.countDescendants(id) > Item.countChildren(id))
         vid(gid("explodeContainer"));
 
     }
+
+
+
     let chainArray = getItemPath(id);
     setCurrentParentId(id);
     chainArray.reverse();
@@ -507,7 +508,7 @@ function deleteItem() {
     if (!reply)
       return;
 
- //   let progeny = Item.getDescendants(idValue);
+    //   let progeny = Item.getDescendants(idValue);
 
     Item.getDescendants(idValue).forEach(id => {
       gItemArray.splice(Item.getIndexById(id), 1);

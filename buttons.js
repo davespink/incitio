@@ -17,15 +17,15 @@ const Button = {
   
   createChain(itemObject) {
     let newButton = document.createElement('button');
-    let el = document.getElementById("divChain");
-    el.appendChild(newButton);
+    gid("divChain").appendChild(newButton);
+  
 
     buttonColor = `btn btn-primary`;
     buttonId = "chain_" + itemObject.id;
     number = countDescendants(itemObject.id);
 
     theHTML = `<button id="${buttonId}" 
-          onClick="handleClick()" onmouseenter=doHoverButton("${buttonId}")     
+       onClick=buttonSelected("${buttonId}") onmouseenter=doHoverButton("${buttonId}")     
            class="${buttonColor} bc-button " >${itemObject.name}  <span class="badge bg-danger">${number}</span></button>`;
 
     newButton.outerHTML = theHTML;
@@ -80,16 +80,8 @@ function makeNewItem(type) {
 }
 
 
-/*
-function checkDblClick(id) {
-  let itemObject = getItemObjectById(id);
-  if (itemObject.type == "c")
-    setCurrentRoot(id);
-  else
-    showAlert("not a container");
-}*/
-
 function handleClick() {
+  alert();
   let thisButton = event.currentTarget;
   buttonSelected(thisButton.id);
 }
@@ -100,9 +92,5 @@ function createChainButton(itemObject) {
 
 
 function createItemButton(itemObject) {
-
   return Button.createItem(itemObject);
-
-
-
 }
