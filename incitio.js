@@ -1,5 +1,5 @@
 function getVersion() {
-  return ("Incitio v1.25f");
+  return ("Incitio v1.25g");
 }
 /*
 function displace(el, options) {
@@ -87,7 +87,9 @@ const User = {
 
   },
 };
-
+//
+//    Item - the data stored on each item or container
+//
 const Item = {
   // belongs in UI
   create(type) {
@@ -111,7 +113,6 @@ const Item = {
     return newItem;
   },
   getChildren(id) {
-
     let children = [];
     for (let i = 0; i < gItemArray.length; i++) {
       //     
@@ -129,7 +130,7 @@ const Item = {
     return this.getChildren(id).length;
   },
   getById(id) {
-
+    /*
     for (let z = 0; z < gItemArray.length; z++) {
       //     
       if (gItemArray[z].id == id) {
@@ -139,18 +140,19 @@ const Item = {
         return gItemArray[z];
       }
     }
-    alert("not found " + id + " len " + id.length)
+    alert("not found " + id + " len " + id.length) */
+
+
+    return gItemArray[this.getIndexById(id)];
+
   },
   getIndexById(id) {
-
     for (i = 0; i < gItemArray.length; i++) {
       //     
       if (gItemArray[i].id == id) {
         return i;
       }
     }
-
-
   },
   getDescendants(rootId) {
     let fullMonte = [];
@@ -165,7 +167,6 @@ const Item = {
       }
       return kids;
     }
-
     function makeTree(thisId) {
       // Utils.doDebug("+" + count);
       let kids = findKids(thisId);
@@ -174,15 +175,12 @@ const Item = {
         // Utils.doDebug(obj.name);
         makeTree(kids[i]);
       }
-
-
     }
-
     makeTree(rootId);
     return fullMonte;
-
-
   },
+
+
 
   countDescendants(id) {
     return this.getDescendants(id).length;
@@ -223,8 +221,6 @@ const UI = {
         onclick="gridPhotoClicked('${thisItemObject.id}')"> 
         <img src="` + forceImageLoad(thisItemObject.image) + `"></button>`;
 
-
-
       }
     }
 
@@ -252,7 +248,7 @@ const UI = {
       function paintChild(id) {
         //let thisItemObject = getItemObjectById(id);
 
-     //   Button.createItem(itemObject)
+        //   Button.createItem(itemObject)
         Button.createItem(getItemObjectById(id));
       }
 
@@ -269,7 +265,7 @@ const UI = {
         Button.createChain(getItemObjectById(itemId));
       }
 
-     // let test = chainArray;
+      // let test = chainArray;
       chainArray.forEach((itemId) => {
         paintParent(itemId);
       });
@@ -398,13 +394,11 @@ function clearAllFocii() {
   hid(openContainer);
 }
 
-
 function openItem() {
   let selected = getFormValue("inItemId");
   hid(openContainer);
   UI.paintBreadCrumbs(selected);
 }
-
 
 function buttonSelected(buttonId) {
 
@@ -413,8 +407,6 @@ function buttonSelected(buttonId) {
     vid(openContainer);
     openContainer.innerHTML = "open " + thisItemObject.name;
   }
-
-
   // debugger;
   clearAllFocii();
 
@@ -425,16 +417,13 @@ function buttonSelected(buttonId) {
 
   let isItem = buttonId.includes("item_");
 
-  if (thisItemObject.type == 'c' && isItem || countDescendants(thisId)) {
-    if (countDescendants(thisId))
+  if (thisItemObject.type == 'c' && isItem || Item.countDescendants(thisId)) {
+    if (Item.countDescendants(thisId))
       UI.paintBreadCrumbs(thisId);
     else
       showOpenButton();
-
   } else {
-
     UI.paintBreadCrumbs(thisItemObject.parentId);
-
   }
 
   Utils.doDebug("Selected button - " + buttonId);
@@ -566,9 +555,7 @@ function updateItemFromForm() {
         showAlert("parent changed");
       }
   }
-  //if (thisItem.type == 'c')
-  //  setCurrentRoot(thisItem.id);
-  //else
+
   if (id != 0)
     UI.paintBreadCrumbs(thisItem.parentId);
 
@@ -579,8 +566,6 @@ function updateItemFromForm() {
 
 
 var flag;
-
-
 function doHoverButton(hoverButton) {
   if (mobile()) return;
   id = Button.idToItem(hoverButton);
@@ -602,18 +587,13 @@ function doHoverButton(hoverButton) {
 }
 
 function killHoverButton() {
-
   flag = false;
-
 }
 
 function doTouch(touchButton) {
-
   console.log(touchButton);
   id = Button.idToItem(touchButton);
   theName.innerHTML = breadCrumbs(id);
-
-
 }
 
 function searchButtonClick(itemId) {
@@ -624,29 +604,36 @@ function searchButtonClick(itemId) {
 
 function createSearchButton(itemObject) {
 
-  let newButton = document.createElement('button');
-  let el = document.getElementById("divSearchResults");
-  el.appendChild(newButton);
+  return Button.createSearch(itemObject);
 
-  // el.addEventListener("touchstart", touchStart);
-  //  el.addEventListener("touchend", touchEnd);
-
-  if (itemObject.type == 'c')
-
-    buttonColor = `btn btn-primary`;
-  else
-    buttonColor = `btn btn-success`;
-
-  buttonId = "search_" + itemObject.id;
-
-  theHTML = `<button id="${buttonId}" 
-      onClick="searchButtonClick('${itemObject.id}')" 
-       class="${buttonColor}" style="margin:5px">${itemObject.name}</button>`;
-
-  newButton.outerHTML = theHTML;
-
-  return newButton;
+  /*
+    let newButton = document.createElement('button');
+    let el = document.getElementById("divSearchResults");
+    el.appendChild(newButton);
+  
+   
+    if (itemObject.type == 'c')
+  
+      buttonColor = `btn btn-primary`;
+    else
+      buttonColor = `btn btn-success`;
+  
+    buttonId = "search_" + itemObject.id;
+  
+    theHTML = `<button id="${buttonId}" 
+        onClick="searchButtonClick('${itemObject.id}')" 
+         class="${buttonColor}" style="margin:5px">${itemObject.name}</button>`;
+  
+    newButton.outerHTML = theHTML;
+  
+    return newButton;
+    */
 }
+
+
+
+
+
 
 var timeout;
 

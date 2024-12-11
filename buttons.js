@@ -60,6 +60,33 @@ const Button = {
     return buttonId;
 
   },
+
+
+
+  createSearch(itemObject) {
+
+    let newButton = document.createElement('button');
+    document.getElementById("divSearchResults").appendChild(newButton);
+  
+    // el.addEventListener("touchstart", touchStart);
+    //  el.addEventListener("touchend", touchEnd);
+  
+    if (itemObject.type == 'c')
+      buttonColor = `btn btn-primary`;
+    else
+      buttonColor = `btn btn-success`;
+  
+    buttonId = "search_" + itemObject.id;
+  
+    theHTML = `<button id="${buttonId}" 
+        onClick="searchButtonClick('${itemObject.id}')" 
+         class="${buttonColor}" style="margin:5px">${itemObject.name}</button>`;
+  
+    newButton.outerHTML = theHTML;
+  
+    return newButton;
+  },
+  
 }
 
 
@@ -72,7 +99,7 @@ function makeNewItem(type) {
 
   gItemArray.push(thisItemObject);
 
-  // find last breadcrump
+  // find last breadcrumb
 
   paintBreadCrumbs(thisItemObject.parentId);
 
